@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="augmentation">
+      <h2 data-cy="augmentationDetailsHeading"><span jhiTranslate="admingatewayApp.augmentation.detail.title">Augmentation</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ augmentation.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.augmentation.codePoste">Code Poste</span></dt>
+        <dd>
+          <span>{{ augmentation.codePoste }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.augmentation.montant">Montant</span></dt>
+        <dd>
+          <span>{{ augmentation.montant }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.augmentation.reference">Reference</span></dt>
+        <dd>
+          <span>{{ augmentation.reference }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.augmentation.posteId">Poste Id</span></dt>
+        <dd>
+          <span>{{ augmentation.posteId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.augmentation.userInsertId">User Insert Id</span></dt>
+        <dd>
+          <span>{{ augmentation.userInsertId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.augmentation.userUpdateId">User Update Id</span></dt>
+        <dd>
+          <span>{{ augmentation.userUpdateId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.augmentation.dateInsertId">Date Insert Id</span></dt>
+        <dd>
+          <span>{{ augmentation.dateInsertId | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.augmentation.dateUpdateId">Date Update Id</span></dt>
+        <dd>
+          <span>{{ augmentation.dateUpdateId | formatMediumDatetime }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/augmentation', augmentation.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,208 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-histo-augmentation-heading" data-cy="HistoAugmentationCreateUpdateHeading" style="text-align: center">
+        {{ titre }}
+      </h2>
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+        <div class="justify-content-center" style="border: 1px solid lightgray; padding: 2%">
+          <fieldset>
+            <legend style="font-size: 17px; color: #24695c; font-weight: 700">Historique Augmentation</legend>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label class="form-label" jhiTranslate="admingatewayApp.histoAugmentation.categorie" for="field_categorie">Categorie</label>
+                <select
+                  class="form-control"
+                  name="categorie"
+                  id="field_categorie"
+                  data-cy="categorie"
+                  formControlName="categorie"
+                  (change)="getSelectedCategorie(editForm.get('categorie')!.value)"
+                >
+                  <option value="">--Veuillez choisir une option --</option>
+                  <option value="Indice">Indice</option>
+                  <option value="Non Indice">Non Indice</option>
+                </select>
+                <div *ngIf="editForm.get('categorie')!.invalid && (editForm.get('categorie')!.dirty || editForm.get('categorie')!.touched)">
+                  <small
+                    class="form-text text-danger"
+                    *ngIf="editForm.get('categorie')?.errors?.required"
+                    jhiTranslate="entity.validation.required"
+                  >
+                    This field is required.
+                  </small>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" jhiTranslate="admingatewayApp.histoAugmentation.libelle" for="field_libelle">Libelle</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="libelle"
+                  id="field_libelle"
+                  data-cy="libelle"
+                  formControlName="libelle"
+                  placeholder="saisir libellé"
+                />
+                <div *ngIf="editForm.get('libelle')!.invalid && (editForm.get('libelle')!.dirty || editForm.get('libelle')!.touched)">
+                  <small
+                    class="form-text text-danger"
+                    *ngIf="editForm.get('libelle')?.errors?.required"
+                    jhiTranslate="entity.validation.required"
+                  >
+                    This field is required.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6" *ngIf="isNonIndice == true">
+                <label> Type<span style="color: red">*</span> </label>
+                <select
+                  class="form-control"
+                  name="type"
+                  id="field_type"
+                  data-cy="type"
+                  formControlName="type"
+                  (change)="getSelectedType(editForm.get('type')!.value)"
+                >
+                  <option elected>--Veuillez choisir une option --</option>
+                  <option value="Taux">Taux</option>
+                  <option value="Montant">Montant</option>
+                  <option value="Valeur">Baréme</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" jhiTranslate="admingatewayApp.histoAugmentation.date" for="field_date">Date</label>
+                <div class="input-group">
+                  <input
+                    id="field_date"
+                    data-cy="date"
+                    type="date"
+                    class="form-control"
+                    name="date"
+                    ngbDatepicker
+                    #dateDp="ngbDatepicker"
+                    formControlName="date"
+                  />
+                </div>
+                <div *ngIf="editForm.get('date')!.invalid && (editForm.get('date')!.dirty || editForm.get('date')!.touched)">
+                  <small
+                    class="form-text text-danger"
+                    *ngIf="editForm.get('date')?.errors?.required"
+                    jhiTranslate="entity.validation.required"
+                  >
+                    This field is required.
+                  </small>
+                </div>
+              </div>
+            </div>
+
+            <div class="row" style="margin-top: 1%" *ngIf="isIndice == false">
+              <div class="col-md-6">
+                <label class="form-label" jhiTranslate="admingatewayApp.histoAugmentation.codePoste" for="field_codePoste"
+                  >Code Poste</label
+                >
+                <select class="form-control" id="field_codePoste" data-cy="codePoste" name="codePoste" formControlName="codePoste">
+                  <option [ngValue]="null"></option>
+                  <option
+                    [ngValue]="
+                      codePosteOption.id === editForm.get('codePoste')!.value?.id ? editForm.get('codePoste')!.value : codePosteOption
+                    "
+                    *ngFor="let codePosteOption of postesSharedCollection"
+                  >
+                    {{ codePosteOption.code }}--{{ codePosteOption.libelle }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" jhiTranslate="admingatewayApp.histoAugmentation.hierarchie" for="field_hierarchie"
+                  >Hierarchie</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  name="valeur"
+                  id="field_hierarchie"
+                  data-cy="hierarchie"
+                  formControlName="hierarchie"
+                  placeholder="saisir Hierarchie..."
+                />
+              </div>
+            </div>
+            <div class="row" style="margin-top: 1%" *ngIf="isNonIndice == true">
+              <div class="col-md-6">
+                <label class="form-label" jhiTranslate="admingatewayApp.histoAugmentation.plafond" for="field_plafond">Plafond</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  name="plafond"
+                  id="field_plafond"
+                  data-cy="plafond"
+                  formControlName="plafond"
+                  placeholder="saisir plafond ..."
+                />
+              </div>
+              <div class="col-md-6" *ngIf="isMontant == true || isNonIndice == true">
+                <label class="form-label">Montant</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  name="montant"
+                  id="field_montant"
+                  data-cy="montant"
+                  formControlName="montant"
+                  placeholder="saisir montant ..."
+                />
+              </div>
+            </div>
+
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6" *ngIf="isTaux == true">
+                <label class="form-label">Taux</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  name="taux"
+                  id="field_taux"
+                  data-cy="taux"
+                  formControlName="taux"
+                  placeholder="saisir taux ..."
+                />
+              </div>
+              <div class="col-md-6" *ngIf="isValeur == true || isIndice == true">
+                <label class="form-label">Valeur</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="valeur"
+                  id="field_valeur"
+                  data-cy="valeur"
+                  formControlName="valeur"
+                  placeholder="saisir valeur ..."
+                />
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+      <br />
+      <div style="display: flex; justify-content: center; align-items: center">
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        &nbsp;
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

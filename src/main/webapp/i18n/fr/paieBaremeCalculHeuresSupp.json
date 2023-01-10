@@ -1,0 +1,39 @@
+{
+  "admingatewayApp": {
+    "paieBaremeCalculHeuresSupp": {
+      "home": {
+        "title": "BaremeCalculHeuresSupps",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Bareme Calcul Heures Supp",
+        "createOrEditLabel": "Créer ou éditer un Bareme Calcul Heures Supp",
+        "notFound": "Aucun Bareme Calcul Heures Supp trouvé"
+      },
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Bareme Calcul Heures Supp {{ id }} ?"
+      },
+      "detail": {
+        "title": "Bareme Calcul Heures Supp"
+      },
+      "id": "ID",
+      "indiceDebut": "Indice Debut",
+      "indiceFin": "Indice Fin",
+      "soldeGlobalDebut": "Solde Global Debut",
+      "soldeGlobalFin": "Solde Global Fin",
+      "heuresOrdinaires": "Heures Ordinaires",
+      "dimanchesJoursFeries": "Dimanches Jours Feries",
+      "heuresNuit": "Heures Nuit",
+      "observation": "Observation",
+      "userInsertId": "User Insert Id",
+      "userUpdateId": "User Update Id",
+      "dateInsert": "Date Insert",
+      "dateUpdate": "Date Update"
+    }
+  },
+  "paieApp": {
+    "paieBaremeCalculHeuresSupp": {
+      "created": "Un nouveau Bareme Calcul Heures Supp a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Bareme Calcul Heures Supp avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Bareme Calcul Heures Supp avec l'identifiant {{ param }} a été supprimé"
+    }
+  }
+}

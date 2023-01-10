@@ -1,0 +1,125 @@
+<div class="d-flex justify-content-center">
+  <div class="col-10 custom-card">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-grille-convention-heading" class="custom-title" data-cy="GrilleConventionCreateUpdateHeading">
+        {{ this.titre }}
+      </h2>
+      <br />
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+        <div class="justify-content-center" style="border: 1px solid lightgray; padding: 2%">
+          <fieldset>
+            <legend style="font-size: 17px; color: #24695c; font-weight: 700">Paramètrage Grille Convention</legend>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Etablissement<span style="color: red">*</span> </label>
+                <select
+                  class="form-control"
+                  id="field_etablissement"
+                  data-cy="etablissement"
+                  name="etablissement"
+                  formControlName="etablissement"
+                  required
+                >
+                  <option [ngValue]="null"></option>
+                  <option
+                    [ngValue]="
+                      etablissementOption.id === editForm.get('etablissement')!.value?.id
+                        ? editForm.get('etablissement')!.value
+                        : etablissementOption
+                    "
+                    *ngFor="let etablissementOption of etablissementSharedCollection"
+                  >
+                    {{ etablissementOption.libelleLong }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label> Grade<span style="color: red">*</span> </label>
+                <select class="form-control" id="field_grade" data-cy="grade" name="grade" formControlName="grade" required>
+                  <option [ngValue]="null"></option>
+                  <option
+                    [ngValue]="gradeOption.id === editForm.get('grade')!.value?.id ? editForm.get('grade')!.value : gradeOption"
+                    *ngFor="let gradeOption of gradeSharedCollection"
+                  >
+                    {{ gradeOption.libelle }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label>Catégorie </label>
+                <select class="form-control" id="field_categorie" data-cy="categorie" name="categorie" formControlName="categorie" required>
+                  <option [ngValue]="null"></option>
+                  <option
+                    [ngValue]="
+                      categorieOption.id === editForm.get('categorie')!.value?.id ? editForm.get('categorie')!.value : categorieOption
+                    "
+                    *ngFor="let categorieOption of categorieSharedCollection"
+                  >
+                    {{ categorieOption.libelle }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label>Classe </label>
+                <select class="form-control" id="field_classe" data-cy="classe" name="classe" formControlName="classe">
+                  <option [ngValue]="null"></option>
+                  <option
+                    [ngValue]="classeOption.id === editForm.get('classe')!.value?.id ? editForm.get('classe')!.value : classeOption"
+                    *ngFor="let classeOption of classeSharedCollection"
+                  >
+                    {{ classeOption.libelle }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label>Salaire de Base <span style="color: red">*</span></label>
+                <input
+                  type="number"
+                  class="form-control"
+                  name="salaireDeBase"
+                  id="field_salaireDeBase"
+                  data-cy="salaireBase"
+                  formControlName="salaireDeBase"
+                  required
+                />
+              </div>
+              <div class="col-md-6">
+                <label> Taux Prime De Téchnicité </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="tauxPrimeDeTechnicite"
+                  id="field_tauxPrimeDeTechnicite"
+                  data-cy="tauxPrimeDeTechnicite"
+                  formControlName="tauxPrimeDeTechnicite"
+                />
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+      <br />
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp; Enregistrer
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

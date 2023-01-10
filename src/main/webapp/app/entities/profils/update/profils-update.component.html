@@ -1,0 +1,77 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-profils-heading" data-cy="ProfilsCreateUpdateHeading" class="custom-title">{{ this.titre }}</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3">
+          <label class="form-label custom-label">Code <span style="color: red">*</span></label>
+          <input
+            type="text"
+            class="form-control custom-control custom-input-size"
+            name="code"
+            id="field_code"
+            data-cy="code"
+            formControlName="code"
+            required
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label custom-label" for="field_libelle">Libellé <span style="color: red">*</span></label>
+          <input
+            type="text"
+            class="form-control custom-control custom-input-size"
+            name="libelle"
+            id="field_libelle"
+            data-cy="libelle"
+            formControlName="libelle"
+            required
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label custom-label" for="field_description">Description</label>
+          <input
+            type="text"
+            class="form-control custom-control custom-input-size"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label for="field_roles">Roles</label>
+          <select class="form-control" id="field_roles" data-cy="roles" multiple name="roles" formControlName="roles">
+            <option
+              [ngValue]="getSelectedRoles(rolesOption, editForm.get('roles')!.value)"
+              *ngFor="let rolesOption of rolesSharedCollection; trackBy: trackRolesById"
+            >
+              {{ rolesOption.libelle }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Enregistrer</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

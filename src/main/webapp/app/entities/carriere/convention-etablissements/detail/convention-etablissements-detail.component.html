@@ -1,0 +1,38 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="conventionEtablissements">
+      <h2 data-cy="conventionEtablissementsDetailsHeading">
+        <span jhiTranslate="admingatewayApp.carriereConventionEtablissements.detail.title">Convention Etablissements</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ conventionEtablissements.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereConventionEtablissements.etablissementId">Etablissement Id</span></dt>
+        <dd>
+          <span>{{ conventionEtablissements.etablissementId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereConventionEtablissements.conventionId">Convention Id</span></dt>
+        <dd>
+          <span>{{ conventionEtablissements.conventionId }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/convention-etablissements', conventionEtablissements.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

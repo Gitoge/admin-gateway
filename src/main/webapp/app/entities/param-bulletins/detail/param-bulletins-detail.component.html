@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="paramBulletins">
+      <h2 data-cy="paramBulletinsDetailsHeading">
+        <span jhiTranslate="admingatewayApp.paramBulletins.detail.title">Param Bulletins</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ paramBulletins.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paramBulletins.code">Code</span></dt>
+        <dd>
+          <span>{{ paramBulletins.code }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paramBulletins.libelle">Libellé</span></dt>
+        <dd>
+          <span>{{ paramBulletins.libelle }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paramBulletins.entete">Entete</span></dt>
+        <dd>
+          <span>{{ paramBulletins.entete }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paramBulletins.signature">Signature</span></dt>
+        <dd>
+          <span>{{ paramBulletins.signature }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paramBulletins.arrierePlan">Arriere Plan</span></dt>
+        <dd>
+          <span>{{ paramBulletins.arrierePlan }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paramBulletins.userIdInsert">User Id Insert</span></dt>
+        <dd>
+          <span>{{ paramBulletins.userIdInsert }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paramBulletins.userdateInsert">Userdate Insert</span></dt>
+        <dd>
+          <span>{{ paramBulletins.userdateInsert | formatMediumDate }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/param-bulletins', paramBulletins.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,157 @@
+<div>
+  <h2 id="page-heading" data-cy="PositionsAgentHeading">
+    <span jhiTranslate="admingatewayApp.carrierePositionsAgent.home.title">Positions Agents</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="admingatewayApp.carrierePositionsAgent.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-positions-agent"
+        [routerLink]="['/positions-agent/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="admingatewayApp.carrierePositionsAgent.home.createLabel"> Create a new Positions Agent </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="positionsAgents?.length === 0">
+    <span jhiTranslate="admingatewayApp.carrierePositionsAgent.home.notFound">No positionsAgents found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="positionsAgents && positionsAgents.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="motif">
+            <span jhiTranslate="admingatewayApp.carrierePositionsAgent.motif">Motif</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="datePosition">
+            <span jhiTranslate="admingatewayApp.carrierePositionsAgent.datePosition">Date Position</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateAnnulation">
+            <span jhiTranslate="admingatewayApp.carrierePositionsAgent.dateAnnulation">Date Annulation</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateFinAbsence">
+            <span jhiTranslate="admingatewayApp.carrierePositionsAgent.dateFinAbsence">Date Fin Absence</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <span jhiTranslate="admingatewayApp.carrierePositionsAgent.status">Status</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="posistionsId">
+            <span jhiTranslate="admingatewayApp.carrierePositionsAgent.posistionsId">Posistions Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="userInsertId">
+            <span jhiTranslate="admingatewayApp.carrierePositionsAgent.userInsertId">User Insert Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="actes.id">
+            <span jhiTranslate="admingatewayApp.carrierePositionsAgent.actes">Actes</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="agent.id">
+            <span jhiTranslate="admingatewayApp.carrierePositionsAgent.agent">Agent</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="categorieAgent.id">
+            <span jhiTranslate="admingatewayApp.carrierePositionsAgent.categorieAgent">Categorie Agent</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let positionsAgent of positionsAgents; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/positions-agent', positionsAgent.id, 'view']">{{ positionsAgent.id }}</a>
+          </td>
+          <td>{{ positionsAgent.motif }}</td>
+          <td>{{ positionsAgent.datePosition | formatMediumDate }}</td>
+          <td>{{ positionsAgent.dateAnnulation | formatMediumDate }}</td>
+          <td>{{ positionsAgent.dateFinAbsence | formatMediumDate }}</td>
+          <td>{{ positionsAgent.status }}</td>
+          <td>{{ positionsAgent.posistionsId }}</td>
+          <td>{{ positionsAgent.userInsertId }}</td>
+          <td>
+            <div *ngIf="positionsAgent.actes">
+              <a [routerLink]="['/actes', positionsAgent.actes?.id, 'view']">{{ positionsAgent.actes?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="positionsAgent.agent">
+              <a [routerLink]="['/agent', positionsAgent.agent?.id, 'view']">{{ positionsAgent.agent?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="positionsAgent.categorieAgent">
+              <a [routerLink]="['/categorie-agent', positionsAgent.categorieAgent?.id, 'view']">{{ positionsAgent.categorieAgent?.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/positions-agent', positionsAgent.id, 'view']"
+                class="btn btn-outline-info btn-sm"
+                data-cy="entityDetailsButton"
+                title="Details"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/positions-agent', positionsAgent.id, 'edit']"
+                class="btn btn-outline-primary btn-sm"
+                data-cy="entityEditButton"
+                title="Modifier"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+
+              <button
+                type="submit"
+                (click)="delete(positionsAgent)"
+                class="btn btn-outline-danger btn-sm"
+                data-cy="entityDeleteButton"
+                title="Supprimer"
+              >
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="positionsAgents && positionsAgents.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+{
+  "admingatewayApp": {
+    "carriereGrilleConvention": {
+      "home": {
+        "title": "GrilleConventions",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Grille Convention",
+        "createOrEditLabel": "Créer ou éditer un Grille Convention",
+        "notFound": "Aucun Grille Convention trouvé"
+      },
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Grille Convention {{ id }} ?"
+      },
+      "detail": {
+        "title": "Grille Convention"
+      },
+      "id": "ID",
+      "salaireBase": "Salaire Base",
+      "tauxPrimeDeTechnicite": "Taux Prime De Technicite",
+      "gradeId": "Grade Id",
+      "classeId": "Classe Id"
+    }
+  },
+  "carriereApp": {
+    "carriereGrilleConvention": {
+      "created": "Un nouveau Grille Convention a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Grille Convention avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Grille Convention avec l'identifiant {{ param }} a été supprimé"
+    }
+  }
+}

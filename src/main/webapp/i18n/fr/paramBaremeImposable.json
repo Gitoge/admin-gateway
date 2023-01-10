@@ -1,0 +1,33 @@
+{
+  "admingatewayApp": {
+    "paramBaremeImposable": {
+      "home": {
+        "title": "ParamBaremeImposables",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Param Bareme Imposable",
+        "createOrEditLabel": "Créer ou éditer un Param Bareme Imposable",
+        "notFound": "Aucun Param Bareme Imposable trouvé"
+      },
+      "created": "Un nouveau Param Bareme Imposable a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Param Bareme Imposable avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Param Bareme Imposable avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Param Bareme Imposable {{ id }} ?"
+      },
+      "detail": {
+        "title": "Param Bareme Imposable"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "salaireDebut": "Salaire Debut",
+      "salaireFin": "Salaire Fin",
+      "tauxTranche": "Taux Tranche",
+      "tauxCumule": "Taux Cumule",
+      "montant": "Montant",
+      "dateImpact": "Date Impact",
+      "userIdInsert": "User Id Insert",
+      "userdateInsert": "Userdate Insert"
+    }
+  }
+}

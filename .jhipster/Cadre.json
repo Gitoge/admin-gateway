@@ -1,0 +1,36 @@
+{
+  "applications": "*",
+  "changelogDate": "20220722173333",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "cadre",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "libelle",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "typeSalaire",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Cadre",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no",
+  "skipServer": true
+}

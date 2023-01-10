@@ -1,0 +1,38 @@
+{
+  "admingatewayApp": {
+    "carriereActes": {
+      "home": {
+        "title": "Actes",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Actes",
+        "createOrEditLabel": "Créer ou éditer un Actes",
+        "notFound": "Aucun Actes trouvé"
+      },
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Actes {{ id }} ?"
+      },
+      "detail": {
+        "title": "Actes"
+      },
+      "id": "ID",
+      "numeroActe": "Numero Acte",
+      "dateActe": "Date Acte",
+      "dateEffet": "Date Effet",
+      "origineId": "Origine Id",
+      "userInsertId": "User Insert Id",
+      "positionsAgent": "Positions Agent",
+      "situationAdministrative": "Situation Administrative",
+      "situationFamiliale": "Situation Familiale",
+      "affectation": "Affectation",
+      "natureActes": "Nature Actes",
+      "typeActes": "Type Actes"
+    }
+  },
+  "carriereApp": {
+    "carriereActes": {
+      "created": "Un nouvel Acte a été créé avec l'identifiant {{ param }}",
+      "updated": "L'acte avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "L'actes avec l'identifiant {{ param }} a été supprimé"
+    }
+  }
+}

@@ -1,0 +1,141 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="ajouterHeuresSupp()" [formGroup]="editForm" style="margin: 0; padding: 0">
+  <div>
+    <br />
+    <h2 id="page-heading" class="custom-title" style="font-weight: bold; text-align: center">Heures Supp</h2>
+
+    <!-- <button type="button" class="btn-close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button> -->
+  </div>
+
+  <div class="modal-body">
+    <div class="row" style="margin-top: 1%">
+      <div class="col-md-6">
+        <label> Code Poste <span style="color: red">*</span> </label>
+        <div>
+          <ng-autocomplete
+            [data]="postesSharedCollection"
+            [searchKeyword]="keyword"
+            placeholder="Saisir le code poste"
+            (selected)="selectEvent($event)"
+            (inputChanged)="onChangeSearch($event)"
+            (inputFocused)="onFocused($event)"
+            (focusout)="onFocusOutEvent($event)"
+            historyIdentifier="postes"
+            [itemTemplate]="itemTemplate"
+            [notFoundTemplate]="notFoundTemplate"
+            (change)="getPostesByCode(codeposte)"
+            name="codePoste"
+            formControlName="codePoste"
+            id="field_codePoste"
+          >
+          </ng-autocomplete>
+          <ng-template #itemTemplate let-item>
+            <a [innerHTML]="item.code"></a>
+          </ng-template>
+          <ng-template #notFoundTemplate let-notFound>
+            <div style="color: red">Postes non trouvé !</div>
+          </ng-template>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <label> Libellé Poste <span style="color: red">*</span> </label>
+        <input
+          type="text"
+          class="form-control"
+          name="libellePoste"
+          id="field_libellePoste"
+          data-cy="libellePoste"
+          placeholder=" Vous pourrez modifier le libllé du poste "
+          formControlName="libellePoste"
+        />
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 2%">
+      <div class="col-md-6">
+        <label> Heures Ordinaires <span style="color: red">*</span> </label>
+        <input
+          type="number"
+          class="form-control"
+          required
+          min="0"
+          max="740"
+          name="heuresOrdinaires"
+          id="field_heuresOrdinaires"
+          data-cy="heuresOrdinaires"
+          placeholder="Saisir le nombre d'heures Ordinaires"
+          formControlName="heuresOrdinaires"
+        />
+        <!-- <div *ngIf="editForm.get('heuresOrdinaires')!.invalid && (editForm.get('heuresOrdinaires')!.dirty || editForm.get('heuresOrdinaires')!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get('heuresOrdinaires')?.errors?.required"> Ce champ est obligatoire. </small>
+
+          <small class="form-text text-danger" *ngIf="editForm.get('heuresOrdinaires')?.errors?.pattern"> Pas de caracteres spéciaux". </small>
+        </div> -->
+      </div>
+
+      <div class="col-md-6">
+        <label> Jours Fériés et dimanches <span style="color: red">*</span> </label>
+        <input
+          type="number"
+          class="form-control"
+          required
+          name="dimanchesJoursFeries"
+          id="field_dimanchesJoursFeries"
+          data-cy="dimanchesJoursFeries"
+          min="0"
+          max="740"
+          placeholder="Nombre d'heures en Jours fériés et dimanches"
+          formControlName="dimanchesJoursFeries"
+        />
+        <div
+          *ngIf="
+            editForm.get('dimanchesJoursFeries')!.invalid &&
+            (editForm.get('dimanchesJoursFeries')!.dirty || editForm.get('dimanchesJoursFeries')!.touched)
+          "
+        >
+          <small class="form-text text-danger" *ngIf="editForm.get('dimanchesJoursFeries')?.errors?.required">
+            Ce champ est obligatoire.
+          </small>
+
+          <small class="form-text text-danger" *ngIf="editForm.get('dimanchesJoursFeries')?.errors?.pattern">
+            Pas de caracteres spéciaux".
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 2%">
+      <div class="col-md-6">
+        <label> Heures Nuit <span style="color: red">*</span> </label>
+        <div class="input-group">
+          <input
+            id="field_heuresNuit"
+            data-cy="heuresNuit"
+            type="number"
+            required
+            class="form-control"
+            min="0"
+            max="740"
+            name="heuresNuit"
+            placeholder="Saisir le nombre d'heures de Nuit"
+            formControlName="heuresNuit"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <label> </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+      <fa-icon icon="ban"></fa-icon>&nbsp;<span>Retour</span>
+    </button>
+
+    <button data-cy="entityDetailsButton" [disabled]="editForm.invalid || isSaving" type="submit" class="btn btn-primary">
+      <fa-icon icon="save"></fa-icon>&nbsp;<span>Ajouter</span>
+    </button>
+  </div>
+</form>

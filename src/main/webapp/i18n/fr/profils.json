@@ -1,0 +1,28 @@
+{
+  "admingatewayApp": {
+    "profils": {
+      "home": {
+        "title": "Profils",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Profils",
+        "createOrEditLabel": "Créer ou éditer un Profils",
+        "notFound": "Aucun Profils trouvé"
+      },
+      "created": "Un nouveau Profils a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Profils avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Profils avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Profils {{ id }} ?"
+      },
+      "detail": {
+        "title": "Profils"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description",
+      "roles": "Roles",
+      "modules": "Modules"
+    }
+  }
+}

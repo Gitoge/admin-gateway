@@ -1,0 +1,41 @@
+{
+  "admingatewayApp": {
+    "carriereEnfant": {
+      "home": {
+        "title": "Enfants",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Enfant",
+        "createOrEditLabel": "Create or edit a Enfant",
+        "notFound": "No Enfants found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Enfant {{ id }}?"
+      },
+      "detail": {
+        "title": "Enfant"
+      },
+      "id": "ID",
+      "matriculeParent": "Matricule Parent",
+      "nom": "Nom",
+      "prenom": "Prenom",
+      "sexe": "Sexe",
+      "dateNaissance": "Date Naissance",
+      "lieuNaissance": "Lieu Naissance",
+      "numeroActeNaissance": "Numero Acte Naissance",
+      "dateActeNaissance": "Date Acte Naissance",
+      "rangEnfant": "Rang Enfant",
+      "codeAge": "Code Age",
+      "enfantEnVie": "Enfant En Vie",
+      "enfantImposable": "Enfant Imposable",
+      "userInsertId": "User Insert Id",
+      "agent": "Agent"
+    }
+  },
+  "carriereApp": {
+    "carriereEnfant": {
+      "created": "A new Enfant is created with identifier {{ param }}",
+      "updated": "A Enfant is updated with identifier {{ param }}",
+      "deleted": "A Enfant is deleted with identifier {{ param }}"
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "applications": "*",
+  "changelogDate": "20220722173332",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "reglement",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "libelle",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "complementinfos",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "commentaire",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Reglement",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "typeReglement",
+      "otherEntityRelationshipName": "reglement",
+      "relationshipName": "typereglement",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no",
+  "skipServer": true
+}

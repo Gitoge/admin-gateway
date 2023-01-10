@@ -1,0 +1,148 @@
+<div>
+  <h2 id="page-heading" data-cy="BaremeCalculHeuresSuppHeading">
+    <span jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.home.title">Bareme Calcul Heures Supps</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-bareme-calcul-heures-supp"
+        [routerLink]="['/bareme-calcul-heures-supp/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Nouveau </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="baremeCalculHeuresSupps?.length === 0">
+    <span jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.home.notFound">No baremeCalculHeuresSupps found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="baremeCalculHeuresSupps && baremeCalculHeuresSupps.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="indiceDebut">
+            <span jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.indiceDebut">Indice Debut</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="indiceFin">
+            <span jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.indiceFin">Indice Fin</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="soldeGlobalDebut">
+            <span jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.soldeGlobalDebut">Solde Global Debut</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="soldeGlobalFin">
+            <span jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.soldeGlobalFin">Solde Global Fin</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="heuresOrdinaires">
+            <span jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.heuresOrdinaires">Heures Ordinaires</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dimanchesJoursFeries">
+            <span jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.dimanchesJoursFeries">Dimanches Jours Feries</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="heuresNuit">
+            <span jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.heuresNuit">Heures Nuit</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="observation">
+            <span jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.observation">Observation</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="userInsertId">
+            <span jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.userInsertId">User Insert Id</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="userUpdateId">
+            <span jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.userUpdateId">User Update Id</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateInsert">
+            <span jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.dateInsert">Date Insert</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateUpdate">
+            <span jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.dateUpdate">Date Update</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let baremeCalculHeuresSupp of baremeCalculHeuresSupps; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/bareme-calcul-heures-supp', baremeCalculHeuresSupp.id, 'view']">{{ baremeCalculHeuresSupp.id }}</a>
+          </td>
+          <td>{{ baremeCalculHeuresSupp.indiceDebut }}</td>
+          <td>{{ baremeCalculHeuresSupp.indiceFin }}</td>
+          <td>{{ baremeCalculHeuresSupp.soldeGlobalDebut }}</td>
+          <td>{{ baremeCalculHeuresSupp.soldeGlobalFin }}</td>
+          <td>{{ baremeCalculHeuresSupp.heuresOrdinaires }}</td>
+          <td>{{ baremeCalculHeuresSupp.dimanchesJoursFeries }}</td>
+          <td>{{ baremeCalculHeuresSupp.heuresNuit }}</td>
+          <td>{{ baremeCalculHeuresSupp.observation }}</td>
+          <td>{{ baremeCalculHeuresSupp.userInsertId }}</td>
+          <td>{{ baremeCalculHeuresSupp.userUpdateId }}</td>
+          <td>{{ baremeCalculHeuresSupp.dateInsert | formatMediumDatetime }}</td>
+          <td>{{ baremeCalculHeuresSupp.dateUpdate | formatMediumDatetime }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/bareme-calcul-heures-supp', baremeCalculHeuresSupp.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/bareme-calcul-heures-supp', baremeCalculHeuresSupp.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(baremeCalculHeuresSupp)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="baremeCalculHeuresSupps && baremeCalculHeuresSupps.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

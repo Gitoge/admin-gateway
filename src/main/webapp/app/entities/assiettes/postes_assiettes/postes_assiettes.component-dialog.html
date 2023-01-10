@@ -1,0 +1,30 @@
+<form *ngIf="postes" name="deleteForm">
+  <div class="modal-header">
+    <h4 class="modal-title" data-cy="postesAssiettesDialogHeading">Liste des Postes associés</h4>
+
+    <button type="button" class="btn-close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
+  </div>
+
+  <div class="modal-body">
+    <jhi-alert-error></jhi-alert-error>
+
+    <p id="jhi-delete-pages-heading">Les Postes disponibles à l'assiettes : <b> {{ assiette.libelle }} </b></p>
+
+    <div class="table-responsive" id="entities" *ngIf="postes">
+      <table class="table table-bordered table-condensed table-hover" aria-describedby="page-heading">
+        <thead>
+          <tr>
+            <th scope="col"><span>Code</span> <fa-icon icon="sort"></fa-icon></th>
+            <th scope="col"><span>Libellé</span> <fa-icon icon="sort"></fa-icon></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let poste of postes" data-cy="entityTable">
+            <td>{{ poste.code }}</td>
+            <td>{{ poste.libelle }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</form>

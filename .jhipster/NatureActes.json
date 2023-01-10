@@ -1,0 +1,40 @@
+{
+  "applications": "*",
+  "changelogDate": "20220727201829",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "nature_actes",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "libelle",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "userIdInsert",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "userdateInsert",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "NatureActes",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no",
+  "skipServer": true
+}

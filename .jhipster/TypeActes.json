@@ -1,0 +1,47 @@
+{
+  "applications": "*",
+  "changelogDate": "20220727201828",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "type_actes",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "libelle",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "userIdInsert",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "userdateInsert",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "TypeActes",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "categorieActes",
+      "otherEntityRelationshipName": "typeactes",
+      "relationshipName": "categorieactes",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no",
+  "skipServer": true
+}

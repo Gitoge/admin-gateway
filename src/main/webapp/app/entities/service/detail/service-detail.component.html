@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <div *ngIf="service">
+      <h2 data-cy="serviceDetailsHeading" class="custom-title">
+        <span>
+          Visualisation du Service: <b>{{ service.libelle }}</b>
+        </span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details detail-card">
+        <dt><span jhiTranslate="admingatewayApp.service.code">Code</span></dt>
+        <dd>
+          <span>{{ service.code }}</span>
+        </dd>
+        <dt><span>Libellé</span></dt>
+        <dd>
+          <span>{{ service.libelle }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.service.adresse">Adresse</span></dt>
+        <dd>
+          <span>{{ service.adresse }}</span>
+        </dd>
+        <dt><span>Numéro Téléphone</span></dt>
+        <dd>
+          <span>{{ service.numTelephone }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.service.fax">Fax</span></dt>
+        <dd>
+          <span>{{ service.fax }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.service.email">Email</span></dt>
+        <dd>
+          <span>{{ service.email }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.service.contact">Contact</span></dt>
+        <dd>
+          <span>{{ service.contact }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.service.direction">Direction</span></dt>
+        <dd>
+          <div *ngIf="service.direction">
+            <a [routerLink]="['/direction', service.direction?.id, 'view']">{{ service.direction?.libelle }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+    </div>
+  </div>
+</div>

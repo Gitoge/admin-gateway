@@ -1,0 +1,28 @@
+{
+  "admingatewayApp": {
+    "augmentationHierarchie": {
+      "home": {
+        "title": "AugmentationHierarchies",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Augmentation Hierarchie",
+        "createOrEditLabel": "Créer ou éditer un Augmentation Hierarchie",
+        "notFound": "Aucun Augmentation Hierarchie trouvé"
+      },
+      "created": "Un nouveau Augmentation Hierarchie a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Augmentation Hierarchie avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Augmentation Hierarchie avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Augmentation Hierarchie {{ id }} ?"
+      },
+      "detail": {
+        "title": "Augmentation Hierarchie"
+      },
+      "id": "ID",
+      "montant": "Montant",
+      "augmentationId": "Augmentation Id",
+      "hierarchieId": "Hierarchie Id",
+      "userInserId": "User Inser Id",
+      "dateInsert": "Date Insert"
+    }
+  }
+}

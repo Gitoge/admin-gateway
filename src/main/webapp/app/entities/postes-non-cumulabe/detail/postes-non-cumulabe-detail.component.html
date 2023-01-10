@@ -1,0 +1,34 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <div *ngIf="postesNonCumulabe">
+      <h2 data-cy="postesNonCumulabeDetailsHeading">
+        <span jhiTranslate="admingatewayApp.postesNonCumulabe.detail.title">Postes Non Cumulabe</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details detail-card">
+        <dt><span jhiTranslate="admingatewayApp.postesNonCumulabe.codePoste1">Code Poste 1</span></dt>
+        <dd>
+          <span>{{ postesNonCumulabe.codePoste1 }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.postesNonCumulabe.codePoste2">Code Poste 2</span></dt>
+        <dd>
+          <span>{{ postesNonCumulabe.codePoste2 }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/postes-non-cumulabe', postesNonCumulabe.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

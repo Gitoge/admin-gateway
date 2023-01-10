@@ -1,0 +1,47 @@
+{
+  "applications": "*",
+  "changelogDate": "20220718174957",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "pages",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "libelle",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Pages",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "actions",
+      "otherEntityRelationshipName": "pages",
+      "ownerSide": true,
+      "relationshipName": "actions",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "roles",
+      "otherEntityRelationshipName": "pages",
+      "ownerSide": false,
+      "relationshipName": "roles",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "no",
+  "skipServer": true
+}

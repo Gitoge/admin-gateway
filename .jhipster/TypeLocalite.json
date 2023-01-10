@@ -1,0 +1,39 @@
+{
+  "applications": "*",
+  "changelogDate": "20220722173322",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "type_localite",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "libelle",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "TypeLocalite",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "localite",
+      "otherEntityRelationshipName": "typeLocalite",
+      "relationshipName": "localite",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no",
+  "skipServer": true
+}

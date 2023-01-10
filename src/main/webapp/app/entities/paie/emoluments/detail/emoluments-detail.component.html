@@ -1,0 +1,86 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="emoluments">
+      <h2 data-cy="emolumentsDetailsHeading"><span jhiTranslate="admingatewayApp.paieEmoluments.detail.title">Emoluments</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ emoluments.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieEmoluments.codePoste">Code Poste</span></dt>
+        <dd>
+          <span>{{ emoluments.codePoste }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieEmoluments.matricule">Matricule</span></dt>
+        <dd>
+          <span>{{ emoluments.matricule }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieEmoluments.reference">Reference</span></dt>
+        <dd>
+          <span>{{ emoluments.reference }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieEmoluments.montant">Montant</span></dt>
+        <dd>
+          <span>{{ emoluments.montant }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieEmoluments.taux">Taux</span></dt>
+        <dd>
+          <span>{{ emoluments.taux }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieEmoluments.dateEffet">Date Effet</span></dt>
+        <dd>
+          <span>{{ emoluments.dateEffet | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieEmoluments.dateEcheance">Date Echeance</span></dt>
+        <dd>
+          <span>{{ emoluments.dateEcheance | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieEmoluments.agentId">Agent Id</span></dt>
+        <dd>
+          <span>{{ emoluments.agentId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieEmoluments.etablissementId">Etablissement Id</span></dt>
+        <dd>
+          <span>{{ emoluments.etablissementId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieEmoluments.userInsertId">User Insert Id</span></dt>
+        <dd>
+          <span>{{ emoluments.userInsertId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieEmoluments.userUpdateId">User Update Id</span></dt>
+        <dd>
+          <span>{{ emoluments.userUpdateId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieEmoluments.dateInsert">Date Insert</span></dt>
+        <dd>
+          <span>{{ emoluments.dateInsert | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieEmoluments.dateUpdate">Date Update</span></dt>
+        <dd>
+          <span>{{ emoluments.dateUpdate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieEmoluments.postes">Postes</span></dt>
+        <dd>
+          <div *ngIf="emoluments.postes">
+            <a [routerLink]="['/postes', emoluments.postes?.id, 'view']">{{ emoluments.postes?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/emoluments', emoluments.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

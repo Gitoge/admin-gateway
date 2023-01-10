@@ -1,0 +1,146 @@
+<div class="d-flex justify-content-center">
+  <div class="col-10 custom-card">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-billeteur-heading"
+        data-cy="BilleteurCreateUpdateHeading"
+        style="text-align: center; font-weight: 600; text-transform: uppercase; font-size: 12px"
+      >
+        Billeteur
+      </h2>
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+        <br />
+
+        <div class="justify-content-center" style="border: 1px solid lightgray; padding: 2%">
+          <fieldset>
+            <legend style="font-size: 17px; color: #24695c; font-weight: 700"></legend>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Etablissement<span style="color: red">*</span> </label>
+                <select
+                  class="form-control"
+                  id="field_etablissement"
+                  data-cy="etablissement"
+                  name="etablissement"
+                  formControlName="etablissement"
+                  required
+                >
+                  <option [ngValue]="null"></option>
+                  <option
+                    [ngValue]="
+                      etablissementOption.id === editForm.get('etablissement')!.value?.id
+                        ? editForm.get('etablissement')!.value
+                        : etablissementOption
+                    "
+                    *ngFor="let etablissementOption of etablissementSharedCollection"
+                  >
+                    {{ etablissementOption.libelleLong }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label> Code<span style="color: red">*</span> </label>
+                <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" />
+                <div *ngIf="editForm.get('code')!.invalid && (editForm.get('code')!.dirty || editForm.get('code')!.touched)">
+                  <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.required"> Ce champ est obligatoire. </small>
+                  <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.minlength">
+                    Ce champ doit comporter au moins 3 caractères.
+                  </small>
+                  <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.maxlength">
+                    Ce champ doit comporter au plus 10 caractères.
+                  </small>
+                  <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.pattern"> Pas de caracteres spéciaux". </small>
+                </div>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Matricule<span style="color: red">*</span> </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="matricule"
+                  id="field_matricule"
+                  data-cy="matricule"
+                  formControlName="matricule"
+                  (ngModelChange)="getInfosByMatricule(editForm.get('matricule')!.value)"
+                  required
+                />
+                <div *ngIf="editForm.get('matricule')!.invalid && (editForm.get('matricule')!.dirty || editForm.get('matricule')!.touched)">
+                  <small class="form-text text-danger" *ngIf="editForm.get('matricule')?.errors?.required">
+                    Ce champ est obligatoire.
+                  </small>
+                  <small class="form-text text-danger" *ngIf="editForm.get('matricule')?.errors?.minlength">
+                    Ce champ doit comporter au moins 6 caractères.
+                  </small>
+                  <small class="form-text text-danger" *ngIf="editForm.get('matricule')?.errors?.maxlength">
+                    Ce champ doit comporter au plus 6caractères.
+                  </small>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label> Prénom<span style="color: red">*</span> </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="prenom"
+                  id="field_prenom"
+                  data-cy="prenom"
+                  formControlName="prenom"
+                  readonly
+                  required
+                />
+              </div>
+            </div>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Nom<span style="color: red">*</span> </label>
+                <input type="text" class="form-control" name="nom" id="field_nom" data-cy="nom" formControlName="nom" readonly required />
+              </div>
+
+              <div class="col-md-6">
+                <label> Téléphone<span style="color: red">*</span> </label>
+                <input
+                  type="number"
+                  class="form-control"
+                  name="telephone"
+                  id="field_telephone"
+                  data-cy="telephone"
+                  formControlName="telephone"
+                />
+                <div *ngIf="editForm.get('telephone')!.invalid && (editForm.get('telephone')!.dirty || editForm.get('telephone')!.touched)">
+                  <small class="form-text text-danger" *ngIf="editForm.get('telephone')?.errors?.required">
+                    Ce champ est obligatoire.
+                  </small>
+                  <small class="form-text text-danger" *ngIf="editForm.get('telephone')?.errors?.minlength">
+                    Ce champ doit comporter au moins 9 caractères.
+                  </small>
+                  <small class="form-text text-danger" *ngIf="editForm.get('telephone')?.errors?.maxlength">
+                    Ce champ doit comporter au plus 9 caractères.
+                  </small>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+      <br />
+      <div style="display: flex; justify-content: center; align-items: center">
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Annuler</span>
+        </button>
+        &nbsp;
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Enregistrer</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

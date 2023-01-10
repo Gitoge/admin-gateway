@@ -1,0 +1,30 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <div *ngIf="indices">
+      <h2 data-cy="indicesDetailsHeading" class="custom-title">
+        <span>
+          Visualisation de l'indice: <b>{{ indices.code }}</b>
+        </span>
+      </h2>
+      <hr />
+      <jhi-alert-error></jhi-alert-error>
+      <jhi-alert></jhi-alert>
+      <dl class="row-md jh-entity-details detail-card">
+        <dt><span jhiTranslate="admingatewayApp.carriereIndices.code">Code</span></dt>
+        <dd>
+          <span>{{ indices.code }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereIndices.soldeIndiciaire">Solde Indiciaire</span></dt>
+        <dd>
+          <span>{{ indices.soldeIndiciaire | number }}</span>
+        </dd>
+      </dl>
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+      <button type="button" [routerLink]="['/indices', indices.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,89 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="saisieEmoluments">
+      <h2 data-cy="saisieEmolumentsDetailsHeading">
+        <span jhiTranslate="admingatewayApp.paieSaisieEmoluments.detail.title">Saisie Emoluments</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="admingatewayApp.paieSaisieEmoluments.codePoste">Code Poste</span></dt>
+        <dd>
+          <span>{{ saisieEmoluments.codePoste }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieSaisieEmoluments.matricule">Matricule</span></dt>
+        <dd>
+          <span>{{ saisieEmoluments.matricule }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieSaisieEmoluments.reference">Reference</span></dt>
+        <dd>
+          <span>{{ saisieEmoluments.reference }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieSaisieEmoluments.montant">Montant</span></dt>
+        <dd>
+          <span>{{ saisieEmoluments.montant }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieSaisieEmoluments.taux">Taux</span></dt>
+        <dd>
+          <span>{{ saisieEmoluments.taux }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieSaisieEmoluments.dateEffet">Date Effet</span></dt>
+        <dd>
+          <span>{{ saisieEmoluments.dateEffet | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieSaisieEmoluments.dateEcheance">Date Echeance</span></dt>
+        <dd>
+          <span>{{ saisieEmoluments.dateEcheance | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieSaisieEmoluments.statut">Statut</span></dt>
+        <dd>
+          <span>{{ saisieEmoluments.statut }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieSaisieEmoluments.agentId">Agent Id</span></dt>
+        <dd>
+          <span>{{ saisieEmoluments.agentId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieSaisieEmoluments.etablissementId">Etablissement Id</span></dt>
+        <dd>
+          <span>{{ saisieEmoluments.etablissementId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieSaisieEmoluments.userInsertId">User Insert Id</span></dt>
+        <dd>
+          <span>{{ saisieEmoluments.userInsertId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieSaisieEmoluments.userUpdateId">User Update Id</span></dt>
+        <dd>
+          <span>{{ saisieEmoluments.userUpdateId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieSaisieEmoluments.dateInsert">Date Insert</span></dt>
+        <dd>
+          <span>{{ saisieEmoluments.dateInsert | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieSaisieEmoluments.dateUpdate">Date Update</span></dt>
+        <dd>
+          <span>{{ saisieEmoluments.dateUpdate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieSaisieEmoluments.periodePaye">Periode Paye</span></dt>
+        <dd>
+          <div *ngIf="saisieEmoluments.periodePaye">
+            <a [routerLink]="['/periode-paye', saisieEmoluments.periodePaye?.id, 'view']">{{ saisieEmoluments.periodePaye?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieSaisieEmoluments.postes">Postes</span></dt>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/saisie-emoluments', saisieEmoluments.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

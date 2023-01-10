@@ -1,0 +1,27 @@
+{
+  "admingatewayApp": {
+    "augmentationIndice": {
+      "home": {
+        "title": "Augmentation Indices",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Augmentation Indice",
+        "createOrEditLabel": "Create or edit a Augmentation Indice",
+        "notFound": "No Augmentation Indices found"
+      },
+      "created": "A new Augmentation Indice is created with identifier {{ param }}",
+      "updated": "A Augmentation Indice is updated with identifier {{ param }}",
+      "deleted": "A Augmentation Indice is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Augmentation Indice {{ id }}?"
+      },
+      "detail": {
+        "title": "Augmentation Indice"
+      },
+      "id": "ID",
+      "libelle": "Libelle",
+      "valeur": "Valeur",
+      "idPoste": "Id Poste",
+      "total": "Total"
+    }
+  }
+}

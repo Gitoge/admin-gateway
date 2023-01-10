@@ -1,0 +1,133 @@
+<div class="d-flex justify-content-center">
+  <div class="col-10 custom-card">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-grade-heading" data-cy="GradeCreateUpdateHeading" class="custom-title">{{ this.titre }}</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+        <div class="justify-content-center" style="border: 1px solid lightgray; padding: 2%">
+          <fieldset>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Code<span style="color: red">*</span> </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="code"
+                  id="field_code"
+                  data-cy="code"
+                  formControlName="code"
+                  maxlength="6"
+                  oninput="this.value = this.value.toUpperCase()"
+                />
+                <div *ngIf="editForm.get('code')!.invalid && (editForm.get('code')!.dirty || editForm.get('code')!.touched)">
+                  <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.required"> Ce champ est obligatoire. </small>
+                  <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.minlength">
+                    Ce champ doit comporter au moins 2 caractères.
+                  </small>
+                  <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.maxlength">
+                    Ce champ doit comporter au plus 10 caractères.
+                  </small>
+                  <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.pattern"> Pas de caracteres spéciaux". </small>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label> Libellé<span style="color: red">*</span> </label>
+                <input type="text" class="form-control" name="libelle" id="field_libelle" data-cy="libelle" formControlName="libelle" />
+                <div *ngIf="editForm.get('libelle')!.invalid && (editForm.get('libelle')!.dirty || editForm.get('libelle')!.touched)">
+                  <small class="form-text text-danger" *ngIf="editForm.get('libelle')?.errors?.required"> Ce champ est obligatoire. </small>
+                </div>
+              </div>
+            </div>
+
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label>Déscription </label>
+                <input type="text" class="form-control" name="description" id="field_description" data-cy="description" />
+              </div>
+              <div class="col-md-6"></div>
+            </div>
+          </fieldset>
+
+          <div class="table-responsive" *ngIf="postesSharedCollection">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th><span>Code Poste</span></th>
+                  <th></th>
+                  <th></th>
+                  <th><span> Libellé Postes</span></th>
+                  <th><span> Choisir </span></th>
+                  <th><span> Choisi </span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let postesOption of postesSharedCollection; trackBy: trackPostesById">
+                  <td>
+                    <div *ngIf="postesOption.code">
+                      {{ postesOption?.code }}
+                    </div>
+                  </td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <div *ngIf="postesOption.libelle">
+                      {{ postesOption?.libelle }}
+                    </div>
+                  </td>
+
+                  <td>
+                    <input
+                      type="checkbox"
+                      name="assiettePostes"
+                      [checked]="postesOption?.isChecked"
+                      [disabled]="isSaving"
+                      (change)="add($event, postesOption)"
+                    />
+                  </td>
+
+                  <td>
+                    {{ postesOption?.isChecked }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div *ngIf="postesSharedCollection && postesSharedCollection.length > 0">
+          <div class="d-flex justify-content-center">
+            <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"> </jhi-item-count>
+          </div>
+          <div class="d-flex justify-content-center">
+            <ngb-pagination
+              [collectionSize]="totalItems"
+              [(page)]="ngbPaginationPage"
+              [pageSize]="itemsPerPage"
+              [maxSize]="5"
+              [rotate]="true"
+              [boundaryLinks]="true"
+              (pageChange)="loadPage($event)"
+            ></ngb-pagination>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div style="display: flex; justify-content: center; align-items: center">
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span> Annuler </span>
+        </button>
+        &nbsp;
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span> Enregistrer </span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

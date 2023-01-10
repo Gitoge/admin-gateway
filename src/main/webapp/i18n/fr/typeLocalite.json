@@ -1,0 +1,27 @@
+{
+  "admingatewayApp": {
+    "typeLocalite": {
+      "home": {
+        "title": "TypeLocalites",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Type Localite",
+        "createOrEditLabel": "Créer ou éditer un Type Localite",
+        "notFound": "Aucun Type Localite trouvé"
+      },
+      "created": "Un nouveau Type Localite a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Type Localite avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Type Localite avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Type Localite {{ id }} ?"
+      },
+      "detail": {
+        "title": "Type Localite"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description",
+      "localite": "Localite"
+    }
+  }
+}

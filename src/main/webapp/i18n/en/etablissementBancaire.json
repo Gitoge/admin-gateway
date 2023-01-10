@@ -1,0 +1,32 @@
+{
+  "admingatewayApp": {
+    "etablissementBancaire": {
+      "home": {
+        "title": "Etablissement Bancaires",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Etablissement Bancaire",
+        "createOrEditLabel": "Create or edit a Etablissement Bancaire",
+        "notFound": "No Etablissement Bancaires found"
+      },
+      "created": "A new Etablissement Bancaire is created with identifier {{ param }}",
+      "updated": "A Etablissement Bancaire is updated with identifier {{ param }}",
+      "deleted": "A Etablissement Bancaire is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Etablissement Bancaire {{ id }}?"
+      },
+      "detail": {
+        "title": "Etablissement Bancaire"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "telephone": "Telephone",
+      "email": "Email",
+      "adresse": "Adresse",
+      "fax": "Fax",
+      "regionId": "Region Id",
+      "departementId": "Departement Id",
+      "communeId": "Commune Id"
+    }
+  }
+}

@@ -1,0 +1,329 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-postes-heading" data-cy="PostesCreateUpdateHeading" style="text-align: center">
+        {{ titre }}
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_code">Code</label>
+          <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" />
+          <div *ngIf="editForm.get('code')!.invalid && (editForm.get('code')!.dirty || editForm.get('code')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('code')?.errors?.minlength"
+              jhiTranslate="entity.validation.minlength"
+              [translateValues]="{ min: 3 }"
+            >
+              This field is required to be at least 3 characters.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('code')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 3 }"
+            >
+              This field cannot be longer than 3 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_libelle">Libellé</label>
+          <input type="text" class="form-control" name="libelle" id="field_libelle" data-cy="libelle" formControlName="libelle" />
+          <div *ngIf="editForm.get('libelle')!.invalid && (editForm.get('libelle')!.dirty || editForm.get('libelle')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('libelle')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_description">Déscription</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_dateEffet">Date Effet</label>
+          <div class="input-group">
+            <input
+              id="field_dateEffet"
+              data-cy="dateEffet"
+              type="text"
+              class="form-control"
+              name="dateEffet"
+              ngbDatepicker
+              #dateEffetDp="ngbDatepicker"
+              formControlName="dateEffet"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateEffetDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_dateEcheance">Date Echeance</label>
+          <div class="input-group">
+            <input
+              id="field_dateEcheance"
+              data-cy="dateEcheance"
+              type="text"
+              class="form-control"
+              name="dateEcheance"
+              ngbDatepicker
+              #dateEcheanceDp="ngbDatepicker"
+              formControlName="dateEcheance"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateEcheanceDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label">Formule</label>
+          <div class="input-group">
+            <input
+              id="field_formule"
+              data-cy="formule"
+              type="text"
+              class="form-control"
+              name="formule"
+              ngbDatepicker
+              #formuleDp="ngbDatepicker"
+              formControlName="formule"
+            />
+            <button type="button" class="btn btn-secondary" (click)="formuleDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_montant">Montant</label>
+          <input type="number" class="form-control" name="montant" id="field_montant" data-cy="montant" formControlName="montant" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_capital">Capital</label>
+          <input type="number" class="form-control" name="capital" id="field_capital" data-cy="capital" formControlName="capital" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_cumuleRetenue">Cumule Retenue</label>
+          <input
+            type="number"
+            class="form-control"
+            name="cumuleRetenue"
+            id="field_cumuleRetenue"
+            data-cy="cumuleRetenue"
+            formControlName="cumuleRetenue"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_typePosteId">Type Poste</label>
+          <input
+            type="number"
+            class="form-control"
+            name="typePosteId"
+            id="field_typePosteId"
+            data-cy="typePosteId"
+            formControlName="typePosteId"
+          />
+          <div *ngIf="editForm.get('typePosteId')!.invalid && (editForm.get('typePosteId')!.dirty || editForm.get('typePosteId')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('typePosteId')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('typePosteId')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_typePosteLibelle">Type Poste Libellé</label>
+          <input
+            type="text"
+            class="form-control"
+            name="typePosteLibelle"
+            id="field_typePosteLibelle"
+            data-cy="typePosteLibelle"
+            formControlName="typePosteLibelle"
+          />
+          <div
+            *ngIf="
+              editForm.get('typePosteLibelle')!.invalid &&
+              (editForm.get('typePosteLibelle')!.dirty || editForm.get('typePosteLibelle')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('typePosteLibelle')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_frequenceId" [ngbTooltip]="'admingatewayApp.postes.help.frequenceId' | translate"
+            >Frequence
+          </label>
+          <input
+            type="number"
+            class="form-control"
+            name="frequenceId"
+            id="field_frequenceId"
+            data-cy="frequenceId"
+            formControlName="frequenceId"
+          />
+          <div *ngIf="editForm.get('frequenceId')!.invalid && (editForm.get('frequenceId')!.dirty || editForm.get('frequenceId')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('frequenceId')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('frequenceId')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_frequenceLibelle" [ngbTooltip]="'admingatewayApp.postes.help.frequenceLibelle' | translate"
+            >Frequence Libellé</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="frequenceLibelle"
+            id="field_frequenceLibelle"
+            data-cy="frequenceLibelle"
+            formControlName="frequenceLibelle"
+          />
+          <div
+            *ngIf="
+              editForm.get('frequenceLibelle')!.invalid &&
+              (editForm.get('frequenceLibelle')!.dirty || editForm.get('frequenceLibelle')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('frequenceLibelle')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_categoriePosteId" [ngbTooltip]="'admingatewayApp.postes.help.categoriePosteId' | translate"
+            >Categorie Poste
+          </label>
+          <input
+            type="number"
+            class="form-control"
+            name="categoriePosteId"
+            id="field_categoriePosteId"
+            data-cy="categoriePosteId"
+            formControlName="categoriePosteId"
+          />
+          <div
+            *ngIf="
+              editForm.get('categoriePosteId')!.invalid &&
+              (editForm.get('categoriePosteId')!.dirty || editForm.get('categoriePosteId')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('categoriePosteId')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('categoriePosteId')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_categoriePosteLibelle">Categorie Poste Libellé</label>
+          <input
+            type="text"
+            class="form-control"
+            name="categoriePosteLibelle"
+            id="field_categoriePosteLibelle"
+            data-cy="categoriePosteLibelle"
+            formControlName="categoriePosteLibelle"
+          />
+          <div
+            *ngIf="
+              editForm.get('categoriePosteLibelle')!.invalid &&
+              (editForm.get('categoriePosteLibelle')!.dirty || editForm.get('categoriePosteLibelle')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('categoriePosteLibelle')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

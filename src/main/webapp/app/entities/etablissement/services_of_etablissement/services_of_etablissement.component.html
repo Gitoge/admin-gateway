@@ -1,0 +1,40 @@
+<form *ngIf="services" name="deleteForm">
+  <div class="modal-header">
+    <h4 class="modal-title" data-cy="rolesProfilDialogHeading">Liste des services d'un établissement</h4>
+
+    <button type="button" class="btn-close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
+  </div>
+
+  <div class="modal-body">
+    <jhi-alert-error></jhi-alert-error>
+
+    <p id="jhi-delete-pages-heading">
+      Les services disponibles dans cet établissement : <b> {{ etablissement.libelle }} </b>
+    </p>
+
+    <div class="table-responsive" id="entities" *ngIf="services">
+      <table class="table table-bordered table-condensed table-hover" aria-describedby="page-heading">
+        <thead>
+          <tr>
+            <th scope="col"><span>Code</span> <fa-icon icon="sort"></fa-icon></th>
+            <th scope="col"><span>Libellé</span> <fa-icon icon="sort"></fa-icon></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let service of services" data-cy="entityTable">
+            <td>
+              <strong>
+                {{ service.code }}
+              </strong>
+            </td>
+            <td>
+              <strong>
+                {{ service.libelle }}
+              </strong>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</form>

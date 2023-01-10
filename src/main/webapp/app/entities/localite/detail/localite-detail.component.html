@@ -1,0 +1,61 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <div *ngIf="localite">
+      <h2 data-cy="localiteDetailsHeading" class="custom-title">
+        <span>
+          Visualisation de la Localité: <b>{{ localite.libelle }}</b>
+        </span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details detail-card">
+        <dt><span>Code</span></dt>
+        <dd>
+          <span>{{ localite.code }}</span>
+        </dd>
+        <dt><span>Libellé</span></dt>
+        <dd>
+          <span>{{ localite.libelle }}</span>
+        </dd>
+        <dt><span>Niveau</span></dt>
+        <dd>
+          <span>{{ localite.niveau }}</span>
+        </dd>
+        <dt><span>Ordre</span></dt>
+        <dd>
+          <span>{{ localite.ordre }}</span>
+        </dd>
+        <dt><span>Version</span></dt>
+        <dd>
+          <span>{{ localite.version }}</span>
+        </dd>
+        <dt><span>Pays </span></dt>
+        <dd>
+          <span>{{ localite.pays?.libelle }}</span>
+        </dd>
+
+        <dt><span>Localité de Rattachement</span></dt>
+        <dd>
+          <div *ngIf="localite.localite">
+            <a [routerLink]="['/localite', localite.localite?.id, 'view']">{{ localite.localite?.libelle }}</a>
+          </div>
+        </dd>
+        <dt><span>Type Localité</span></dt>
+        <dd>
+          <div *ngIf="localite.typeLocalite">
+            <a [routerLink]="['/type-localite', localite.typeLocalite?.id, 'view']">{{ localite.typeLocalite?.libelle }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+      </button>
+    </div>
+  </div>
+</div>

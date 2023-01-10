@@ -1,0 +1,75 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-postes-non-cumulabe-heading" data-cy="PostesNonCumulabeCreateUpdateHeading"></h2>
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+        <div class="justify-content-center" style="border: 1px solid lightgray; padding: 2%">
+          <fieldset>
+            <legend style="font-size: 17px; color: #24695c; font-weight: 700">{{ titre }}</legend>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Code Poste 1<span style="color: red">*</span> </label>
+                <select
+                  class="form-control"
+                  id="field_codePoste1"
+                  data-cy="codePoste1"
+                  name="codePoste1"
+                  formControlName="codePoste1"
+                  required
+                >
+                  <option [ngValue]="null"></option>
+                  <option
+                    [ngValue]="
+                      codePoste1Option.id === editForm.get('codePoste1')!.value?.id ? editForm.get('codePoste1')!.value : codePoste1Option
+                    "
+                    *ngFor="let codePoste1Option of poste1"
+                  >
+                    {{ codePoste1Option.code }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label> code Poste 2 <span style="color: red">*</span> </label>
+                <select
+                  class="form-control"
+                  id="field_codePoste2"
+                  data-cy="codePoste2"
+                  name="codePoste1"
+                  formControlName="codePoste2"
+                  required
+                >
+                  <option [ngValue]="null"></option>
+                  <option
+                    [ngValue]="
+                      codePoste2Option.id === editForm.get('codePoste2')!.value?.id ? editForm.get('codePoste2')!.value : codePoste2Option
+                    "
+                    *ngFor="let codePoste2Option of poste1"
+                  >
+                    {{ codePoste2Option.code }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+      <br />
+      <div style="display: flex; justify-content: center; align-items: center">
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        &nbsp;
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

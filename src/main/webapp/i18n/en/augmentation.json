@@ -1,0 +1,31 @@
+{
+  "admingatewayApp": {
+    "augmentation": {
+      "home": {
+        "title": "Augmentations",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Augmentation",
+        "createOrEditLabel": "Create or edit a Augmentation",
+        "notFound": "No Augmentations found"
+      },
+      "created": "A new Augmentation is created with identifier {{ param }}",
+      "updated": "A Augmentation is updated with identifier {{ param }}",
+      "deleted": "A Augmentation is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Augmentation {{ id }}?"
+      },
+      "detail": {
+        "title": "Augmentation"
+      },
+      "id": "ID",
+      "codePoste": "Code Poste",
+      "montant": "Montant",
+      "reference": "Reference",
+      "posteId": "Poste Id",
+      "userInsertId": "User Insert Id",
+      "userUpdateId": "User Update Id",
+      "dateInsertId": "Date Insert Id",
+      "dateUpdateId": "Date Update Id"
+    }
+  }
+}

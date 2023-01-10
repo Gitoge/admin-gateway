@@ -1,0 +1,48 @@
+{
+  "applications": "*",
+  "changelogDate": "20220722173339",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "emplois",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "libelle",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "tauxAt",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "primeLieEmploi",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Emplois",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "postes",
+      "otherEntityRelationshipName": "emplois",
+      "ownerSide": true,
+      "relationshipName": "postes",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "no",
+  "skipServer": true
+}

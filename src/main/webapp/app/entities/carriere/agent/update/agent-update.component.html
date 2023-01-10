@@ -1,0 +1,342 @@
+<div class="row justify-content-center">
+  <div class="col-10 custom-card">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-agent-heading"
+        data-cy="AgentCreateUpdateHeading"
+        style="text-align: center; font-weight: 600; text-transform: uppercase; font-size: 12px"
+      >
+        {{ title }}
+      </h2>
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+        <!--
+       <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carriereAgent.matricule" for="field_matricule">Matricule</label>
+          <input type="text" class="form-control" name="matricule" id="field_matricule" data-cy="matricule" formControlName="matricule" [readonly]="true"/>
+          <div *ngIf="editForm.get('matricule')!.invalid && (editForm.get('matricule')!.dirty || editForm.get('matricule')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('matricule')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+        -->
+        <div class="row mb-4">
+          <div class="col mb-2 row">
+            <label class="col-sm-4 col-form-label" for="field_prenom">Prénom<span style="color: red">*</span></label>
+            <div class="col-sm-7">
+              <input type="text" class="form-control" name="prenom" id="field_prenom" data-cy="prenom" formControlName="prenom" required />
+              <div *ngIf="editForm.get('prenom')!.invalid && (editForm.get('prenom')!.dirty || editForm.get('prenom')!.touched)">
+                <small
+                  class="form-text text-danger"
+                  *ngIf="editForm.get('prenom')?.errors?.required"
+                  jhiTranslate="entity.validation.required"
+                >
+                  This field is required.
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="col mb-2 row">
+            <label class="col-sm-4 col-form-label" for="field_nom">Nom<span style="color: red">*</span></label>
+            <div class="col-sm-7">
+              <input type="text" class="form-control" name="nom" id="field_nom" data-cy="nom" formControlName="nom" required />
+              <div *ngIf="editForm.get('nom')!.invalid && (editForm.get('nom')!.dirty || editForm.get('nom')!.touched)">
+                <small
+                  class="form-text text-danger"
+                  *ngIf="editForm.get('nom')?.errors?.required"
+                  jhiTranslate="entity.validation.required"
+                >
+                  This field is required.
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col mb-2 row">
+            <label class="col-sm-4 col-form-label" for="field_typePiece">Type Piéce <span style="color: red">*</span></label>
+            <div class="col-sm-7">
+              <select class="form-control" name="typePiece" formControlName="typePiece" id="field_typePiece" data-cy="typePiece" required>
+                <option [ngValue]="null"></option>
+                <option value="CNI">CNI</option>
+                <option value="PASSEPORT">PASSEPORT</option>
+              </select>
+            </div>
+          </div>
+          <div class="col mb-2 row">
+            <label class="col-sm-4 col-form-label" for="field_nom">Numéro Piéce <span style="color: red">*</span></label>
+            <div class="col-sm-7">
+              <input
+                type="text"
+                class="form-control"
+                name="numeroPiece"
+                id="field_numeroPiece"
+                data-cy="numeroPiece"
+                formControlName="numeroPiece"
+              />
+              <div
+                *ngIf="editForm.get('numeroPiece')!.invalid && (editForm.get('numeroPiece')!.dirty || editForm.get('numeroPiece')!.touched)"
+              >
+                <small class="form-text text-danger" *ngIf="editForm.get('numeroPiece')?.errors?.required">
+                  Numéro Piéce obligatoire.
+                </small>
+                <small class="form-text text-danger" *ngIf="editForm.get('numeroPiece')?.errors?.minlength">
+                  Numéro Piéce doit comporter au moins 13 caractères.
+                </small>
+                <small class="form-text text-danger" *ngIf="editForm.get('numeroPiece')?.errors?.maxlength">
+                  Numéro Piéce doit comporter au moins 14 caractères.
+                </small>
+                <small class="form-text text-danger" *ngIf="editForm.get('numeroPiece')?.errors?.pattern">
+                  Pas de caracteres spéciaux".
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col mb-2 row">
+            <label class="col-sm-4 col-form-label" for="email">Email</label>
+            <div class="col-sm-7">
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                title="Entrer une addresse une email valide !"
+                formControlName="email"
+                data-cy="email"
+              />
+              <div *ngIf="editForm.get('email')!.invalid && (editForm.get('email')!.dirty || editForm.get('email')!.touched)">
+                <small class="form-text text-danger" *ngIf="editForm.get('email')?.errors?.required"> Votre email est obligatoire. </small>
+                <small class="form-text text-danger" *ngIf="editForm.get('email')?.errors?.invalid"> Votre email est invalide. </small>
+                <small class="form-text text-danger" *ngIf="editForm.get('email')?.errors?.minlength">
+                  Votre email doit comporter plus de 5 caractères.
+                </small>
+                <small class="form-text text-danger" *ngIf="editForm.get('email')?.errors?.maxlength">
+                  Votre email ne peut pas comporter plus de 50 caractères.
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="col mb-2 row">
+            <label class="col-sm-4 col-form-label" jhiTranslate="admingatewayApp.carriereAgent.adresse" for="field_adresse">Adresse</label>
+            <div class="col-sm-7">
+              <input type="text" class="form-control" name="adresse" id="field_adresse" data-cy="adresse" formControlName="adresse" />
+            </div>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col mb-2 row">
+            <label class="col-sm-4 col-form-label" for="field_dateNaissance">Date Naissance<span style="color: red">*</span></label>
+            <div class="col-sm-7">
+              <div class="input-group">
+                <input
+                  id="field_dateNaissance"
+                  data-cy="dateNaissance"
+                  type="text"
+                  class="form-control"
+                  name="dateNaissance"
+                  ngbDatepicker
+                  #dateNaissanceDp="ngbDatepicker"
+                  formControlName="dateNaissance"
+                />
+                <button type="button" class="btn btn-secondary" (click)="dateNaissanceDp.toggle()">
+                  <fa-icon icon="calendar-alt"></fa-icon>
+                </button>
+              </div>
+              <div
+                *ngIf="
+                  editForm.get('dateNaissance')!.invalid && (editForm.get('dateNaissance')!.dirty || editForm.get('dateNaissance')!.touched)
+                "
+              >
+                <small
+                  class="form-text text-danger"
+                  *ngIf="editForm.get('dateNaissance')?.errors?.required"
+                  jhiTranslate="entity.validation.required"
+                >
+                  This field is required.
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="col mb-2 row">
+            <label class="col-sm-4 col-form-label" for="field_lieuNaissance">Lieu Naissance<span style="color: red">*</span></label>
+            <div class="col-sm-7">
+              <input
+                type="text"
+                class="form-control"
+                name="lieuNaissance"
+                id="field_lieuNaissance"
+                data-cy="lieuNaissance"
+                formControlName="lieuNaissance"
+                required
+              />
+              <div
+                *ngIf="
+                  editForm.get('lieuNaissance')!.invalid && (editForm.get('lieuNaissance')!.dirty || editForm.get('lieuNaissance')!.touched)
+                "
+              >
+                <small
+                  class="form-text text-danger"
+                  *ngIf="editForm.get('lieuNaissance')?.errors?.required"
+                  jhiTranslate="entity.validation.required"
+                >
+                  This field is required.
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col mb-2 row">
+            <label class="col-sm-4 col-form-label" for="field_telephone">Téléphone </label>
+            <div class="col-sm-7">
+              <input
+                type="text"
+                class="form-control"
+                name="telephone"
+                id="field_telephone"
+                data-cy="telephone"
+                formControlName="telephone"
+              />
+            </div>
+          </div>
+          <div class="col mb-2 row">
+            <label class="col-sm-4 col-form-label" for="field_sexe">Sexe<span style="color: red">*</span></label>
+            <div class="col-sm-7">
+              <select class="form-control" name="sexe" formControlName="sexe" id="field_sexe" data-cy="sexe" required>
+                <option [ngValue]="null"></option>
+                <option value="MASCULIN">MASCULIN</option>
+                <option value="FEMININ">FEMININ</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col mb-2 row">
+            <label
+              class="col-sm-4 col-form-label"
+              jhiTranslate="admingatewayApp.carriereAgent.datePriseEnCharge"
+              for="field_datePriseEnCharge"
+              >Date Prise En Charge</label
+            >
+            <div class="col-sm-7">
+              <div class="input-group">
+                <input
+                  id="field_datePriseEnCharge"
+                  data-cy="datePriseEnCharge"
+                  type="text"
+                  class="form-control"
+                  name="datePriseEnCharge"
+                  ngbDatepicker
+                  #datePriseEnChargeDp="ngbDatepicker"
+                  formControlName="datePriseEnCharge"
+                />
+                <button type="button" class="btn btn-secondary" (click)="datePriseEnChargeDp.toggle()">
+                  <fa-icon icon="calendar-alt"></fa-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col mb-2 row">
+            <label class="col-sm-4 col-form-label" jhiTranslate="admingatewayApp.carriereAgent.dateSortie" for="field_dateSortie"
+              >Date Sortie</label
+            >
+            <div class="col-sm-7">
+              <div class="input-group">
+                <input
+                  id="field_datedateSortie"
+                  data-cy="datedateSortie"
+                  type="text"
+                  class="form-control"
+                  name="datedateSortie"
+                  ngbDatepicker
+                  #dateSortieDp="ngbDatepicker"
+                  formControlName="dateSortie"
+                />
+                <button type="button" class="btn btn-secondary" (click)="dateSortieDp.toggle()">
+                  <fa-icon icon="calendar-alt"></fa-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col mb-2 row">
+            <label class="col-sm-4 col-form-label" for="field_titre">Titre<span style="color: red">*</span></label>
+            <div class="col-sm-7">
+              <select class="form-control" name="titre" formControlName="titre" id="field_titre" data-cy="titre" required>
+                <option [ngValue]="null"></option>
+                <option value="Monsieur">Monsieur</option>
+                <option value="Madame">Madame</option>
+                <option value="Mademoiselle">Mademoiselle</option>
+              </select>
+            </div>
+          </div>
+          <div class="col mb-2 row">
+            <label class="col-sm-4 col-form-label" for="field_nationalite">Nationalité</label>
+            <div class="col-sm-7">
+              <select class="form-control" id="field_nationalite" data-cy="nationalite" name="nationalite" formControlName="nationalite">
+                <option [ngValue]="null"></option>
+                <option
+                  [ngValue]="
+                    nationaliteOption.id === editForm.get('nationalite')!.value?.id ? editForm.get('nationalite')!.value : nationaliteOption
+                  "
+                  *ngFor="let nationaliteOption of nationalitesSharedCollection; trackBy: trackNationaliteById"
+                >
+                  {{ nationaliteOption.libelle }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col mb-2 row">
+            <label class="col-sm-4 col-form-label" jhiTranslate="admingatewayApp.carriereAgent.femmeMariee" for="field_femmeMariee"
+              >Femme Mariee</label
+            >
+            <div class="col-sm-7">
+              <input
+                type="checkbox"
+                class="form-check"
+                name="femmeMariee"
+                id="field_femmeMariee"
+                data-cy="femmeMariee"
+                formControlName="femmeMariee"
+              />
+            </div>
+          </div>
+          <div class="col mb-2 row">
+            <label class="col-sm-4 col-form-label" jhiTranslate="admingatewayApp.carriereAgent.nomMari" for="field_nomMari">Nom Mari</label>
+            <div class="col-sm-7">
+              <input type="text" class="form-control" name="nomMari" id="field_nomMari" data-cy="nomMari" formControlName="nomMari" />
+            </div>
+          </div>
+        </div>
+        <!--   <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carriereAgent.status" for="field_status">Status</label>
+          <input type="text" class="form-control" name="status" id="field_status" data-cy="status" formControlName="status" />
+        </div>-->
+      </div>
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

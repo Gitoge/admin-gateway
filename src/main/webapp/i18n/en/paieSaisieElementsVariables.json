@@ -1,0 +1,44 @@
+{
+  "admingatewayApp": {
+    "paieSaisieElementsVariables": {
+      "home": {
+        "title": "Saisie Elements Variables",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Saisie Elements Variables",
+        "createOrEditLabel": "Create or edit a Saisie Elements Variables",
+        "notFound": "No Saisie Elements Variables found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Saisie Elements Variables {{ id }}?"
+      },
+      "detail": {
+        "title": "Saisie Elements Variables"
+      },
+      "id": "ID",
+      "codePoste": "Code Poste",
+      "matricule": "Matricule",
+      "reference": "Reference",
+      "montant": "Montant",
+      "taux": "Taux",
+      "dateDebut": "Date Debut",
+      "dateEcheance": "Date Echeance",
+      "periode": "Periode",
+      "statut": "Statut",
+      "agentId": "Agent Id",
+      "etablissementId": "Etablissement Id",
+      "userInsertId": "User Insert Id",
+      "userUpdateId": "User Update Id",
+      "dateInsert": "Date Insert",
+      "dateUpdate": "Date Update",
+      "periodePaye": "Periode Paye",
+      "postes": "Postes"
+    }
+  },
+  "paieApp": {
+    "paieSaisieElementsVariables": {
+      "created": "A new Saisie Elements Variables is created with identifier {{ param }}",
+      "updated": "A Saisie Elements Variables is updated with identifier {{ param }}",
+      "deleted": "A Saisie Elements Variables is deleted with identifier {{ param }}"
+    }
+  }
+}

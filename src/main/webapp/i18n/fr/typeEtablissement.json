@@ -1,0 +1,27 @@
+{
+  "admingatewayApp": {
+    "typeEtablissement": {
+      "home": {
+        "title": "TypeEtablissements",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Type Etablissement",
+        "createOrEditLabel": "Créer ou éditer un Type Etablissement",
+        "notFound": "Aucun Type Etablissement trouvé"
+      },
+      "created": "Un nouveau Type Etablissement a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Type Etablissement avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Type Etablissement avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Type Etablissement {{ id }} ?"
+      },
+      "detail": {
+        "title": "Type Etablissement"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description",
+      "etab": "Etab"
+    }
+  }
+}

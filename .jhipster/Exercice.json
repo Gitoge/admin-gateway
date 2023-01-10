@@ -1,0 +1,75 @@
+{
+  "applications": "*",
+  "changelogDate": "20221010142421",
+  "clientRootFolder": "paie",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "exercice",
+  "fields": [
+    {
+      "fieldName": "libelle",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "4",
+      "fieldValidateRulesMinlength": "4"
+    },
+    {
+      "fieldName": "dateDebut",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateFin",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateOuverture",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateFermeture",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "statut",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "userInsertId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "userUpdateId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "dateInsert",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "dateUpdate",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "paie",
+  "name": "Exercice",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "periodePaye",
+      "otherEntityRelationshipName": "exercice",
+      "relationshipName": "periodePaye",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no",
+  "skipServer": true
+}

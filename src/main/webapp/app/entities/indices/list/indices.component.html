@@ -1,0 +1,96 @@
+<div>
+  <h2 id="page-heading" data-cy="IndicesHeading">
+    <span jhiTranslate="admingatewayApp.indices.home.title">Indices</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="reset()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="admingatewayApp.indices.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-indices"
+        [routerLink]="['/indices/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="admingatewayApp.indices.home.createLabel"> Create a new Indices </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="indices?.length === 0">
+    <span jhiTranslate="admingatewayApp.indices.home.notFound">No indices found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="indices && indices.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="reset()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="code">
+            <span jhiTranslate="admingatewayApp.indices.code">Code</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="description">
+            <span jhiTranslate="admingatewayApp.indices.description">Description</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="mntSFTenf01">
+            <span jhiTranslate="admingatewayApp.indices.mntSFTenf01">Mnt SF Tenf 01</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="mntSFTenf02">
+            <span jhiTranslate="admingatewayApp.indices.mntSFTenf02">Mnt SF Tenf 02</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="soldeIndiciaire">
+            <span jhiTranslate="admingatewayApp.indices.soldeIndiciaire">Solde Indiciaire</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+        <tr *ngFor="let indices of indices; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/indices', indices.id, 'view']">{{ indices.id }}</a>
+          </td>
+          <td>{{ indices.code }}</td>
+          <td>{{ indices.description }}</td>
+          <td>{{ indices.mntSFTenf01 }}</td>
+          <td>{{ indices.mntSFTenf02 }}</td>
+          <td>{{ indices.soldeIndiciaire }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/indices', indices.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/indices', indices.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(indices)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

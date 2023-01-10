@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="indices">
+      <h2 data-cy="indicesDetailsHeading"><span jhiTranslate="admingatewayApp.indices.detail.title">Indices</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ indices.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.indices.code">Code</span></dt>
+        <dd>
+          <span>{{ indices.code }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.indices.description">Description</span></dt>
+        <dd>
+          <span>{{ indices.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.indices.mntSFTenf01">Mnt SF Tenf 01</span></dt>
+        <dd>
+          <span>{{ indices.mntSFTenf01 }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.indices.mntSFTenf02">Mnt SF Tenf 02</span></dt>
+        <dd>
+          <span>{{ indices.mntSFTenf02 }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.indices.soldeIndiciaire">Solde Indiciaire</span></dt>
+        <dd>
+          <span>{{ indices.soldeIndiciaire }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/indices', indices.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

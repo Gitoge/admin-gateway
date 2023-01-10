@@ -1,0 +1,65 @@
+{
+  "applications": "*",
+  "changelogDate": "20220718174954",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "modules",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "libelle",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "icon",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ordre",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "routerLink",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "active",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Modules",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "profils",
+      "otherEntityRelationshipName": "modules",
+      "relationshipName": "profils",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "applications",
+      "otherEntityRelationshipName": "modules",
+      "relationshipName": "applications",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no",
+  "skipServer": true
+}

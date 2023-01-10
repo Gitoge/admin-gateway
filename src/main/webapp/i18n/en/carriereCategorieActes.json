@@ -1,0 +1,32 @@
+{
+  "admingatewayApp": {
+    "carriereCategorieActes": {
+      "home": {
+        "title": "Categorie Actes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Categorie Actes",
+        "createOrEditLabel": "Create or edit a Categorie Actes",
+        "notFound": "No Categorie Actes found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Categorie Actes {{ id }}?"
+      },
+      "detail": {
+        "title": "Categorie Actes"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "userInsertId": "User Insert Id",
+      "userdateInsert": "Userdate Insert",
+      "typeActes": "Type Actes"
+    }
+  },
+  "carriereApp": {
+    "carriereCategorieActes": {
+      "created": "A new Categorie Actes is created with identifier {{ param }}",
+      "updated": "A Categorie Actes is updated with identifier {{ param }}",
+      "deleted": "A Categorie Actes is deleted with identifier {{ param }}"
+    }
+  }
+}

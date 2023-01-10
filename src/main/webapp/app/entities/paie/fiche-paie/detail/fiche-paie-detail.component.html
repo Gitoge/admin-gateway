@@ -1,0 +1,84 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="fichePaie">
+      <h2 data-cy="fichePaieDetailsHeading"><span jhiTranslate="admingatewayApp.paieFichePaie.detail.title">Fiche Paie</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="admingatewayApp.paieFichePaie.codePoste">Code Poste</span></dt>
+        <dd>
+          <span>{{ fichePaie.codePoste }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieFichePaie.libellePoste">Libelle Poste</span></dt>
+        <dd>
+          <span>{{ fichePaie.libellePoste }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieFichePaie.matricule">Matricule</span></dt>
+        <dd>
+          <span>{{ fichePaie.matricule }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieFichePaie.montantGain">Montant Gain</span></dt>
+        <dd>
+          <span>{{ fichePaie.montantGain }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieFichePaie.montantRetenue">Montant Retenue</span></dt>
+        <dd>
+          <span>{{ fichePaie.montantRetenue }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieFichePaie.dateCalcul">Date Calcul</span></dt>
+        <dd>
+          <span>{{ fichePaie.dateCalcul | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieFichePaie.dateAnnulationCalcul">Date Annulation Calcul</span></dt>
+        <dd>
+          <span>{{ fichePaie.dateAnnulationCalcul | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieFichePaie.annulationCalcul">Annulation Calcul</span></dt>
+        <dd>
+          <span>{{ fichePaie.annulationCalcul }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieFichePaie.agentId">Agent Id</span></dt>
+        <dd>
+          <span>{{ fichePaie.agentId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieFichePaie.posteId">Poste Id</span></dt>
+        <dd>
+          <span>{{ fichePaie.posteId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieFichePaie.etablissementId">Etablissement Id</span></dt>
+        <dd>
+          <span>{{ fichePaie.etablissementId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieFichePaie.userInsertId">User Insert Id</span></dt>
+        <dd>
+          <span>{{ fichePaie.userInsertId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieFichePaie.userUpdateId">User Update Id</span></dt>
+        <dd>
+          <span>{{ fichePaie.userUpdateId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieFichePaie.dateInsert">Date Insert</span></dt>
+        <dd>
+          <span>{{ fichePaie.dateInsert | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieFichePaie.dateUpdate">Date Update</span></dt>
+        <dd>
+          <span>{{ fichePaie.dateUpdate | formatMediumDatetime }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/fiche-paie', fichePaie.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

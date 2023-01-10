@@ -1,0 +1,186 @@
+<div>
+  <h2 id="page-heading" data-cy="ModulesHeading">
+    <span>Liste des Modules</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Actualiser</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-modules"
+        [routerLink]="['/modules/new']"
+        *ngIf="permissions?.actionAjout"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span>Nouveau</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="modules?.length === 0">
+    <span>Aucun module trouvé ! </span>
+  </div>
+
+  <br />
+  <div id="navcontainer">
+    <div class="row">
+      <div class="col-md-10">
+        <div class="input-group" id="adv-search">
+          <input
+            type="text"
+            class="form-control searchbar"
+            name="motCles"
+            id="field_motCles"
+            [(ngModel)]="motCles"
+            oninput="this.value = this.value.toUpperCase()"
+            placeholder="Rechercher par Libellé"
+          />
+          &nbsp;
+          <div class="input-group-btn">
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-primary" title="Rechercher" (click)="recherche()">
+                <fa-icon [icon]="'search'"></fa-icon>
+              </button>
+              &nbsp;
+              <button type="button" class="btn btn-danger" title="Effacer" (click)="effacer()">
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+
+  <div class="table-responsive" id="entities" *ngIf="modules && modules.length > 0">
+    <table class="table table-bordered table-condensed table-hover" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="libelle"><span>Libellé</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="libelle"><span>Numéro Ordre</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="description"><span>Description</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="applications.id"><span>Application</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let modules of modules; trackBy: trackId" data-cy="entityTable">
+          <td>{{ modules.libelle }}</td>
+          <td>{{ modules.ordre }}</td>
+          <td>{{ modules.description }}</td>
+
+          <td>
+            <div *ngIf="modules.applications">
+              <a [routerLink]="['/applications', modules.applications?.id, 'view']">{{ modules.applications.nom }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <!-- <button
+                type="submit"
+                (click)="getPages(modules)"
+                class="btn btn-outline-warning"
+                title="Pages"
+                data-cy="entityDetailsButton"
+                *ngIf="permissions.actionPages">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button> -->
+
+              <button
+                type="submit"
+                [routerLink]="['/modules', modules.id, 'view']"
+                class="btn btn-outline-info"
+                title="Détails"
+                data-cy="entityDetailsButton"
+                *ngIf="permissions?.actionDetails"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+
+              <button
+                type="submit"
+                (click)="openPopup(modules)"
+                class="btn btn-outline-primary btn-sm"
+                data-cy="entityEditButton"
+                title="Modifier"
+                *ngIf="permissions?.actionModifier"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+
+              <button
+                type="submit"
+                (click)="delete(modules)"
+                class="btn btn-outline-danger"
+                title="Supprimer"
+                data-cy="entityDeleteButton"
+                *ngIf="permissions?.actionSupprimer"
+              >
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="modules && modules.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>
+<!-- MODAL - CODE FORCAGE -->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{ display: displayStyle }">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" style="font-size: 16px"><b>Confirmation</b></h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <label class="form-label custom-label" for="field_code" required>Code de forçage <span style="color: red">*</span> </label>
+          <input
+            type="text"
+            class="form-control custom-control"
+            name="code"
+            id="field_code"
+            data-cy="code"
+            [(ngModel)]="codeForcage"
+            required
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closePopup()">Quitter</button>
+        <button type="button" class="btn btn-primary" (click)="validPopup()">Valider</button>
+      </div>
+    </div>
+  </div>
+</div>

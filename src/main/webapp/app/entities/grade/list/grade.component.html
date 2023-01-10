@@ -1,0 +1,169 @@
+<div>
+  <h2 id="page-heading" data-cy="GradeHeading">
+    <span>Les Grades</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Actualiser</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-grade"
+        [routerLink]="['/grade/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Nouveau </span>
+      </button>
+    </div>
+  </h2>
+  <div class="row" style="margin-left: 1px">
+    <div class="col-md-8 form__group field" id="adv-search">
+      <input
+        type="text"
+        class="form__field"
+        name="motCle"
+        id="field_motCle"
+        [(ngModel)]="motCle"
+        oninput="this.value = this.value.toUpperCase()"
+      />
+      <label for="name" class="form__label">Rechercher par Code , Libelle ...</label>
+    </div>
+    <div class="col-md-4" style="margin-top: 25px">
+      <button type="button" class="btn btn-primary" title="Rechercher" (click)="recherche()">
+        <fa-icon [icon]="'search'"></fa-icon>
+      </button>
+      &nbsp;
+      <button type="button" class="btn btn-danger" title="Effacer" (click)="effacer()">
+        <fa-icon icon="times"></fa-icon>
+      </button>
+    </div>
+  </div>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="grades?.length === 0">
+    <span>Aucun grade trouvé !</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="grades && grades.length > 0">
+    <table class="table table-bordered table-condensed table-hover" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="code"><span>Code</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="libelle"><span>Libellé</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="description"><span>Description</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let grade of grades; trackBy: trackId" data-cy="entityTable">
+          <td>{{ grade.code }}</td>
+          <td>{{ grade.libelle }}</td>
+          <td>{{ grade.description }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                (click)="getPoste(grade)"
+                class="btn btn-outline-warning"
+                title="Visualiser les rôles"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="list"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/grade', grade.id, 'view']"
+                class="btn btn-outline-info btn-sm"
+                data-cy="entityDetailsButton"
+                title="Details"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+
+              <button
+                type="submit"
+                (click)="openPopup(grade)"
+                class="btn btn-outline-primary btn-sm"
+                data-cy="entityEditButton"
+                title="Modifier"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+
+              <button
+                type="submit"
+                (click)="delete(grade)"
+                class="btn btn-outline-danger btn-sm"
+                data-cy="entityDeleteButton"
+                title="Supprimer"
+              >
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="grades && grades.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>
+
+<!-- DEBUT MODAL - CODE FORCAGE -->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{ display: displayStyle }">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="font-size: 16px; text-align: center">
+        <h4 class="modal-title"><b>Confirmation</b></h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <label class="form-label custom-label" for="field_code" required>Code de forçage <span style="color: red">*</span> </label>
+          <input
+            type="text"
+            class="form-control custom-control"
+            name="code"
+            id="field_code"
+            data-cy="code"
+            placeholder="merci de saisir le code de forçage svp ........."
+            [(ngModel)]="codeForcage"
+            required
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closePopup()">Quitter</button>
+        <button type="button" class="btn btn-primary" (click)="validPopup()">Valider</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FIN MODAL - CODE FORCAGE -->

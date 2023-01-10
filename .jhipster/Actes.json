@@ -1,0 +1,81 @@
+{
+  "applications": "*",
+  "changelogDate": "20220829114023",
+  "clientRootFolder": "carriere",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "actes",
+  "fields": [
+    {
+      "fieldName": "numeroActe",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "dateActe",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dateEffet",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "origineId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "userInsertId",
+      "fieldType": "Integer"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "carriere",
+  "name": "Actes",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "positionsAgent",
+      "otherEntityRelationshipName": "actes",
+      "ownerSide": false,
+      "relationshipName": "positionsAgent",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "situationAdministrative",
+      "otherEntityRelationshipName": "actes",
+      "ownerSide": false,
+      "relationshipName": "situationAdministrative",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "situationFamiliale",
+      "otherEntityRelationshipName": "actes",
+      "ownerSide": false,
+      "relationshipName": "situationFamiliale",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "affectation",
+      "otherEntityRelationshipName": "actes",
+      "ownerSide": false,
+      "relationshipName": "affectation",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "natureActes",
+      "otherEntityRelationshipName": "actes",
+      "relationshipName": "natureActes",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "typeActes",
+      "otherEntityRelationshipName": "actes",
+      "relationshipName": "typeActes",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

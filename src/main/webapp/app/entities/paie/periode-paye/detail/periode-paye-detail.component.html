@@ -1,0 +1,82 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="periodePaye">
+      <h2 data-cy="periodePayeDetailsHeading"><span jhiTranslate="admingatewayApp.paiePeriodePaye.detail.title">Periode Paye</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ periodePaye.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paiePeriodePaye.libelle">Libelle</span></dt>
+        <dd>
+          <span>{{ periodePaye.libelle }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paiePeriodePaye.dateDebut">Date Debut</span></dt>
+        <dd>
+          <span>{{ periodePaye.dateDebut | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paiePeriodePaye.dateFin">Date Fin</span></dt>
+        <dd>
+          <span>{{ periodePaye.dateFin | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paiePeriodePaye.dateDebutSaisie">Date Debut Saisie</span></dt>
+        <dd>
+          <span>{{ periodePaye.dateDebutSaisie | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paiePeriodePaye.dateFinSaisie">Date Fin Saisie</span></dt>
+        <dd>
+          <span>{{ periodePaye.dateFinSaisie | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paiePeriodePaye.dateDebutCalculSal">Date Debut Calcul Sal</span></dt>
+        <dd>
+          <span>{{ periodePaye.dateDebutCalculSal | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paiePeriodePaye.dateFinCalculSal">Date Fin Calcul Sal</span></dt>
+        <dd>
+          <span>{{ periodePaye.dateFinCalculSal | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paiePeriodePaye.statut">Statut</span></dt>
+        <dd>
+          <span>{{ periodePaye.statut }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paiePeriodePaye.userInsertId">User Insert Id</span></dt>
+        <dd>
+          <span>{{ periodePaye.userInsertId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paiePeriodePaye.userUpdateId">User Update Id</span></dt>
+        <dd>
+          <span>{{ periodePaye.userUpdateId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paiePeriodePaye.dateInsert">Date Insert</span></dt>
+        <dd>
+          <span>{{ periodePaye.dateInsert | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paiePeriodePaye.dateUpdate">Date Update</span></dt>
+        <dd>
+          <span>{{ periodePaye.dateUpdate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paiePeriodePaye.exercice">Exercice</span></dt>
+        <dd>
+          <div *ngIf="periodePaye.exercice">
+            <a [routerLink]="['/exercice', periodePaye.exercice?.id, 'view']">{{ periodePaye.exercice?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/periode-paye', periodePaye.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

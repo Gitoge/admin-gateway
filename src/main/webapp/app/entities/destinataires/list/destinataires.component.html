@@ -1,0 +1,138 @@
+<div>
+  <h2 id="page-heading" data-cy="DestinatairesHeading">
+    <span>Destinataires</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="reset()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Actualiser</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-destinataires"
+        [routerLink]="['/destinataires/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span>Nouveau </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="destinataires?.length === 0">
+    <span>Aucun Destinataire trouvé !</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="destinataires && destinataires.length > 0">
+    <table class="table table-bordered table-condensed table-hover" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="reset()">
+          <!-- <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="code">
+            <span jhiTranslate="admingatewayApp.destinataires.code">Code</span> <fa-icon icon="sort"></fa-icon>
+          </th> -->
+          <th scope="col" jhiSortBy="libelle"><span>Libellé</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="prenom"><span>Prénom</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="nom"><span>Nom</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="adresse"><span>Adresse</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="comptebancaire"><span>Compte Bancaire</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="typedestinataires.id"><span>Type Destinataires</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+        <tr *ngFor="let destinataires of destinataires; trackBy: trackId" data-cy="entityTable">
+          <!-- <td>
+            <a [routerLink]="['/destinataires', destinataires.id, 'view']">{{ destinataires.id }}</a>
+          </td>
+          <td>{{ destinataires.code }}</td> -->
+          <td>{{ destinataires.libelle }}</td>
+          <td>{{ destinataires.prenom }}</td>
+          <td>{{ destinataires.nom }}</td>
+          <td>{{ destinataires.adresse }}</td>
+          <td>{{ destinataires.comptebancaire }}</td>
+          <td>
+            <div *ngIf="destinataires.typedestinataires">
+              <a [routerLink]="['/type-destinataires', destinataires.typedestinataires?.id, 'view']">{{
+                destinataires.typedestinataires?.libelle
+              }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/destinataires', destinataires.id, 'view']"
+                class="btn btn-outline-info btn-sm"
+                data-cy="entityDetailsButton"
+                title="Details"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+
+              <button
+                type="submit"
+                (click)="openPopup(destinataires)"
+                class="btn btn-outline-primary btn-sm"
+                data-cy="entityEditButton"
+                title="Modifier"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+
+              <button
+                type="submit"
+                (click)="delete(destinataires)"
+                class="btn btn-outline-danger btn-sm"
+                data-cy="entityDeleteButton"
+                title="Supprimer"
+              >
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- DEBUT MODAL - CODE FORCAGE -->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{ display: displayStyle }">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="font-size: 16px; text-align: center">
+        <h4 class="modal-title"><b>Confirmation</b></h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <label class="form-label custom-label" for="field_code" required>Code de forçage <span style="color: red">*</span> </label>
+          <input
+            type="text"
+            class="form-control custom-control"
+            name="code"
+            id="field_code"
+            data-cy="code"
+            placeholder="merci de saisir le code de forçage svp ........."
+            [(ngModel)]="codeForcage"
+            required
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closePopup()">Quitter</button>
+        <button type="button" class="btn btn-primary" (click)="validPopup()">Valider</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FIN MODAL - CODE FORCAGE -->

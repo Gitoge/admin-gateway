@@ -1,0 +1,30 @@
+{
+  "admingatewayApp": {
+    "paramBaremeMinimumFiscal": {
+      "home": {
+        "title": "ParamBaremeMinimumFiscals",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Param Bareme Minimum Fiscal",
+        "createOrEditLabel": "Créer ou éditer un Param Bareme Minimum Fiscal",
+        "notFound": "Aucun Param Bareme Minimum Fiscal trouvé"
+      },
+      "created": "Un nouveau Param Bareme Minimum Fiscal a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Param Bareme Minimum Fiscal avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Param Bareme Minimum Fiscal avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Param Bareme Minimum Fiscal {{ id }} ?"
+      },
+      "detail": {
+        "title": "Param Bareme Minimum Fiscal"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "montantPlafond": "Montant Plafond",
+      "montantAPrelever": "Montant A Prelever",
+      "dateImpact": "Date Impact",
+      "userIdInsert": "User Id Insert",
+      "userdateInsert": "Userdate Insert"
+    }
+  }
+}

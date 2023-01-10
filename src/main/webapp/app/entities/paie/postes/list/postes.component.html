@@ -1,0 +1,169 @@
+<div>
+  <h2 id="page-heading" data-cy="PostesHeading">
+    <span jhiTranslate="admingatewayApp.paiePostes.home.title">Postes</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="admingatewayApp.paiePostes.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-postes"
+        [routerLink]="['/postes/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="admingatewayApp.paiePostes.home.createLabel"> Create a new Postes </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="postes?.length === 0">
+    <span jhiTranslate="admingatewayApp.paiePostes.home.notFound">No postes found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="postes && postes.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="code">
+            <span jhiTranslate="admingatewayApp.paiePostes.code">Code</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="libelle">
+            <span jhiTranslate="admingatewayApp.paiePostes.libelle">Libelle</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="description">
+            <span jhiTranslate="admingatewayApp.paiePostes.description">Description</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="sens">
+            <span jhiTranslate="admingatewayApp.paiePostes.sens">Sens</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateEffet">
+            <span jhiTranslate="admingatewayApp.paiePostes.dateEffet">Date Effet</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateEcheance">
+            <span jhiTranslate="admingatewayApp.paiePostes.dateEcheance">Date Echeance</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="formule">
+            <span jhiTranslate="admingatewayApp.paiePostes.formule">Formule</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dansAssiette">
+            <span jhiTranslate="admingatewayApp.paiePostes.dansAssiette">Dans Assiette</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="montant">
+            <span jhiTranslate="admingatewayApp.paiePostes.montant">Montant</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="capital">
+            <span jhiTranslate="admingatewayApp.paiePostes.capital">Capital</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="cumuleRetenue">
+            <span jhiTranslate="admingatewayApp.paiePostes.cumuleRetenue">Cumule Retenue</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="typePosteId">
+            <span jhiTranslate="admingatewayApp.paiePostes.typePosteId">Type Poste Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="typePosteLibelle">
+            <span jhiTranslate="admingatewayApp.paiePostes.typePosteLibelle">Type Poste Libelle</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="frequenceId">
+            <span jhiTranslate="admingatewayApp.paiePostes.frequenceId">Frequence Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="frequenceLibelle">
+            <span jhiTranslate="admingatewayApp.paiePostes.frequenceLibelle">Frequence Libelle</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="categoriePosteId">
+            <span jhiTranslate="admingatewayApp.paiePostes.categoriePosteId">Categorie Poste Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="categoriePosteLibelle">
+            <span jhiTranslate="admingatewayApp.paiePostes.categoriePosteLibelle">Categorie Poste Libelle</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="userInsertId">
+            <span jhiTranslate="admingatewayApp.paiePostes.userInsertId">User Insert Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="userUpdateId">
+            <span jhiTranslate="admingatewayApp.paiePostes.userUpdateId">User Update Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateInsert">
+            <span jhiTranslate="admingatewayApp.paiePostes.dateInsert">Date Insert</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateUpdate">
+            <span jhiTranslate="admingatewayApp.paiePostes.dateUpdate">Date Update</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let postes of postes; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/postes', postes.id, 'view']">{{ postes.id }}</a>
+          </td>
+          <td>{{ postes.code }}</td>
+          <td>{{ postes.libelle }}</td>
+          <td>{{ postes.description }}</td>
+          <td>{{ postes.sens }}</td>
+          <td>{{ postes.dateEffet | formatMediumDate }}</td>
+          <td>{{ postes.dateEcheance | formatMediumDate }}</td>
+          <td>{{ postes.formule | formatMediumDate }}</td>
+          <td>{{ postes.dansAssiette }}</td>
+          <td>{{ postes.montant }}</td>
+          <td>{{ postes.capital }}</td>
+          <td>{{ postes.cumuleRetenue }}</td>
+          <td>{{ postes.typePosteId }}</td>
+          <td>{{ postes.typePosteLibelle }}</td>
+          <td>{{ postes.frequenceId }}</td>
+          <td>{{ postes.frequenceLibelle }}</td>
+          <td>{{ postes.categoriePosteId }}</td>
+          <td>{{ postes.categoriePosteLibelle }}</td>
+          <td>{{ postes.userInsertId }}</td>
+          <td>{{ postes.userUpdateId }}</td>
+          <td>{{ postes.dateInsert | formatMediumDatetime }}</td>
+          <td>{{ postes.dateUpdate | formatMediumDatetime }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/postes', postes.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/postes', postes.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(postes)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="postes && postes.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,151 @@
+<div class="modal-header">
+  <h4 class="modal-title">Pièce Administrative</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form name="editForm" role="form" novalidate (ngSubmit)="ajouterDocument()" [formGroup]="editForm">
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-block">
+            <div class="row justify-content-center">
+              <div class="col-12">
+                <br />
+                <div class="row mb-4">
+                  <div class="col mb-2 row">
+                    <label class="col-sm-4 col-form-label space" for="field_evenement">Type Acte </label>
+                    <div class="col-sm-7">
+                      <!--<select class="form-control" name="typePiece" id="field_typePiece" data-cy="typePiece" formControlName="typePiece">
+                        <option value="null"></option>
+                        <option value="Décision d’engagement">Décision d’engagement</option>
+                        <option value="Décision d’affectation">Décision d’affectation</option>
+                        <option value="Fiche de renseignements individuels">Fiche de renseignements individuels</option>
+                      </select>-->
+                      <select class="form-control" id="field_evenement" data-cy="evenement" name="evenement" formControlName="evenement">
+                        <option [ngValue]="null"></option>
+                        <option
+                          [ngValue]="
+                      evenementOption.id === editForm.get('evenement')!.value?.id
+                        ? editForm.get('evenement')!.value
+                        : evenementOption
+                    "
+                          *ngFor="let evenementOption of evenementSharedCollection;"
+                        >
+                          {{ evenementOption.libelle }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col mb-2 row">
+                    <label for="field_nomPiece" class="col-sm-3 col-form-label">Nom Acte</label>
+                    <div class="col-sm-7">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="nomPiece"
+                        id="field_nomPiece"
+                        data-cy="nomPiece"
+                        formControlName="nomPiece"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mb-4">
+                  <div class="col mb-2 row">
+                    <label class="col-sm-4 col-form-label space" for="field_numero">Numéro </label>
+                    <div class="col-sm-7">
+                      <input type="text" class="form-control" name="numero" id="field_numero" data-cy="numero" formControlName="numero" />
+                    </div>
+                  </div>
+                  <div class="col mb-2 row">
+                    <label for="field_date" class="col-sm-3 col-form-label">Date Acte</label>
+                    <div class="col-sm-7">
+                      <input type="date" class="form-control" name="date" id="field_date" data-cy="date" formControlName="date" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mb-4">
+                  <div class="col mb-2 row">
+                    <label class="col-sm-4 col-form-label space" for="field_natureActes">Nature Acte</label>
+                    <div class="col-sm-7">
+                      <select
+                        class="form-control"
+                        name="natureActes"
+                        id="field_natureActes"
+                        data-cy="natureActes"
+                        formControlName="natureActes"
+                        style="width: 100%; font-size: 12px"
+                      >
+                        <option [ngValue]="null"></option>
+                        <option
+                          [ngValue]="
+                        natureActesOption.id === editForm.get('natureActes')!.value?.id ? editForm.get('natureActes')!.value : natureActesOption
+                      "
+                          *ngFor="let natureActesOption of natureActesSharedCollection"
+                        >
+                          {{ natureActesOption.libelle }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col mb-2 row">
+                    <label class="col-sm-3 col-form-label" for="field_fichier">fichier</label>
+                    <div class="col-sm-7">
+                      <div>
+                        <div *ngIf="editForm.get('fichier')!.value" class="form-text text-danger clearfix">
+                          <a class="pull-left" (click)="openFile(editForm.get('fichier')!.value, editForm.get('fichierContentType')!.value)"
+                            >open</a
+                          ><br />
+                          <span class="pull-left"
+                            >{{ editForm.get('fichierContentType')!.value }}, {{ byteSize(editForm.get('fichier')!.value) }}</span
+                          >
+                          <button
+                            type="button"
+                            (click)="editForm.patchValue({ fichier: null }); editForm.patchValue({ fichierContentType: null })"
+                            class="btn btn-secondary btn-xs pull-right"
+                          >
+                            <fa-icon icon="times"></fa-icon>
+                          </button>
+                        </div>
+                        <input
+                          type="file"
+                          id="file_fichier"
+                          name="file_fichier"
+                          data-cy="fichier"
+                          (change)="setFileData($event, 'fichier', false)"
+                        />
+                      </div>
+                      <input
+                        type="hidden"
+                        class="form-control"
+                        name="fichier"
+                        id="field_fichier"
+                        data-cy="fichier"
+                        formControlName="fichier"
+                      />
+                      <input
+                        type="hidden"
+                        class="form-control"
+                        name="fichierContentType"
+                        id="field_fichierContentType"
+                        formControlName="fichierContentType"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Annuler</button>
+    <button type="submit" class="btn btn-outline-dark" [disabled]="editForm.invalid || isSaving">Enregistrer</button>
+  </div>
+</form>

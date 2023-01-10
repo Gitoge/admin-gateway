@@ -1,0 +1,45 @@
+{
+  "applications": "*",
+  "changelogDate": "20220727201834",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "param_parts_fiscales",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "composition",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "nombreParts",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "userIdInsert",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "userdateInsert",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "ParamPartsFiscales",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no",
+  "skipServer": true
+}

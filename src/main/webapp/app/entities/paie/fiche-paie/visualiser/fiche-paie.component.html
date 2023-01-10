@@ -1,0 +1,277 @@
+<div>
+  <form style="margin: 2px; padding: 0" [formGroup]="editForm">
+    <h2 id="page-heading" data-cy="FichePaieHeading">
+      <span>Fiche Paies</span>
+      <div class="col-md-12" style="border: 1px solid lightgray; padding: 1%">
+        <fieldset>
+          <legend style="font-size: 17px; color: #24695c; font-weight: 700">Recherche Fiche Paie Agent:</legend>
+          <div class="row" style="margin-top: 1%">
+            <div class="col-md-3">
+              <label style="font-family: Arial; font-size: 80%">Exercice</label>
+              <select
+                class="form-control"
+                id="field_exerciceId"
+                data-cy="exerciceId"
+                name="exerciceId"
+                formControlName="exerciceId"
+                (change)="findPeriodeByExercice(editForm.get('exerciceId')!.value?.id)"
+                required
+              >
+                <option [ngValue]="null"></option>
+                <option
+                  [ngValue]="
+                    exerciceOption.id === editForm.get('exerciceId')!.value?.id ? editForm.get('exerciceId')!.value : exerciceOption
+                  "
+                  *ngFor="let exerciceOption of exercice"
+                >
+                  {{ exerciceOption.libelle }}
+                </option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label style="font-family: Arial; font-size: 80%">Periode</label>
+              <select class="form-control" id="field_periodeId" data-cy="periodeId" name="periodeId" formControlName="periodeId" required>
+                <option [ngValue]="null"></option>
+                <option
+                  [ngValue]="periodeOption.id === editForm.get('periodeId')!.value?.id ? editForm.get('periodeId')!.value : periodeOption"
+                  *ngFor="let periodeOption of periodePaye"
+                >
+                  {{ periodeOption.libelle }}
+                </option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label style="font-family: Arial; font-size: 80%">Matricule</label>
+              <input
+                type="text"
+                class="form-control"
+                name="matricule"
+                id="field_matricule"
+                data-cy="matricule"
+                formControlName="matricule"
+                placeholder="Saisir matricule"
+                [(ngModel)]="matricule"
+              />
+            </div>
+            <div class="col-md-3" style="margin-top: 20px">
+              <button
+                type="button"
+                class="btn btn-primary"
+                [disabled]="editForm.invalid"
+                (click)="getAgentByMatricule(editForm.get('matricule')!.value)"
+              >
+                <fa-icon [icon]="'search'"></fa-icon>
+              </button>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </h2>
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+    <button type="button" (click)="openPDF()" class="btn btn-primary" *ngIf="fiche && fiche.length > 0">Imprimer</button>
+    <div class="table-responsive row" id="testPDF" *ngIf="fiche && fiche.length > 0">
+      <table class="table table-bordered table-condensed table-hover" aria-describedby="page-heading" style="width: 25%">
+        <thead>
+          <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+            <span>
+              <img class="align-middle" src="../../content/images/logo_dtai.png" width="37%" />
+              &nbsp;&nbsp;
+              <th>TRESOR</th> </span
+            ><br /><br />
+            <b
+              >REPUBLIQUE <br />
+              &nbsp; DU SENEGAL</b
+            >
+            <br />
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="agent">
+            <td style="width: 20%; height: 20%">{{ agent.prenom }} {{ agent.nom }}</td>
+          </tr>
+          <tr>
+            <td style="width: 20%; height: 20%">
+              <b>COMPTE A DEBITER </b><br /><br /><br />
+              <b> TRESORIER GENERAL DU SENEGAL</b>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 20%; height: 20%">
+              <b style="float: left"> Visa</b>
+              <b style="float: right"> Timbre à date</b>
+            </td>
+          </tr>
+          <tr>
+            <table class="table table-bordered table-condensed table-hover" aria-describedby="page-heading" style="width: 100%">
+              <thead>
+                <tr class="table-dark">
+                  <th>
+                    <span style="font-size: 12px">Matricule</span>
+                  </th>
+                  <th>
+                    <span style="font-size: 12px; width: 100px">No Emission</span>
+                  </th>
+                  <th>
+                    <span style="font-size: 12px; width: 16px">No Ordre</span>
+                  </th>
+                  <th>
+                    <span style="font-size: 12px; width: 16px">Date</span>
+                  </th>
+                </tr>
+              </thead>
+              <tr *ngIf="agent">
+                <td>{{ agent.matricule }}</td>
+                <td>numero 2</td>
+                <td>221</td>
+                <td>10/01/2022</td>
+              </tr>
+              <tr>
+                <td>jicznco</td>
+                <td></td>
+                <td></td>
+                <td>jicznc</td>
+              </tr>
+            </table>
+          </tr>
+        </tbody>
+      </table>
+      &nbsp;
+      <table class="table table-bordered table-condensed table-hover" aria-describedby="page-heading" style="width: 74%">
+        <thead>
+          <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+            <b
+              >REPUBLIQUE &nbsp;&nbsp;
+              <th style="font-size: 25px; float: right">BULLETIN DE SOLDE</th>
+              <br />&nbsp; DU SENEGAL </b
+            ><br />
+            <p>
+              <span style="font-family: Yu Gothic UI Semilight">CEP <br />&nbsp; ORDRE DE VIREMENT </span>
+            </p>
+            <td *ngIf="agent">
+              <span>
+                <b> MATRICULE <br />IDENTIFICATION : </b>
+                {{ agent.matricule }}
+              </span>
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="width: 60%; height: 20%" *ngIf="agent">
+              <div class="row" style="margin-top: 1%; font-family: bold">
+                <div class="col-md-6">
+                  <span *ngIf="agent.sexe === 'MASCULIN'">
+                    {{ agent.matricule }} MONSIEUR &nbsp; {{ agent.prenom }} &nbsp; {{ agent.nom }} &nbsp;<br />
+                  </span>
+                  <span *ngIf="agent.sexe === 'FEMININ'">
+                    {{ agent.matricule }} MADAME &nbsp; {{ agent.prenom }} &nbsp; {{ agent.nom }} &nbsp;<br />
+                  </span>
+                  <br />
+                  {{ agent.adresse }}&nbsp; &nbsp; NB MF 0 &nbsp; PARTS {{ sitFamiliale.nombrePart }}
+                  <br />
+                  <br />
+                  {{ libelleEmplois }} <br />
+                  <br />
+                  SIT.MAT {{ sitFamiliale.situationMatrimoniale }} &nbsp; &nbsp; NB.ENF {{ sitFamiliale.nombreEnfant }}
+                  &nbsp; &nbsp; ENF+10
+                  {{ sitFamiliale.nombreEnfantMajeur }} <br />
+                  <br />
+                  {{ libelleEtablissement }}
+                  <br />
+                  <br />
+                  <span *ngIf="grade">{{ grade.libelle }}</span>
+                </div>
+                <div class="col-md-6">
+                  <span *ngIf="hierarchie">{{ hierarchie.libelle }}</span
+                  ><br /><br />
+                  <span *ngIf="echelon"> {{ echelon.libelle }}</span
+                  ><br /><br />
+                  <span> {{ agent.nationalite?.libelle }}</span>
+                  <br /><br />
+                  <span> TEI {{ sitFamiliale.nombreEnfantImposable }}</span>
+                  &nbsp; &nbsp; EMD
+                  <span *ngIf="sitFamiliale"> {{ sitFamiliale.nombreEnfantDecede }}</span> <br /><br />
+                  <span *ngIf="services"> {{ services.libelle }}</span> <br /><br />
+                  <span *ngIf="sitAdmin"> {{ sitAdmin.indice?.libelle }}</span>
+                </div>
+              </div>
+              <div style="float: right"></div>
+            </td>
+            <td>
+              <b>
+                Joindre le present timbre <br />
+                à l'appui de toute reclamation <br />
+                ou l'observation <br />
+                adresser la correspondance à la <br />
+                DIRECTION de la SOLDE <br />
+                des PENSIONS et des RENTES B.P. n 4017 <br />
+                DAKAR
+                <hr />
+              </b>
+              <p style="text-align: center">
+                <b>Montants</b> <br />
+                <label style="float: left">Gains </label>
+                &nbsp;
+                <label style="float: right">Retenues</label>
+              </p>
+            </td>
+          </tr>
+          <tr *ngFor="let fichePaie of fiche">
+            <td>{{ fichePaie.codePoste }} {{ fichePaie.libellePoste }}&emsp;&emsp;&emsp;&emsp;&emsp;{{ fichePaie.numero }} <br /></td>
+            <td>
+              {{ fichePaie.montantGain }}
+              <span style="float: right"> {{ fichePaie.montantRetenue }}<br /></span>
+            </td>
+          </tr>
+          <td></td>
+          <td *ngIf="fiche?.length > 0">
+            {{ fiche[fiche?.length - 1].sommeGain | number }}
+            <span style="float: right"> {{ fiche[fiche?.length - 1].sommeRetenue | number }}<br /></span>
+          </td>
+          <tr>
+            <table class="table table-bordered table-condensed table-hover" aria-describedby="page-heading">
+              <thead>
+                <tr class="table-dark">
+                  <th>
+                    <span> No Emission</span>
+                  </th>
+                  <th>
+                    <span> No Ordre</span>
+                  </th>
+                  <th>
+                    <span>Date</span>
+                  </th>
+                  <th>
+                    <span>Imputation</span>
+                  </th>
+                  <th>
+                    <span>Bulletin Négatif</span>
+                  </th>
+                  <th>
+                    <span></span>
+                  </th>
+                </tr>
+              </thead>
+              <tr>
+                <td>103105I</td>
+                <td>numero2</td>
+                <td>10/01/2022</td>
+                <td>221</td>
+                <td>221</td>
+                <td *ngIf="sitAdmin">
+                  Mode de réglement[{{ sitAdmin.modeReglement }}
+                  {{ sitAdmin.numeroCompte }}
+                </td>
+              </tr>
+            </table>
+            <td *ngIf="fiche?.length > 0"><b> Net A payer :</b>{{ fiche[fiche?.length - 1].netAPayer | number }}</td>
+          </tr>
+          <tr>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </form>
+</div>

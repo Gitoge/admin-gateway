@@ -1,0 +1,339 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-bareme-calcul-heures-supp-heading"
+        data-cy="BaremeCalculHeuresSuppCreateUpdateHeading"
+        jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.home.createOrEditLabel"
+      >
+        Create or edit a Bareme Calcul Heures Supp
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.indiceDebut" for="field_indiceDebut"
+            >Indice Debut</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="indiceDebut"
+            id="field_indiceDebut"
+            data-cy="indiceDebut"
+            formControlName="indiceDebut"
+          />
+          <div *ngIf="editForm.get('indiceDebut')!.invalid && (editForm.get('indiceDebut')!.dirty || editForm.get('indiceDebut')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('indiceDebut')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('indiceDebut')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.indiceFin" for="field_indiceFin"
+            >Indice Fin</label
+          >
+          <input type="number" class="form-control" name="indiceFin" id="field_indiceFin" data-cy="indiceFin" formControlName="indiceFin" />
+          <div *ngIf="editForm.get('indiceFin')!.invalid && (editForm.get('indiceFin')!.dirty || editForm.get('indiceFin')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('indiceFin')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('indiceFin')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.soldeGlobalDebut" for="field_soldeGlobalDebut"
+            >Solde Global Debut</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="soldeGlobalDebut"
+            id="field_soldeGlobalDebut"
+            data-cy="soldeGlobalDebut"
+            formControlName="soldeGlobalDebut"
+          />
+          <div
+            *ngIf="
+              editForm.get('soldeGlobalDebut')!.invalid &&
+              (editForm.get('soldeGlobalDebut')!.dirty || editForm.get('soldeGlobalDebut')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('soldeGlobalDebut')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('soldeGlobalDebut')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.soldeGlobalFin" for="field_soldeGlobalFin"
+            >Solde Global Fin</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="soldeGlobalFin"
+            id="field_soldeGlobalFin"
+            data-cy="soldeGlobalFin"
+            formControlName="soldeGlobalFin"
+          />
+          <div
+            *ngIf="
+              editForm.get('soldeGlobalFin')!.invalid && (editForm.get('soldeGlobalFin')!.dirty || editForm.get('soldeGlobalFin')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('soldeGlobalFin')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('soldeGlobalFin')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.heuresOrdinaires" for="field_heuresOrdinaires"
+            >Heures Ordinaires</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="heuresOrdinaires"
+            id="field_heuresOrdinaires"
+            data-cy="heuresOrdinaires"
+            formControlName="heuresOrdinaires"
+          />
+          <div
+            *ngIf="
+              editForm.get('heuresOrdinaires')!.invalid &&
+              (editForm.get('heuresOrdinaires')!.dirty || editForm.get('heuresOrdinaires')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('heuresOrdinaires')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('heuresOrdinaires')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.dimanchesJoursFeries"
+            for="field_dimanchesJoursFeries"
+            >Dimanches Jours Feries</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="dimanchesJoursFeries"
+            id="field_dimanchesJoursFeries"
+            data-cy="dimanchesJoursFeries"
+            formControlName="dimanchesJoursFeries"
+          />
+          <div
+            *ngIf="
+              editForm.get('dimanchesJoursFeries')!.invalid &&
+              (editForm.get('dimanchesJoursFeries')!.dirty || editForm.get('dimanchesJoursFeries')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dimanchesJoursFeries')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('dimanchesJoursFeries')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.heuresNuit" for="field_heuresNuit"
+            >Heures Nuit</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="heuresNuit"
+            id="field_heuresNuit"
+            data-cy="heuresNuit"
+            formControlName="heuresNuit"
+          />
+          <div *ngIf="editForm.get('heuresNuit')!.invalid && (editForm.get('heuresNuit')!.dirty || editForm.get('heuresNuit')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('heuresNuit')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('heuresNuit')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.observation" for="field_observation"
+            >Observation</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="observation"
+            id="field_observation"
+            data-cy="observation"
+            formControlName="observation"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.userInsertId" for="field_userInsertId"
+            >User Insert Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="userInsertId"
+            id="field_userInsertId"
+            data-cy="userInsertId"
+            formControlName="userInsertId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.userUpdateId" for="field_userUpdateId"
+            >User Update Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="userUpdateId"
+            id="field_userUpdateId"
+            data-cy="userUpdateId"
+            formControlName="userUpdateId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.dateInsert" for="field_dateInsert"
+            >Date Insert</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dateInsert"
+              data-cy="dateInsert"
+              type="datetime-local"
+              class="form-control"
+              name="dateInsert"
+              formControlName="dateInsert"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.dateUpdate" for="field_dateUpdate"
+            >Date Update</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dateUpdate"
+              data-cy="dateUpdate"
+              type="datetime-local"
+              class="form-control"
+              name="dateUpdate"
+              formControlName="dateUpdate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

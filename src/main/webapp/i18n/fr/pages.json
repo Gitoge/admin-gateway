@@ -1,0 +1,28 @@
+{
+  "admingatewayApp": {
+    "pages": {
+      "home": {
+        "title": "Pages",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Pages",
+        "createOrEditLabel": "Créer ou éditer un Pages",
+        "notFound": "Aucun Pages trouvé"
+      },
+      "created": "Un nouveau Pages a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Pages avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Pages avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Pages {{ id }} ?"
+      },
+      "detail": {
+        "title": "Pages"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description",
+      "actions": "Actions",
+      "roles": "Roles"
+    }
+  }
+}

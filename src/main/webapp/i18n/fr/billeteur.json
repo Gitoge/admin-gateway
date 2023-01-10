@@ -1,0 +1,29 @@
+{
+  "admingatewayApp": {
+    "billeteur": {
+      "home": {
+        "title": "Billeteurs",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Billeteur",
+        "createOrEditLabel": "Créer ou éditer un Billeteur",
+        "notFound": "Aucun Billeteur trouvé"
+      },
+      "created": "Un nouveau Billeteur a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Billeteur avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Billeteur avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Billeteur {{ id }} ?"
+      },
+      "detail": {
+        "title": "Billeteur"
+      },
+      "id": "ID",
+      "etablissementId": "Etablissement Id",
+      "code": "Code",
+      "prenom": "Prenom",
+      "nom": "Nom",
+      "matricule": "Matricule",
+      "telephone": "Telephone"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "admingatewayApp": {
+    "positions": {
+      "home": {
+        "title": "Positions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Positions",
+        "createOrEditLabel": "Create or edit a Positions",
+        "notFound": "No Positions found"
+      },
+      "created": "A new Positions is created with identifier {{ param }}",
+      "updated": "A Positions is updated with identifier {{ param }}",
+      "deleted": "A Positions is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Positions {{ id }}?"
+      },
+      "detail": {
+        "title": "Positions"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description",
+      "typeAgent": "Type Agent",
+      "impactSolde": "Impact Solde",
+      "statutPosition": "Statut Position",
+      "typeposition": "Typeposition"
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "applications": "*",
+  "changelogDate": "20220722173331",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "type_reglement",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "libelle",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "TypeReglement",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "reglement",
+      "otherEntityRelationshipName": "typereglement",
+      "relationshipName": "reglement",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no",
+  "skipServer": true
+}

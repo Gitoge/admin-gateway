@@ -1,0 +1,181 @@
+<div>
+  <h2 id="page-heading" data-cy="EtablissementHeading">
+    <span>Les Etablissements</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="reset()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Actualiser</span>
+      </button>
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-etablissement"
+        [routerLink]="['/etablissement/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Nouveau </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="etablissements?.length === 0">
+    <span>Aucun Etablissemt trouvé !</span>
+  </div>
+  <br />
+  <div class="row" style="margin-left: 1px">
+    <div class="col-md-8 form__group field" id="adv-search">
+      <input
+        type="text"
+        class="form__field"
+        name="motCle"
+        id="field_motCle"
+        [(ngModel)]="motCles"
+        oninput="this.value = this.value.toUpperCase()"
+      />
+      <label for="name" class="form__label">Rechercher par Sigle, Libellé, Type Etablissement, Localité, Téléphone ...</label>
+    </div>
+    <div class="col-md-4" style="margin-top: 25px">
+      <button type="button" class="btn btn-primary" title="Rechercher" (click)="recherche()">
+        <fa-icon [icon]="'search'"></fa-icon>
+      </button>
+      &nbsp;
+      <button type="button" class="btn btn-danger" title="Effacer" (click)="effacer()">
+        <fa-icon icon="times"></fa-icon>
+      </button>
+    </div>
+  </div>
+  <br />
+  <div class="table-responsive" id="entities" *ngIf="etablissements && etablissements.length > 0">
+    <table class="table table-bordered table-condensed table-hover" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="sigle"><span>Sigle</span> <fa-icon icon="sort"></fa-icon></th>
+          <th><span>Libellé</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="adresse"><span>Adresse</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="numTelephone"><span>Num Téléphone</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="typeEtab.id"><span>Type Etablissement</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="localite.id"><span>Localité</span> <fa-icon icon="sort"></fa-icon></th>
+          <th><span>Convention</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let etablissement of etablissements; trackBy: trackId" data-cy="entityTable">
+          <td>{{ etablissement.sigle }}</td>
+          <td>{{ etablissement.libelleLong }}</td>
+          <td>{{ etablissement.adresse }}</td>
+          <td>{{ etablissement.numTelephone }}</td>
+          <td>
+            <div *ngIf="etablissement.typeEtab">
+              <a [routerLink]="['/type-etablissement', etablissement.typeEtab?.id, 'view']">{{ etablissement.typeEtab?.libelle }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="etablissement.localite">
+              <a [routerLink]="['/localite', etablissement.localite?.id, 'view']">{{ etablissement.localite?.libelle }}</a>
+            </div>
+          </td>
+          <td>{{ etablissement.libelleConvention }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                (click)="getServices(etablissement)"
+                class="btn btn-outline-warning"
+                title="Visualiser les services de l'établissement"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="list"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/etablissement', etablissement.id, 'view']"
+                class="btn btn-outline-info btn-sm"
+                data-cy="entityDetailsButton"
+                title="Details"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+
+              <button
+                type="submit"
+                (click)="openPopup1(etablissement)"
+                class="btn btn-outline-primary btn-sm"
+                data-cy="entityEditButton"
+                title="Modifier"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+
+              <button
+                type="submit"
+                (click)="delete(etablissement)"
+                class="btn btn-outline-danger btn-sm"
+                data-cy="entityDeleteButton"
+                title="Supprimer"
+              >
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="etablissements && etablissements.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -bCODE FORCAGE -->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{ display: displayStyle }">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" style="font-size: 16px"><b>Confirmation</b></h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <label class="form-label custom-label" for="field_code" required>Code de forçage <span style="color: red">*</span> </label>
+          <input
+            type="text"
+            class="form-control custom-control"
+            name="code"
+            id="field_code"
+            data-cy="code"
+            [(ngModel)]="codeForcage"
+            required
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closePopup()">Quitter</button>
+        <button type="button" class="btn btn-primary" (click)="validPopup()">Valider</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- FIN MODAL -bCODE FORCAGE -->

@@ -1,0 +1,139 @@
+<div>
+  <h2 id="page-heading" data-cy="GrilleSoldeGlobalHeading">
+    <span>Grille Solde Globals</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Rafraichir la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-grille-solde-global"
+        [routerLink]="['/grille-solde-global/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Ajouter grille Solde Global </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="grilleSoldeGlobals?.length === 0">
+    <span>Aucun grille Solde Globale trouvé</span>
+  </div>
+
+  <div id="navcontainer">
+    <div class="row">
+      <div class="col-md-10">
+        <div class="input-group" id="adv-search">
+          <input
+            type="text"
+            class="form-control searchbar"
+            name="motCles"
+            id="field_motCles"
+            [(ngModel)]="motCles"
+            placeholder="Rechercher par Hierarchie, Echelon, Classe, Grade"
+            oninput="this.value = this.value.toUpperCase()"
+          />
+          &nbsp;
+          <div class="input-group-btn">
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-primary" title="Rechercher" (click)="recherche()">
+                <fa-icon [icon]="'search'"></fa-icon>
+              </button>
+              &nbsp;
+              <button type="button" class="btn btn-danger" title="Effacer" (click)="effacer()">
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="grilleSoldeGlobals && grilleSoldeGlobals.length > 0">
+    <table class="table table-bordered table-condensed table-hover" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="soldeGlobal"><span>Hierarchie</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="anciennete"><span>Grade</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="corpsId"><span>Classe </span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="cadreId"><span>Echelon</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="gradeId"><span>Solde Global </span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="echelonId"><span>Ancienneté </span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let grilleSoldeGlobal of grilleSoldeGlobals; trackBy: trackId" data-cy="entityTable">
+          <td>{{ grilleSoldeGlobal.libelleHierarchie }}</td>
+          <td>{{ grilleSoldeGlobal.codeGrade }}</td>
+          <td>{{ grilleSoldeGlobal.libelleClasse }}</td>
+          <td>{{ grilleSoldeGlobal.libelleEchelon }}</td>
+          <td>{{ grilleSoldeGlobal.soldeGlobal }}</td>
+          <td>{{ grilleSoldeGlobal.anciennete }} ans</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <!-- <button
+                type="submit"
+                [routerLink]="['/grille-solde-global', grilleSoldeGlobal.id, 'view']"
+                class="btn btn-outline-info btn-sm"
+                data-cy="entityDetailsButton"
+                title="Details"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button> -->
+              <!-- <button
+                type="submit"
+                [routerLink]="['/grille-solde-global', grilleSoldeGlobal.id, 'edit']"
+                class="btn btn-outline-primary btn-sm"
+                data-cy="entityEditButton"
+                title="Modifier"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button> -->
+
+              <!-- <button
+                type="submit"
+                (click)="delete(grilleSoldeGlobal)"
+                class="btn btn-outline-danger btn-sm"
+                data-cy="entityDeleteButton"
+                title="Supprimer"
+              >
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button> -->
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="grilleSoldeGlobals && grilleSoldeGlobals.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

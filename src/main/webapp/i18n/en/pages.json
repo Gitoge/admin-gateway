@@ -1,0 +1,28 @@
+{
+  "admingatewayApp": {
+    "pages": {
+      "home": {
+        "title": "Pages",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Pages",
+        "createOrEditLabel": "Create or edit a Pages",
+        "notFound": "No Pages found"
+      },
+      "created": "A new Pages is created with identifier {{ param }}",
+      "updated": "A Pages is updated with identifier {{ param }}",
+      "deleted": "A Pages is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Pages {{ id }}?"
+      },
+      "detail": {
+        "title": "Pages"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description",
+      "actions": "Actions",
+      "roles": "Roles"
+    }
+  }
+}

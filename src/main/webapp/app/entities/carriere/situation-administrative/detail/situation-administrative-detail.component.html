@@ -1,0 +1,138 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="situationAdministrative">
+      <h2 data-cy="situationAdministrativeDetailsHeading">
+        <span jhiTranslate="admingatewayApp.carriereSituationAdministrative.detail.title">Situation Administrative</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ situationAdministrative.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationAdministrative.dateRecrutement">Date Recrutement</span></dt>
+        <dd>
+          <span>{{ situationAdministrative.dateRecrutement | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationAdministrative.numeroRecrutement">Numero Recrutement</span></dt>
+        <dd>
+          <span>{{ situationAdministrative.numeroRecrutement }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationAdministrative.datePriseRang">Date Prise Rang</span></dt>
+        <dd>
+          <span>{{ situationAdministrative.datePriseRang | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationAdministrative.numeroOrdreService">Numero Ordre Service</span></dt>
+        <dd>
+          <span>{{ situationAdministrative.numeroOrdreService }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationAdministrative.dateOrdreService">Date Ordre Service</span></dt>
+        <dd>
+          <span>{{ situationAdministrative.dateOrdreService | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationAdministrative.loge">Loge</span></dt>
+        <dd>
+          <span>{{ situationAdministrative.loge }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationAdministrative.logementFonction">Logement Fonction</span></dt>
+        <dd>
+          <span>{{ situationAdministrative.logementFonction }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationAdministrative.datedebut">Datedebut</span></dt>
+        <dd>
+          <span>{{ situationAdministrative.datedebut | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationAdministrative.datefin">Datefin</span></dt>
+        <dd>
+          <span>{{ situationAdministrative.datefin | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationAdministrative.numeroCompte">Numero Compte</span></dt>
+        <dd>
+          <span>{{ situationAdministrative.numeroCompte }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationAdministrative.status">Status</span></dt>
+        <dd>
+          <span>{{ situationAdministrative.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationAdministrative.corpsId">Corps Id</span></dt>
+        <dd>
+          <span>{{ situationAdministrative.corpsId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationAdministrative.hierarchieId">Hierarchie Id</span></dt>
+        <dd>
+          <span>{{ situationAdministrative.hierarchieId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationAdministrative.cadreId">Cadre Id</span></dt>
+        <dd>
+          <span>{{ situationAdministrative.cadreId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationAdministrative.gradeId">Grade Id</span></dt>
+        <dd>
+          <span>{{ situationAdministrative.gradeId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationAdministrative.echelonId">Echelon Id</span></dt>
+        <dd>
+          <span>{{ situationAdministrative.echelonId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationAdministrative.classeId">Classe Id</span></dt>
+        <dd>
+          <span>{{ situationAdministrative.classeId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationAdministrative.reglementId">Reglement Id</span></dt>
+        <dd>
+          <span>{{ situationAdministrative.reglementId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationAdministrative.userInsertId">User Insert Id</span></dt>
+        <dd>
+          <span>{{ situationAdministrative.userInsertId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationAdministrative.userUpdateId">User Update Id</span></dt>
+        <dd>
+          <span>{{ situationAdministrative.userUpdateId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationAdministrative.dateInsert">Date Insert</span></dt>
+        <dd>
+          <span>{{ situationAdministrative.dateInsert | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationAdministrative.dateUpdate">Date Update</span></dt>
+        <dd>
+          <span>{{ situationAdministrative.dateUpdate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationAdministrative.actes">Actes</span></dt>
+        <dd>
+          <div *ngIf="situationAdministrative.actes">
+            <a [routerLink]="['/actes', situationAdministrative.actes?.id, 'view']">{{ situationAdministrative.actes?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationAdministrative.agent">Agent</span></dt>
+        <dd>
+          <div *ngIf="situationAdministrative.agent">
+            <a [routerLink]="['/agent', situationAdministrative.agent?.id, 'view']">{{ situationAdministrative.agent?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationAdministrative.categorieAgent">Categorie Agent</span></dt>
+        <dd>
+          <div *ngIf="situationAdministrative.categorieAgent">
+            <a [routerLink]="['/categorie-agent', situationAdministrative.categorieAgent?.id, 'view']">{{
+              situationAdministrative.categorieAgent?.id
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/situation-administrative', situationAdministrative.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <div *ngIf="saisieElementsVariables">
+      <h2 data-cy="saisieElementsVariablesDetailsHeading">
+        <span jhiTranslate="admingatewayApp.paieSaisieElementsVariables.detail.title">Saisie Elements Variables</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details detail-card">
+        <dt><span jhiTranslate="admingatewayApp.paieSaisieElementsVariables.matricule">Matricule</span></dt>
+        <dd>
+          <span>{{ saisieElementsVariables.matricule }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieSaisieElementsVariables.codePoste">Code Poste</span></dt>
+        <dd>
+          <span>{{ saisieElementsVariables.codePoste }}</span>
+        </dd>
+        <dt><span>Libellé Poste</span></dt>
+        <dd>
+          <span>{{ saisieElementsVariables.libellePoste }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieSaisieElementsVariables.montant">Montant</span></dt>
+        <dd>
+          <span>{{ saisieElementsVariables.montant | number }}</span>
+        </dd>
+        <dt><span>Date Début</span></dt>
+        <dd>
+          <span>{{ saisieElementsVariables.date | date: 'dd/MM/YYYY' }}</span>
+        </dd>
+        <dt><span>Date Echéance</span></dt>
+        <dd>
+          <span>{{ saisieElementsVariables.dateEcheance | date: 'dd/MM/YYYY' }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/saisie-elements-variables', saisieElementsVariables.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <div *ngIf="modules">
+      <h2 data-cy="modulesDetailsHeading" class="custom-title">
+        <span
+          >Visualisation du module: <b>{{ modules.libelle }}</b>
+        </span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details detail-card">
+        <dt><span>Libellé</span></dt>
+        <dd>
+          <span>{{ modules.libelle }}</span>
+        </dd>
+        <dt><span>Description</span></dt>
+        <dd>
+          <span>{{ modules.description }}</span>
+        </dd>
+        <dt><span>Applications</span></dt>
+        <dd>
+          <div *ngIf="modules.applications">
+            <a [routerLink]="['/applications', modules.applications?.id, 'view']">{{ modules.applications?.nom }}</a>
+          </div>
+        </dd>
+
+        <!-- <dd>
+          <div *ngIf="modules.pages">
+            <a [routerLink]="['/pages', modules.pages?.id, 'view']">{{ modules.pages?.libelle }}</a>
+          </div>
+        </dd> -->
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/modules', modules.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Modifier</span>
+      </button>
+    </div>
+  </div>
+</div>

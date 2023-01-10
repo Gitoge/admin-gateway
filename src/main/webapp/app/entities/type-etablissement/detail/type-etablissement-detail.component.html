@@ -1,0 +1,81 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <div *ngIf="typeEtablissement">
+      <h2 data-cy="typeEtablissementDetailsHeading" class="custom-title">
+        <span>
+          Visualisation du Type d'Etablissement: <b>{{ typeEtablissement.libelle }}</b>
+        </span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details detail-card">
+        <!-- <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ typeEtablissement.id }}</span>
+        </dd> -->
+        <dt><span>Code</span></dt>
+        <dd>
+          <span>{{ typeEtablissement.code }}</span>
+        </dd>
+        <dt><span>Libellé</span></dt>
+        <dd>
+          <span>{{ typeEtablissement.libelle }}</span>
+        </dd>
+        <dt><span>Description</span></dt>
+        <dd>
+          <span>{{ typeEtablissement.description }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <!-- 
+      <button 
+        type="button"
+        (click)="openPopup(typeEtab)"  
+        class="btn btn-primary"
+        >
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    --></div>
+  </div>
+</div>
+
+<!--  DEBUT MODAL - CODE FORCAGE -->
+<!--
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{ display: displayStyle }">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" style="font-size: 16px"><b>Confirmation</b></h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <label class="form-label custom-label" for="field_code" required>Code de forçage <span style="color: red">*</span> </label>
+          <input
+            type="text"
+            class="form-control custom-control"
+            name="code"
+            id="field_code"
+            data-cy="code"
+            [(ngModel)]="codeForcage"
+            required
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="validPopup()">Valider</button>
+        <button type="button" class="btn btn-secondary" (click)="closePopup()">Quitter</button>
+      </div>
+    </div>
+  </div>
+</div>
+-->
+<!--  FIN MODAL - CODE FORCAGE -->

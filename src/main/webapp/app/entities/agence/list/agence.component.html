@@ -1,0 +1,127 @@
+<div>
+  <h2 id="page-heading" data-cy="AgenceHeading">
+    <span jhiTranslate="admingatewayApp.agence.home.title">Agences</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="admingatewayApp.agence.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-agence"
+        [routerLink]="['/agence/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Nouveau </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="agences?.length === 0">
+    <span jhiTranslate="admingatewayApp.agence.home.notFound">No agences found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="agences && agences.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="code">
+            <span jhiTranslate="admingatewayApp.agence.code">Code</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="libelle">
+            <span jhiTranslate="admingatewayApp.agence.libelle">Libelle</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="telephone">
+            <span jhiTranslate="admingatewayApp.agence.telephone">Telephone</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="adresse">
+            <span jhiTranslate="admingatewayApp.agence.adresse">Adresse</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="etablissementBancaire">
+            <span jhiTranslate="admingatewayApp.agence.etablissementBancaire">Etablissement Bancaire</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let agence of agences; trackBy: trackId" data-cy="entityTable">
+          <!-- <td>
+            <a [routerLink]="['/agence', agence.id, 'view']">{{ agence.id }}</a>
+          </td> -->
+          <td>{{ agence.code }}</td>
+          <td>{{ agence.libelle }}</td>
+          <td>{{ agence.telephone }}</td>
+          <td>{{ agence.adresse }}</td>
+          <td>
+            <div *ngIf="agence.etablissementBancaire">
+              <a [routerLink]="['/etablissement-bancaire', agence.etablissementBancaire?.id, 'view']">{{
+                agence.etablissementBancaire?.libelle
+              }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/agence', agence.id, 'view']"
+                class="btn btn-outline-info"
+                title="Détails"
+                data-cy="entityDetailsButton"
+                title="Details"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/agence', agence.id, 'edit']"
+                class="btn btn-outline-primary"
+                title="Modifier"
+                data-cy="entityEditButton"
+                title="Modifier"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+
+              <button type="submit" (click)="delete(agence)" class="btn btn-outline-danger" title="Supprimer" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="agences && agences.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

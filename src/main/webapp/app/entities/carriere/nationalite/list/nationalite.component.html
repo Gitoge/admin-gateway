@@ -1,0 +1,128 @@
+<div>
+  <h2 id="page-heading" data-cy="NationaliteHeading">
+    <span jhiTranslate="admingatewayApp.carriereNationalite.home.title">Nationalites</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="admingatewayApp.carriereNationalite.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-nationalite"
+        [routerLink]="['/nationalite/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Nouveau </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="nationalites?.length === 0">
+    <span jhiTranslate="admingatewayApp.carriereNationalite.home.notFound">No nationalites found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="nationalites && nationalites.length > 0">
+    <table class="table table-bordered table-condensed table-hover" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <!-- <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th> -->
+          <!-- <th scope="col" jhiSortBy="code">
+            <span jhiTranslate="admingatewayApp.carriereNationalite.code">Code</span> <fa-icon icon="sort"></fa-icon>
+          </th> -->
+          <th scope="col" jhiSortBy="libelle">
+            <span jhiTranslate="admingatewayApp.carriereNationalite.libelle">Libelle</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <!-- <th scope="col" jhiSortBy="userInsertId">
+            <span jhiTranslate="admingatewayApp.carriereNationalite.userInsertId">User Insert Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="userUpdateId">
+            <span jhiTranslate="admingatewayApp.carriereNationalite.userUpdateId">User Update Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateInsert">
+            <span jhiTranslate="admingatewayApp.carriereNationalite.dateInsert">Date Insert</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateUpdate">
+            <span jhiTranslate="admingatewayApp.carriereNationalite.dateUpdate">Date Update</span> <fa-icon icon="sort"></fa-icon>
+          </th> -->
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let nationalite of nationalites; trackBy: trackId" data-cy="entityTable">
+          <!-- <td>
+            <a [routerLink]="['/nationalite', nationalite.id, 'view']">{{ nationalite.id }}</a>
+          </td> -->
+          <!-- <a [routerLink]="['/nationalite', nationalite.id, 'view']"
+            ><td>{{ nationalite.code }}</td></a
+          > -->
+          <td>{{ nationalite.libelle }}</td>
+          <!-- <td>{{ nationalite.userInsertId }}</td>
+          <td>{{ nationalite.userUpdateId }}</td>
+          <td>{{ nationalite.dateInsert | formatMediumDatetime }}</td>
+          <td>{{ nationalite.dateUpdate | formatMediumDatetime }}</td> -->
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/nationalite', nationalite.id, 'view']"
+                class="btn btn-outline-info btn-sm"
+                data-cy="entityDetailsButton"
+                title="Details"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/nationalite', nationalite.id, 'edit']"
+                class="btn btn-outline-primary btn-sm"
+                data-cy="entityEditButton"
+                title="Modifier"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+
+              <button
+                type="submit"
+                (click)="delete(nationalite)"
+                class="btn btn-outline-danger btn-sm"
+                data-cy="entityDeleteButton"
+                title="Supprimer"
+              >
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="nationalites && nationalites.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

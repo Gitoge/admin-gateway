@@ -1,0 +1,110 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <div *ngIf="personne">
+      <h2 data-cy="personneDetailsHeading" class="custom-title">
+        <span
+          >Visualisation des informations de l'utilisateur: <b>{{ personne.prenom }} {{ personne.nom }}</b>
+        </span>
+      </h2>
+      <jhi-alert-error></jhi-alert-error>
+      <jhi-alert></jhi-alert>
+      <dl class="detail-card">
+        <div class="row">
+          <div class="col row">
+            <dt><span class="col-sm-6">Prénom </span></dt>
+            <dd>
+              <span>{{ personne.prenom }}</span>
+            </dd>
+          </div>
+          <div class="col row">
+            <dt><span class="col-sm-6">Nom </span></dt>
+            <dd>
+              <span>{{ personne.nom }}</span>
+            </dd>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col row">
+            <dt><span>Date Naissance</span></dt>
+            <dd>
+              <span>{{ personne.dateNaissance | formatMediumDate }}</span>
+            </dd>
+          </div>
+          <div class="col row">
+            <dt><span>Lieu Naissance</span></dt>
+            <dd>
+              <span>{{ personne.lieuNaissance }}</span>
+            </dd>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col row">
+            <dt><span>Sexe</span></dt>
+            <dd>
+              <span>{{ personne.sexe }}</span>
+            </dd>
+          </div>
+          <div class="col row">
+            <dt><span></span></dt>
+            <dd>
+              <span></span>
+            </dd>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col row">
+            <dt><span>Type Pièce</span></dt>
+            <dd>
+              <span>{{ personne.typePiece }}</span>
+            </dd>
+          </div>
+          <div class="col row">
+            <dt><span>Numéro Pièce</span></dt>
+            <dd>
+              <span>{{ personne.numeroPiece }}</span>
+            </dd>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col row">
+            <dt><span>Téléphone</span></dt>
+            <dd>
+              <span>{{ personne.telephone }}</span>
+            </dd>
+          </div>
+          <div class="col row">
+            <dt><span>Email</span></dt>
+            <dd>
+              <span>{{ personne.email }}</span>
+            </dd>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col row">
+            <dt><span>Login</span></dt>
+            <dd>
+              <span>{{ personne.login }}</span>
+            </dd>
+          </div>
+          <div class="col row">
+            <dt><span>Profil</span></dt>
+            <dd>
+              <span>{{ personne.profils?.libelle }}</span>
+            </dd>
+          </div>
+        </div>
+      </dl>
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+      <button type="button" [routerLink]="['/personne', personne.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Modifier</span>
+      </button>
+    </div>
+  </div>
+</div>

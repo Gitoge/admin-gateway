@@ -1,0 +1,29 @@
+{
+  "admingatewayApp": {
+    "structureAdmin": {
+      "home": {
+        "title": "Structure Admins",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Structure Admin",
+        "createOrEditLabel": "Create or edit a Structure Admin",
+        "notFound": "No Structure Admins found"
+      },
+      "created": "A new Structure Admin is created with identifier {{ param }}",
+      "updated": "A Structure Admin is updated with identifier {{ param }}",
+      "deleted": "A Structure Admin is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Structure Admin {{ id }}?"
+      },
+      "detail": {
+        "title": "Structure Admin"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description",
+      "direction": "Direction",
+      "services": "Services",
+      "adresse": "Adresse"
+    }
+  }
+}

@@ -1,0 +1,79 @@
+<div class="d-flex justify-content-center">
+  <div class="col-6 custom-card">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-type-localite-heading" data-cy="TypeLocaliteCreateUpdateHeading" class="custom-title">
+        {{ this.titre }}
+      </h2>
+
+      <div>
+        <!-- <jhi-alert-error></jhi-alert-error> -->
+        <div>
+          <div class="row" style="margin-top: 1%">
+            <div class="col-md-6">
+              <label class="form-label custom-label" for="field_code">Code</label>
+              <input
+                type="text"
+                class="form-control custom-control"
+                name="code"
+                id="field_code"
+                data-cy="code"
+                formControlName="code"
+                oninput="this.value = this.value.toUpperCase()"
+              />
+              <div *ngIf="editForm.get('code')!.invalid && (editForm.get('code')!.dirty || editForm.get('code')!.touched)">
+                <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.required"> Ce champ est obligatoire. </small>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label custom-label" for="field_libelle">Libellé</label>
+              <input
+                type="text"
+                class="form-control"
+                name="libelle"
+                id="field_libelle"
+                data-cy="libelle"
+                formControlName="libelle"
+                oninput="this.value = this.value.toUpperCase()"
+              />
+              <div *ngIf="editForm.get('libelle')!.invalid && (editForm.get('libelle')!.dirty || editForm.get('libelle')!.touched)">
+                <small class="form-text text-danger" *ngIf="editForm.get('libelle')?.errors?.required"> Ce champ est obligatoire. </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="row" style="margin-top: 2%">
+            <div class="col-md-12">
+              <label class="form-label custom-label" for="field_description">Description</label>
+              <input
+                type="text"
+                class="form-control"
+                name="description"
+                id="field_description"
+                data-cy="description"
+                formControlName="description"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br />
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Enregistrer</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

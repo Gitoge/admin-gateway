@@ -1,0 +1,43 @@
+{
+  "admingatewayApp": {
+    "paieElementsVariables": {
+      "home": {
+        "title": "ElementsVariables",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Elements Variables",
+        "createOrEditLabel": "Créer ou éditer un Elements Variables",
+        "notFound": "Aucun Elements Variables trouvé"
+      },
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Elements Variables {{ id }} ?"
+      },
+      "detail": {
+        "title": "Elements Variables"
+      },
+      "id": "ID",
+      "codePoste": "Code Poste",
+      "matricule": "Matricule",
+      "reference": "Reference",
+      "montant": "Montant",
+      "taux": "Taux",
+      "dateDebut": "Date Debut",
+      "dateEcheance": "Date Echeance",
+      "periode": "Periode",
+      "statut": "Statut",
+      "agentId": "Agent Id",
+      "etablissementId": "Etablissement Id",
+      "userInsertId": "User Insert Id",
+      "userUpdateId": "User Update Id",
+      "dateInsert": "Date Insert",
+      "dateUpdate": "Date Update",
+      "postes": "Postes"
+    }
+  },
+  "paieApp": {
+    "paieElementsVariables": {
+      "created": "Un nouveau Elements Variables a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Elements Variables avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Elements Variables avec l'identifiant {{ param }} a été supprimé"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "applications": "*",
+  "changelogDate": "20220727201826",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "diplomes",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "libelle",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "userIdInsert",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "userdateInsert",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Diplomes",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no",
+  "skipServer": true
+}

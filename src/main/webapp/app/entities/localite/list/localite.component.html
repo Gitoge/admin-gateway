@@ -1,0 +1,170 @@
+<div>
+  <h2 id="page-heading" data-cy="LocaliteHeading">
+    <span> Les Localités</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Actualiser</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-localite"
+        [routerLink]="['/localite/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Nouveau </span>
+      </button>
+    </div>
+  </h2>
+
+  <!-- <jhi-alert-error></jhi-alert-error> -->
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="localites?.length === 0">
+    <span>Aucune Localite trouvée !</span>
+  </div>
+  <div class="row" style="margin-left: 1px">
+    <div class="col-md-8 form__group field" id="adv-search">
+      <input
+        type="text"
+        class="form__field"
+        name="motCle"
+        id="field_motCle"
+        [(ngModel)]="motCles"
+        oninput="this.value = this.value.toUpperCase()"
+      />
+      <label for="name" class="form__label">Rechercher par Libellé ...</label>
+    </div>
+    <div class="col-md-4" style="margin-top: 25px">
+      <button type="button" class="btn btn-primary" title="Rechercher" (click)="recherche()">
+        <fa-icon [icon]="'search'"></fa-icon>
+      </button>
+      &nbsp;
+      <button type="button" class="btn btn-danger" title="Effacer" (click)="effacer()">
+        <fa-icon icon="times"></fa-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="localites && localites.length > 0">
+    <table class="table table-bordered table-condensed table-hover" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="libelle"><span>Libellé</span> <fa-icon icon="sort"></fa-icon></th>
+
+          <!-- <th scope="col" jhiSortBy="paysId"><span>Pays </span> <fa-icon icon="sort"></fa-icon></th> -->
+
+          <!--<th scope="col" jhiSortBy="localite.id"><span>Localité de Rattachement</span> <fa-icon icon="sort"></fa-icon></th> -->
+          <th scope="col" jhiSortBy="typeLocalite.id"><span>Type Localité</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let localite of localites; trackBy: trackId" data-cy="entityTable">
+          <td>{{ localite.libelle }}</td>
+
+          <!-- <td>{{ localite.pays?.libelle }}</td> -->
+          <!--
+          <td>
+            <div *ngIf="localite.localite">
+              <a [routerLink]="['/localite', localite.localite?.id, 'view']">{{ localite.localite?.libelle }}</a>
+            </div>
+          </td>
+        -->
+          <td>
+            <div *ngIf="localite.typeLocalite">
+              <a [routerLink]="['/type-localite', localite.typeLocalite?.id, 'view']">{{ localite.typeLocalite?.libelle }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/localite', localite.id, 'view']"
+                class="btn btn-outline-info btn-sm"
+                data-cy="entityDetailsButton"
+                title="Détails"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+
+              <button
+                type="submit"
+                (click)="openPopup(localite)"
+                class="btn btn-outline-primary btn-sm"
+                data-cy="entityEditButton"
+                title="Modifier"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+
+              <button
+                type="submit"
+                (click)="delete(localite)"
+                class="btn btn-outline-danger btn-sm"
+                data-cy="entityDeleteButton"
+                title="Supprimer"
+              >
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="localites && localites.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>
+
+<!-- DEBUT MODAL - CODE FORCAGE -->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{ display: displayStyle }">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" style="font-size: 16px"><b>Confirmation</b></h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <label class="form-label custom-label" for="field_code" required>Code de forçage <span style="color: red">*</span> </label>
+          <input
+            type="text"
+            class="form-control custom-control"
+            name="code"
+            id="field_code"
+            data-cy="code"
+            [(ngModel)]="codeForcage"
+            required
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closePopup()">Quitter</button>
+        <button type="button" class="btn btn-primary" (click)="validPopup()">Valider</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- FIN MODAL - CODE FORCAGE -->

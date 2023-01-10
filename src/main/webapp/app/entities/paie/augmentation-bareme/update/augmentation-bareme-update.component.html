@@ -1,0 +1,153 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+      <div>
+        <div class="form-group" [hidden]="!augmentationBareme.id">
+          <h2 class="custom-title" id="jhi-augmentationBareme-heading">
+            Modification de l'augmentation: <b>{{ augmentationBareme.postes?.libelle }}</b>
+          </h2>
+        </div>
+        <div class="form-group" [hidden]="augmentationBareme.id">
+          <h2 class="custom-title" id="jhi-augmentationBareme-heading">Ajout d'une nouvelle Augmentation Bareme</h2>
+        </div>
+      </div>
+      <br />
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+        <div class="justify-content-center" style="border: 1px solid lightgray; padding: 2%">
+          <fieldset>
+            <legend style="font-size: 17px; color: #24695c; font-weight: 700"></legend>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Poste<span style="color: red">*</span> </label>
+                <select
+                  class="form-control"
+                  id="field_postes"
+                  data-cy="postes"
+                  name="postes"
+                  [(ngModel)]="augmentationBareme.postes"
+                  required
+                >
+                  <option [ngValue]="null"></option>
+                  <option
+                    [ngValue]="postesOption.id === augmentationBareme.postes?.id ? augmentationBareme.postes : postesOption"
+                    *ngFor="let postesOption of postesSharedCollection"
+                  >
+                    {{ postesOption.code }} -- {{ postesOption.libelle }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label> Montant <span style="color: red">*</span> </label>
+                <input
+                  type="number"
+                  class="form-control"
+                  name="montant"
+                  id="field_valeur"
+                  data-cy="montant"
+                  [(ngModel)]="augmentationBareme.montant"
+                  placeholder="saisir le montant "
+                  required
+                />
+
+                <div [hidden]="!(editForm.controls.montant?.dirty && editForm.controls.montant?.invalid)">
+                  <small class="form-text text-danger" [hidden]="!editForm.controls.montant?.errors?.required">
+                    Ce champ est obligatoire.
+                  </small>
+                  <small class="form-text text-danger" [hidden]="!editForm.controls.montant?.errors?.number">
+                    Ce champ doit comporter un nombre.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Borne Inférieure<span style="color: red">*</span> </label>
+                <input
+                  type="number"
+                  class="form-control"
+                  name="borneInf"
+                  id="field_borneInf"
+                  data-cy="borneInf"
+                  [(ngModel)]="augmentationBareme.borneInf"
+                  placeholder="Borne inférieure "
+                  required
+                />
+                <div [hidden]="!(editForm.controls.borneInf?.dirty && editForm.controls.borneInf?.invalid)">
+                  <small class="form-text text-danger" [hidden]="!editForm.controls.borneInf?.errors?.required">
+                    Ce champ est obligatoire.
+                  </small>
+                  <small class="form-text text-danger" [hidden]="!editForm.controls.borneInf?.errors?.number">
+                    Ce champ doit comporter un nombre.
+                  </small>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label> Borne Supérieure <span style="color: red">*</span> </label>
+                <input
+                  type="number"
+                  class="form-control"
+                  name="borneSup"
+                  id="field_borneSup"
+                  data-cy="borneSup"
+                  [(ngModel)]="augmentationBareme.borneSup"
+                  placeholder="Borne Supérieure "
+                  required
+                />
+
+                <div [hidden]="!(editForm.controls.borneSup?.dirty && editForm.controls.borneSup?.invalid)">
+                  <small class="form-text text-danger" [hidden]="!editForm.controls.borneSup?.errors?.required">
+                    Ce champ est obligatoire.
+                  </small>
+                  <small class="form-text text-danger" [hidden]="!editForm.controls.borneSup?.errors?.number">
+                    Ce champ doit comporter un nombre.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Libellé <span style="color: red">*</span> </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="libelle"
+                  id="field_libelle"
+                  data-cy="libelle"
+                  [(ngModel)]="augmentationBareme.libelle"
+                  placeholder="Libellé"
+                  required
+                />
+
+                <div [hidden]="!(editForm.controls.libelle?.dirty && editForm.controls.libelle?.invalid)">
+                  <small class="form-text text-danger" [hidden]="!editForm.controls.libelle?.errors?.required">
+                    Ce champ est obligatoire.
+                  </small>
+                  <small class="form-text text-danger" [hidden]="!editForm.controls.libelle?.errors?.number">
+                    Ce champ doit comporter un nombre.
+                  </small>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+      <hr />
+      <div style="display: flex; justify-content: center; align-items: center">
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        &nbsp;
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+{
+  "admingatewayApp": {
+    "emplois": {
+      "home": {
+        "title": "Emplois",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Emplois",
+        "createOrEditLabel": "Créer ou éditer un Emplois",
+        "notFound": "Aucun Emplois trouvé"
+      },
+      "created": "Un nouveau Emplois a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Emplois avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Emplois avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Emplois {{ id }} ?"
+      },
+      "detail": {
+        "title": "Emplois"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description",
+      "tauxAt": "Taux At",
+      "primeLieEmploi": "Prime Lie Emploi",
+      "indemniteLogement": "Indemnite Logement",
+      "indemnitesujetion": "Indemnitesujetion",
+      "indemnitehabillement": "Indemnitehabillement"
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "applications": "*",
+  "changelogDate": "20220722173334",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "hierarchie",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "libelle",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "borneInferieure",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "borneSuperieure",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "codEchelonIndiciare",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "hcadre",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Hierarchie",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "postes",
+      "otherEntityRelationshipName": "hierarchie",
+      "ownerSide": true,
+      "relationshipName": "postes",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "no",
+  "skipServer": true
+}

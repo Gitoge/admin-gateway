@@ -1,0 +1,29 @@
+{
+  "admingatewayApp": {
+    "categorieActes": {
+      "home": {
+        "title": "Categorie Actes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Categorie Actes",
+        "createOrEditLabel": "Create or edit a Categorie Actes",
+        "notFound": "No Categorie Actes found"
+      },
+      "created": "A new Categorie Actes is created with identifier {{ param }}",
+      "updated": "A Categorie Actes is updated with identifier {{ param }}",
+      "deleted": "A Categorie Actes is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Categorie Actes {{ id }}?"
+      },
+      "detail": {
+        "title": "Categorie Actes"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description",
+      "userIdInsert": "User Id Insert",
+      "userdateInsert": "Userdate Insert",
+      "typeactes": "Typeactes"
+    }
+  }
+}

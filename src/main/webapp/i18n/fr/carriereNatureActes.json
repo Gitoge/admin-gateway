@@ -1,0 +1,32 @@
+{
+  "admingatewayApp": {
+    "carriereNatureActes": {
+      "home": {
+        "title": "NatureActes",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Nature Actes",
+        "createOrEditLabel": "Créer ou éditer un Nature Actes",
+        "notFound": "Aucun Nature Actes trouvé"
+      },
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Nature Actes {{ id }} ?"
+      },
+      "detail": {
+        "title": "Nature Actes"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "userInsertId": "User Insert Id",
+      "userdateInsert": "Userdate Insert",
+      "actes": "Actes"
+    }
+  },
+  "carriereApp": {
+    "carriereNatureActes": {
+      "created": "Une nouvelle Nature d'actes a été créé avec l'identifiant {{ param }}",
+      "updated": "La Nature d'actes avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "La Nature d'actes avec l'identifiant {{ param }} a été supprimé"
+    }
+  }
+}

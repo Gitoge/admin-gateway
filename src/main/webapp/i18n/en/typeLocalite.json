@@ -1,0 +1,27 @@
+{
+  "admingatewayApp": {
+    "typeLocalite": {
+      "home": {
+        "title": "Type Localites",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Type Localite",
+        "createOrEditLabel": "Create or edit a Type Localite",
+        "notFound": "No Type Localites found"
+      },
+      "created": "A new Type Localite is created with identifier {{ param }}",
+      "updated": "A Type Localite is updated with identifier {{ param }}",
+      "deleted": "A Type Localite is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Type Localite {{ id }}?"
+      },
+      "detail": {
+        "title": "Type Localite"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description",
+      "localite": "Localite"
+    }
+  }
+}

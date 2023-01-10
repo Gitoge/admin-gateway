@@ -1,0 +1,229 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="ajouterEnfant()" [formGroup]="editForm" style="margin: 0; padding: 0">
+  <div>
+    <br />
+    <h2 id="page-heading" class="custom-title" style="font-weight: bold; text-align: center">Ajouter un Membre</h2>
+
+    <!-- <button type="button" class="btn-close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button> -->
+  </div>
+
+  <div class="modal-body">
+    <jhi-alert-error></jhi-alert-error>
+    <div class="row" style="margin-top: 1%">
+      <div class="col-md-6">
+        <label> Lien de Parenté <span style="color: red">*</span> </label>
+        <select
+          class="form-control"
+          name="lienParente"
+          id="field_lienParente"
+          data-cy="lienParente"
+          style="width: 100%; font-size: 12px"
+          formControlName="lienParente"
+          (change)="onLienParenteChange(editForm.get('lienParente')!.value?.libelle)"
+        >
+          <option *ngIf="!editForm.value.lienParente" [ngValue]="null" selected></option>
+          <option
+            [ngValue]="
+              lienParenteOption.id === editForm.get('lienParente')!.value?.id ? editForm.get('lienParente')!.value : lienParenteOption
+            "
+            *ngFor="let lienParenteOption of lienParente"
+          >
+            {{ lienParenteOption.libelle }}
+          </option>
+        </select>
+      </div>
+
+      <div class="col-md-6" *ngIf="isEnfant == false">
+        <label> Numéro d'Indentification National <span style="color: red">*</span> </label>
+        <input
+          type="text"
+          class="form-control"
+          name="nin"
+          id="field_nin"
+          data-cy="nin"
+          placeholder="Saisir le numéro de la pièce"
+          formControlName="nin"
+        />
+        <div *ngIf="editForm.get('nin')!.invalid && (editForm.get('nin')!.dirty || editForm.get('nin')!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get('nin')?.errors?.required"> Ce champ est obligatoire. </small>
+          <small class="form-text text-danger" *ngIf="editForm.get('nin')?.errors?.minlength">
+            Ce champ doit comporter 13 caractères.
+          </small>
+          <small class="form-text text-danger" *ngIf="editForm.get('nin')?.errors?.maxlength">
+            Ce champ doit comporter 13 caractères.
+          </small>
+          <small class="form-text text-danger" *ngIf="editForm.get('nin')?.errors?.pattern"> Pas de caracteres spéciaux". </small>
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="isEnfant == true">
+        <label> Rang Enfant <span style="color: red">*</span> </label>
+        <input
+          type="number"
+          class="form-control"
+          name="rangEnfant"
+          id="field_rangEnfant"
+          data-cy="rangEnfant"
+          placeholder="Saisir le rang de l'enfant"
+          formControlName="rangEnfant"
+        />
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 2%">
+      <div class="col-md-6">
+        <label> Prénom <span style="color: red">*</span> </label>
+        <input
+          type="text"
+          class="form-control"
+          required
+          name="prenom"
+          id="field_prenom"
+          data-cy="prenom"
+          placeholder="Saisir le Prénom"
+          formControlName="prenom"
+          oninput="this.value = this.value.toLowerCase()"
+        />
+        <div *ngIf="editForm.get('prenom')!.invalid && (editForm.get('prenom')!.dirty || editForm.get('prenom')!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get('prenom')?.errors?.required"> Ce champ est obligatoire. </small>
+
+          <small class="form-text text-danger" *ngIf="editForm.get('prenom')?.errors?.pattern"> Pas de caracteres spéciaux". </small>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <label> Nom <span style="color: red">*</span> </label>
+        <input
+          type="text"
+          class="form-control"
+          required
+          name="nom"
+          id="field_prenom"
+          data-cy="nom"
+          placeholder="Saisir le Nom"
+          formControlName="nom"
+          oninput="this.value = this.value.toLowerCase()"
+        />
+        <div *ngIf="editForm.get('nom')!.invalid && (editForm.get('nom')!.dirty || editForm.get('nom')!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get('nom')?.errors?.required"> Ce champ est obligatoire. </small>
+
+          <small class="form-text text-danger" *ngIf="editForm.get('nom')?.errors?.pattern"> Pas de caracteres spéciaux". </small>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 2%">
+      <div class="col-md-6">
+        <label> Date de naissance <span style="color: red">*</span> </label>
+        <div class="input-group">
+          <input
+            id="field_dateNaissance"
+            data-cy="dateNaissance"
+            type="date"
+            class="form-control"
+            min="1950-01-01"
+            max="{{ today | date: 'yyyy-MM-dd' }}"
+            name="dateNaissance"
+            formControlName="dateNaissance"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <label> Lieu de naissance <span style="color: red">*</span> </label>
+        <input
+          type="text"
+          class="form-control"
+          required
+          name="lieunaissance"
+          id="field_lieunaissance"
+          data-cy="lieunaissance"
+          placeholder="Saisir le lieu de naissance"
+          formControlName="lieuNaissance"
+          oninput="this.value = this.value.toLowerCase()"
+        />
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 2%">
+      <div class="col-md-6">
+        <label> Sexe <span style="color: red">*</span> </label>
+        <select
+          class="form-control"
+          name="sexe"
+          required
+          id="field_sexe"
+          data-cy="sexe"
+          formControlName="sexe"
+          style="width: 100%; font-size: 12px"
+        >
+          <option value="MASCULIN">MASCULIN</option>
+          <option value="FEMININ">FEMININ</option>
+        </select>
+      </div>
+
+      <div class="col-md-6">
+        <!-- <label> Matricule Parent</label>
+        <input type="text" class="form-control" required name="prenom" id="field_prenom" data-cy="prenom" disabled /> -->
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="row" style="margin-top: 2%" *ngIf="isEnfant == true">
+      <div class="col-md-6">
+        <label> Date acte <span style="color: red">*</span> </label>
+        <div class="input-group">
+          <input
+            id="field_dateActeNaissance"
+            data-cy="dateActeNaissance"
+            type="date"
+            class="form-control"
+            min="1950-01-01"
+            max="{{ today | date: 'yyyy-MM-dd' }}"
+            name="dateActeNaissance"
+            formControlName="dateActeNaissance"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <label> Numéro Acte <span style="color: red">*</span> </label>
+        <input
+          id="field_numeroActeNaissance"
+          type="text"
+          class="form-control"
+          fomrControlName="numeroActeNaissance"
+          name="numeroActeNaissance"
+          data-cy="numeroActeNaissance"
+          placeholder="Saisir le numéro de l'acte de Naissance"
+        />
+      </div>
+    </div>
+
+    <!-- <div class="row" style="margin-top: 2%" *ngIf="isEnfant == true">
+      <div class="col-md-6">
+        <input
+          type="checkbox"
+          name="enfantEnVie"
+          id="field_enfantEnVie"
+          data-cy="enfantEnVie"
+          style="margin: 2%"
+          (change)="isEnfantEnvie($event)"
+          (change)="isEnfantImposable($event)"
+          formControlName="enfantEnVie"
+        />
+        <label> Enfant en Vie </label>
+      </div>
+    </div> -->
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+      <fa-icon icon="ban"></fa-icon>&nbsp;<span>Retour</span>
+    </button>
+
+    <button data-cy="entityDetailsButton" [disabled]="editForm.invalid || isSaving" type="submit" class="btn btn-primary">
+      <fa-icon icon="save"></fa-icon>&nbsp;<span>Ajouter</span>
+    </button>
+  </div>
+</form>

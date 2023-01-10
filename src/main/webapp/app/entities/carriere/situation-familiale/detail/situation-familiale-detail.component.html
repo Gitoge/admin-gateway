@@ -1,0 +1,90 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="situationFamiliale">
+      <h2 data-cy="situationFamilialeDetailsHeading">
+        <span jhiTranslate="admingatewayApp.carriereSituationFamiliale.detail.title">Situation Familiale</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ situationFamiliale.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationFamiliale.situationMatrimoniale">Situation Matrimoniale</span></dt>
+        <dd>
+          <span>{{ situationFamiliale.situationMatrimoniale }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationFamiliale.nombreEpouse">Nombre Epouse</span></dt>
+        <dd>
+          <span>{{ situationFamiliale.nombreEpouse }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationFamiliale.codeTravailConjoint">Code Travail Conjoint</span></dt>
+        <dd>
+          <span>{{ situationFamiliale.codeTravailConjoint }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationFamiliale.nombreEnfant">Nombre Enfant</span></dt>
+        <dd>
+          <span>{{ situationFamiliale.nombreEnfant }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationFamiliale.nombrePart">Nombre Part</span></dt>
+        <dd>
+          <span>{{ situationFamiliale.nombrePart }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationFamiliale.nombreEnfantImposable">Nombre Enfant Imposable</span></dt>
+        <dd>
+          <span>{{ situationFamiliale.nombreEnfantImposable }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationFamiliale.nombreEnfantMajeur">Nombre Enfant Majeur</span></dt>
+        <dd>
+          <span>{{ situationFamiliale.nombreEnfantMajeur }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationFamiliale.nombreMinimumFiscal">Nombre Minimum Fiscal</span></dt>
+        <dd>
+          <span>{{ situationFamiliale.nombreMinimumFiscal }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationFamiliale.nombreEnfantDecede">Nombre Enfant Decede</span></dt>
+        <dd>
+          <span>{{ situationFamiliale.nombreEnfantDecede }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationFamiliale.dateModification">Date Modification</span></dt>
+        <dd>
+          <span>{{ situationFamiliale.dateModification | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationFamiliale.status">Status</span></dt>
+        <dd>
+          <span>{{ situationFamiliale.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationFamiliale.userInsertId">User Insert Id</span></dt>
+        <dd>
+          <span>{{ situationFamiliale.userInsertId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationFamiliale.actes">Actes</span></dt>
+        <dd>
+          <div *ngIf="situationFamiliale.actes">
+            <a [routerLink]="['/actes', situationFamiliale.actes?.id, 'view']">{{ situationFamiliale.actes?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereSituationFamiliale.agent">Agent</span></dt>
+        <dd>
+          <div *ngIf="situationFamiliale.agent">
+            <a [routerLink]="['/agent', situationFamiliale.agent?.id, 'view']">{{ situationFamiliale.agent?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/situation-familiale', situationFamiliale.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

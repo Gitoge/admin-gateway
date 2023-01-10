@@ -1,0 +1,32 @@
+{
+  "admingatewayApp": {
+    "etablissementBancaire": {
+      "home": {
+        "title": "EtablissementBancaires",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Etablissement Bancaire",
+        "createOrEditLabel": "Créer ou éditer un Etablissement Bancaire",
+        "notFound": "Aucun Etablissement Bancaire trouvé"
+      },
+      "created": "Un nouveau Etablissement Bancaire a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Etablissement Bancaire avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Etablissement Bancaire avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Etablissement Bancaire {{ id }} ?"
+      },
+      "detail": {
+        "title": "Etablissement Bancaire"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "telephone": "Telephone",
+      "email": "Email",
+      "adresse": "Adresse",
+      "fax": "Fax",
+      "regionId": "Region Id",
+      "departementId": "Departement Id",
+      "communeId": "Commune Id"
+    }
+  }
+}

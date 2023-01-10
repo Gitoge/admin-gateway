@@ -1,0 +1,147 @@
+{
+  "applications": "*",
+  "changelogDate": "20220727201825",
+  "clientRootFolder": "paie",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "postes",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "minlength", "maxlength", "unique"],
+      "fieldValidateRulesMaxlength": "3",
+      "fieldValidateRulesMinlength": "3"
+    },
+    {
+      "fieldName": "libelle",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sens",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateEffet",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dateEcheance",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "formule",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dansAssiette",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "montant",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "capital",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "cumuleRetenue",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "typePosteId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "typePosteLibelle",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"],
+      "javadoc": "A récupérer au niveau de Table Valeur"
+    },
+    {
+      "fieldName": "frequenceId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"],
+      "javadoc": "A récupérer au niveau de Table Valeur"
+    },
+    {
+      "fieldName": "frequenceLibelle",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"],
+      "javadoc": "A récupérer au niveau de Table Valeur"
+    },
+    {
+      "fieldName": "categoriePosteId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"],
+      "javadoc": "A récupérer au niveau de Table Valeur"
+    },
+    {
+      "fieldName": "categoriePosteLibelle",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"],
+      "javadoc": "A récupérer au niveau de Table Valeur"
+    },
+    {
+      "fieldName": "userInsertId",
+      "fieldType": "Integer",
+      "javadoc": "A récupérer au niveau de Table Valeur"
+    },
+    {
+      "fieldName": "userUpdateId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "dateInsert",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "dateUpdate",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "paie",
+  "name": "Postes",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "saisieEmoluments",
+      "otherEntityRelationshipName": "postes",
+      "relationshipName": "saisieEmoluments",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "saisieElementsVariables",
+      "otherEntityRelationshipName": "postes",
+      "relationshipName": "saisieElementsVariables",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "emoluments",
+      "otherEntityRelationshipName": "postes",
+      "relationshipName": "emoluments",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "elementsVariables",
+      "otherEntityRelationshipName": "postes",
+      "relationshipName": "elementsVariables",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no",
+  "skipServer": true
+}

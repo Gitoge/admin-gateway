@@ -1,0 +1,108 @@
+<div>
+  <h2 id="page-heading" data-cy="StructureAdminHeading">
+    <span>Liste des Structures</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Actualiser</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-structure-admin"
+        [routerLink]="['/structure-admin/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Ajouter une nouvelle Structure </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="structureAdmins?.length === 0">
+    <span>Aucune Structure trouvée !</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="structureAdmins && structureAdmins.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="libelle"><span>Libellé</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="description"><span>Description</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="direction"><span>Direction</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="services"><span>Services</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="adresse"><span>Adresse</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let structureAdmin of structureAdmins; trackBy: trackId" data-cy="entityTable">
+          <td>{{ structureAdmin.libelle }}</td>
+          <td>{{ structureAdmin.description }}</td>
+          <td>{{ structureAdmin.direction }}</td>
+          <td>{{ structureAdmin.services }}</td>
+          <td>{{ structureAdmin.adresse }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/structure-admin', structureAdmin.id, 'view']"
+                class="btn btn-outline-info btn-sm"
+                data-cy="entityDetailsButton"
+                title="Details"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/structure-admin', structureAdmin.id, 'edit']"
+                class="btn btn-outline-primary btn-sm"
+                data-cy="entityEditButton"
+                title="Modifier"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+
+              <button
+                type="submit"
+                (click)="delete(structureAdmin)"
+                class="btn btn-outline-danger btn-sm"
+                data-cy="entityDeleteButton"
+                title="Supprimer"
+              >
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="structureAdmins && structureAdmins.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

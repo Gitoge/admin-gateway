@@ -1,0 +1,44 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <div *ngIf="agence">
+      <h2 data-cy="agenceDetailsHeading"><span>Agence</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details detail-card">
+        <dt><span>Code</span></dt>
+        <dd>
+          <span>{{ agence.code }}</span>
+        </dd>
+        <dt><span>Libelle</span></dt>
+        <dd>
+          <span>{{ agence.libelle }}</span>
+        </dd>
+        <dt><span>Telephone</span></dt>
+        <dd>
+          <span>{{ agence.telephone }}</span>
+        </dd>
+        <dt><span>Adresse</span></dt>
+        <dd>
+          <span>{{ agence.adresse }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.agence.etablissementBancaire">Etablissement Bancaire</span></dt>
+        <dd>
+          <span>{{ agence.etablissementBancaire?.libelle }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/agence', agence.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

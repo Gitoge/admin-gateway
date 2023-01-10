@@ -1,0 +1,28 @@
+{
+  "admingatewayApp": {
+    "actions": {
+      "home": {
+        "title": "Actions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Actions",
+        "createOrEditLabel": "Create or edit a Actions",
+        "notFound": "No Actions found"
+      },
+      "created": "A new Actions is created with identifier {{ param }}",
+      "updated": "A Actions is updated with identifier {{ param }}",
+      "deleted": "A Actions is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Actions {{ id }}?"
+      },
+      "detail": {
+        "title": "Actions"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description",
+      "actionLink": "Action Link",
+      "pages": "Pages"
+    }
+  }
+}

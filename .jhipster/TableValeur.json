@@ -1,0 +1,39 @@
+{
+  "applications": "*",
+  "changelogDate": "20220722173328",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "table_valeur",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "libelle",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "TableValeur",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "tableTypeValeur",
+      "otherEntityRelationshipName": "tablevaleur",
+      "relationshipName": "tabletypevaleur",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no",
+  "skipServer": true
+}

@@ -1,0 +1,82 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-type-destinataires-heading" data-cy="TypeDestinatairesCreateUpdateHeading" class="custom-title">
+        {{ titre }}
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <!-- <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div> -->
+
+        <div class="row mb-3">
+          <label class="form-label custom-label" jhiTranslate="admingatewayApp.typeDestinataires.code" for="field_code">Code</label>
+          <input
+            type="text"
+            class="form-control custom-control custom-input-size"
+            name="code"
+            id="field_code"
+            data-cy="code"
+            maxlength="2"
+            formControlName="code"
+          />
+          <div *ngIf="editForm.get('code')!.invalid && (editForm.get('code')!.dirty || editForm.get('code')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.required"> Ce champ est obligatoire. </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label custom-label" jhiTranslate="admingatewayApp.typeDestinataires.libelle" for="field_libelle"
+            >Libellé</label
+          >
+          <input
+            type="text"
+            class="form-control custom-control"
+            name="libelle"
+            id="field_libelle"
+            data-cy="libelle"
+            formControlName="libelle"
+            oninput="this.value = this.value.toUpperCase()"
+          />
+          <div *ngIf="editForm.get('libelle')!.invalid && (editForm.get('libelle')!.dirty || editForm.get('libelle')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('libelle')?.errors?.required"> Ce champ est obligatoire. </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label custom-label" jhiTranslate="admingatewayApp.typeDestinataires.description" for="field_description"
+            >Description</label
+          >
+          <input
+            type="text"
+            class="form-control custom-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Enregistrer</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,143 @@
+{
+  "applications": "*",
+  "changelogDate": "20220829114015",
+  "clientRootFolder": "carriere",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "agent",
+  "fields": [
+    {
+      "fieldName": "matricule",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "nin",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "prenom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateNaissance",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "lieuNaissance",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "sexe",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "nomMari",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "telephone",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "adresse",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "femmeMariee",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "datePriseEnCharge",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "dateSortie",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "titreId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "userInsertId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "userUpdateId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "dateInsert",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "dateUpdate",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "carriere",
+  "name": "Agent",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "situationFamiliale",
+      "otherEntityRelationshipName": "agent",
+      "relationshipName": "situationFamiliale",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "situationAdministrative",
+      "otherEntityRelationshipName": "agent",
+      "relationshipName": "situationAdministrative",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "affectation",
+      "otherEntityRelationshipName": "agent",
+      "relationshipName": "affectation",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "positionsAgent",
+      "otherEntityRelationshipName": "agent",
+      "relationshipName": "positionsAgent",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "enfant",
+      "otherEntityRelationshipName": "agent",
+      "relationshipName": "enfant",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "nationalite",
+      "otherEntityRelationshipName": "agent",
+      "relationshipName": "nationalite",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

@@ -1,0 +1,46 @@
+.nav-tabs .nav-link.active {
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+
+  background-color: #657e9e;
+  color: white !important;
+}
+
+.nav-tabs .nav-link {
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  background-color: #727b84;
+  color: white !important;
+}
+
+.container {
+  padding-top: 50px;
+  padding-bottom: 10px;
+  color: #405065;
+}
+
+.search-hero {
+  max-width: 500px;
+  padding-bottom: 50px;
+  margin: auto;
+}
+
+.form-control {
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  // box-shadow: 0 10px 40px 0 #bbd1cc;
+}
+
+.btn-control {
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.btnsave-control {
+  background-color: aquamarine;
+  color: darkblue;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+.form-control::placeholder {
+  font-family: FontAwesome;
+}
+
+strong {
+  font-weight: bold;
+}

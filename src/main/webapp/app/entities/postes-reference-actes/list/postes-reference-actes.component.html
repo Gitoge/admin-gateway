@@ -1,0 +1,102 @@
+<div>
+  <h2 id="page-heading" data-cy="PostesReferenceActesHeading">
+    <span>Postes Réference Actes</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="admingatewayApp.postesReferenceActes.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-postes-reference-actes"
+        [routerLink]="['/postes-references-actes/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="admingatewayApp.postesReferenceActes.home.createLabel"> Ajouter Postes Reference Actes </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="postesReferenceActes?.length === 0">
+    <span jhiTranslate="admingatewayApp.postesReferenceActes.home.notFound">No postesReferenceActes found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="postesReferenceActes && postesReferenceActes.length > 0">
+    <table class="table table-bordered table-condensed table-hover" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="postes">
+            <span jhiTranslate="admingatewayApp.postesReferenceActes.postes">Postes</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let postesReferenceActes of postesReferenceActes; trackBy: trackId" data-cy="entityTable">
+          <td>{{ postesReferenceActes.postes?.code }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/postes-reference-actes', postesReferenceActes.id, 'view']"
+                class="btn btn-outline-info"
+                title="Détails"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/postes-reference-actes', postesReferenceActes.id, 'edit']"
+                class="btn btn-outline-primary"
+                title="Modifier"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+
+              <button
+                type="submit"
+                (click)="delete(postesReferenceActes)"
+                class="btn btn-outline-danger btn-sm"
+                data-cy="entityDeleteButton"
+                title="Supprimer"
+              >
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="postesReferenceActes && postesReferenceActes.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+{
+  "admingatewayApp": {
+    "posteCompoGrade": {
+      "home": {
+        "title": "Poste Compo Grades",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Poste Compo Grade",
+        "createOrEditLabel": "Create or edit a Poste Compo Grade",
+        "notFound": "No Poste Compo Grades found"
+      },
+      "created": "A new Poste Compo Grade is created with identifier {{ param }}",
+      "updated": "A Poste Compo Grade is updated with identifier {{ param }}",
+      "deleted": "A Poste Compo Grade is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Poste Compo Grade {{ id }}?"
+      },
+      "detail": {
+        "title": "Poste Compo Grade"
+      },
+      "id": "ID",
+      "dateInsert": "Date Insert",
+      "operateur": "Operateur",
+      "posteComposant": "Poste Composant",
+      "posteCompose": "Poste Compose",
+      "userInsertId": "User Insert Id",
+      "valeur": "Valeur"
+    }
+  }
+}

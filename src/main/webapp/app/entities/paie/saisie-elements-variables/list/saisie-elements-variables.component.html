@@ -1,0 +1,149 @@
+<div>
+  <form [formGroup]="editForm" style="margin: 2px; padding: 0">
+    <div class="col-md-10 container" style="border: 1px solid lightgray; padding: 1%">
+      <jhi-alert-error></jhi-alert-error>
+      <jhi-alert></jhi-alert>
+      <fieldset>
+        <legend style="font-size: 17px; color: #24695c; font-weight: 700">Recherches élements variables en cours ...</legend>
+        <div class="row" style="margin-top: 1%">
+          <div class="col-md-3">
+            <label style="font-family: Arial; font-size: 100%">Exercice</label>
+            <select
+              (change)="findPeriodeByExercice(editForm.get('exerciceId')!.value?.id)"
+              class="form-control"
+              data-cy="exerciceId"
+              formControlName="exerciceId"
+              id="field_exerciceId"
+              name="exerciceId"
+              required
+            >
+              <option [ngValue]="null"></option>
+              <option
+                *ngFor="let exerciceOption of exercice"
+                [ngValue]="exerciceOption.id === editForm.get('exerciceId')!.value?.id ? editForm.get('exerciceId')!.value : exerciceOption"
+              >
+                {{ exerciceOption.libelle }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label style="font-family: Arial; font-size: 100%">Période</label>
+            <select class="form-control" data-cy="periodeId" formControlName="periodeId" id="field_periodeId" name="periodeId" required>
+              <option [ngValue]="null"></option>
+              <option
+                *ngFor="let periodeOption of periodePaye"
+                [ngValue]="periodeOption.id === editForm.get('periodeId')!.value?.id ? editForm.get('periodeId')!.value : periodeOption"
+              >
+                {{ periodeOption.libelle }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label style="font-family: Arial; font-size: 100%">Matricule</label>
+            <input
+              class="form-control"
+              data-cy="matricule"
+              formControlName="matricule"
+              id="field_matricule"
+              name="matricule"
+              placeholder="Saisir matricule"
+              type="text"
+            />
+          </div>
+          <div class="col-md-3" style="margin-top: 20px">
+            <button (click)="getSAIByMatricule()" [disabled]="editForm.invalid" class="btn btn-primary" type="button">
+              <fa-icon [icon]="'search'"></fa-icon>
+            </button>
+          </div>
+        </div>
+      </fieldset>
+      <div class="alert alert-warning" id="no-result" *ngIf="saisieElementsVariables?.length === 0">
+        <span jhiTranslate="admingatewayApp.paieSaisieElementsVariables.home.notFound">No saisieElementsVariables found</span>
+      </div>
+      <div class="table-responsive" id="entities" *ngIf="saisieElementsVariables && saisieElementsVariables.length > 0">
+        <table class="table table-bordered table-condensed table-hover" aria-describedby="page-heading">
+          <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+              <th scope="col" jhiSortBy="codePoste">
+                <span>Code Poste</span>
+                <fa-icon icon="sort"></fa-icon>
+              </th>
+              <th scope="col" jhiSortBy="dateEcheance">
+                <span>Libellé Poste</span>
+                <fa-icon icon="sort"></fa-icon>
+              </th>
+              <th scope="col" jhiSortBy="matricule">
+                <span>Matricule</span>
+                <fa-icon icon="sort"></fa-icon>
+              </th>
+              <th scope="col" jhiSortBy="montant">
+                <span>Montant</span>
+                <fa-icon icon="sort"></fa-icon>
+              </th>
+              <th scope="col" jhiSortBy="dateEcheance">
+                <span>Date Début</span>
+                <fa-icon icon="sort"></fa-icon>
+              </th>
+              <th scope="col" jhiSortBy="dateEcheance">
+                <span>Date Echéance</span>
+                <fa-icon icon="sort"></fa-icon>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let saisieElementsVariables of saisieElementsVariables; trackBy: trackId" data-cy="entityTable">
+              <td>{{ saisieElementsVariables.codePoste }}</td>
+              <td>{{ saisieElementsVariables.libellePoste }}</td>
+              <td>{{ saisieElementsVariables.matricule }}</td>
+              <td>{{ saisieElementsVariables.montant | number }}</td>
+              <td>{{ saisieElementsVariables.date | date: 'dd/MM/yyyy' }}</td>
+              <td>{{ saisieElementsVariables.dateEcheance | date: 'dd/MM/yyyy' }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <!-- <button
+                    type="submit"
+                    [routerLink]="['/saisie-elements-variables', saisieElementsVariables.id, 'view']"
+                    class="btn btn-outline-info"
+                    title="Détails"
+                    data-cy="entityDetailsButton"
+                    title="Details"
+                    [disabled]="(today | date: 'yyyy-MM-dd')! > saisieElementsVariables?.periodePaye?.dateFin"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline"></span>
+                  </button>-->
+                  <button
+                    type="submit"
+                    [routerLink]="['/saisie-elements-variables', saisieElementsVariables.id, 'edit']"
+                    class="btn btn-outline-primary"
+                    title="Modifier"
+                    data-cy="entityEditButton"
+                    title="Modifier"
+                    [disabled]="(today | date: 'yyyy-MM-dd')! > saisieElementsVariables?.periodePaye?.dateFin"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline"></span>
+                  </button>
+                  <button
+                    type="submit"
+                    (click)="delete(saisieElementsVariables)"
+                    class="btn btn-outline-danger"
+                    title="Supprimer"
+                    data-cy="entityDeleteButton"
+                    class="btn btn-outline-danger btn-sm"
+                    data-cy="entityDeleteButton"
+                    title="Supprimer"
+                    [disabled]="(today | date: 'yyyy-MM-dd')! > saisieElementsVariables?.periodePaye?.dateFin"
+                  >
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline"></span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </form>
+</div>

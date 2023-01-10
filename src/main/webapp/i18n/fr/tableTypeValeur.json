@@ -1,0 +1,27 @@
+{
+  "admingatewayApp": {
+    "tableTypeValeur": {
+      "home": {
+        "title": "TableTypeValeurs",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Table Type Valeur",
+        "createOrEditLabel": "Créer ou éditer un Table Type Valeur",
+        "notFound": "Aucun Table Type Valeur trouvé"
+      },
+      "created": "Un nouveau Table Type Valeur a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Table Type Valeur avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Table Type Valeur avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Table Type Valeur {{ id }} ?"
+      },
+      "detail": {
+        "title": "Table Type Valeur"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description",
+      "tablevaleur": "Tablevaleur"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "admingatewayApp": {
+    "postesReferenceActes": {
+      "home": {
+        "title": "PostesReferenceActes",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Postes Reference Actes",
+        "createOrEditLabel": "Créer ou éditer un Postes Reference Actes",
+        "notFound": "Aucun Postes Reference Actes trouvé"
+      },
+      "created": "Un nouveau Postes Reference Actes a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Postes Reference Actes avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Postes Reference Actes avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Postes Reference Actes {{ id }} ?"
+      },
+      "detail": {
+        "title": "Postes Reference Actes"
+      },
+      "id": "ID",
+      "postes": "Postes"
+    }
+  }
+}

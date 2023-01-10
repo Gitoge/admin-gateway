@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <div *ngIf="corps">
+      <h2 data-cy="corpsDetailsHeading" class="custom-title"><span>Corps</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details detail-card">
+        <!-- <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ corps.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.corps.code">Code</span></dt>
+        <dd>
+          <span>{{ corps.code }}</span>
+        </dd> -->
+        <dt><span>Libellé</span></dt>
+        <dd>
+          <span>{{ corps.libelle }}</span>
+        </dd>
+        <dt><span>Description</span></dt>
+        <dd>
+          <span>{{ corps.description }}</span>
+        </dd>
+        <dt><span>Code Hierarchie</span></dt>
+        <dd>
+          <span>{{ corps.codHierarchie }}</span>
+        </dd>
+        <dt><span>Age Retraite</span></dt>
+        <dd>
+          <span>{{ corps.ageRetraite }}</span>
+        </dd>
+        <dt><span>Classification</span></dt>
+        <dd>
+          <span>{{ corps.classification }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/corps', corps.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Modifier</span>
+      </button>
+    </div>
+  </div>
+</div>

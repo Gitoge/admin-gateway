@@ -1,0 +1,36 @@
+{
+  "admingatewayApp": {
+    "carriereCategorieAgent": {
+      "home": {
+        "title": "Categorie Agents",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Categorie Agent",
+        "createOrEditLabel": "Create or edit a Categorie Agent",
+        "notFound": "No Categorie Agents found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Categorie Agent {{ id }}?"
+      },
+      "detail": {
+        "title": "Categorie Agent"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description",
+      "userInsertId": "User Insert Id",
+      "userUpdateId": "User Update Id",
+      "dateInsert": "Date Insert",
+      "dateUpdate": "Date Update",
+      "situationAdministrative": "Situation Administrative",
+      "positionsAgent": "Positions Agent"
+    }
+  },
+  "carriereApp": {
+    "carriereCategorieAgent": {
+      "created": "A new Categorie Agent is created with identifier {{ param }}",
+      "updated": "A Categorie Agent is updated with identifier {{ param }}",
+      "deleted": "A Categorie Agent is deleted with identifier {{ param }}"
+    }
+  }
+}

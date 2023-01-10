@@ -1,0 +1,30 @@
+{
+  "admingatewayApp": {
+    "histoAugmentation": {
+      "home": {
+        "title": "HistoAugmentations",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Histo Augmentation",
+        "createOrEditLabel": "Créer ou éditer un Histo Augmentation",
+        "notFound": "Aucun Histo Augmentation trouvé"
+      },
+      "created": "Un nouveau Histo Augmentation a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Histo Augmentation avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Histo Augmentation avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Histo Augmentation {{ id }} ?"
+      },
+      "detail": {
+        "title": "Histo Augmentation"
+      },
+      "id": "ID",
+      "codePoste": "Code Poste",
+      "libelle": "Libelle",
+      "type": "Type",
+      "date": "Date",
+      "categorie": "Categorie",
+      "hierarchie": "Hierarchie",
+      "plafond": "Plafond"
+    }
+  }
+}

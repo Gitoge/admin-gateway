@@ -1,0 +1,109 @@
+<div>
+  <form style="margin: 2px; padding: 0" [formGroup]="editForm">
+    <div class="row justify-content-center" style="margin: 0 !important; padding: 0 !important">
+      <h2 id="page-heading" data-cy="FichePaieHeading">
+        <span>Fiche Paies</span>
+      </h2>
+      <div class="col-md-5" style="border: 1px solid lightgray; padding: 1%">
+        <div class="col-md-12" style="border: 1px solid lightgray; padding: 1%">
+          <fieldset>
+            <legend style="font-size: 17px; color: #24695c; font-weight: 700">Recherche par matricule:</legend>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="matricule"
+                  id="field_matricule"
+                  data-cy="matricule"
+                  formControlName="matricule"
+                  placeholder="Saisir matricule"
+                  [(ngModel)]="matricule"
+                />
+              </div>
+              <div class="col-md-6" style="margin-top: 1px">
+                <button type="button" class="btn btn-primary" (click)="getAgentByMatricule(editForm.get('matricule')!.value)">
+                  <fa-icon [icon]="'search'"></fa-icon>
+                </button>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+      <div class="col-md-5" style="border: 1px solid lightgray; padding: 1%">
+        <div class="col-md-12" style="border: 1px solid lightgray; padding: 1%">
+          <fieldset>
+            <legend style="font-size: 17px; color: #24695c; font-weight: 700">Générer fiches paie par Etablissement:</legend>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <div>
+                  <ng-autocomplete
+                    [data]="etablissementSharedCollection"
+                    [searchKeyword]="keyword"
+                    placeholder="Saisir le nom de l'établissement"
+                    (selected)="selectEventEtablissement($event)"
+                    [disabled]="!['VERROUILLE'].includes(etatPeriodePayeEnCours.toUpperCase())"
+                    (inputChanged)="onChangeSearch($event)"
+                    (inputFocused)="onFocused($event)"
+                    historyIdentifier="etablissement"
+                    name="etablissementId"
+                    id="field_etablissementId"
+                    [itemTemplate]="itemTemplate"
+                    [notFoundTemplate]="notFoundTemplate"
+                    (change)="getSelectedEtablissement(editForm.get('etablissementId')!.value?.id)"
+                    formControlName="etablissementId"
+                  >
+                  </ng-autocomplete>
+                  <ng-template #itemTemplate let-item>
+                    <a [innerHTML]="item.libelleLong"></a>
+                  </ng-template>
+                  <ng-template #notFoundTemplate let-notFound>
+                    <div>Etablissement non trouvé !</div>
+                  </ng-template>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  style="margin-top: 2px"
+                  [disabled]="!['VERROUILLE'].includes(etatPeriodePayeEnCours.toUpperCase())"
+                  (click)="genereFichePaieByEtablissement(agentIds)"
+                >
+                  <fa-icon [icon]="'search'"></fa-icon>
+                </button>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+      <br />
+      <br />
+      <div class="col-md-10" style="border: 1px solid lightgray; padding: 1%">
+        <div class="col-md-12" style="border: 1px solid lightgray; padding: 1%">
+          <fieldset>
+            <legend style="font-size: 17px; color: #24695c; font-weight: 700">Générer des fiches de paie pour tous les agents:</legend>
+            <div class="row" style="margin-top: 1%">
+              <div style="display: flex; justify-content: center; align-items: center">
+                <button
+                  title="Générer pour tous les agents"
+                  type="button"
+                  class="btn btn-secondary"
+                  style="margin-top: 5.5%"
+                  [disabled]="!['VERROUILLE'].includes(etatPeriodePayeEnCours.toUpperCase())"
+                  (click)="genererFichePaieForAllAgent()"
+                >
+                  <fa-icon [icon]="'plus'"></fa-icon><span>Générer pour tous</span>
+                </button>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+
+      <!-- <jhi-alert-error></jhi-alert-error> -->
+
+      <jhi-alert></jhi-alert>
+    </div>
+  </form>
+</div>

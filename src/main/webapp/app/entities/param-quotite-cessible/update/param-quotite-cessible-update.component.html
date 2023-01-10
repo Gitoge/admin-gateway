@@ -1,0 +1,191 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-param-quotite-cessible-heading" data-cy="ParamQuotiteCessibleCreateUpdateHeading" class="custom-title">
+        {{ titre }}
+      </h2>
+
+      <!-- <div> -->
+      <jhi-alert-error></jhi-alert-error>
+
+      <!-- <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div> -->
+
+      <div class="row" style="margin-top: 1%">
+        <div class="col-md-6">
+          <label class="form-label" for="field_code">Code</label>
+          <input type="text" class="form-control custom-control" name="code" id="field_code" data-cy="code" formControlName="code" />
+          <div *ngIf="editForm.get('code')!.invalid && (editForm.get('code')!.dirty || editForm.get('code')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label" jhiTranslate="admingatewayApp.paramQuotiteCessible.libelle" for="field_libelle">Libellé</label>
+          <input
+            type="text"
+            class="form-control custom-control"
+            name="libelle"
+            id="field_libelle"
+            data-cy="libelle"
+            formControlName="libelle"
+          />
+          <div *ngIf="editForm.get('libelle')!.invalid && (editForm.get('libelle')!.dirty || editForm.get('libelle')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('libelle')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 1%">
+        <div class="col-md-6">
+          <label class="form-label" jhiTranslate="admingatewayApp.paramQuotiteCessible.salaireDebut" for="field_salaireDebut"
+            >Salaire Debut</label
+          >
+          <input
+            type="number"
+            class="form-control custom-control"
+            name="salaireDebut"
+            id="field_salaireDebut"
+            data-cy="salaireDebut"
+            formControlName="salaireDebut"
+          />
+          <div
+            *ngIf="editForm.get('salaireDebut')!.invalid && (editForm.get('salaireDebut')!.dirty || editForm.get('salaireDebut')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('salaireDebut')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('salaireDebut')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label" jhiTranslate="admingatewayApp.paramQuotiteCessible.salaireFin" for="field_salaireFin"
+            >Salaire Fin</label
+          >
+          <input
+            type="number"
+            class="form-control custom-control"
+            name="salaireFin"
+            id="field_salaireFin"
+            data-cy="salaireFin"
+            formControlName="salaireFin"
+          />
+          <div *ngIf="editForm.get('salaireFin')!.invalid && (editForm.get('salaireFin')!.dirty || editForm.get('salaireFin')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('salaireFin')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('salaireFin')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 1%">
+        <div class="col-md-6">
+          <label class="form-label" jhiTranslate="admingatewayApp.paramQuotiteCessible.tauxTranche" for="field_tauxTranche"
+            >Taux Tranche</label
+          >
+          <input
+            type="number"
+            class="form-control custom-control"
+            name="tauxTranche"
+            id="field_tauxTranche"
+            data-cy="tauxTranche"
+            formControlName="tauxTranche"
+          />
+          <div *ngIf="editForm.get('tauxTranche')!.invalid && (editForm.get('tauxTranche')!.dirty || editForm.get('tauxTranche')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('tauxTranche')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('tauxTranche')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="col-md-5">
+          <label class="form-label" for="field_dateImpact">Date Impact</label>
+          <div class="input-group">
+            <input
+              id="field_dateImpact"
+              data-cy="dateImpact"
+              type="text"
+              class="form-control custom-control"
+              name="dateImpact"
+              ngbDatepicker
+              #dateImpactDp="ngbDatepicker"
+              formControlName="dateImpact"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateImpactDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+          <div *ngIf="editForm.get('dateImpact')!.invalid && (editForm.get('dateImpact')!.dirty || editForm.get('dateImpact')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dateImpact')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <!-- </div> -->
+
+      <br />
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

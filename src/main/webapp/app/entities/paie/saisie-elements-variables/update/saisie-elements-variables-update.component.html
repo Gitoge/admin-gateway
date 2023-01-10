@@ -1,0 +1,361 @@
+<form style="margin: 2px; padding: 0" [formGroup]="editForm">
+  <div class="row justify-content-center" style="margin: 0 !important; padding: 0 !important">
+    <div class="col-md-7" style="border: 1px solid lightgray; padding: 1%">
+      <div class="col-md-12" style="border: 1px solid lightgray; padding: 1%">
+        <fieldset>
+          <div class="row" style="margin-top: 1%">
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Matricule </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="matriucle"
+                  id="field_matriucle"
+                  data-cy="matriucle"
+                  formControlName="matricule"
+                  placeholder="Saisir matricucle"
+                  [(ngModel)]="matricule"
+                  oninput="this.value = this.value.toUpperCase()"
+                />
+              </div>
+              <div class="col-md-6" style="margin-top: 5px">
+                <button
+                  [disabled]="!['OUVERT'].includes(etatPeriodePayeEnCours.toUpperCase())"
+                  type="button"
+                  class="btn btn-primary"
+                  style="margin-top: 5.5%"
+                  (click)="getAgentByMatricule(editForm.get('matricule')!.value); infos()"
+                >
+                  <fa-icon [icon]="'search'"></fa-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <fieldset *ngIf="agent && agent.length > 0">
+        <fieldset class="row">
+          <div class="row" style="margin-top: 1%">
+            <div class="table-responsive row" id="entities" *ngIf="agent && agent.length > 0">
+              <div class="col-md-6" style="margin-top: 5px">
+                <table>
+                  <tr *ngFor="let agent of agent">
+                    <td>{{ agent.prenom }}</td>
+                    &nbsp;
+                    <td>{{ agent.nom }}</td>
+                    &nbsp;
+                    <td>
+                      MATRICULE : <b>{{ agent.matricule }}</b>
+                    </td>
+                    <td></td>
+                  </tr>
+                </table>
+              </div>
+              <div class="col-md-6">
+                <button
+                  style="margin-right: 200px"
+                  type="submit"
+                  class="btn btn-outline-info"
+                  title="Ajouter Elements Variables"
+                  data-cy="entityDetailsButton"
+                  (click)="veuxAjouter()"
+                >
+                  <fa-icon icon="plus"></fa-icon>
+                  <span class="d-none d-md-inline"></span>
+                </button>
+              </div>
+              <div class="col-mb-6">
+                Heures Supp:
+                <button
+                  type="submit"
+                  class="btn btn-outline-info"
+                  title="Ajouter Elements Variables"
+                  data-cy="entityDetailsButton"
+                  (click)="addHeuresSupp()"
+                >
+                  <fa-icon icon="plus"></fa-icon>
+                  <span class="d-none d-md-inline"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </fieldset>
+    </div>
+    <br />
+    <div class="col-md-4 custom-card" style="border: 1px solid lightgray; padding: 1%; margin-left: 1%">
+      <div class="row justify-content-center" style="margin: 0 !important; padding: 0 !important">
+        <div class="table-responsive" id="entities" *ngIf="elementsVar && elementsVar.length > 1"></div>
+      </div>
+    </div>
+    <br />
+  </div>
+  <div class="row">
+    <div class="col-md-7 custom-card" style="border: 1px solid lightgray; padding: 1%; margin-left: 45px; float: left; height: 40%">
+      <div class="row justify-content-center" style="margin: 0 !important; padding: 0 !important" *ngIf="isAjout == true">
+        <form name="editForm" role="form" novalidate (ngSubmit)="infos()" [formGroup]="editForm">
+          <legend style="font-size: 17px; color: #24695c; font-weight: 700; text-align: center">Saisie Elements Variables:</legend>
+          <hr />
+          <div class="row">
+            <div class="row" style="margin-top: 5%">
+              <div class="col-md-6">
+                <label for="field_codePoste">Code Poste <span style="color: red">*</span></label>
+                <div>
+                  <ng-autocomplete
+                    [data]="postes"
+                    [searchKeyword]="keyword"
+                    placeholder="Saisir le code poste"
+                    (selected)="selectEvent($event)"
+                    (inputChanged)="onChangeSearch($event)"
+                    (inputFocused)="onFocused($event)"
+                    (focusout)="onFocusOutEvent($event)"
+                    historyIdentifier="codePoste"
+                    formControlName="codePoste"
+                    [itemTemplate]="itemTemplate"
+                    [notFoundTemplate]="notFoundTemplate"
+                    (change)="getPostesByCode(codeposte)"
+                    name="code"
+                    id="field_code"
+                  >
+                  </ng-autocomplete>
+                  <ng-template #itemTemplate let-item>
+                    <a [innerHTML]="item.code"></a>
+                  </ng-template>
+                  <ng-template #notFoundTemplate let-notFound>
+                    <div style="color: red">Etablissement non trouvé !</div>
+                  </ng-template>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="field_libellePoste">Libellé Poste <span style="color: red">*</span></label>
+                <div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="libellePoste"
+                    id="field_libellePoste"
+                    data-cy="libellePoste"
+                    formControlName="libellePoste"
+                    oninput="this.value = this.value.toUpperCase()"
+                    [(ngModel)]="libellePoste"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 5%">
+              <div class="col-md-6">
+                <label for="field_date">Date Début <span style="color: red">*</span></label>
+                <div>
+                  <input
+                    type="date"
+                    class="form-control"
+                    name="date"
+                    id="field_date"
+                    data-cy="date"
+                    formControlName="date"
+                    (change)="add(date)"
+                    [(ngModel)]="date"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="field_dateEcheance">Date Echéance <span style="color: red">*</span></label>
+                <div>
+                  <input
+                    type="date"
+                    class="form-control"
+                    name="dateEcheance"
+                    id="field_dateEcheance"
+                    data-cy="dateEcheance"
+                    formControlName="dateEcheance"
+                    [(ngModel)]="dateEcheange"
+                    required
+                  />
+                  <div
+                    *ngIf="
+                      editForm.get('dateEcheance')!.invalid &&
+                      (editForm.get('dateEcheance')!.dirty || editForm.get('dateEcheance')!.touched)
+                    "
+                  >
+                    <small
+                      class="form-text text-danger"
+                      *ngIf="editForm.get('dateEcheance')?.errors?.required"
+                      jhiTranslate="entity.validation.required"
+                    >
+                      This field is required.
+                    </small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 5%">
+              <div class="col-md-6">
+                <label for="field_montant">Montant <span style="color: red">*</span></label>
+                <div>
+                  <input
+                    type="number"
+                    class="form-control"
+                    name="montant"
+                    id="field_montant"
+                    data-cy="montant"
+                    formControlName="montant"
+                    [(ngModel)]="montant"
+                    required
+                  />
+                  <div *ngIf="editForm.get('montant')!.invalid && (editForm.get('montant')!.dirty || editForm.get('montant')!.touched)">
+                    <small
+                      class="form-text text-danger"
+                      *ngIf="editForm.get('montant')?.errors?.required"
+                      jhiTranslate="entity.validation.required"
+                    >
+                      This field is required.
+                    </small>
+                    <small
+                      class="form-text text-danger"
+                      [hidden]="!editForm.get('montant')?.errors?.number"
+                      jhiTranslate="entity.validation.number"
+                    >
+                      This field should be a number.
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="field_destinataire">Destinataire </label>
+                <div>
+                  <ng-autocomplete
+                    [data]="destinairesSharedCollection"
+                    [searchKeyword]="keywordestinatire"
+                    placeholder="Saisir le code poste du destinataire"
+                    (selected)="selectEventDestinataire($event)"
+                    (inputChanged)="onChangeSearch($event)"
+                    (inputFocused)="onFocused($event)"
+                    (focusout)="onFocusOutEventDestinataire($event)"
+                    historyIdentifier="destinataire"
+                    formControlName="destinataire"
+                    (change)="getPostesByCode(destinataire)"
+                    [itemTemplate]="itemTemplate"
+                    [notFoundTemplate]="notFoundTemplate"
+                    name="destinataire"
+                    id="field_destinataire"
+                  >
+                  </ng-autocomplete>
+                  <ng-template #itemTemplate let-item>
+                    <a [innerHTML]="item.code"></a>
+                  </ng-template>
+                  <ng-template #notFoundTemplate let-notFound>
+                    <div style="color: red">destinataire non trouvé !</div>
+                  </ng-template>
+                </div>
+              </div>
+            </div>
+
+            <div class="row" style="margin-top: 5%">
+              <div class="col-md-6">
+                <div
+                  [hidden]="
+                    codeposte === null || codeposte === undefined || codePostesReference === undefined || codePostesReference === undefined
+                  "
+                >
+                  <div class="col mb-2 row">
+                    <label for="field_reference">Reférence</label>
+                    <div>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="reference"
+                        id="field_reference"
+                        data-cy="reference"
+                        formControlName="reference"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="display: flex; justify-content: center; align-items: center">
+              <button
+                type="submit"
+                id="save-entity"
+                data-cy="entityCreateSaveButton"
+                [disabled]="editForm.invalid || isSaving"
+                class="btn btn-primary"
+              >
+                <fa-icon icon="plus"></fa-icon>&nbsp;<span>Ajouter</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-4 custom-card" style="border: 1px solid lightgray; padding: 1%; margin-left: 1%">
+      <div class="row justify-content-center" style="margin: 0 !important; padding: 0 !important">
+        <div class="table-responsive" id="entities" *ngIf="elementsVar && elementsVar.length > 1">
+          <table class="table table-bordered table-condensed table-hover" aria-describedby="page-heading">
+            <thead>
+              <tr>
+                <th scope="col"><span>Matricule</span></th>
+                <th scope="col">
+                  <span>Montant</span>
+                </th>
+                <th scope="col">
+                  <span>Code Poste</span>
+                </th>
+                <th scope="col">
+                  <span>Date Echéange</span>
+                </th>
+                <th scope="col">
+                  <span>Dest</span>
+                </th>
+                <th scope="col">
+                  <span>Date Début</span>
+                </th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let element of elementsVar">
+                <td *ngIf="element?.montant != undefined">{{ element.matricule }}</td>
+                <td *ngIf="element?.montant != undefined">{{ element.montant }}</td>
+                <td *ngIf="element?.montant != undefined">{{ element.codePoste }}</td>
+                <td *ngIf="element?.montant != undefined">{{ element.dateEcheance | date: 'dd/MM/yyyy' }}</td>
+                <td *ngIf="element?.montant != undefined">{{ element.destinataire }}</td>
+                <td *ngIf="element?.montant != undefined">{{ element.date | date: 'dd/MM/yyyy' }}</td>
+                <td *ngIf="element?.montant != undefined">
+                  <button
+                    class="btn btn-outline-danger btn-sm"
+                    data-cy="entityDeleteButton"
+                    title="Retirer ce Membre"
+                    (click)="deleteElementsVar(element)"
+                  >
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline"></span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="float: right">
+            <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+              <fa-icon icon="ban"></fa-icon>&nbsp;<span>Annuler</span>
+            </button>
+            <button
+              type="submit"
+              id="save-entity"
+              data-cy="entityCreateSaveButton"
+              class="btn btn-primary"
+              [disabled]="elementsVar!.length < 2"
+              (click)="save()"
+            >
+              <fa-icon icon="save"></fa-icon>&nbsp;<span>Enregistrer</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<br /><br />

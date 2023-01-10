@@ -1,0 +1,32 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <div *ngIf="nationalite">
+      <h2 data-cy="nationaliteDetailsHeading" class="custom-title"><span>Nationalité</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details detail-card">
+        <dt><span jhiTranslate="admingatewayApp.carriereNationalite.code">Code</span></dt>
+        <dd>
+          <span>{{ nationalite.code }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereNationalite.libelle">Libelle</span></dt>
+        <dd>
+          <span>{{ nationalite.libelle }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/nationalite', nationalite.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

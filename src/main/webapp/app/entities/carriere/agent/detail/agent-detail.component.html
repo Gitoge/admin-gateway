@@ -1,0 +1,95 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="agent">
+      <h2 data-cy="agentDetailsHeading"><span>Agent</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>Matricule</span></dt>
+        <dd>
+          <span>{{ agent.matricule }}</span>
+        </dd>
+        <dt><span>Type Piéce</span></dt>
+        <dd>
+          <span>{{ agent.typePiece }}</span>
+        </dd>
+        <dt><span>Prenom</span></dt>
+        <dd>
+          <span>{{ agent.prenom }}</span>
+        </dd>
+        <dt><span>Nom</span></dt>
+        <dd>
+          <span>{{ agent.nom }}</span>
+        </dd>
+        <dt><span>Date Naissance</span></dt>
+        <dd>
+          <span>{{ agent.dateNaissance | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Lieu Naissance</span></dt>
+        <dd>
+          <span>{{ agent.lieuNaissance }}</span>
+        </dd>
+        <dt><span>Sexe</span></dt>
+        <dd>
+          <span>{{ agent.sexe }}</span>
+        </dd>
+        <dt><span>Nom Mari</span></dt>
+        <dd>
+          <span>{{ agent.nomMari }}</span>
+        </dd>
+        <dt><span>Téléphone</span></dt>
+        <dd>
+          <span>{{ agent.telephone }}</span>
+        </dd>
+        <dt><span>Email</span></dt>
+        <dd>
+          <span>{{ agent.email }}</span>
+        </dd>
+        <dt><span>Adrésse</span></dt>
+        <dd>
+          <span>{{ agent.adresse }}</span>
+        </dd>
+        <dt><span>Femme Mariée</span></dt>
+        <dd>
+          <span>{{ agent.femmeMariee }}</span>
+        </dd>
+        <dt><span>Date PEC</span></dt>
+        <dd>
+          <span>{{ agent.datePriseEnCharge | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Date Sortie</span></dt>
+        <dd>
+          <span>{{ agent.dateSortie | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Status</span></dt>
+        <dd>
+          <span>{{ agent.status }}</span>
+        </dd>
+        <dt><span>Titre </span></dt>
+        <dd>
+          <span>{{ agent.titre }}</span>
+        </dd>
+
+        <dt><span>Nationalite</span></dt>
+        <dd>
+          <div *ngIf="agent.nationalite">
+            <a [routerLink]="['/nationalite', agent.nationalite?.libelle, 'view']">{{ agent.nationalite?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/agent', agent.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Modifier</span>
+      </button>
+    </div>
+  </div>
+</div>

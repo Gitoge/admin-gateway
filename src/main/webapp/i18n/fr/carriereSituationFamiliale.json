@@ -1,0 +1,41 @@
+{
+  "admingatewayApp": {
+    "carriereSituationFamiliale": {
+      "home": {
+        "title": "SituationFamiliales",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Situation Familiale",
+        "createOrEditLabel": "Créer ou éditer un Situation Familiale",
+        "notFound": "Aucun Situation Familiale trouvé"
+      },
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Situation Familiale {{ id }} ?"
+      },
+      "detail": {
+        "title": "Situation Familiale"
+      },
+      "id": "ID",
+      "situationMatrimoniale": "Situation Matrimoniale",
+      "nombreEpouse": "Nombre Epouse",
+      "codeTravailConjoint": "Code Travail Conjoint",
+      "nombreEnfant": "Nombre Enfant",
+      "nombrePart": "Nombre Part",
+      "nombreEnfantImposable": "Nombre Enfant Imposable",
+      "nombreEnfantMajeur": "Nombre Enfant Majeur",
+      "nombreMinimumFiscal": "Nombre Minimum Fiscal",
+      "nombreEnfantDecede": "Nombre Enfant Decede",
+      "dateModification": "Date Modification",
+      "status": "Status",
+      "userInsertId": "User Insert Id",
+      "actes": "Actes",
+      "agent": "Agent"
+    }
+  },
+  "carriereApp": {
+    "carriereSituationFamiliale": {
+      "created": "Un nouveau Situation Familiale a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Situation Familiale avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Situation Familiale avec l'identifiant {{ param }} a été supprimé"
+    }
+  }
+}

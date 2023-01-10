@@ -1,0 +1,49 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="documentAdministratif">
+      <h2 data-cy="documentAdministratifDetailsHeading"><span>Document Administratif</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ documentAdministratif.id }}</span>
+        </dd>
+        <!--  <dt><span>Date Creation</span></dt>
+        <dd>
+          <span>{{ documentAdministratif.dateCreation | formatMediumDatetime }}</span>
+        </dd>-->
+        <dt><span>Proprietaire Id</span></dt>
+        <dd>
+          <span>{{ documentAdministratif.proprietaireId }}</span>
+        </dd>
+        <dt><span>Nom Document</span></dt>
+        <dd>
+          <span>{{ documentAdministratif.nomDocument }}</span>
+        </dd>
+        <dt><span>Type Entite</span></dt>
+        <dd>
+          <span>{{ documentAdministratif.typeEntite }}</span>
+        </dd>
+        <dt><span>Type Document</span></dt>
+        <dd>
+          <span>{{ documentAdministratif.typeDocument }}</span>
+        </dd>
+        <dt><span>Employe</span></dt>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/document-administratif', documentAdministratif.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

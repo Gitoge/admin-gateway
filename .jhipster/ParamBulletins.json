@@ -1,0 +1,48 @@
+{
+  "applications": "*",
+  "changelogDate": "20220727201831",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "param_bulletins",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "libelle",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "entete",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "signature",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "arrierePlan",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "userIdInsert",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "userdateInsert",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "ParamBulletins",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no",
+  "skipServer": true
+}

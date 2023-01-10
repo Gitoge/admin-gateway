@@ -1,0 +1,64 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <div *ngIf="etablissement">
+      <h2 data-cy="etablissementDetailsHeading" class="custom-title">
+        <span>
+          Visualisation de l'Etablissement: <b>{{ etablissement.libelleLong }}</b>
+        </span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details detail-card">
+        <dt><span>Sigle</span></dt>
+        <dd>
+          <span>{{ etablissement.sigle }}</span>
+        </dd>
+        <dt><span>Libellé</span></dt>
+        <dd>
+          <span>{{ etablissement.libelleLong }}</span>
+        </dd>
+        <dt><span>Adresse</span></dt>
+        <dd>
+          <span>{{ etablissement.adresse }}</span>
+        </dd>
+        <dt><span>Numéro Téléphone</span></dt>
+        <dd>
+          <span>{{ etablissement.numTelephone }}</span>
+        </dd>
+        <dt><span>Fax</span></dt>
+        <dd>
+          <span>{{ etablissement.fax }}</span>
+        </dd>
+        <dt><span>Email</span></dt>
+        <dd>
+          <span>{{ etablissement.email }}</span>
+        </dd>
+        <dt><span>Bp</span></dt>
+        <dd>
+          <span>{{ etablissement.bp }}</span>
+        </dd>
+        <dt><span>Type Etablissement</span></dt>
+        <dd>
+          <div *ngIf="etablissement.typeEtab">
+            <a [routerLink]="['/type-etablissement', etablissement.typeEtab?.id, 'view']">{{ etablissement.typeEtab?.libelle }}</a>
+          </div>
+        </dd>
+        <dt><span>Localité</span></dt>
+        <dd>
+          <div *ngIf="etablissement.localite">
+            <a [routerLink]="['/localite', etablissement.localite?.id, 'view']">{{ etablissement.localite?.libelle }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+      </button>
+    </div>
+  </div>
+</div>

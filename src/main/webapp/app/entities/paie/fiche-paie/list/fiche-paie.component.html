@@ -1,0 +1,162 @@
+<div>
+  <form [formGroup]="editForm" style="margin: 2px; padding: 0">
+    <div class="col-md-10 container" style="border: 1px solid lightgray; padding: 1%">
+      <h2 data-cy="FichePaieHeading" id="page-heading" [hidden]="fiche">
+        <fieldset>
+          <legend style="font-size: 17px; color: #24695c; font-weight: 700">Recherche Fiche Paie Agent:</legend>
+          <div class="row" style="margin-top: 1%">
+            <div class="col-md-3">
+              <label style="font-family: Arial; font-size: 80%">Exercice</label>
+              <select
+                (change)="findPeriodeByExercice(editForm.get('exerciceId')!.value?.id)"
+                class="form-control"
+                data-cy="exerciceId"
+                formControlName="exerciceId"
+                id="field_exerciceId"
+                name="exerciceId"
+                required
+              >
+                <option [ngValue]="null"></option>
+                <option
+                  *ngFor="let exerciceOption of exercice"
+                  [ngValue]="
+                    exerciceOption.id === editForm.get('exerciceId')!.value?.id ? editForm.get('exerciceId')!.value : exerciceOption
+                  "
+                >
+                  {{ exerciceOption.libelle }}
+                </option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label style="font-family: Arial; font-size: 80%">Periode</label>
+              <select class="form-control" data-cy="periodeId" formControlName="periodeId" id="field_periodeId" name="periodeId" required>
+                <option [ngValue]="null"></option>
+                <option
+                  *ngFor="let periodeOption of periodePaye"
+                  [ngValue]="periodeOption.id === editForm.get('periodeId')!.value?.id ? editForm.get('periodeId')!.value : periodeOption"
+                >
+                  {{ periodeOption.libelle }}
+                </option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label style="font-family: Arial; font-size: 80%">Matricule</label>
+              <input
+                [(ngModel)]="matricule"
+                class="form-control"
+                data-cy="matricule"
+                formControlName="matricule"
+                id="field_matricule"
+                name="matricule"
+                placeholder="Saisir matricule"
+                type="text"
+              />
+            </div>
+            <div class="col-md-3" style="margin-top: 20px">
+              <button
+                (click)="getAgentByMatricule(editForm.get('matricule')!.value)"
+                [disabled]="editForm.invalid"
+                class="btn btn-primary"
+                type="button"
+              >
+                <fa-icon [icon]="'search'"></fa-icon>
+              </button>
+            </div>
+          </div>
+        </fieldset>
+      </h2>
+      <br />
+      <jhi-alert-error></jhi-alert-error>
+      <jhi-alert></jhi-alert>
+      <button *ngIf="fiche && fiche.length > 0" [routerLink]="['/fiche-paie/visualiser']" class="btn btn-primary" type="button">
+        Page d'Impression</button
+      >&nbsp;
+      <button *ngIf="fiche && fiche.length > 0" (click)="refresh()" class="btn btn-primary" type="button">Retour</button>
+      <div *ngIf="fiche && fiche.length > 0" class="table-responsive row" id="testPDF">
+        <table aria-describedby="page-heading" class="table table-bordered table-condensed table-hover" style="width: 100%; height: 50px">
+          <thead>
+            <tr (sortChange)="loadPage()" [(ascending)]="ascending" [(predicate)]="predicate" jhiSort>
+              <br />
+              <td></td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td *ngIf="agent" style="width: 60%; height: 10%">
+                <div class="row" style="margin-top: 1%; font-family: bold">
+                  <div class="col-md-6">
+                    <span *ngIf="agent.sexe === 'MASCULIN'">
+                      {{ agent.matricule }} MONSIEUR &nbsp; {{ agent.prenom }} &nbsp; {{ agent.nom }} &nbsp;<br />
+                    </span>
+                    <span *ngIf="agent.sexe === 'FEMININ'">
+                      {{ agent.matricule }} MADAME &nbsp; {{ agent.prenom }} &nbsp; {{ agent.nom }} &nbsp;<br />
+                    </span>
+                    <br />
+                    {{ agent.adresse }}&nbsp; &nbsp; NB MF 0 &nbsp; PARTS {{ sitFamiliale.nombrePart }}<br /><br />
+                    <span *ngIf="services"> {{ services.libelle }}</span> <br /><br />
+                  </div>
+                  <div class="col-md-6">
+                    {{ libelleEmplois }} <br />
+                    <br />
+                    SIT.MAT {{ sitFamiliale.situationMatrimoniale }} &nbsp; &nbsp; NB.ENF {{ sitFamiliale.nombreEnfant }} &nbsp; &nbsp;
+                    ENF+10 {{ sitFamiliale.nombreEnfantMajeur }} <br />
+                    <br />
+                    {{ libelleEtablissement }}
+                    <br />
+                    <br />
+                    <span *ngIf="grade">{{ grade.libelle }}</span> &nbsp;&nbsp;<span *ngIf="sitAdmin"> {{ sitAdmin.indice?.libelle }}</span>
+                  </div>
+                </div>
+                <div style="float: right"></div>
+              </td>
+              <td>
+                <div class="col-md-6">
+                  <span *ngIf="hierarchie">{{ hierarchie.libelle }}</span
+                  ><br /><br />
+                  <span *ngIf="echelon"> {{ echelon.libelle }}</span
+                  >&nbsp;&nbsp;&nbsp;
+                  <span> {{ agent.nationalite?.libelle }}</span>
+                  <br /><br />
+                </div>
+                <div class="col-md-6">
+                  <span> TEI {{ sitFamiliale.nombreEnfantImposable }}</span>
+                  &nbsp; &nbsp; EMD
+                  <span *ngIf="sitFamiliale"> {{ sitFamiliale.nombreEnfantDecede }}</span> <br /><br />
+                </div>
+                <p style="text-align: center">
+                  <b>Montants</b> <br />
+                  <label style="float: left">Gains </label>
+                  &nbsp;
+                  <label style="text-align: center">Retenues</label>
+                  &nbsp;
+                  <label style="float: right; height: 10px"> Parts Contributives </label>
+                </p>
+              </td>
+            </tr>
+            <tr *ngFor="let fichePaie of fiche">
+              <td>{{ fichePaie.codePoste }} {{ fichePaie.libellePoste }}</td>
+              <td style="height: 10px" colspan="3">
+                <div class="row">
+                  <div class="col-md-4">{{ fichePaie.montantGain }}</div>
+                  <div class="col-md-4">{{ fichePaie.montantRetenue }}</div>
+                  <div class="col-md-4">{{ fichePaie.partContributive }}</div>
+                </div>
+              </td>
+            </tr>
+            <td></td>
+            <td *ngIf="fiche?.length > 0">
+              {{ fiche[fiche?.length - 1].sommeGain | number }}
+            </td>
+            <tr>
+              <table aria-describedby="page-heading" class="table table-bordered table-condensed table-hover"></table>
+              <td *ngIf="fiche?.length > 0"><b> Net A payer :</b>{{ fiche[fiche?.length - 1].netAPayer }}</td>
+            </tr>
+            <tr>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </form>
+</div>

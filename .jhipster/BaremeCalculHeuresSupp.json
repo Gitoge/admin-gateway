@@ -1,0 +1,75 @@
+{
+  "applications": "*",
+  "changelogDate": "20221125160308",
+  "clientRootFolder": "paie",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "bareme_calcul_heures_supp",
+  "fields": [
+    {
+      "fieldName": "indiceDebut",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "indiceFin",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "soldeGlobalDebut",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "soldeGlobalFin",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "heuresOrdinaires",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dimanchesJoursFeries",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "heuresNuit",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "observation",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "userInsertId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "userUpdateId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "dateInsert",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "dateUpdate",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "paie",
+  "name": "BaremeCalculHeuresSupp",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no",
+  "skipServer": true
+}

@@ -1,0 +1,104 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-augmentation-hierarchie-heading" data-cy="AugmentationHierarchieCreateUpdateHeading">Augmentation Hiérarchie</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="justify-content-center" style="border: 1px solid lightgray; padding: 2%">
+          <fieldset>
+            <legend style="font-size: 17px; color: #24695c; font-weight: 700">Paramètrage Augmentation Baréme</legend>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Hiérarchie<span style="color: red">*</span> </label>
+                <select
+                  class="form-control"
+                  id="field_hierarchieId"
+                  data-cy="hierarchieId"
+                  name="hierarchieId"
+                  formControlName="hierarchieId"
+                  required
+                >
+                  <option [ngValue]="null"></option>
+                  <option
+                    [ngValue]="
+                      hierarchieOption.id === editForm.get('hierarchieId')!.value?.id
+                        ? editForm.get('hierarchieId')!.value
+                        : hierarchieOption
+                    "
+                    *ngFor="let hierarchieOption of hierarchie"
+                  >
+                    {{ hierarchieOption.libelle }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <label> Augmantation <span style="color: red">*</span> </label>
+                <select
+                  class="form-control"
+                  id="field_augmentationId"
+                  data-cy="augmentationId"
+                  name="augmentationId"
+                  formControlName="augmentationId"
+                  required
+                >
+                  <option [ngValue]="null"></option>
+                  <option
+                    [ngValue]="
+                      augmentationOption.id === editForm.get('augmentationId')!.value?.id
+                        ? editForm.get('augmentationId')!.value
+                        : augmentationOption
+                    "
+                    *ngFor="let augmentationOption of augmentation"
+                  >
+                    {{ augmentationOption.codePoste }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Montant<span style="color: red">*</span> </label>
+                <input type="number" class="form-control" name="montant" id="field_montant" data-cy="montant" formControlName="montant" />
+                <div *ngIf="editForm.get('montant')!.invalid && (editForm.get('montant')!.dirty || editForm.get('montant')!.touched)">
+                  <small
+                    class="form-text text-danger"
+                    *ngIf="editForm.get('montant')?.errors?.required"
+                    jhiTranslate="entity.validation.required"
+                  >
+                    This field is required.
+                  </small>
+                  <small
+                    class="form-text text-danger"
+                    [hidden]="!editForm.get('montant')?.errors?.number"
+                    jhiTranslate="entity.validation.number"
+                  >
+                    This field should be a number.
+                  </small>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+      <br />
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

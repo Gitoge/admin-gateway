@@ -1,0 +1,30 @@
+{
+  "admingatewayApp": {
+    "destinataires": {
+      "home": {
+        "title": "Destinataires",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Destinataires",
+        "createOrEditLabel": "Create or edit a Destinataires",
+        "notFound": "No Destinataires found"
+      },
+      "created": "A new Destinataires is created with identifier {{ param }}",
+      "updated": "A Destinataires is updated with identifier {{ param }}",
+      "deleted": "A Destinataires is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Destinataires {{ id }}?"
+      },
+      "detail": {
+        "title": "Destinataires"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "prenom": "Prenom",
+      "nom": "Nom",
+      "adresse": "Adresse",
+      "comptebancaire": "Comptebancaire",
+      "typedestinataires": "Typedestinataires"
+    }
+  }
+}

@@ -1,0 +1,34 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <div *ngIf="typePosition">
+      <h2 data-cy="typePositionDetailsHeading" class="custom-title">
+        <span
+          >Visualisation du Type de position: <b>{{ typePosition.libelle }}</b></span
+        >
+      </h2>
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details detail-card">
+        <dt><span jhiTranslate="admingatewayApp.typePosition.code">Code</span></dt>
+        <dd>
+          <span>{{ typePosition.code }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.typePosition.libelle">Libellé</span></dt>
+        <dd>
+          <span>{{ typePosition.libelle }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.typePosition.description">Description</span></dt>
+        <dd>
+          <span>{{ typePosition.description }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+{
+  "admingatewayApp": {
+    "paramBulletins": {
+      "home": {
+        "title": "Param Bulletins",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Param Bulletins",
+        "createOrEditLabel": "Create or edit a Param Bulletins",
+        "notFound": "No Param Bulletins found"
+      },
+      "created": "A new Param Bulletins is created with identifier {{ param }}",
+      "updated": "A Param Bulletins is updated with identifier {{ param }}",
+      "deleted": "A Param Bulletins is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Param Bulletins {{ id }}?"
+      },
+      "detail": {
+        "title": "Param Bulletins"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "entete": "Entete",
+      "signature": "Signature",
+      "arrierePlan": "Arriere Plan",
+      "userIdInsert": "User Id Insert",
+      "userdateInsert": "Userdate Insert"
+    }
+  }
+}

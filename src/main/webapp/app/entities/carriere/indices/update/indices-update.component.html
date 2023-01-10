@@ -1,0 +1,97 @@
+<div class="d-flex justify-content-center">
+  <div class="col-10 custom-card">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-indices-heading"
+        data-cy="IndicesCreateUpdateHeading"
+        style="text-align: center; font-weight: 600; text-transform: uppercase; font-size: 12px"
+      >
+        {{ titre }}
+      </h2>
+      <br />
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="justify-content-center" style="border: 1px solid lightgray; padding: 2%">
+          <fieldset>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Indice<span style="color: red">*</span> </label>
+                <input
+                  type="text"
+                  class="form-control custom-control"
+                  name="code"
+                  id="field_code"
+                  data-cy="code"
+                  formControlName="code"
+                  required
+                />
+                <div *ngIf="editForm.get('code')!.invalid && (editForm.get('code')!.dirty || editForm.get('code')!.touched)">
+                  <small
+                    class="form-text text-danger"
+                    *ngIf="editForm.get('code')?.errors?.required"
+                    jhiTranslate="entity.validation.required"
+                  >
+                    This field is required.
+                  </small>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label> Solde Indiciaire<span style="color: red">*</span> </label>
+                <input
+                  type="number"
+                  class="form-control custom-control"
+                  name="soldeIndiciaire"
+                  id="field_soldeIndiciaire"
+                  data-cy="soldeIndiciaire"
+                  formControlName="soldeIndiciaire"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label>Mnt SF Tenf 01</label>
+                <input
+                  type="number"
+                  class="form-control custom-control"
+                  name="mntSFTenf01"
+                  id="field_mntSFTenf01"
+                  data-cy="mntSFTenf01"
+                  formControlName="mntSFTenf01"
+                />
+              </div>
+              <div class="col-md-6">
+                <label>Mnt SF Tenf 02</label>
+                <input
+                  type="number"
+                  class="form-control custom-control"
+                  name="mntSFTenf02"
+                  id="field_mntSFTenf02"
+                  data-cy="mntSFTenf02"
+                  formControlName="mntSFTenf02"
+                />
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+      <br />
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;Enregistrer
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

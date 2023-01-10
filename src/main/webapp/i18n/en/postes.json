@@ -1,0 +1,34 @@
+{
+  "admingatewayApp": {
+    "postes": {
+      "home": {
+        "title": "Postes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Postes",
+        "createOrEditLabel": "Create or edit a Postes",
+        "notFound": "No Postes found"
+      },
+      "created": "A new Postes is created with identifier {{ param }}",
+      "updated": "A Postes is updated with identifier {{ param }}",
+      "deleted": "A Postes is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Postes {{ id }}?"
+      },
+      "detail": {
+        "title": "Postes"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description",
+      "typePoste": "Type Poste",
+      "userIdInsert": "User Id Insert",
+      "userdateInsert": "Userdate Insert",
+      "grade": "Grade",
+      "hierarchie": "Hierarchie",
+      "corps": "Corps",
+      "emplois": "Emplois",
+      "assiettes": "Assiettes"
+    }
+  }
+}

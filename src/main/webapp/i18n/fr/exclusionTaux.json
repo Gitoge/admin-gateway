@@ -1,0 +1,25 @@
+{
+  "admingatewayApp": {
+    "exclusionTaux": {
+      "home": {
+        "title": "ExclusionTauxes",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Exclusion Taux",
+        "createOrEditLabel": "Créer ou éditer un Exclusion Taux",
+        "notFound": "Aucun Exclusion Taux trouvé"
+      },
+      "created": "Un nouveau Exclusion Taux a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Exclusion Taux avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Exclusion Taux avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Exclusion Taux {{ id }} ?"
+      },
+      "detail": {
+        "title": "Exclusion Taux"
+      },
+      "id": "ID",
+      "etablissementId": "Etablissement Id",
+      "valeur": "Valeur"
+    }
+  }
+}

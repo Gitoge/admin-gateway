@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <div *ngIf="posteCompoGrade">
+      <h2 data-cy="posteCompoGradeDetailsHeading">
+        <span jhiTranslate="admingatewayApp.posteCompoGrade.detail.title">Poste Compo Grade</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details detail-card">
+        <dt><span jhiTranslate="admingatewayApp.posteCompoGrade.operateur">Operateur</span></dt>
+        <dd>
+          <span>{{ posteCompoGrade.operateur }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.posteCompoGrade.posteComposant">Poste Composant</span></dt>
+        <dd>
+          <span>{{ posteCompoGrade.posteComposant }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.posteCompoGrade.posteCompose">Poste Compose</span></dt>
+        <dd>
+          <span>{{ posteCompoGrade.posteCompose }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.posteCompoGrade.valeur">Valeur</span></dt>
+        <dd>
+          <span>{{ posteCompoGrade.valeur }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/poste-compo-grade', posteCompoGrade.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

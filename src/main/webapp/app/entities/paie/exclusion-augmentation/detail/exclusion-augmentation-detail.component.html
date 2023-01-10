@@ -1,0 +1,34 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <div *ngIf="exclusionAugmentation">
+      <h2 data-cy="exclusionAugmentationDetailsHeading">
+        <span jhiTranslate="admingatewayApp.exclusionAugmentation.detail.title">Exclusion Augmentation</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details detail-card">
+        <dt><span jhiTranslate="admingatewayApp.exclusionAugmentation.etablissementId">Etablissement Id</span></dt>
+        <dd>
+          <span>{{ exclusionAugmentation.etablissementId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.exclusionAugmentation.posteId">Poste Id</span></dt>
+        <dd>
+          <span>{{ exclusionAugmentation.posteId }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/exclusion-augmentation', exclusionAugmentation.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

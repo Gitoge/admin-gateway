@@ -1,0 +1,53 @@
+{
+  "admingatewayApp": {
+    "carriereAgent": {
+      "home": {
+        "title": "Agents",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Agent",
+        "createOrEditLabel": "Créer ou éditer un Agent",
+        "notFound": "Aucun Agent trouvé"
+      },
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer l'Agent {{ id }} ?"
+      },
+      "detail": {
+        "title": "Agent"
+      },
+      "id": "ID",
+      "matricule": "Matricule",
+      "nin": "Nin",
+      "prenom": "Prénom",
+      "nom": "Nom",
+      "dateNaissance": "Date Naissance",
+      "lieuNaissance": "Lieu Naissance",
+      "sexe": "Sexe",
+      "nomMari": "Nom Mari",
+      "telephone": "Téléphone",
+      "email": "Email",
+      "adresse": "Adrésse",
+      "femmeMariee": "Femme Mariée",
+      "datePriseEnCharge": "Date Prise En Charge",
+      "dateSortie": "Date Sortie",
+      "status": "Status",
+      "titreId": "Titre",
+      "userInsertId": "User Insert Id",
+      "userUpdateId": "User Update Id",
+      "dateInsert": "Date Insert",
+      "dateUpdate": "Date Update",
+      "situationFamiliale": "Situation Familiale",
+      "situationAdministrative": "Situation Administrative",
+      "affectation": "Affectation",
+      "positionsAgent": "Positions Agent",
+      "enfant": "Enfant",
+      "nationalite": "Nationalité"
+    }
+  },
+  "carriereApp": {
+    "carriereAgent": {
+      "created": "Un nouveau Agent a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Agent avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Agent avec l'identifiant {{ param }} a été supprimé"
+    }
+  }
+}

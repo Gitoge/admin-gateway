@@ -1,0 +1,85 @@
+entity Applications {
+ 	code String,
+   	nom String,
+   	description String
+}
+
+entity Modules {
+   code String,
+   libelle String,
+   description String,
+   icon String,
+   ordre Long,
+   routerLink String,
+   type String,
+   active Boolean
+ }
+
+entity Profils {
+   code String,
+   libelle String,
+   description String
+}
+
+entity Roles {
+   code String,
+   libelle String,
+   description String
+}
+
+entity Pages {
+  code String,
+  libelle String,
+  description String
+}
+
+entity Actions {
+  code String,
+  libelle String,
+  description String,
+  actionLink String
+}
+
+
+entity Personne {
+  prenom String,
+  nom String,
+  dateNaissance LocalDate,
+  lieuNaissance String,
+  telephone String,
+  cni String,
+  email String,
+  sexe String
+}
+
+entity StructureAdmin {
+	code String,
+    libelle String,
+    description String,
+    direction String,
+    services String,
+    adresse String
+}
+
+relationship OneToMany {
+	Applications to Modules
+}
+
+relationship ManyToMany {
+	Modules to Profils
+}
+
+relationship ManyToMany {
+	Profils to Roles
+}
+
+relationship ManyToMany {
+	Roles to Pages
+}
+
+relationship ManyToMany {
+	Pages to Actions
+}
+
+skipServer *
+paginate * with pagination

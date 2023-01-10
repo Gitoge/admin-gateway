@@ -1,0 +1,190 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-positions-agent-heading"
+        data-cy="PositionsAgentCreateUpdateHeading"
+        jhiTranslate="admingatewayApp.carrierePositionsAgent.home.createOrEditLabel"
+      >
+        Create or edit a Positions Agent
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carrierePositionsAgent.motif" for="field_motif">Motif</label>
+          <input type="text" class="form-control" name="motif" id="field_motif" data-cy="motif" formControlName="motif" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carrierePositionsAgent.datePosition" for="field_datePosition"
+            >Date Position</label
+          >
+          <div class="input-group">
+            <input
+              id="field_datePosition"
+              data-cy="datePosition"
+              type="text"
+              class="form-control"
+              name="datePosition"
+              ngbDatepicker
+              #datePositionDp="ngbDatepicker"
+              formControlName="datePosition"
+            />
+            <button type="button" class="btn btn-secondary" (click)="datePositionDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carrierePositionsAgent.dateAnnulation" for="field_dateAnnulation"
+            >Date Annulation</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dateAnnulation"
+              data-cy="dateAnnulation"
+              type="text"
+              class="form-control"
+              name="dateAnnulation"
+              ngbDatepicker
+              #dateAnnulationDp="ngbDatepicker"
+              formControlName="dateAnnulation"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateAnnulationDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carrierePositionsAgent.dateFinAbsence" for="field_dateFinAbsence"
+            >Date Fin Absence</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dateFinAbsence"
+              data-cy="dateFinAbsence"
+              type="text"
+              class="form-control"
+              name="dateFinAbsence"
+              ngbDatepicker
+              #dateFinAbsenceDp="ngbDatepicker"
+              formControlName="dateFinAbsence"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateFinAbsenceDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carrierePositionsAgent.status" for="field_status">Status</label>
+          <input type="text" class="form-control" name="status" id="field_status" data-cy="status" formControlName="status" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carrierePositionsAgent.posistionsId" for="field_posistionsId"
+            >Posistions Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="posistionsId"
+            id="field_posistionsId"
+            data-cy="posistionsId"
+            formControlName="posistionsId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carrierePositionsAgent.userInsertId" for="field_userInsertId"
+            >User Insert Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="userInsertId"
+            id="field_userInsertId"
+            data-cy="userInsertId"
+            formControlName="userInsertId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carrierePositionsAgent.actes" for="field_actes">Actes</label>
+          <select class="form-control" id="field_actes" data-cy="actes" name="actes" formControlName="actes">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="actesOption.id === editForm.get('actes')!.value?.id ? editForm.get('actes')!.value : actesOption"
+              *ngFor="let actesOption of actesCollection; trackBy: trackActesById"
+            >
+              {{ actesOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carrierePositionsAgent.agent" for="field_agent">Agent</label>
+          <select class="form-control" id="field_agent" data-cy="agent" name="agent" formControlName="agent">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="agentOption.id === editForm.get('agent')!.value?.id ? editForm.get('agent')!.value : agentOption"
+              *ngFor="let agentOption of agentsSharedCollection; trackBy: trackAgentById"
+            >
+              {{ agentOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carrierePositionsAgent.categorieAgent" for="field_categorieAgent"
+            >Categorie Agent</label
+          >
+          <select
+            class="form-control"
+            id="field_categorieAgent"
+            data-cy="categorieAgent"
+            name="categorieAgent"
+            formControlName="categorieAgent"
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                categorieAgentOption.id === editForm.get('categorieAgent')!.value?.id
+                  ? editForm.get('categorieAgent')!.value
+                  : categorieAgentOption
+              "
+              *ngFor="let categorieAgentOption of categorieAgentsSharedCollection; trackBy: trackCategorieAgentById"
+            >
+              {{ categorieAgentOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

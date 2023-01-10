@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <div *ngIf="priseencompte">
+      <h2 data-cy="priseencompteDetailsHeading" class="custom-title"><span>Nationalité</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details detail-card">
+        <!-- <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ priseencompte.id }}</span>
+        </dd> -->
+        <dt><span jhiTranslate="admingatewayApp.carrierePriseEnCompte.code">Code</span></dt>
+        <dd>
+          <span>{{ priseencompte.code }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carrierePriseEnCompte.libelle">Libelle</span></dt>
+        <dd>
+          <span>{{ priseencompte.libelle }}</span>
+        </dd>
+        <!-- <dt><span jhiTranslate="admingatewayApp.carrierePriseEnCompte.userInsertId">User Insert Id</span></dt>
+        <dd>
+          <span>{{ priseencompte.userInsertId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carrierePriseEnCompte.userUpdateId">User Update Id</span></dt>
+        <dd>
+          <span>{{ priseencompte.userUpdateId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carrierePriseEnCompte.dateInsert">Date Insert</span></dt>
+        <dd>
+          <span>{{ priseencompte.dateInsert | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carrierePriseEnCompte.dateUpdate">Date Update</span></dt>
+        <dd>
+          <span>{{ priseencompte.dateUpdate | formatMediumDatetime }}</span>
+        </dd> -->
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/priseencompte', priseencompte.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

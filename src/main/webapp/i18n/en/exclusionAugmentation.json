@@ -1,0 +1,29 @@
+{
+  "admingatewayApp": {
+    "exclusionAugmentation": {
+      "home": {
+        "title": "Exclusion Augmentations",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Exclusion Augmentation",
+        "createOrEditLabel": "Create or edit a Exclusion Augmentation",
+        "notFound": "No Exclusion Augmentations found"
+      },
+      "created": "A new Exclusion Augmentation is created with identifier {{ param }}",
+      "updated": "A Exclusion Augmentation is updated with identifier {{ param }}",
+      "deleted": "A Exclusion Augmentation is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Exclusion Augmentation {{ id }}?"
+      },
+      "detail": {
+        "title": "Exclusion Augmentation"
+      },
+      "id": "ID",
+      "etablissementId": "Etablissement Id",
+      "posteId": "Poste Id",
+      "userInsertId": "User Insert Id",
+      "userUpdateId": "User Update Id",
+      "dateInsertId": "Date Insert Id",
+      "dateUpdateId": "Date Update Id"
+    }
+  }
+}

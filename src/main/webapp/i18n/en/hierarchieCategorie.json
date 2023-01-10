@@ -1,0 +1,25 @@
+{
+  "admingatewayApp": {
+    "hierarchieCategorie": {
+      "home": {
+        "title": "Hierarchie Categories",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Hierarchie Categorie",
+        "createOrEditLabel": "Create or edit a Hierarchie Categorie",
+        "notFound": "No Hierarchie Categories found"
+      },
+      "created": "A new Hierarchie Categorie is created with identifier {{ param }}",
+      "updated": "A Hierarchie Categorie is updated with identifier {{ param }}",
+      "deleted": "A Hierarchie Categorie is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Hierarchie Categorie {{ id }}?"
+      },
+      "detail": {
+        "title": "Hierarchie Categorie"
+      },
+      "id": "ID",
+      "hierarchieId": "Hierarchie Id",
+      "categorieId": "Categorie Id"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "admingatewayApp": {
+    "typeDestinataires": {
+      "home": {
+        "title": "Type Destinataires",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Type Destinataires",
+        "createOrEditLabel": "Create or edit a Type Destinataires",
+        "notFound": "No Type Destinataires found"
+      },
+      "created": "A new Type Destinataires is created with identifier {{ param }}",
+      "updated": "A Type Destinataires is updated with identifier {{ param }}",
+      "deleted": "A Type Destinataires is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Type Destinataires {{ id }}?"
+      },
+      "detail": {
+        "title": "Type Destinataires"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description",
+      "destinataires": "Destinataires"
+    }
+  }
+}

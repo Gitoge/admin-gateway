@@ -1,0 +1,44 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="assiettes">
+      <h2 data-cy="assiettesDetailsHeading"><span jhiTranslate="admingatewayApp.assiettes.detail.title">Assiettes</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="admingatewayApp.assiettes.code">Code</span></dt>
+        <dd>
+          <span>{{ assiettes.code }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.assiettes.libelle">Libellé</span></dt>
+        <dd>
+          <span>{{ assiettes.libelle }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.assiettes.description">Description</span></dt>
+        <dd>
+          <span>{{ assiettes.description }}</span>
+        </dd>
+
+        <dt><span jhiTranslate="admingatewayApp.assiettes.postes">Postes</span></dt>
+        <dd>
+          <span *ngFor="let postes of assiettes.postes; let last = last">
+            <a [routerLink]="['/postes', postes?.id, 'view']">{{ postes.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/assiettes', assiettes.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

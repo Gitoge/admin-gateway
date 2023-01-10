@@ -1,0 +1,36 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <div *ngIf="augmentationBareme">
+      <h2 data-cy="augmentationBaremeDetailsHeading">
+        <span>Augmentation Baréme</span>
+      </h2>
+
+      <hr />
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>Code Poste</span></dt>
+        <dd>
+          <span>{{ augmentationBareme.postes?.code }}</span>
+        </dd>
+        <dt><span>Montant</span></dt>
+        <dd>
+          <span>{{ augmentationBareme.montant }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.augmentationBareme.posteId">Poste </span></dt>
+        <dd>
+          <span>{{ augmentationBareme.postes?.libelle }}</span>
+        </dd>
+      </dl>
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/augmentation-bareme', augmentationBareme.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

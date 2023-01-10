@@ -1,0 +1,28 @@
+{
+  "admingatewayApp": {
+    "indices": {
+      "home": {
+        "title": "Indices",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Indices",
+        "createOrEditLabel": "Créer ou éditer un Indices",
+        "notFound": "Aucun Indices trouvé"
+      },
+      "created": "Un nouveau Indices a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Indices avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Indices avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Indices {{ id }} ?"
+      },
+      "detail": {
+        "title": "Indices"
+      },
+      "id": "ID",
+      "code": "Code",
+      "description": "Description",
+      "mntSFTenf01": "Mnt SF Tenf 01",
+      "mntSFTenf02": "Mnt SF Tenf 02",
+      "soldeIndiciaire": "Solde Indiciaire"
+    }
+  }
+}

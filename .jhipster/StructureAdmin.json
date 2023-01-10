@@ -1,0 +1,50 @@
+{
+  "applications": "*",
+  "changelogDate": "20220718175000",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "structure_admin",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "libelle",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "direction",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "departementService",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "adresse",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "StructureAdmin",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "userExtended",
+      "otherEntityRelationshipName": "structureAdmin",
+      "ownerSide": true,
+      "relationshipName": "userAdminStructure",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "no",
+  "skipServer": true
+}

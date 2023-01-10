@@ -1,0 +1,564 @@
+@import 'bootstrap-variables';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+
+/* ==============================================================
+Bootstrap tweaks
+===============================================================*/
+body {
+  background-image: url('../images/bg-dtai.png');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-color: #f9f9f9;
+}
+
+body,
+h1,
+h2,
+h3,
+h4 {
+  font-family: Helvetica !important;
+}
+
+/* Increase contrast of links to get 100% on Lighthouse Accessability Audit. Override this color if you want to change the link color, or use a Bootswatch theme */
+a {
+  // color: #151516;
+  color: #35a8e0;
+}
+
+a:hover {
+  // color: #151516;
+  color: #35a8e0;
+}
+
+/* override hover color for dropdown-item forced by bootstrap to all a:not([href]):not([tabindex]) elements in _reboot.scss */
+a:not([href]):not([tabindex]):hover.dropdown-item {
+  color: $dropdown-link-hover-color;
+}
+
+/* override .dropdown-item.active background-color on hover */
+.dropdown-item.active:hover {
+  background-color: mix($dropdown-link-hover-bg, $dropdown-link-active-bg, 50%);
+}
+
+a:hover {
+  /* make sure browsers use the pointer cursor for anchors, even with no href */
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  color: $dropdown-link-hover-color;
+}
+
+/* ==========================================================================
+Browser Upgrade Prompt
+========================================================================== */
+.browserupgrade {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+/* ==========================================================================
+Generic styles
+========================================================================== */
+
+/* Error highlight on input fields */
+.ng-valid[required],
+.ng-valid.required {
+  border-left: 5px solid green;
+}
+
+.ng-invalid:not(form) {
+  border-left: 5px solid red;
+}
+
+/* other generic styles */
+
+.jh-card {
+  padding: 1%;
+  margin-top: 3%;
+  border: none;
+  background-color: #f9f9f9;
+  font-size: 14px !important;
+}
+
+.error {
+  color: white;
+  background-color: red;
+}
+
+.pad {
+  padding: 10px;
+}
+
+.w-40 {
+  width: 40% !important;
+}
+
+.w-60 {
+  width: 60% !important;
+}
+
+.break {
+  white-space: normal;
+  word-break: break-all;
+}
+
+.form-control {
+  background-color: #fff;
+  font-size: 15px !important;
+}
+
+.readonly {
+  background-color: #eee;
+  opacity: 1;
+}
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 5%;
+  background-color: white;
+  color: black;
+  text-align: center;
+  font-size: 11px;
+  margin: -1%;
+  //padding: 5px;
+  display: flex;
+  justify-content: center;
+}
+
+.hand,
+[jhisortby] {
+  cursor: pointer;
+}
+
+/* ==========================================================================
+Custom alerts for notification
+========================================================================== */
+.alerts {
+  .alert {
+    text-overflow: ellipsis;
+    pre {
+      background: none;
+      border: none;
+      font: inherit;
+      color: inherit;
+      padding: 0;
+      margin: 0;
+    }
+    .popover pre {
+      font-size: 14px;
+    }
+  }
+  .jhi-toast {
+    position: fixed;
+    width: 100%;
+    &.left {
+      left: 5px;
+    }
+    &.right {
+      right: 5px;
+    }
+    &.top {
+      top: 55px;
+    }
+    &.bottom {
+      bottom: 55px;
+    }
+  }
+}
+
+@media screen and (min-width: 480px) {
+  .alerts .jhi-toast {
+    width: 50%;
+  }
+}
+
+/* ==========================================================================
+entity detail page css
+========================================================================== */
+.row-md.jh-entity-details {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 10px;
+  line-height: 1.5;
+}
+
+@media screen and (min-width: 768px) {
+  .row-md.jh-entity-details > {
+    dt {
+      float: left;
+      overflow: hidden;
+      clear: left;
+      text-align: right;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding: 0.5em 0;
+    }
+    dd {
+      border-bottom: 1px solid #eee;
+      padding: 0.5em 0;
+      margin-left: 0;
+    }
+  }
+}
+
+/* ==========================================================================
+ui bootstrap tweaks
+========================================================================== */
+.nav,
+.pagination,
+.carousel,
+.panel-title a {
+  cursor: pointer;
+}
+
+.thread-dump-modal-lock {
+  max-width: 450px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dropdown-menu {
+  padding-left: 0px;
+}
+
+/* ==========================================================================
+angular-cli removes postcss-rtl processed inline css, processed rules must be added here instead
+========================================================================== */
+/* page-ribbon.component.scss */
+.ribbon {
+  left: -3.5em;
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+/* navbar.component.scss */
+.navbar {
+  ul.navbar-nav {
+    .nav-item {
+      margin-left: 0.5em;
+    }
+  }
+}
+/* jhipster-needle-scss-add-main JHipster will add new css style */
+
+/* STYLE SIDEBAR ET RETOUCH NAVBAR */
+// documentatio, : https://codepen.io/nilbog/pen/OJqzgo
+
+#menu {
+  left: 33px;
+  font-size: 2em;
+  font-weight: 800;
+  color: #ff9900;
+  z-index: 111;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.5s;
+  -webkit-transition: all 0.25s;
+  position: absolute;
+  transform: rotate(90deg);
+}
+
+#menu:hover {
+  transform: rotate(90deg);
+  color: #ff9900;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  //  margin-top: 75px;
+}
+
+li {
+  // text-align: center;
+  // text-transform: uppercase;
+  //  height: 70px;
+  //  line-height: 70px;
+  //  margin: 15px 0;
+  color: $primary;
+  cursor: pointer;
+  background-color: white;
+  font-size: 14px;
+  letter-spacing: 0.2em;
+  transition: all 0.25s;
+}
+
+li:hover {
+  background-color: white;
+  border-radius: 5px;
+  color: $primary;
+  font-size: 14px;
+  letter-spacing: 0.2em;
+}
+
+a.nav-link {
+  // text-align: center;
+  //  height: 70px;
+  //  line-height: 70px;
+  //  margin: 15px 0;
+  text-transform: uppercase;
+  color: white;
+  cursor: pointer;
+  background-color: $primary;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  transition: all 0.25s;
+}
+
+a.nav-link:hover {
+  background-color: $primary;
+  color: black;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+}
+
+#lgMenu {
+  width: 250px;
+  height: 100% !important;
+  top: 0;
+  left: -400px;
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 5px 5px 10px grey;
+  position: absolute;
+  z-index: 11;
+  opacity: 0;
+  transition: all 0.25s;
+  -webkit-transition: all 0.25s;
+}
+
+#exit {
+  position: absolute;
+  right: 10px;
+  padding: 0px;
+  top: -10px;
+  font-size: 3em;
+  color: black;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s;
+  -webkit-transition: all 0.25s;
+}
+#exit:hover {
+  color: #ff9900;
+}
+
+#lgMenu.enter {
+  opacity: 1;
+  left: 0;
+  background-color: $primary !important;
+}
+
+/* STYLE CRUD*/
+
+#page-heading {
+  //color: #000;
+  color: #11478f;
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.table-responsive {
+  margin-top: 1%;
+  font-size: 14px !important;
+}
+
+.table-bordered {
+  border: 1px solid #d3e1de;
+  font-size: 14px !important;
+}
+
+.custom-card {
+  font-size: 14px !important;
+  border: 2px solid #d3e1de;
+  border-radius: 1px;
+  background-color: white;
+  padding: 2% 4% 2% 4%;
+}
+
+.custom-title {
+  margin: 0 0 5%;
+  font-weight: 600;
+  color: #11478f;
+  font-size: 13px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.update-form {
+  font-size: 14 !important;
+  font-weight: bold;
+}
+
+.detail-card {
+  justify-items: left;
+  font-size: 14px;
+  padding: 2%;
+  border: 0.5px solid #dcdcdc;
+  border-radius: 1px;
+}
+
+// Custom FORM
+
+.custom-label {
+  width: 25% !important;
+}
+
+.custom-control {
+  width: 75% !important;
+}
+.custom-input-size {
+  width: 25% !important;
+}
+
+.text-end {
+  padding: 1px !important;
+  vertical-align: middle;
+}
+
+input,
+button {
+  font-size: 14px !important;
+  font-family: Helvetica;
+}
+
+b {
+  font-weight: bold !important;
+}
+.card-header {
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 0;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  // background-color: var(--primary);
+  color: rgb(255, 255, 255);
+}
+.header-list {
+  background-color: $primary !important;
+}
+.space {
+  padding-left: 10px;
+}
+
+.searchbar {
+  font-size: 2.4rem;
+  outline: none;
+  height: 10px;
+  border-radius: 5rem;
+  padding: 1rem;
+  transition: all 0.1s;
+  transition-delay: 0.1s;
+}
+input[type='text']:hover,
+input[type='reset']:hover {
+  background-color: #fefefe;
+}
+input[type='text']:active,
+input[type='reset']:active {
+  background-color: #b0c1d9;
+  box-shadow: 1px 1px 1px #b0c1d9 inset;
+}
+.space {
+  padding-left: 20px;
+}
+.ouvert {
+  height: 33px;
+  width: 56px;
+  font-size: 70%;
+  padding-top: 10px;
+  margin-top: 4px;
+}
+.fermer {
+  height: 33px;
+  width: 58px;
+  font-size: 70%;
+  padding-top: 10px;
+  margin-top: 4px;
+}
+#scroll_to_top {
+  position: fixed;
+  width: 25px;
+  height: 25px;
+  bottom: 50px;
+  right: 30px;
+}
+#scroll_to_top img {
+  width: 25px;
+}
+
+$primary: #11998e;
+$secondary: #11478f;
+$white: #fff;
+$gray: #9b9b9b;
+.form__group {
+  position: relative;
+  padding: 15px 0 0;
+  margin-top: 10px;
+  width: 50%;
+}
+
+.form__field {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid $gray;
+  outline: 0;
+  font-size: 1.3rem;
+  color: black;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+
+  &::placeholder {
+    color: transparent;
+  }
+
+  &:placeholder-shown ~ .form__label {
+    font-size: 1.3rem;
+    cursor: text;
+    top: 20px;
+  }
+}
+
+.form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: $gray;
+}
+
+.form__field:focus {
+  ~ .form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: $secondary;
+    font-weight: 700;
+  }
+  padding-bottom: 6px;
+  font-weight: 700;
+  border-width: 3px;
+  border-image: linear-gradient(to right, $secondary, $secondary);
+  border-image-slice: 1;
+}
+
+legend {
+  color: #11998e;
+  font-weight: bold;
+}

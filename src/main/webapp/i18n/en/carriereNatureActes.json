@@ -1,0 +1,32 @@
+{
+  "admingatewayApp": {
+    "carriereNatureActes": {
+      "home": {
+        "title": "Nature Actes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Nature Actes",
+        "createOrEditLabel": "Create or edit a Nature Actes",
+        "notFound": "No Nature Actes found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Nature Actes {{ id }}?"
+      },
+      "detail": {
+        "title": "Nature Actes"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "userInsertId": "User Insert Id",
+      "userdateInsert": "Userdate Insert",
+      "actes": "Actes"
+    }
+  },
+  "carriereApp": {
+    "carriereNatureActes": {
+      "created": "A new Nature Actes is created with identifier {{ param }}",
+      "updated": "A Nature Actes is updated with identifier {{ param }}",
+      "deleted": "A Nature Actes is deleted with identifier {{ param }}"
+    }
+  }
+}

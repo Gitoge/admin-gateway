@@ -1,0 +1,219 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+      <h2 id="jhi-avancement-heading" data-cy="AvancementCreateUpdateHeading">
+        <div>
+          <div class="form-group" [hidden]="!avancement.id">
+            <h2 class="custom-title" id="jhi-avancement-heading">
+              Modification de l'avancement de : <b>{{ avancement.matricule }}</b>
+            </h2>
+          </div>
+          <div class="form-group" [hidden]="avancement.id">
+            <h2 class="custom-title" id="jhi-avancement-heading">Ajout d'un nouvel avancement</h2>
+          </div>
+        </div>
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row" style="margin-top: 1%">
+          <div class="col-md-4">
+            <label class="form-label">Matricule </label>
+            <select
+              class="form-control"
+              id="field_matricule"
+              data-cy="matricule"
+              (change)="getSelectedMatricule(avancement.matricule)"
+              name="matricule"
+              [(ngModel)]="avancement.matricule"
+              required
+            >
+              <option [ngValue]="null"></option>
+              <option
+                [ngValue]="matriculeOption === avancement.matricule ? avancement.matricule : matriculeOption"
+                *ngFor="let matriculeOption of agents"
+              >
+                {{ matriculeOption.matricule }}
+              </option>
+            </select>
+            <div [hidden]="!(editForm.controls.gradeId?.dirty && editForm.controls.matricule?.invalid)">
+              <small class="form-text text-danger" [hidden]="!editForm.controls.matricule?.errors?.required">
+                Ce champ est obligatoire.
+              </small>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label"> </label>
+          </div>
+        </div>
+
+        <br />
+
+        <div class="row" style="margin-top: 1%">
+          <div class="col-md-6">
+            <label class="form-label">Grade actuel </label>
+            <input
+              type="number"
+              class="form-control"
+              name="ancienGradeCode"
+              id="field_ancienGradeCode"
+              data-cy="ancienGradeCode"
+              readOnly
+              [(ngModel)]="avancement.ancienGradeCode"
+            />
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Nouveau Grade </label>
+            <select class="form-control" id="field_gradeId" data-cy="gradeId" name="gradeId" [(ngModel)]="avancement.gradeId" required>
+              <option [ngValue]="null"></option>
+              <option
+                [ngValue]="gradeIdOption.id === avancement.gradeId ? avancement.gradeId : gradeIdOption.id"
+                *ngFor="let gradeIdOption of gradeSharedCollection"
+              >
+                {{ gradeIdOption.code }}
+              </option>
+            </select>
+            <div [hidden]="!(editForm.controls.gradeId?.dirty && editForm.controls.gradeId?.invalid)">
+              <small class="form-text text-danger" [hidden]="!editForm.controls.gradeId?.errors?.required">
+                Ce champ est obligatoire.
+              </small>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 1%">
+          <div class="col-md-6">
+            <label class="form-label">Echelon actuel </label>
+            <input
+              type="text"
+              class="form-control"
+              name="ancienEchelonCode"
+              id="field_ancienEchelonCode"
+              data-cy="ancienEchelonCode"
+              [(ngModel)]="avancement.ancienEchelonCode"
+              readonly
+            />
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Nouvel echelon </label>
+            <select
+              class="form-control"
+              id="field_echelonId"
+              data-cy="echelonId"
+              name="echelonId"
+              [(ngModel)]="avancement.echelonId"
+              required
+            >
+              <option [ngValue]="null"></option>
+              <option
+                [ngValue]="echelonIdOption.id === avancement.echelonId ? avancement.echelonId : echelonIdOption.id"
+                *ngFor="let echelonIdOption of echelonSharedCollection"
+              >
+                {{ echelonIdOption.code }}
+              </option>
+            </select>
+            <div [hidden]="!(editForm.controls.echelonId?.dirty && editForm.controls.echelonId?.invalid)">
+              <small class="form-text text-danger" [hidden]="!editForm.controls.echelonId?.errors?.required">
+                Ce champ est obligatoire.
+              </small>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 1%">
+          <div class="col-md-6">
+            <label class="form-label">Hierarchie actuelle</label>
+            <input
+              type="text"
+              class="form-control"
+              name="ancienHierarchieCode"
+              id="field_ancienHierarchieCode"
+              data-cy="ancienHierarchieCode"
+              [(ngModel)]="avancement.ancienHierarchieCode"
+              readonly
+            />
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label" for="field_hierarchieId">Nouvelle hierarchie</label>
+            <select
+              class="form-control"
+              id="field_hierarchieId"
+              data-cy="hierarchieId"
+              name="hierarchieId"
+              [(ngModel)]="avancement.hierarchieId"
+              required
+            >
+              <option [ngValue]="null"></option>
+              <option
+                [ngValue]="hierarchieIdOption.id === avancement.hierarchieId ? avancement.hierarchieId : hierarchieIdOption.id"
+                *ngFor="let hierarchieIdOption of hierarchieSharedCollection"
+              >
+                {{ hierarchieIdOption.code }}
+              </option>
+            </select>
+            <div [hidden]="!(editForm.controls.hierarchieId?.dirty && editForm.controls.hierarchieId?.invalid)">
+              <small class="form-text text-danger" [hidden]="!editForm.controls.hierarchieId?.errors?.required">
+                Ce champ est obligatoire.
+              </small>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 1%">
+          <div class="col-md-6">
+            <label class="form-label">Indice actuel</label>
+            <input
+              type="number"
+              class="form-control"
+              name="ancienIndice"
+              id="field_ancienIndice"
+              data-cy="ancienIndice"
+              [(ngModel)]="avancement.ancienIndice"
+              readonly
+            />
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label" for="field_hierarchieId">Nouvel indice</label>
+            <select class="form-control" id="field_indice" data-cy="indice" name="indice" [(ngModel)]="avancement.indice" required>
+              <option [ngValue]="null"></option>
+              <option
+                [ngValue]="indiceOption.id === avancement.indice ? avancement.indice : indiceOption"
+                *ngFor="let indiceOption of indicesSharedCollection"
+              >
+                {{ indiceOption.code }}
+              </option>
+            </select>
+            <div [hidden]="!(editForm.controls.indice?.dirty && editForm.controls.indice?.invalid)">
+              <small class="form-text text-danger" [hidden]="!editForm.controls.indice?.errors?.required">
+                Ce champ est obligatoire.
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br /><br />
+      <div style="margin-top: 1%; margin-right: 25%; margin-left: 25%">
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

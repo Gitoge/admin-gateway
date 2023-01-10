@@ -1,0 +1,27 @@
+{
+  "applications": "*",
+  "changelogDate": "20220829114025",
+  "clientRootFolder": "carriere",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "convention_etablissements",
+  "fields": [
+    {
+      "fieldName": "etablissementId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "conventionId",
+      "fieldType": "Long"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "carriere",
+  "name": "ConventionEtablissements",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no"
+}

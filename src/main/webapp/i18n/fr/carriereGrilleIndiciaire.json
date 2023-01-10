@@ -1,0 +1,38 @@
+{
+  "admingatewayApp": {
+    "carriereGrilleIndiciaire": {
+      "home": {
+        "title": "GrilleIndiciaires",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Grille Indiciaire",
+        "createOrEditLabel": "Créer ou éditer un Grille Indiciaire",
+        "notFound": "Aucun Grille Indiciaire trouvé"
+      },
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Grille Indiciaire {{ id }} ?"
+      },
+      "detail": {
+        "title": "Grille Indiciaire"
+      },
+      "id": "ID",
+      "salaireDeBase": "Salaire Base 2011",
+      "borneInferieure": "Borne Inferieure",
+      "borneSuperieure": "Borne Superieure",
+      "anciennete": "Anciennete",
+      "corpsId": "Corps Id",
+      "hierarchieId": "Hierarchie Id",
+      "cadreId": "Cadre Id",
+      "gradeId": "Grade Id",
+      "echelonId": "Echelon Id",
+      "classeId": "Classe Id",
+      "indices": "Indices"
+    }
+  },
+  "carriereApp": {
+    "carriereGrilleIndiciaire": {
+      "created": "Un nouveau Grille Indiciaire a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Grille Indiciaire avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Grille Indiciaire avec l'identifiant {{ param }} a été supprimé"
+    }
+  }
+}

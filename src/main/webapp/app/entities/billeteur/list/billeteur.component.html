@@ -1,0 +1,111 @@
+<div>
+  <h2 id="page-heading" data-cy="BilleteurHeading">
+    <span jhiTranslate="admingatewayApp.billeteur.home.title">Billeteurs</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="admingatewayApp.billeteur.home.refreshListLabel">Refresh List</span>
+      </button>
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-billeteur"
+        [routerLink]="['/billeteur/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span>Nouveau</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="billeteurs?.length === 0">
+    <span jhiTranslate="admingatewayApp.billeteur.home.notFound">No billeteurs found</span>
+  </div>
+  <div class="table table-bordered table-condensed table-hover" id="entities" *ngIf="billeteurs && billeteurs.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="code">
+            <span jhiTranslate="admingatewayApp.billeteur.code">Code</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="prenom"><span>Prénom</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="nom"><span jhiTranslate="admingatewayApp.billeteur.nom">Nom</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="matricule">
+            <span jhiTranslate="admingatewayApp.billeteur.matricule">Matricule</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="telephone"><span>Téléphone</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let billeteur of billeteurs; trackBy: trackId" data-cy="entityTable">
+          <td>{{ billeteur.code }}</td>
+          <td>{{ billeteur.prenom }}</td>
+          <td>{{ billeteur.nom }}</td>
+          <td>{{ billeteur.matricule }}</td>
+          <td>{{ billeteur.telephone }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/billeteur', billeteur.id, 'view']"
+                class="btn btn-outline-info"
+                title="Détails"
+                data-cy="entityDetailsButton"
+                title="Details"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/billeteur', billeteur.id, 'edit']"
+                class="btn btn-outline-primary"
+                title="Modifier"
+                data-cy="entityEditButton"
+                title="Modifier"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+              <button
+                type="submit"
+                (click)="delete(billeteur)"
+                class="btn btn-outline-danger"
+                title="Supprimer"
+                data-cy="entityDeleteButton"
+              >
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="billeteurs && billeteurs.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

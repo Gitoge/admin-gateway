@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <div *ngIf="etablissementBancaire">
+      <h2 data-cy="etablissementBancaireDetailsHeading"><span>Etablissement Bancaire : </span> {{ etablissementBancaire.libelle }}</h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details detail-card">
+        <dt><span jhiTranslate="admingatewayApp.etablissementBancaire.code">Code</span></dt>
+        <dd>
+          <span>{{ etablissementBancaire.code }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.etablissementBancaire.libelle">Libelle</span></dt>
+        <dd>
+          <span>{{ etablissementBancaire.libelle }}</span>
+        </dd>
+        <dt><span>Téléphone</span></dt>
+        <dd>
+          <span>{{ etablissementBancaire.telephone }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.etablissementBancaire.email">Email</span></dt>
+        <dd>
+          <span>{{ etablissementBancaire.email }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.etablissementBancaire.adresse">Adresse</span></dt>
+        <dd>
+          <span>{{ etablissementBancaire.adresse }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.etablissementBancaire.fax">Fax</span></dt>
+        <dd>
+          <span>{{ etablissementBancaire.fax }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/etablissement-bancaire', etablissementBancaire.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

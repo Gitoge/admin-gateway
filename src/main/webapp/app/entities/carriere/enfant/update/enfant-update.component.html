@@ -1,0 +1,214 @@
+<div class="d-flex justify-content-center">
+  <div class="col-10 custom-card">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-enfant-heading"
+        data-cy="EnfantCreateUpdateHeading"
+        style="text-align: center; font-weight: 600; text-transform: uppercase; font-size: 12px"
+      >
+        {{ titre }}
+      </h2>
+      <br />
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="justify-content-center" style="border: 1px solid lightgray; padding: 2%">
+          <fieldset>
+            <!-- <legend style="font-size: 17px; color: #24695c; font-weight: 700">Paramètrage Grille Solde Global</legend> -->
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Matricule Agent<span style="color: red">*</span> </label>
+                <div>
+                  <ng-autocomplete
+                    [data]="agentsSharedCollection"
+                    [searchKeyword]="keywordMatricule"
+                    placeholder="Saisir le matricule"
+                    name="agent"
+                    id="field_agent"
+                    formControlName="agent"
+                    (selected)="selectEventMatricule($event)"
+                    (inputChanged)="onChangeSearch($event)"
+                    (inputFocused)="onFocused($event)"
+                    historyIdentifier="agent"
+                    [itemTemplate]="itemTemplate"
+                  >
+                  </ng-autocomplete>
+
+                  <ng-template #itemTemplate let-itemb>
+                    <a [innerHTML]="itemb.matricule"></a>
+                  </ng-template>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label> Lien de Parenté<span style="color: red">*</span> </label>
+                <select
+                  class="form-control"
+                  name="lienParente"
+                  id="field_lienParente"
+                  data-cy="lienParente"
+                  style="width: 100%; font-size: 12px"
+                  formControlName="lienParente"
+                  (change)="onLienParenteChange(editForm.get('lienParente')!.value?.libelle)"
+                >
+                  <option
+                    [ngValue]="
+                      lienParenteOption.id === editForm.get('lienParente')!.value?.id
+                        ? editForm.get('lienParente')!.value
+                        : lienParenteOption
+                    "
+                    *ngFor="let lienParenteOption of lienParente"
+                  >
+                    {{ lienParenteOption.libelle }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label>Nom </label>
+                <input type="text" class="form-control" name="nom" id="field_nom" data-cy="nom" formControlName="nom" />
+                <div *ngIf="editForm.get('nom')!.invalid && (editForm.get('nom')!.dirty || editForm.get('nom')!.touched)">
+                  <small
+                    class="form-text text-danger"
+                    *ngIf="editForm.get('nom')?.errors?.required"
+                    jhiTranslate="entity.validation.required"
+                  >
+                    This field is required.
+                  </small>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label>Prénom</label>
+                <input type="text" class="form-control" name="prenom" id="field_prenom" data-cy="prenom" formControlName="prenom" />
+                <div *ngIf="editForm.get('prenom')!.invalid && (editForm.get('prenom')!.dirty || editForm.get('prenom')!.touched)">
+                  <small
+                    class="form-text text-danger"
+                    *ngIf="editForm.get('prenom')?.errors?.required"
+                    jhiTranslate="entity.validation.required"
+                  >
+                    This field is required.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label>Date de naissance<span style="color: red">*</span></label>
+                <input
+                  id="field_dateNaissance"
+                  data-cy="dateNaissance"
+                  type="date"
+                  class="form-control"
+                  min="1950-01-01"
+                  max="{{ today | date: 'yyyy-MM-dd' }}"
+                  name="dateNaissance"
+                  formControlName="dateNaissance"
+                  placeholder=" AAAA-MM-JJ"
+                />
+              </div>
+              <div class="col-md-6">
+                <label>Lieu de Naissance<span style="color: red">*</span></label>
+
+                <input
+                  type="text"
+                  class="form-control"
+                  name="lieuNaissance"
+                  id="field_lieuNaissance"
+                  data-cy="lieuNaissance"
+                  formControlName="lieuNaissance"
+                />
+              </div>
+            </div>
+
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label>Sexe </label>
+                <select
+                  class="form-control"
+                  name="sexe"
+                  id="field_sexe"
+                  data-cy="sexe"
+                  style="width: 100%; font-size: 12px"
+                  formControlName="sexe"
+                >
+                  <option
+                    [ngValue]="sexeOption.id === editForm.get('sexe')!.value?.id ? editForm.get('sexe')!.value : sexeOption"
+                    *ngFor="let sexeOption of genre"
+                  >
+                    {{ sexeOption.libelle }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-6" *ngIf="isEnfant == false">
+                <label>CNI</label>
+                <input type="text" class="form-control" name="nin" id="field_nin" data-cy="nin" formControlName="nin" />
+              </div>
+            </div>
+
+            <div class="row" style="margin-top: 1%" *ngIf="isEnfant == true">
+              <div class="col-md-6">
+                <label> Numéro Acte de Naissance<span style="color: red">*</span> </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="numeroActeNaissance"
+                  id="field_numeroActeNaissance"
+                  data-cy="numeroActeNaissance"
+                  formControlName="numeroActeNaissance"
+                />
+              </div>
+              <div class="col-md-6">
+                <label> Date Acte de Naissance<span style="color: red">*</span> </label>
+                <input
+                  id="field_dateActeNaissance"
+                  data-cy="dateActeNaissance"
+                  type="date"
+                  class="form-control"
+                  min="1950-01-01"
+                  max="{{ today | date: 'yyyy-MM-dd' }}"
+                  name="dateActeNaissance"
+                  formControlName="dateActeNaissance"
+                  placeholder=" AAAA-MM-JJ"
+                />
+              </div>
+            </div>
+
+            <div class="row" style="margin-top: 1%" *ngIf="isEnfant == true">
+              <div class="col-md-6">
+                <label> Rang Enfant<span style="color: red">*</span> </label>
+                <input
+                  type="number"
+                  class="form-control"
+                  name="rangEnfant"
+                  id="field_rangEnfant"
+                  data-cy="rangEnfant"
+                  formControlName="rangEnfant"
+                />
+              </div>
+              <div class="col-md-6">
+                <label> Code Age<span style="color: red">*</span> </label>
+                <input id="field_codeAge" data-cy="codeAge" type="number" class="form-control" name="codeAge" />
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+      <hr />
+      <div style="display: flex; justify-content: center; align-items: center">
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        &nbsp;
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,82 @@
+{
+  "applications": "*",
+  "changelogDate": "20220829114018",
+  "clientRootFolder": "carriere",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "situation_familiale",
+  "fields": [
+    {
+      "fieldName": "situationMatrimoniale",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "nombreEpouse",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "codeTravailConjoint",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "nombreEnfant",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "nombrePart",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "nombreEnfantImposable",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "nombreEnfantMajeur",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "nombreMinimumFiscal",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "nombreEnfantDecede",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "dateModification",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "userInsertId",
+      "fieldType": "Integer"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "carriere",
+  "name": "SituationFamiliale",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "actes",
+      "otherEntityRelationshipName": "situationFamiliale",
+      "ownerSide": true,
+      "relationshipName": "actes",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "agent",
+      "otherEntityRelationshipName": "situationFamiliale",
+      "relationshipName": "agent",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

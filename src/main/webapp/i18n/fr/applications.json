@@ -1,0 +1,27 @@
+{
+  "admingatewayApp": {
+    "applications": {
+      "home": {
+        "title": "Applications",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Applications",
+        "createOrEditLabel": "Créer ou éditer un Applications",
+        "notFound": "Aucun Applications trouvé"
+      },
+      "created": "Un nouveau Applications a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Applications avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Applications avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Applications {{ id }} ?"
+      },
+      "detail": {
+        "title": "Applications"
+      },
+      "id": "ID",
+      "code": "Code",
+      "nom": "Nom",
+      "description": "Description",
+      "modules": "Modules"
+    }
+  }
+}

@@ -1,0 +1,258 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-situation-familiale-heading"
+        data-cy="SituationFamilialeCreateUpdateHeading"
+        jhiTranslate="admingatewayApp.carriereSituationFamiliale.home.createOrEditLabel"
+      >
+        Create or edit a Situation Familiale
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="admingatewayApp.carriereSituationFamiliale.situationMatrimoniale"
+            for="field_situationMatrimoniale"
+            >Situation Matrimoniale</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="situationMatrimoniale"
+            id="field_situationMatrimoniale"
+            data-cy="situationMatrimoniale"
+            formControlName="situationMatrimoniale"
+          />
+          <div
+            *ngIf="
+              editForm.get('situationMatrimoniale')!.invalid &&
+              (editForm.get('situationMatrimoniale')!.dirty || editForm.get('situationMatrimoniale')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('situationMatrimoniale')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carriereSituationFamiliale.nombreEpouse" for="field_nombreEpouse"
+            >Nombre Epouse</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="nombreEpouse"
+            id="field_nombreEpouse"
+            data-cy="nombreEpouse"
+            formControlName="nombreEpouse"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="admingatewayApp.carriereSituationFamiliale.codeTravailConjoint"
+            for="field_codeTravailConjoint"
+            >Code Travail Conjoint</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="codeTravailConjoint"
+            id="field_codeTravailConjoint"
+            data-cy="codeTravailConjoint"
+            formControlName="codeTravailConjoint"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carriereSituationFamiliale.nombreEnfant" for="field_nombreEnfant"
+            >Nombre Enfant</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="nombreEnfant"
+            id="field_nombreEnfant"
+            data-cy="nombreEnfant"
+            formControlName="nombreEnfant"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carriereSituationFamiliale.nombrePart" for="field_nombrePart"
+            >Nombre Part</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="nombrePart"
+            id="field_nombrePart"
+            data-cy="nombrePart"
+            formControlName="nombrePart"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="admingatewayApp.carriereSituationFamiliale.nombreEnfantImposable"
+            for="field_nombreEnfantImposable"
+            >Nombre Enfant Imposable</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="nombreEnfantImposable"
+            id="field_nombreEnfantImposable"
+            data-cy="nombreEnfantImposable"
+            formControlName="nombreEnfantImposable"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="admingatewayApp.carriereSituationFamiliale.nombreEnfantMajeur"
+            for="field_nombreEnfantMajeur"
+            >Nombre Enfant Majeur</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="nombreEnfantMajeur"
+            id="field_nombreEnfantMajeur"
+            data-cy="nombreEnfantMajeur"
+            formControlName="nombreEnfantMajeur"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="admingatewayApp.carriereSituationFamiliale.nombreMinimumFiscal"
+            for="field_nombreMinimumFiscal"
+            >Nombre Minimum Fiscal</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="nombreMinimumFiscal"
+            id="field_nombreMinimumFiscal"
+            data-cy="nombreMinimumFiscal"
+            formControlName="nombreMinimumFiscal"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="admingatewayApp.carriereSituationFamiliale.nombreEnfantDecede"
+            for="field_nombreEnfantDecede"
+            >Nombre Enfant Decede</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="nombreEnfantDecede"
+            id="field_nombreEnfantDecede"
+            data-cy="nombreEnfantDecede"
+            formControlName="nombreEnfantDecede"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carriereSituationFamiliale.dateModification" for="field_dateModification"
+            >Date Modification</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dateModification"
+              data-cy="dateModification"
+              type="datetime-local"
+              class="form-control"
+              name="dateModification"
+              formControlName="dateModification"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carriereSituationFamiliale.status" for="field_status">Status</label>
+          <input type="text" class="form-control" name="status" id="field_status" data-cy="status" formControlName="status" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carriereSituationFamiliale.userInsertId" for="field_userInsertId"
+            >User Insert Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="userInsertId"
+            id="field_userInsertId"
+            data-cy="userInsertId"
+            formControlName="userInsertId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carriereSituationFamiliale.actes" for="field_actes">Actes</label>
+          <select class="form-control" id="field_actes" data-cy="actes" name="actes" formControlName="actes">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="actesOption.id === editForm.get('actes')!.value?.id ? editForm.get('actes')!.value : actesOption"
+              *ngFor="let actesOption of actesCollection; trackBy: trackActesById"
+            >
+              {{ actesOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carriereSituationFamiliale.agent" for="field_agent">Agent</label>
+          <select class="form-control" id="field_agent" data-cy="agent" name="agent" formControlName="agent">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="agentOption.id === editForm.get('agent')!.value?.id ? editForm.get('agent')!.value : agentOption"
+              *ngFor="let agentOption of agentsSharedCollection; trackBy: trackAgentById"
+            >
+              {{ agentOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

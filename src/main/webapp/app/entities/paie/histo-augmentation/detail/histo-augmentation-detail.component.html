@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <div *ngIf="histoAugmentation">
+      <h2 data-cy="histoAugmentationDetailsHeading">
+        <span jhiTranslate="admingatewayApp.histoAugmentation.detail.title">Histo Augmentation</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details detail-card">
+        <dt><span jhiTranslate="admingatewayApp.histoAugmentation.codePoste">Code Poste</span></dt>
+        <dd>
+          <span>{{ histoAugmentation.codePoste }}</span>
+        </dd>
+        <dt><span>Libellé</span></dt>
+        <dd>
+          <span>{{ histoAugmentation.libelle }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.histoAugmentation.type">Type</span></dt>
+        <dd>
+          <span>{{ histoAugmentation.type }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.histoAugmentation.date">Date</span></dt>
+        <dd>
+          <span>{{ histoAugmentation.date?.format('DD/MM/YYYY') }}</span>
+        </dd>
+        <dt><span>Catégorie</span></dt>
+        <dd>
+          <span>{{ histoAugmentation.categorie }}</span>
+        </dd>
+        <dt><span>Hiérarchie</span></dt>
+        <dd>
+          <span>{{ histoAugmentation.hierarchie }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.histoAugmentation.plafond">Plafond</span></dt>
+        <dd>
+          <span>{{ histoAugmentation.plafond }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/histo-augmentation', histoAugmentation.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

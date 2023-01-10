@@ -1,0 +1,26 @@
+{
+  "admingatewayApp": {
+    "echelon": {
+      "home": {
+        "title": "Echelons",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Echelon",
+        "createOrEditLabel": "Create or edit a Echelon",
+        "notFound": "No Echelons found"
+      },
+      "created": "A new Echelon is created with identifier {{ param }}",
+      "updated": "A Echelon is updated with identifier {{ param }}",
+      "deleted": "A Echelon is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Echelon {{ id }}?"
+      },
+      "detail": {
+        "title": "Echelon"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description"
+    }
+  }
+}

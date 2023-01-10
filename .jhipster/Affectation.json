@@ -1,0 +1,65 @@
+{
+  "applications": "*",
+  "changelogDate": "20220829114021",
+  "clientRootFolder": "carriere",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "affectation",
+  "fields": [
+    {
+      "fieldName": "motif",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateAffectation",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dateEffet",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "datefin",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "servicesId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "emploisId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "userInsertId",
+      "fieldType": "Integer"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "carriere",
+  "name": "Affectation",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "actes",
+      "otherEntityRelationshipName": "affectation",
+      "ownerSide": true,
+      "relationshipName": "actes",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "agent",
+      "otherEntityRelationshipName": "affectation",
+      "relationshipName": "agent",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

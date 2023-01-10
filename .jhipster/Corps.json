@@ -1,0 +1,53 @@
+{
+  "applications": "*",
+  "changelogDate": "20220722173337",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "corps",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "libelle",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "codHierarchie",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ageRetraite",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "classification",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Corps",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "postes",
+      "otherEntityRelationshipName": "corps",
+      "ownerSide": true,
+      "relationshipName": "postes",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "no",
+  "skipServer": true
+}

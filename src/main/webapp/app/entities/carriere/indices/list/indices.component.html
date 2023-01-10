@@ -1,0 +1,134 @@
+<div>
+  <h2 id="page-heading" data-cy="IndicesHeading">
+    <span>Les indices</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span> Actualiser </span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-indices"
+        [routerLink]="['/indices/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Nouveau </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="indices?.length === 0">
+    <span jhiTranslate="admingatewayApp.carriereIndices.home.notFound">No indices found</span>
+  </div>
+
+  <div id="navcontainer">
+    <div class="row">
+      <div class="col-md-10">
+        <div class="input-group" id="adv-search">
+          <input
+            type="text"
+            class="form-control searchbar"
+            name="motCles"
+            id="field_motCles"
+            [(ngModel)]="motCles"
+            oninput="this.value = this.value.toUpperCase()"
+            placeholder="Rechercher par Code, Libellé"
+          />
+          &nbsp;
+          <div class="input-group-btn">
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-primary" title="Rechercher" (click)="recherche()">
+                <fa-icon [icon]="'search'"></fa-icon>
+              </button>
+              &nbsp;
+              <button type="button" class="btn btn-danger" title="Effacer" (click)="effacer()">
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="indices && indices.length > 0">
+    <table class="table table-bordered table-condensed table-hover" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="code"><span>Indice</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="soldeIndiciaire">
+            <span jhiTranslate="admingatewayApp.carriereIndices.soldeIndiciaire">Solde Indiciaire</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let indices of indices; trackBy: trackId" data-cy="entityTable">
+          <td>{{ indices.code }}</td>
+          <td style="text-align: right">{{ indices.soldeIndiciaire | number }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/indices', indices.id, 'view']"
+                class="btn btn-outline-info btn-sm"
+                data-cy="entityDetailsButton"
+                title="Details"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/indices', indices.id, 'edit']"
+                class="btn btn-outline-primary btn-sm"
+                data-cy="entityEditButton"
+                title="Modifier"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+
+              <button
+                type="submit"
+                (click)="delete(indices)"
+                class="btn btn-outline-danger btn-sm"
+                data-cy="entityDeleteButton"
+                title="Supprimer"
+              >
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="indices && indices.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

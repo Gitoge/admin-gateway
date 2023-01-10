@@ -1,0 +1,27 @@
+{
+  "admingatewayApp": {
+    "typeReglement": {
+      "home": {
+        "title": "TypeReglements",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Type Reglement",
+        "createOrEditLabel": "Créer ou éditer un Type Reglement",
+        "notFound": "Aucun Type Reglement trouvé"
+      },
+      "created": "Un nouveau Type Reglement a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Type Reglement avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Type Reglement avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Type Reglement {{ id }} ?"
+      },
+      "detail": {
+        "title": "Type Reglement"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description",
+      "reglement": "Reglement"
+    }
+  }
+}

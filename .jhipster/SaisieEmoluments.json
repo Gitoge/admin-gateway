@@ -1,0 +1,103 @@
+{
+  "applications": "*",
+  "changelogDate": "20221010142423",
+  "clientRootFolder": "paie",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "saisie_emoluments",
+  "fields": [
+    {
+      "fieldName": "codePoste",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "3",
+      "fieldValidateRulesMinlength": "3"
+    },
+    {
+      "fieldName": "matricule",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "7",
+      "fieldValidateRulesMinlength": "7"
+    },
+    {
+      "fieldName": "reference",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "montant",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "taux",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateEffet",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateEcheance",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "statut",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "agentId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "etablissementId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "userInsertId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "userUpdateId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "dateInsert",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "dateUpdate",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "paie",
+  "name": "SaisieEmoluments",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "periodePaye",
+      "otherEntityRelationshipName": "saisieEmoluments",
+      "relationshipName": "periodePaye",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "postes",
+      "otherEntityRelationshipName": "saisieEmoluments",
+      "relationshipName": "postes",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no",
+  "skipServer": true
+}

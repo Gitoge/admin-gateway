@@ -1,0 +1,29 @@
+{
+  "admingatewayApp": {
+    "paramPartsFiscales": {
+      "home": {
+        "title": "Param Parts Fiscales",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Param Parts Fiscales",
+        "createOrEditLabel": "Create or edit a Param Parts Fiscales",
+        "notFound": "No Param Parts Fiscales found"
+      },
+      "created": "A new Param Parts Fiscales is created with identifier {{ param }}",
+      "updated": "A Param Parts Fiscales is updated with identifier {{ param }}",
+      "deleted": "A Param Parts Fiscales is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Param Parts Fiscales {{ id }}?"
+      },
+      "detail": {
+        "title": "Param Parts Fiscales"
+      },
+      "id": "ID",
+      "code": "Code",
+      "composition": "Composition",
+      "nombreParts": "Nombre Parts",
+      "description": "Description",
+      "userIdInsert": "User Id Insert",
+      "userdateInsert": "Userdate Insert"
+    }
+  }
+}

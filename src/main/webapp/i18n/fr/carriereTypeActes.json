@@ -1,0 +1,33 @@
+{
+  "admingatewayApp": {
+    "carriereTypeActes": {
+      "home": {
+        "title": "TypeActes",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Type Actes",
+        "createOrEditLabel": "Créer ou éditer un Type Actes",
+        "notFound": "Aucun Type Actes trouvé"
+      },
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Type d'actes {{ id }} ?"
+      },
+      "detail": {
+        "title": "Type Actes"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "userInsertId": "User Insert Id",
+      "userdateInsert": "Userdate Insert",
+      "actes": "Actes",
+      "categorieActes": "Categorie Actes"
+    }
+  },
+  "carriereApp": {
+    "carriereTypeActes": {
+      "created": "Un nouveau Type d'actes a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Type d'actes avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Type d'actes avec l'identifiant {{ param }} a été supprimé"
+    }
+  }
+}

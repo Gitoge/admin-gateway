@@ -1,0 +1,28 @@
+{
+  "admingatewayApp": {
+    "profils": {
+      "home": {
+        "title": "Profils",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Profils",
+        "createOrEditLabel": "Create or edit a Profils",
+        "notFound": "No Profils found"
+      },
+      "created": "A new Profils is created with identifier {{ param }}",
+      "updated": "A Profils is updated with identifier {{ param }}",
+      "deleted": "A Profils is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Profils {{ id }}?"
+      },
+      "detail": {
+        "title": "Profils"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description",
+      "roles": "Roles",
+      "modules": "Modules"
+    }
+  }
+}

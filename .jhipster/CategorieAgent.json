@@ -1,0 +1,62 @@
+{
+  "applications": "*",
+  "changelogDate": "20220829114020",
+  "clientRootFolder": "carriere",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "categorie_agent",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "libelle",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "userInsertId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "userUpdateId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "dateInsert",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "dateUpdate",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "carriere",
+  "name": "CategorieAgent",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "situationAdministrative",
+      "otherEntityRelationshipName": "categorieAgent",
+      "relationshipName": "situationAdministrative",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "positionsAgent",
+      "otherEntityRelationshipName": "categorieAgent",
+      "relationshipName": "positionsAgent",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no"
+}

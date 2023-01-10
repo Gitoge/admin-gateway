@@ -1,0 +1,97 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-param-matricules-heading" data-cy="ParamMatriculesCreateUpdateHeading" style="text-align: center">
+        {{ titre }}
+      </h2>
+      <hr />
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3">
+          <label class="form-label custom-label" for="field_numeroMatricule" required
+            >Numéro Matricule<span style="color: red">*</span>
+          </label>
+          <input
+            type="text"
+            class="form-control custom-control"
+            name="code"
+            id="field_numeroMatricule"
+            data-cy="numeroMatricule"
+            formControlName="numeroMatricule"
+          />
+          <div
+            *ngIf="
+              editForm.get('numeroMatricule')!.invalid &&
+              (editForm.get('numeroMatricule')!.dirty || editForm.get('numeroMatricule')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('numeroMatricule')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('numeroMatricule')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label custom-label"
+            jhiTranslate="admingatewayApp.carriereParamMatricules.datePriseEnCompte"
+            for="field_datePriseEnCompte"
+            >Date Prise En Compte</label
+          >
+          <input
+            id="field_datePriseEnCompte"
+            data-cy="datePriseEnCompte"
+            type="date"
+            class="form-control custom-control"
+            name="datePriseEnCompte"
+            ngbDatepicker
+            formControlName="datePriseEnCompte"
+            required
+          />
+          <div
+            *ngIf="
+              editForm.get('datePriseEnCompte')!.invalid &&
+              (editForm.get('datePriseEnCompte')!.dirty || editForm.get('datePriseEnCompte')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('datePriseEnCompte')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

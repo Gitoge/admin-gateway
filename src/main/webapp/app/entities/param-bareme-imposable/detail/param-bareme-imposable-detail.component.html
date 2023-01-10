@@ -1,0 +1,70 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="paramBaremeImposable">
+      <h2 data-cy="paramBaremeImposableDetailsHeading">
+        <span jhiTranslate="admingatewayApp.paramBaremeImposable.detail.title">Param Bareme Imposable</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ paramBaremeImposable.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paramBaremeImposable.code">Code</span></dt>
+        <dd>
+          <span>{{ paramBaremeImposable.code }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paramBaremeImposable.libelle">Libellé</span></dt>
+        <dd>
+          <span>{{ paramBaremeImposable.libelle }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paramBaremeImposable.salaireDebut">Salaire Debut</span></dt>
+        <dd>
+          <span>{{ paramBaremeImposable.salaireDebut }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paramBaremeImposable.salaireFin">Salaire Fin</span></dt>
+        <dd>
+          <span>{{ paramBaremeImposable.salaireFin }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paramBaremeImposable.tauxTranche">Taux Tranche</span></dt>
+        <dd>
+          <span>{{ paramBaremeImposable.tauxTranche }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paramBaremeImposable.tauxCumule">Taux Cumule</span></dt>
+        <dd>
+          <span>{{ paramBaremeImposable.tauxCumule }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paramBaremeImposable.montant">Montant</span></dt>
+        <dd>
+          <span>{{ paramBaremeImposable.montant }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paramBaremeImposable.dateImpact">Date Impact</span></dt>
+        <dd>
+          <span>{{ paramBaremeImposable.dateImpact | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paramBaremeImposable.userIdInsert">User Id Insert</span></dt>
+        <dd>
+          <span>{{ paramBaremeImposable.userIdInsert }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paramBaremeImposable.userdateInsert">Userdate Insert</span></dt>
+        <dd>
+          <span>{{ paramBaremeImposable.userdateInsert | formatMediumDate }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/param-bareme-imposable', paramBaremeImposable.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

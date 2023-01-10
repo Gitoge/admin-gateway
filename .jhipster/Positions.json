@@ -1,0 +1,51 @@
+{
+  "applications": "*",
+  "changelogDate": "20220722173341",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "positions",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "libelle",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "typeAgent",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "impactSolde",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "statutPosition",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Positions",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "typePosition",
+      "otherEntityRelationshipName": "positions",
+      "relationshipName": "typeposition",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no",
+  "skipServer": true
+}

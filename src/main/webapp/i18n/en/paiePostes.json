@@ -1,0 +1,60 @@
+{
+  "admingatewayApp": {
+    "paiePostes": {
+      "home": {
+        "title": "Postes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Postes",
+        "createOrEditLabel": "Create or edit a Postes",
+        "notFound": "No Postes found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Postes {{ id }}?"
+      },
+      "detail": {
+        "title": "Postes"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description",
+      "sens": "Sens",
+      "dateEffet": "Date Effet",
+      "dateEcheance": "Date Echeance",
+      "formule": "Formule",
+      "dansAssiette": "Dans Assiette",
+      "montant": "Montant",
+      "capital": "Capital",
+      "cumuleRetenue": "Cumule Retenue",
+      "typePosteId": "Type Poste Id",
+      "typePosteLibelle": "Type Poste Libelle",
+      "frequenceId": "Frequence Id",
+      "frequenceLibelle": "Frequence Libelle",
+      "categoriePosteId": "Categorie Poste Id",
+      "categoriePosteLibelle": "Categorie Poste Libelle",
+      "userInsertId": "User Insert Id",
+      "userUpdateId": "User Update Id",
+      "dateInsert": "Date Insert",
+      "dateUpdate": "Date Update",
+      "saisieEmoluments": "Saisie Emoluments",
+      "saisieElementsVariables": "Saisie Elements Variables",
+      "emoluments": "Emoluments",
+      "elementsVariables": "Elements Variables",
+      "help": {
+        "typePosteLibelle": "A récupérer au niveau de Table Valeur",
+        "frequenceId": "A récupérer au niveau de Table Valeur",
+        "frequenceLibelle": "A récupérer au niveau de Table Valeur",
+        "categoriePosteId": "A récupérer au niveau de Table Valeur",
+        "categoriePosteLibelle": "A récupérer au niveau de Table Valeur",
+        "userInsertId": "A récupérer au niveau de Table Valeur"
+      }
+    }
+  },
+  "paieApp": {
+    "paiePostes": {
+      "created": "A new Postes is created with identifier {{ param }}",
+      "updated": "A Postes is updated with identifier {{ param }}",
+      "deleted": "A Postes is deleted with identifier {{ param }}"
+    }
+  }
+}

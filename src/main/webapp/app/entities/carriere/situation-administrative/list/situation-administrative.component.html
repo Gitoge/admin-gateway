@@ -1,0 +1,230 @@
+<div>
+  <h2 id="page-heading" data-cy="SituationAdministrativeHeading">
+    <span jhiTranslate="admingatewayApp.carriereSituationAdministrative.home.title">Situation Administratives</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="admingatewayApp.carriereSituationAdministrative.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-situation-administrative"
+        [routerLink]="['/situation-administrative/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="admingatewayApp.carriereSituationAdministrative.home.createLabel"> Create a new Situation Administrative </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="situationAdministratives?.length === 0">
+    <span jhiTranslate="admingatewayApp.carriereSituationAdministrative.home.notFound">No situationAdministratives found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="situationAdministratives && situationAdministratives.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="dateRecrutement">
+            <span jhiTranslate="admingatewayApp.carriereSituationAdministrative.dateRecrutement">Date Recrutement</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="numeroRecrutement">
+            <span jhiTranslate="admingatewayApp.carriereSituationAdministrative.numeroRecrutement">Numero Recrutement</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="datePriseRang">
+            <span jhiTranslate="admingatewayApp.carriereSituationAdministrative.datePriseRang">Date Prise Rang</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="numeroOrdreService">
+            <span jhiTranslate="admingatewayApp.carriereSituationAdministrative.numeroOrdreService">Numero Ordre Service</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateOrdreService">
+            <span jhiTranslate="admingatewayApp.carriereSituationAdministrative.dateOrdreService">Date Ordre Service</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="loge">
+            <span jhiTranslate="admingatewayApp.carriereSituationAdministrative.loge">Loge</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="logementFonction">
+            <span jhiTranslate="admingatewayApp.carriereSituationAdministrative.logementFonction">Logement Fonction</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="datedebut">
+            <span jhiTranslate="admingatewayApp.carriereSituationAdministrative.datedebut">Datedebut</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="datefin">
+            <span jhiTranslate="admingatewayApp.carriereSituationAdministrative.datefin">Datefin</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="numeroCompte">
+            <span jhiTranslate="admingatewayApp.carriereSituationAdministrative.numeroCompte">Numero Compte</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <span jhiTranslate="admingatewayApp.carriereSituationAdministrative.status">Status</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="corpsId">
+            <span jhiTranslate="admingatewayApp.carriereSituationAdministrative.corpsId">Corps Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="hierarchieId">
+            <span jhiTranslate="admingatewayApp.carriereSituationAdministrative.hierarchieId">Hierarchie Id</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="cadreId">
+            <span jhiTranslate="admingatewayApp.carriereSituationAdministrative.cadreId">Cadre Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="gradeId">
+            <span jhiTranslate="admingatewayApp.carriereSituationAdministrative.gradeId">Grade Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="echelonId">
+            <span jhiTranslate="admingatewayApp.carriereSituationAdministrative.echelonId">Echelon Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="classeId">
+            <span jhiTranslate="admingatewayApp.carriereSituationAdministrative.classeId">Classe Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="reglementId">
+            <span jhiTranslate="admingatewayApp.carriereSituationAdministrative.reglementId">Reglement Id</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="userInsertId">
+            <span jhiTranslate="admingatewayApp.carriereSituationAdministrative.userInsertId">User Insert Id</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="userUpdateId">
+            <span jhiTranslate="admingatewayApp.carriereSituationAdministrative.userUpdateId">User Update Id</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateInsert">
+            <span jhiTranslate="admingatewayApp.carriereSituationAdministrative.dateInsert">Date Insert</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateUpdate">
+            <span jhiTranslate="admingatewayApp.carriereSituationAdministrative.dateUpdate">Date Update</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="actes.id">
+            <span jhiTranslate="admingatewayApp.carriereSituationAdministrative.actes">Actes</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="agent.id">
+            <span jhiTranslate="admingatewayApp.carriereSituationAdministrative.agent">Agent</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="categorieAgent.id">
+            <span jhiTranslate="admingatewayApp.carriereSituationAdministrative.categorieAgent">Categorie Agent</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let situationAdministrative of situationAdministratives; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/situation-administrative', situationAdministrative.id, 'view']">{{ situationAdministrative.id }}</a>
+          </td>
+          <td>{{ situationAdministrative.dateRecrutement | formatMediumDate }}</td>
+          <td>{{ situationAdministrative.numeroRecrutement }}</td>
+          <td>{{ situationAdministrative.datePriseRang | formatMediumDate }}</td>
+          <td>{{ situationAdministrative.numeroOrdreService }}</td>
+          <td>{{ situationAdministrative.dateOrdreService | formatMediumDate }}</td>
+          <td>{{ situationAdministrative.loge }}</td>
+          <td>{{ situationAdministrative.logementFonction }}</td>
+          <td>{{ situationAdministrative.datedebut | formatMediumDate }}</td>
+          <td>{{ situationAdministrative.datefin | formatMediumDate }}</td>
+          <td>{{ situationAdministrative.numeroCompte }}</td>
+          <td>{{ situationAdministrative.status }}</td>
+          <td>{{ situationAdministrative.corpsId }}</td>
+          <td>{{ situationAdministrative.hierarchieId }}</td>
+          <td>{{ situationAdministrative.cadreId }}</td>
+          <td>{{ situationAdministrative.gradeId }}</td>
+          <td>{{ situationAdministrative.echelonId }}</td>
+          <td>{{ situationAdministrative.classeId }}</td>
+          <td>{{ situationAdministrative.reglementId }}</td>
+          <td>{{ situationAdministrative.userInsertId }}</td>
+          <td>{{ situationAdministrative.userUpdateId }}</td>
+          <td>{{ situationAdministrative.dateInsert | formatMediumDatetime }}</td>
+          <td>{{ situationAdministrative.dateUpdate | formatMediumDatetime }}</td>
+          <td>
+            <div *ngIf="situationAdministrative.actes">
+              <a [routerLink]="['/actes', situationAdministrative.actes?.id, 'view']">{{ situationAdministrative.actes?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="situationAdministrative.agent">
+              <a [routerLink]="['/agent', situationAdministrative.agent?.id, 'view']">{{ situationAdministrative.agent?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="situationAdministrative.categorieAgent">
+              <a [routerLink]="['/categorie-agent', situationAdministrative.categorieAgent?.id, 'view']">{{
+                situationAdministrative.categorieAgent?.id
+              }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/situation-administrative', situationAdministrative.id, 'view']"
+                class="btn btn-outline-info btn-sm"
+                data-cy="entityDetailsButton"
+                title="Details"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/situation-administrative', situationAdministrative.id, 'edit']"
+                class="btn btn-outline-primary btn-sm"
+                data-cy="entityEditButton"
+                title="Modifier"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+
+              <button
+                type="submit"
+                (click)="delete(situationAdministrative)"
+                class="btn btn-outline-danger btn-sm"
+                data-cy="entityDeleteButton"
+                title="Supprimer"
+              >
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="situationAdministratives && situationAdministratives.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

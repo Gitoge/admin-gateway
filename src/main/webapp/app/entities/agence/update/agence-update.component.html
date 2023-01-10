@@ -1,0 +1,118 @@
+<div class="d-flex justify-content-center">
+  <div class="col-10 custom-card">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+      <h2 id="jhi-agence-heading" class="custom-title" [hidden]="!agence.id">Modifier cette Agence banvaire</h2>
+      <h2 id="jhi-agence-heading" class="custom-title" [hidden]="agence.id">Ajouter une nouvelle Agence Bancaire</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="justify-content-center" style="border: 1px solid lightgray; padding: 2%">
+          <fieldset>
+            <legend style="font-size: 17px; color: #24695c; font-weight: 700"></legend>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Code<span style="color: red">*</span> </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="code"
+                  id="field_code"
+                  data-cy="code"
+                  [(ngModel)]="agence.code"
+                  required
+                  maxlength="5"
+                  oninput="this.value = this.value.toUpperCase()"
+                />
+              </div>
+              <div class="col-md-6">
+                <label> Libellé<span style="color: red">*</span> </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="libelle"
+                  id="field_libelle"
+                  data-cy="libelle"
+                  [(ngModel)]="agence.libelle"
+                  required
+                  oninput="this.value = this.value.toUpperCase()"
+                />
+              </div>
+            </div>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Banque<span style="color: red">*</span> </label>
+                <select
+                  class="form-control"
+                  id="field_etablissementBancaire"
+                  data-cy="etablissementBancaire"
+                  name="etablissementBancaire"
+                  [(ngModel)]="agence.etablissementBancaire"
+                  required
+                >
+                  <option [ngValue]="null"></option>
+                  <option
+                    [ngValue]="
+                      etablissementBancaireOption.id === agence.etablissementBancaire?.id
+                        ? agence.etablissementBancaire
+                        : etablissementBancaireOption
+                    "
+                    *ngFor="
+                      let etablissementBancaireOption of etablissementBancaireSharedCollection;
+                      trackBy: trackEtablissementBancaireById
+                    "
+                  >
+                    {{ etablissementBancaireOption.libelle }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label> Adresse<span style="color: red">*</span> </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="adresse"
+                  id="field_adresse"
+                  data-cy="adresse"
+                  [(ngModel)]="agence.adresse"
+                  required
+                  oninput="this.value = this.value.toUpperCase()"
+                />
+              </div>
+            </div>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Télephone </label>
+                <input
+                  type="number"
+                  class="form-control"
+                  name="telephone"
+                  id="field_telephone"
+                  data-cy="telephone"
+                  [(ngModel)]="agence.telephone"
+                />
+              </div>
+              <div class="col-md-6"></div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+      <br />
+      <div style="display: flex; justify-content: center; align-items: center">
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        &nbsp;
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

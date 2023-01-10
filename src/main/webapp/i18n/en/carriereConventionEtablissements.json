@@ -1,0 +1,29 @@
+{
+  "admingatewayApp": {
+    "carriereConventionEtablissements": {
+      "home": {
+        "title": "Convention Etablissements",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Convention Etablissements",
+        "createOrEditLabel": "Create or edit a Convention Etablissements",
+        "notFound": "No Convention Etablissements found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Convention Etablissements {{ id }}?"
+      },
+      "detail": {
+        "title": "Convention Etablissements"
+      },
+      "id": "ID",
+      "etablissementId": "Etablissement Id",
+      "conventionId": "Convention Id"
+    }
+  },
+  "carriereApp": {
+    "carriereConventionEtablissements": {
+      "created": "A new Convention Etablissements is created with identifier {{ param }}",
+      "updated": "A Convention Etablissements is updated with identifier {{ param }}",
+      "deleted": "A Convention Etablissements is deleted with identifier {{ param }}"
+    }
+  }
+}

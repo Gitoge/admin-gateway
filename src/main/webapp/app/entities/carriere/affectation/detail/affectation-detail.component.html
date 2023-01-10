@@ -1,0 +1,72 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="affectation">
+      <h2 data-cy="affectationDetailsHeading"><span jhiTranslate="admingatewayApp.carriereAffectation.detail.title">Affectation</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ affectation.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereAffectation.motif">Motif</span></dt>
+        <dd>
+          <span>{{ affectation.motif }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereAffectation.dateAffectation">Date Affectation</span></dt>
+        <dd>
+          <span>{{ affectation.dateAffectation | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereAffectation.dateEffet">Date Effet</span></dt>
+        <dd>
+          <span>{{ affectation.dateEffet | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereAffectation.datefin">Datefin</span></dt>
+        <dd>
+          <span>{{ affectation.datefin | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereAffectation.status">Status</span></dt>
+        <dd>
+          <span>{{ affectation.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereAffectation.servicesId">Services Id</span></dt>
+        <dd>
+          <span>{{ affectation.servicesId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereAffectation.emploisId">Emplois Id</span></dt>
+        <dd>
+          <span>{{ affectation.emploisId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereAffectation.userInsertId">User Insert Id</span></dt>
+        <dd>
+          <span>{{ affectation.userInsertId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereAffectation.actes">Actes</span></dt>
+        <dd>
+          <div *ngIf="affectation.actes">
+            <a [routerLink]="['/actes', affectation.actes?.id, 'view']">{{ affectation.actes?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereAffectation.agent">Agent</span></dt>
+        <dd>
+          <div *ngIf="affectation.agent">
+            <a [routerLink]="['/agent', affectation.agent?.id, 'view']">{{ affectation.agent?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/affectation', affectation.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

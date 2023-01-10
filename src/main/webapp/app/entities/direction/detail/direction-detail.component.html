@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <div *ngIf="direction">
+      <h2 data-cy="directionDetailsHeading" class="custom-title">
+        <span>
+          Visualisation de la Direction: <b>{{ direction.libelle }}</b>
+        </span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details detail-card">
+        <dt><span>Libellé</span></dt>
+        <dd>
+          <span>{{ direction.libelle }}</span>
+        </dd>
+        <dt><span>Adresse</span></dt>
+        <dd>
+          <span>{{ direction.adresse }}</span>
+        </dd>
+        <dt><span>Num Telephone</span></dt>
+        <dd>
+          <span>{{ direction.numTelephone }}</span>
+        </dd>
+        <dt><span>Fax</span></dt>
+        <dd>
+          <span>{{ direction.fax }}</span>
+        </dd>
+        <dt><span>Email</span></dt>
+        <dd>
+          <span>{{ direction.email }}</span>
+        </dd>
+        <dt><span>Contact</span></dt>
+        <dd>
+          <span>{{ direction.contact }}</span>
+        </dd>
+        <dt><span>Etablissement</span></dt>
+        <dd>
+          <div *ngIf="direction.etab">
+            <a [routerLink]="['/etablissement', direction.etab?.id, 'view']">{{ direction.etab?.libelleLong }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+      </button>
+    </div>
+  </div>
+</div>

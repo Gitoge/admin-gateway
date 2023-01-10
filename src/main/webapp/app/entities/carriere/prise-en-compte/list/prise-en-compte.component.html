@@ -1,0 +1,1062 @@
+<div class="row justify-content-center" style="margin: 0 !important; padding: 0 !important">
+  <div class="col-md-12" style="border: 0px solid rgb(19, 32, 100); padding: 1%">
+    <div class="col-md-12" style="border: 1px solid lightgray; padding: 1%">
+      <fieldset>
+        <legend style="font-size: 17px; color: #24695c; font-weight: 700">{{ title }}</legend>
+        <div class="row" style="margin-top: 1%">
+          <div class="row" style="margin-top: 1%">
+            <div class="col-md-2">
+              <!-- <label> Matricule </label> -->
+              <input
+                type="text"
+                class="form-control"
+                name="matriucle"
+                id="field_matriucle"
+                data-cy="matriucle"
+                [(ngModel)]="matricule"
+                placeholder="Saisir le matricule"
+                oninput="this.value = this.value.toUpperCase()"
+                style="font-weight: bold"
+              />
+            </div>
+
+            <div class="col-md-2">
+              <button type="button" class="btn btn-secondary btn-control" style="margin-top: 1%" (click)="getAgentByMatricule(matricule)">
+                <fa-icon [icon]="'search'"></fa-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+
+    <br />
+
+    <div class="col-md-12 form-control" style="border: 1px solid lightgray; padding: 1%" *ngIf="agents && agents.length > 0">
+      <fieldset>
+        <div class="col-12">
+          <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm" style="margin: 2px; padding: 0">
+            <h2 id="page-heading"></h2>
+            <jhi-alert></jhi-alert>
+            <jhi-alert-error></jhi-alert-error>
+            <ngb-alert #selfClosingAlert *ngIf="successMessage" type="{{ typeMessage }}" (closed)="successMessage = ''">{{
+              successMessage
+            }}</ngb-alert>
+            <hr />
+            <lu ngbNav #nav="ngbNav" [(activeId)]="active" (navChange)="onNavChange($event)" class="nav-tabs">
+              <li [ngbNavItem]="1">
+                <a ngbNavLink id="infos-perso">Informations personnelles</a>
+                <ng-template ngbNavContent>
+                  <div>
+                    <div class="col-12 card">
+                      <div class="row justify-content-center" style="margin: 0 !important; padding: 5 !important">
+                        <div class="col-md-6" style="margin-left: 0 !important; border: 1px solid lightgray; padding: 2%">
+                          <fieldset>
+                            <!-- <legend style="font-size: 17px; color: #24695c; font-weight: 700">Informations personnelles de l'agent</legend> -->
+                            <div class="row" style="margin-top: 1%; margin-left: 20%">
+                              <div class="col-md-5">
+                                <label> Type Pièce </label>
+                                <input
+                                  class="form-control"
+                                  readonly
+                                  name="typePiece"
+                                  id="field_typePiece"
+                                  data-cy="typePiece"
+                                  formControlName="typePiece"
+                                  style="font-weight: bold"
+                                />
+                              </div>
+
+                              <div class="col-md-5">
+                                <label> Numéro Pièce </label>
+                                <input
+                                  class="form-control"
+                                  readonly
+                                  name="numeroPiece"
+                                  id="field_numeroPiece"
+                                  data-cy="numeroPiece"
+                                  formControlName="numeroPiece"
+                                  style="font-weight: bold"
+                                />
+                              </div>
+                            </div>
+
+                            <div class="row" style="margin-top: 1%; margin-left: 20%">
+                              <div class="col-md-5">
+                                <label> Prénom </label>
+                                <input
+                                  class="form-control"
+                                  readonly
+                                  name="prenom"
+                                  id="field_prenom"
+                                  data-cy="prenom"
+                                  formControlName="prenom"
+                                  style="font-weight: bold"
+                                />
+                              </div>
+
+                              <div class="col-md-5">
+                                <label> Nom </label>
+                                <input
+                                  class="form-control"
+                                  readonly
+                                  name="nom"
+                                  id="field_nom"
+                                  data-cy="nom"
+                                  formControlName="nom"
+                                  style="font-weight: bold"
+                                />
+                              </div>
+                            </div>
+
+                            <div class="row" style="margin-top: 1%; margin-left: 20%">
+                              <div class="col-md-5">
+                                <label> Date de naissance </label>
+                                <div class="input-group">
+                                  <input
+                                    class="form-control"
+                                    readonly
+                                    name="dateNaissance"
+                                    id="field_dateNaissance"
+                                    data-cy="dateNaissance"
+                                    formControlName="dateNaissance"
+                                    style="font-weight: bold"
+                                  />
+                                </div>
+                              </div>
+                              <div class="col-md-5">
+                                <label> Lieu de naissance </label>
+                                <input
+                                  class="form-control"
+                                  readonly
+                                  name="lieuNaissance"
+                                  id="field_lieuNaissance"
+                                  data-cy="lieuNaissance"
+                                  formControlName="lieuNaissance"
+                                  style="font-weight: bold"
+                                />
+                              </div>
+                            </div>
+                          </fieldset>
+                        </div>
+
+                        <div class="col-md-6" style="border: 1px solid lightgray; padding: 2%">
+                          <fieldset>
+                            <div class="row" style="margin-top: 1%; margin-left: 20%">
+                              <div class="col-md-4">
+                                <label> Sexe </label>
+                                <input
+                                  class="form-control"
+                                  name="sexe"
+                                  id="field_sexe"
+                                  data-cy="sexe"
+                                  style="width: 100%; font-size: 12px"
+                                  formControlName="sexe"
+                                  readonly
+                                  style="font-weight: bold"
+                                />
+                              </div>
+
+                              <div class="col-md-4">
+                                <label> Nationalité </label>
+                                <input
+                                  class="form-control"
+                                  id="field_nationalite"
+                                  data-cy="nationalite"
+                                  name="nationalite"
+                                  readonly
+                                  [value]="nationaliteAgent?.libelle"
+                                  style="width: 100%; font-size: 12px"
+                                  style="font-weight: bold"
+                                />
+                              </div>
+                            </div>
+
+                            <div class="row" style="margin-top: 1%; margin-left: 20%">
+                              <div class="col-md-4">
+                                <label> Email</label>
+                                <input
+                                  type="email"
+                                  class="form-control"
+                                  name="email"
+                                  id="field_email"
+                                  data-cy="email"
+                                  readonly
+                                  formControlName="email"
+                                  style="font-weight: bold"
+                                />
+                              </div>
+
+                              <div class="col-md-4">
+                                <label> Téléphone</label>
+                                <input
+                                  class="form-control"
+                                  readonly
+                                  name="tel"
+                                  id="field_tel"
+                                  data-cy="tel"
+                                  formControlName="telephone"
+                                  style="font-weight: bold"
+                                />
+                              </div>
+                            </div>
+                            <div class="row" style="margin-top: 1%; margin-left: 20%">
+                              <div class="col-md-8">
+                                <label> Adresse complète </label>
+                                <input
+                                  class="form-control"
+                                  name="adresse"
+                                  readonly
+                                  id="field_adresse"
+                                  data-cy="adresse"
+                                  formControlName="adresse"
+                                  style="font-weight: bold"
+                                />
+                              </div>
+                            </div>
+                          </fieldset>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <h2 id="page-heading">
+                      <div class="float-right float">
+                        <br />
+                        <button type="button" id="jh-create-entity" class="btn btn-info btn-control" (click)="nav.select(2)">
+                          <span>Suivant </span>
+                          <!--  <fa-icon [icon]="'arrow-right'"></fa-icon> -->
+                        </button>
+                      </div>
+                    </h2>
+                  </div>
+                </ng-template>
+              </li>
+              &nbsp;
+
+              <li [ngbNavItem]="2">
+                <a ngbNavLink id="situation-admin">Situation Administrative</a>
+                <ng-template ngbNavContent>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="card">
+                        <div class="card-block">
+                          <div class="row">
+                            <div class="col-md-4" style="border: 0px solid lightgray; padding: 1%">
+                              <fieldset>
+                                <!-- <legend style="font-size: 17px; color: #24695c; font-weight: 700">Situation administrative</legend> -->
+                                <div class="row" style="margin-top: 1%">
+                                  <div class="col-md-6">
+                                    <label> Nature acte </label>
+                                    <select
+                                      class="form-control"
+                                      name="natureActe"
+                                      id="field_natureActe"
+                                      data-cy="natureActe"
+                                      formControlName="natureActe"
+                                      style="width: 100%; font-size: 12px"
+                                      (change)="getSelectedNatureActe(editForm.get('natureActe')!.value)"
+                                    >
+                                      <option *ngIf="!editForm.value.natureActe" [ngValue]="null" selected></option>
+                                      <option
+                                        [ngValue]="
+                                          natureActeOption.id === editForm.get('natureActe')!.value?.id
+                                            ? editForm.get('natureActe')!.value
+                                            : natureActeOption
+                                        "
+                                        *ngFor="let natureActeOption of natureActes"
+                                      >
+                                        {{ natureActeOption.libelle }}
+                                      </option>
+                                    </select>
+                                  </div>
+
+                                  <div class="col-md-6">
+                                    <label> Etablissement </label>
+
+                                    <select
+                                      class="form-control"
+                                      name="etablissementId"
+                                      id="field_etablissementId"
+                                      data-cy="etablissementId"
+                                      formControlName="etablissementId"
+                                      style="width: 100%; font-size: 12px"
+                                      (change)="
+                                        getSelectedEtablissement(editForm.get('etablissementId')!.value?.id);
+                                        onchangeEtablisement(editForm.get('etablissementId')!.value)
+                                      "
+                                    >
+                                      <option [ngValue]="null" selected></option>
+                                      <option
+                                        [ngValue]="
+                                          etablissementOption.id === editForm.get('etablissement')!.value?.id
+                                            ? editForm.get('etablissement')!.value
+                                            : etablissementOption
+                                        "
+                                        *ngFor="let etablissementOption of etablissementSharedCollection"
+                                      >
+                                        {{ etablissementOption.libelleLong }}
+                                      </option>
+                                    </select>
+                                  </div>
+                                </div>
+
+                                <div class="row" style="margin-top: 5%">
+                                  <div class="col-md-6">
+                                    <label> Date recrutement </label>
+                                    <input
+                                      type="date"
+                                      class="form-control"
+                                      name="dateRecrutement"
+                                      id="field_dateRecrutement"
+                                      data-cy="dateRecrutement"
+                                      formControlName="dateRecrutement"
+                                      max="{{ today | date: 'yyyy-MM-dd' }}"
+                                    />
+                                  </div>
+
+                                  <div class="col-md-6">
+                                    <label> Numéro acte </label>
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      required
+                                      name="numeroRecrutement"
+                                      id="field_numeroRecrutement"
+                                      data-cy="numeroRecrutement"
+                                      formControlName="numeroRecrutement"
+                                    />
+                                  </div>
+                                </div>
+
+                                <div class="row" style="margin-top: 5%">
+                                  <div class="col-md-6">
+                                    <label> Rémunération </label>
+                                    <select
+                                      formControlName="typeRemuneration"
+                                      class="form-control"
+                                      name="remun"
+                                      id="field_remun"
+                                      data-cy="remun"
+                                      style="width: 100%; font-size: 12px"
+                                      (change)="
+                                        onRemunerationChange(editForm.get('typeRemuneration')!.value?.libelle);
+                                        getSelectedRemuneration(editForm.get('typeRemuneration')!.value)
+                                      "
+                                      required
+                                    >
+                                      <option
+                                        [ngValue]="
+                                          remunerationOption.id === editForm.get('typeRemuneration')!.value?.id
+                                            ? editForm.get('typeRemuneration')!.value
+                                            : remunerationOption
+                                        "
+                                        *ngFor="let remunerationOption of typeRemuneration"
+                                      >
+                                        {{ remunerationOption.libelle }}
+                                      </option>
+                                    </select>
+                                  </div>
+                                  <div class="col-md-6">
+                                    <label> Statut Agent </label>
+                                    <select
+                                      class="form-control"
+                                      name="categorieAgent"
+                                      id="field_categorieAgent"
+                                      data-cy="categorieAgent"
+                                      style="width: 100%; font-size: 12px"
+                                      formControlName="categorieAgent"
+                                    >
+                                      <option [ngValue]="null"></option>
+                                      <option
+                                        [ngValue]="
+                                          categorieAgentOption.id === editForm.get('categorieAgent')!.value?.id
+                                            ? editForm.get('categorieAgent')!.value
+                                            : categorieAgentOption
+                                        "
+                                        *ngFor="let categorieAgentOption of categorieAgentSharedCollection"
+                                      >
+                                        {{ categorieAgentOption.libelle }}
+                                      </option>
+                                    </select>
+                                  </div>
+                                </div>
+                                <div class="row" style="margin-top: 5%">
+                                  <div class="col-md-6" *ngIf="isIndiciaire == true">
+                                    <label> Grade </label>
+                                    <select
+                                      class="form-control"
+                                      name="grade"
+                                      id="field_grade"
+                                      data-cy="gradeId"
+                                      (change)="selectEventGrade(editForm.get('gradeId')!.value?.id)"
+                                      style="width: 100%; font-size: 12px"
+                                      formControlName="gradeId"
+                                    >
+                                      <option [ngValue]="null"></option>
+                                      <option
+                                        [ngValue]="
+                                          gradeOption.id === editForm.get('gradeId')!.value?.id
+                                            ? editForm.get('gradeId')!.value
+                                            : gradeOption
+                                        "
+                                        *ngFor="let gradeOption of gradeSharedCollection"
+                                      >
+                                        {{ gradeOption.libelle }}
+                                      </option>
+                                    </select>
+                                  </div>
+                                  <div class="col-md-6" *ngIf="isConvention == true || isCasParticulier == true || isSoldeGlobal == true">
+                                    <label> Grade </label>
+                                    <select
+                                      class="form-control"
+                                      name="grade"
+                                      id="field_grade"
+                                      data-cy="gradeId"
+                                      (change)="selectEventGrade2(editForm.get('gradeId')!.value)"
+                                      style="width: 100%; font-size: 12px"
+                                      formControlName="gradeId"
+                                    >
+                                      <option [ngValue]="null"></option>
+                                      <option
+                                        [ngValue]="
+                                          gradeOption.id === editForm.get('gradeId')!.value?.id
+                                            ? editForm.get('gradeId')!.value
+                                            : gradeOption
+                                        "
+                                        *ngFor="let gradeOption of gradeSharedCollection"
+                                      >
+                                        {{ gradeOption.libelle }}
+                                      </option>
+                                    </select>
+                                  </div>
+
+                                  <div
+                                    class="col-md-6"
+                                    *ngIf="
+                                      isIndiciaire == false && isConvention == false && isCasParticulier == false && isSoldeGlobal == false
+                                    "
+                                  >
+                                    <label> Grade </label>
+                                    <div>
+                                      <input
+                                        class="form-control"
+                                        name="grade"
+                                        id="field_grade"
+                                        data-cy="grade"
+                                        readonly
+                                        formControlName="grade"
+                                      />
+                                    </div>
+                                  </div>
+
+                                  <div class="col-md-6" *ngIf="isIndiciaire == true">
+                                    <label> Indice de grade </label>
+                                    <select
+                                      class="form-control"
+                                      name="indiceId"
+                                      id="field_indiceId"
+                                      data-cy="indiceId"
+                                      (change)="selectEventIndice(editForm.get('indiceId')!.value?.id)"
+                                      style="width: 100%; font-size: 12px"
+                                      formControlName="indiceId"
+                                    >
+                                      <option [ngValue]="null"></option>
+                                      <option
+                                        [ngValue]="
+                                          indicesOption.id === editForm.get('indiceId')!.value?.id
+                                            ? editForm.get('indiceId')!.value
+                                            : indicesOption
+                                        "
+                                        *ngFor="let indicesOption of indicesSharedCollection"
+                                      >
+                                        {{ indicesOption.libelle }}
+                                      </option>
+                                    </select>
+                                  </div>
+
+                                  <div class="col-md-6" *ngIf="isSoldeGlobal == true">
+                                    <label> Hierarchie </label>
+                                    <select
+                                      class="form-control"
+                                      name="hierarchieId"
+                                      id="field_hierarchieId"
+                                      data-cy="hierarchieId"
+                                      (change)="selectEventHierarchie(editForm.get('hierarchieId')!.value)"
+                                      style="width: 100%; font-size: 12px"
+                                      formControlName="hierarchieId"
+                                    >
+                                      <option [ngValue]="null"></option>
+                                      <option
+                                        [ngValue]="
+                                          hierarchieOption.id === editForm.get('hierarchieId')!.value?.id
+                                            ? editForm.get('hierarchieId')!.value
+                                            : hierarchieOption
+                                        "
+                                        *ngFor="let hierarchieOption of hierarchieSharedCollection"
+                                      >
+                                        {{ hierarchieOption.libelle }}
+                                      </option>
+                                    </select>
+                                  </div>
+
+                                  <div
+                                    class="col-md-6"
+                                    *ngIf="
+                                      isIndiciaire == false && isConvention == false && isCasParticulier == false && isSoldeGlobal == false
+                                    "
+                                  >
+                                    <label> Indice de grade </label>
+                                    <div>
+                                      <input class="form-control" name="indice" id="field_indice" data-cy="indice" readonly />
+
+                                      <ng-template #itemTemplate let-itemIndice>
+                                        <a [innerHTML]="itemIndice.libelle"></a>
+                                      </ng-template>
+                                    </div>
+                                  </div>
+
+                                  <div
+                                    class="col-md-6"
+                                    *ngIf="isIndiciaire == false && isCasParticulier == false && isConventionEntreprise == true"
+                                  >
+                                    <label> Classe </label>
+                                    <select
+                                      class="form-control"
+                                      name="classeId"
+                                      id="field_classeId"
+                                      data-cy="classeId"
+                                      (change)="selectEventClasse(editForm.get('classeId')!.value)"
+                                      style="width: 100%; font-size: 12px"
+                                      formControlName="classeId"
+                                    >
+                                      <option [ngValue]="null"></option>
+                                      <option
+                                        [ngValue]="
+                                          classeOption.id === editForm.get('classeId')!.value?.id
+                                            ? editForm.get('classeId')!.value
+                                            : classeOption
+                                        "
+                                        *ngFor="let classeOption of classeSharedCollection"
+                                      >
+                                        {{ classeOption.libelle }}
+                                      </option>
+                                    </select>
+                                  </div>
+
+                                  <div class="col-md-6" *ngIf="isCasParticulier == true">
+                                    <label *ngIf="isCasParticulier == true">Solde global </label>
+                                    <input
+                                      type="number"
+                                      class="form-control"
+                                      name="soldeGlobal"
+                                      id="field_soldeGlobal"
+                                      data-cy="soldeGlobal"
+                                      formControlName="soldeGlobal"
+                                    />
+                                  </div>
+                                </div>
+                              </fieldset>
+                            </div>
+
+                            <div class="col-md-4" style="border: 1px solid lightgray; padding: 1%">
+                              <fieldset>
+                                <!-- <legend style="font-size: 17px; color: #24695c; font-weight: 700">Situation administrative</legend> -->
+
+                                <div class="row" style="margin-top: 1%">
+                                  <div class="col-md-6" *ngIf="isIndiciaire == true">
+                                    <label> Hiérarchie </label>
+                                    <input
+                                      class="form-control"
+                                      name="hierarchieId"
+                                      id="field_hierarchieId"
+                                      readOnly
+                                      data-cy="hierarchieId"
+                                      formControlName="hierarchieId"
+                                      style="width: 100%; font-size: 12px"
+                                    />
+                                  </div>
+
+                                  <div class="col-md-6" *ngIf="isSoldeGlobal == true">
+                                    <label> Echelon </label>
+                                    <select
+                                      class="form-control"
+                                      id="field_echelon"
+                                      data-cy="echelon"
+                                      name="echelon"
+                                      (change)="selectEventEchelon(editForm.get('echelon')!.value)"
+                                      style="width: 100%; font-size: 12px"
+                                      formControlName="echelon"
+                                    >
+                                      <option [ngValue]="null"></option>
+                                      <option
+                                        [ngValue]="
+                                          echelonOption.id === editForm.get('echelon')!.value?.id
+                                            ? editForm.get('echelon')!.value
+                                            : echelonOption
+                                        "
+                                        *ngFor="let echelonOption of echelonSharedCollection"
+                                      >
+                                        {{ echelonOption.libelle }}
+                                      </option>
+                                    </select>
+                                  </div>
+
+                                  <div class="col-md-6" *ngIf="isIndiciaire == true">
+                                    <label> Echelon </label>
+                                    <input
+                                      class="form-control"
+                                      readOnly
+                                      name="echelonId"
+                                      id="field_echelonId"
+                                      data-cy="echelonId"
+                                      style="width: 100%; font-size: 12px"
+                                      formControlName="echelonId"
+                                    />
+                                  </div>
+
+                                  <div class="col-md-6" *ngIf="isIndiciaire == false && isCasParticulier == false && isSoldeGlobal == true">
+                                    <label>Solde Globale </label>
+                                    <input
+                                      class="form-control"
+                                      name="soldeGlobal"
+                                      id="field_soldeGlobal"
+                                      data-cy="soldeGlobal"
+                                      readonly
+                                      formControlName="soldeGlobal"
+                                    />
+                                  </div>
+
+                                  <div class="col-md-6" *ngIf="isIndiciaire == false && isCasParticulier == false && isConvention == true">
+                                    <label> Catégorie </label>
+                                    <select
+                                      class="form-control"
+                                      id="field_categorie"
+                                      data-cy="categorie"
+                                      name="categorie"
+                                      (change)="selectEventCategorie(editForm.get('categorie')!.value)"
+                                      style="width: 100%; font-size: 12px"
+                                      formControlName="categorie"
+                                    >
+                                      <option [ngValue]="null"></option>
+                                      <option
+                                        [ngValue]="
+                                          categorieOption.id === editForm.get('categorie')!.value?.id
+                                            ? editForm.get('categorie')!.value
+                                            : categorieOption
+                                        "
+                                        *ngFor="let categorieOption of categorieSharedCollection"
+                                      >
+                                        {{ categorieOption.libelle }}
+                                      </option>
+                                    </select>
+                                  </div>
+
+                                  <div class="col-md-6" *ngIf="isIndiciaire == false && isCasParticulier == false && isConvention == true">
+                                    <label *ngIf="isIndiciaire == false && isCasParticulier == false"
+                                      >Salaire de base <span style="color: red">*</span>
+                                    </label>
+                                    <input
+                                      class="form-control"
+                                      name="soldeGlobal"
+                                      id="field_soldeGlobal"
+                                      data-cy="soldeGlobal"
+                                      readonly
+                                      formControlName="soldeGlobal"
+                                    />
+                                  </div>
+                                </div>
+
+                                <div class="row" style="margin-top: 5%">
+                                  <div class="col-md-6">
+                                    <label> Date de prise de rang </label>
+                                    <input
+                                      type="date"
+                                      class="form-control"
+                                      name="datePriseRang"
+                                      id="field_datePriseRang"
+                                      data-cy="datePriseRang"
+                                      formControlName="datePriseRang"
+                                    />
+                                  </div>
+
+                                  <div class="col-md-6">
+                                    <label> Position </label>
+                                    <select
+                                      class="form-control"
+                                      id="field_position"
+                                      data-cy="position"
+                                      name="position"
+                                      style="width: 100%; font-size: 12px"
+                                      formControlName="position"
+                                    >
+                                      <option [ngValue]="null"></option>
+                                      <option
+                                        [ngValue]="
+                                          positionOption.id === editForm.get('position')!.value?.id
+                                            ? editForm.get('position')!.value
+                                            : positionOption
+                                        "
+                                        *ngFor="let positionOption of positionSharedCollection"
+                                      >
+                                        {{ positionOption.libelle }}
+                                      </option>
+                                    </select>
+                                  </div>
+                                </div>
+                                <div class="row" style="margin-top: 5%">
+                                  <div class="col-md-6">
+                                    <label> Date effet/début </label>
+                                    <input
+                                      type="date"
+                                      class="form-control"
+                                      name="datedebut"
+                                      id="field_datedebut"
+                                      data-cy="datedebut"
+                                      min="{{ today | date: 'yyyy-MM-dd' }}"
+                                      formControlName="datedebut"
+                                    />
+                                  </div>
+                                  <div class="col-md-6">
+                                    <label> Date de fin </label>
+                                    <input
+                                      type="date"
+                                      class="form-control"
+                                      name="datefin"
+                                      id="field_datefin"
+                                      min="{{ today | date: 'yyyy-MM-dd' }}"
+                                      data-cy="datefin"
+                                      formControlName="datefin"
+                                    />
+                                  </div>
+                                </div>
+                              </fieldset>
+                            </div>
+
+                            <div class="col-md-4" style="border: 0px solid lightgray; padding: 1%">
+                              <fieldset>
+                                <!-- <legend style="font-size: 17px; color: #24695c; font-weight: 700">Situation administrative</legend> -->
+
+                                <div class="row" style="margin-top: 1%">
+                                  <div class="col-md-6">
+                                    <label> Service </label>
+                                    <select
+                                      class="form-control"
+                                      id="field_service"
+                                      data-cy="service"
+                                      name="service"
+                                      style="width: 100%; font-size: 12px"
+                                      formControlName="servicesId"
+                                    >
+                                      <option [ngValue]="null"></option>
+                                      <option
+                                        [ngValue]="
+                                          serviceOption.id === editForm.get('servicesId')!.value?.id
+                                            ? editForm.get('servicesId')!.value
+                                            : serviceOption
+                                        "
+                                        *ngFor="let serviceOption of serviceSharedCollection"
+                                      >
+                                        {{ serviceOption.libelle }}
+                                      </option>
+                                    </select>
+                                  </div>
+                                  <div class="col-md-6">
+                                    <label> Emploi/Fonction </label>
+                                    <select
+                                      class="form-control"
+                                      id="field_emploisId"
+                                      data-cy="emploisId"
+                                      name="emploisId"
+                                      (change)="selectEventEmploi(editForm.get('emploisId')!.value)"
+                                      style="width: 100%; font-size: 12px"
+                                      formControlName="emploisId"
+                                    >
+                                      <option [ngValue]="null"></option>
+                                      <option
+                                        [ngValue]="
+                                          emploisOption.id === editForm.get('emploisId')!.value?.id
+                                            ? editForm.get('emploisId')!.value
+                                            : emploisOption
+                                        "
+                                        *ngFor="let emploisOption of emploisSharedCollection"
+                                      >
+                                        {{ emploisOption.libelle }}
+                                      </option>
+                                    </select>
+                                  </div>
+                                </div>
+
+                                <div class="row" style="margin-top: 10%">
+                                  <div class="col-md-6">
+                                    <input
+                                      type="checkbox"
+                                      name="cotisation_ipres"
+                                      id="field_cotisation_ipres"
+                                      data-cy="cotisation_ipres"
+                                      style="margin: 2%"
+                                      (change)="isLogeChecked($event)"
+                                    />
+                                    <label> Cotisation IPRES cadre </label>
+                                  </div>
+
+                                  <div class="col-md-6" *ngIf="isContrat == true">
+                                    <input
+                                      type="checkbox"
+                                      name="cdi"
+                                      id="field_cdi"
+                                      data-cy="cdi"
+                                      formControlName="cdi"
+                                      style="margin: 2%"
+                                      (change)="isCDIChecked($event)"
+                                    />
+                                    <label> CDI </label>
+                                  </div>
+                                </div>
+
+                                <div class="row" style="margin-top: 6%">
+                                  <div class="col-md-6">
+                                    <label> Mode de réglement </label>
+                                    <select
+                                      class="form-control"
+                                      name="modeReglement"
+                                      id="field_modeReglement"
+                                      data-cy="modeReglement"
+                                      style="width: 100%; font-size: 12px"
+                                      (change)="onModeReglementChange(editForm.get('modeReglement')!.value)"
+                                      formControlName="modeReglement"
+                                    >
+                                      <option *ngIf="!editForm.value.modeReglement" [ngValue]="null" selected></option>
+                                      <option
+                                        [ngValue]="
+                                          modeReglementOption.id === editForm.get('modeReglement')!.value?.id
+                                            ? editForm.get('modeReglement')!.value
+                                            : modeReglementOption
+                                        "
+                                        *ngFor="let modeReglementOption of modeReglement"
+                                      >
+                                        {{ modeReglementOption.libelle }}
+                                      </option>
+                                    </select>
+                                  </div>
+
+                                  <div class="col-md-6" *ngIf="isModeBanque == true">
+                                    <label> Nom agence </label>
+                                    <select
+                                      class="form-control"
+                                      name="agence"
+                                      id="field_agence"
+                                      data-cy="agence"
+                                      style="width: 100%; font-size: 12px"
+                                      (change)="selectEventBanque(editForm.get('agence')!.value)"
+                                      formControlName="agence"
+                                    >
+                                      <option *ngIf="!editForm.value.agence" [ngValue]="null" selected></option>
+                                      <option
+                                        [ngValue]="
+                                          agenceOption.id === editForm.get('agence')!.value?.id
+                                            ? editForm.get('agence')!.value
+                                            : agenceOption
+                                        "
+                                        *ngFor="let agenceOption of agenceSharedCollection"
+                                      >
+                                        {{ agenceOption.libelle }}
+                                      </option>
+                                    </select>
+                                  </div>
+
+                                  <div class="col-md-6" *ngIf="isBilleteur == true">
+                                    <label> Billeteur </label>
+                                    <select
+                                      class="form-control"
+                                      name="billeteurId"
+                                      id="field_billeteurId"
+                                      data-cy="billeteurId"
+                                      formControlName="billeteurId"
+                                      style="width: 100%; font-size: 12px"
+                                    >
+                                      <option [ngValue]="null"></option>
+                                      <option
+                                        [ngValue]="
+                                          billeteurOption.id === editForm.get('billeteurId')!.value?.id
+                                            ? editForm.get('billeteurId')!.value
+                                            : billeteurOption
+                                        "
+                                        *ngFor="let billeteurOption of billeteurSharedCollection"
+                                      >
+                                        {{ billeteurOption.prenom }}
+                                      </option>
+                                    </select>
+                                  </div>
+
+                                  <div class="col-md-3" style="margin-top: 5%" *ngIf="isModeBanque">
+                                    <label> Code Agence </label>
+                                    <input
+                                      class="form-control"
+                                      name="codeAgence"
+                                      id="field_codeAgence"
+                                      data-cy="codeAgence"
+                                      readonly
+                                      formControlName="codeAgence"
+                                    />
+                                  </div>
+
+                                  <div class="col-md-9" style="margin-top: 5%" *ngIf="isModeBanque">
+                                    <label> Numéro de compte bancaire </label>
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      name="numeroCompte"
+                                      id="field_numeroCompte"
+                                      data-cy="numeroCompte"
+                                      formControlName="numeroCompte"
+                                    />
+                                    <div
+                                      *ngIf="
+                                        editForm.get('numeroCompte')!.invalid &&
+                                        (editForm.get('numeroCompte')!.dirty || editForm.get('numeroCompte')!.touched)
+                                      "
+                                    >
+                                      <small class="form-text text-danger" *ngIf="editForm.get('numeroCompte')?.errors?.minlength">
+                                        Veuillez saisir un numéro de 24 positions.
+                                      </small>
+                                      <small class="form-text text-danger" *ngIf="editForm.get('numeroCompte')?.errors?.maxlength">
+                                        Veuillez saisir un numéro de 24 positions.
+                                      </small>
+                                      <small class="form-text text-danger" *ngIf="editForm.get('numeroCompte')?.errors?.pattern">
+                                        Veuillez saisir un numéro valide, les caractères spéciaux ne sont pas acceptés.
+                                      </small>
+                                    </div>
+                                  </div>
+                                </div>
+                              </fieldset>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <h2 id="page-heading">
+                      <div class="float-right float">
+                        <br />
+                        <button type="button" id="jh-create-entity" class="btn btn-info btn-control" (click)="nav.select(1)">
+                          <span>Precedent </span>
+                          <!--  <fa-icon [icon]="'arrow-right'"></fa-icon> -->
+                        </button>
+                        <button type="button" id="jh-create-entity" class="btn btn-info btn-control" (click)="nav.select(3)">
+                          <span>Suivant </span>
+                          <!--  <fa-icon [icon]="'arrow-right'"></fa-icon> -->
+                        </button>
+                      </div>
+                    </h2>
+                  </div>
+                </ng-template>
+              </li>
+              &nbsp;
+              <li [ngbNavItem]="3">
+                <a ngbNavLink id="documents-fourni">Documents à fournir</a>
+                <ng-template ngbNavContent>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="card">
+                        <div class="card-block">
+                          <div class="row justify-content-center">
+                            <div class="col-12">
+                              <fieldset style="margin-top: 4%">
+                                <legend style="font-size: 17px; color: #24695c; font-weight: 700">Documents à fournir</legend>
+                                <div class="row">
+                                  <div class="col-md-6">
+                                    <div>
+                                      <button
+                                        type="button"
+                                        id="ajout-piece"
+                                        class="btn btn-outline-primary btn-lg mb-2"
+                                        (click)="ajoutPiece()"
+                                      >
+                                        <fa-icon icon="book"></fa-icon>&nbsp;<span>Ajouter une pièce</span>
+                                      </button>
+                                    </div>
+
+                                    <div class="table-responsive" id="entities" *ngIf="documents && documents.length > 0">
+                                      <table class="table table-bordered table-condensed table-hover" aria-describedby="page-heading">
+                                        <thead>
+                                          <tr>
+                                            <th scope="col"><span>Nom Document</span></th>
+
+                                            <th scope="col">
+                                              <span>Type Acte</span>
+                                            </th>
+
+                                            <th scope="col">
+                                              <span>Emplacement</span>
+                                            </th>
+                                            <th scope="col">
+                                              <span>Type Entite</span>
+                                            </th>
+                                            <th scope="col"></th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr *ngFor="let document of documents">
+                                            <td>{{ document.nomDocument }}</td>
+                                            <td>{{ document.evenement?.libelle }}</td>
+                                            <td>{{ document.fichierContentType }}</td>
+                                            <td>{{ document.typeEntite }}</td>
+                                            <td>
+                                              <button
+                                                class="btn btn-outline-danger btn-sm"
+                                                data-cy="entityDeleteButton"
+                                                title="Retirer ce Membre"
+                                                (click)="deleteDocumentAdmin(document)"
+                                              >
+                                                <fa-icon icon="times"></fa-icon>
+                                                <span class="d-none d-md-inline"></span>
+                                              </button>
+                                            </td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </div>
+                                </div>
+                              </fieldset>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <h2 id="page-heading">
+                      <div>
+                        <div class="float-right float">
+                          <br />
+                          <button type="button" id="jh-create-entity" class="btn btn-info btn-control" (click)="nav.select(2)">
+                            <span>Precedent </span>
+                            <!--  <fa-icon [icon]="'arrow-right'"></fa-icon> -->
+                          </button>
+
+                          <button
+                            type="submit"
+                            id="save-entity"
+                            data-cy="entityCreateSaveButton"
+                            [disabled]="editForm.invalid || isSaving"
+                            class="btn btn-info btnsave-control"
+                          >
+                            <fa-icon icon="save"></fa-icon>&nbsp;<span>Enregistrer</span>
+                          </button>
+                        </div>
+                      </div>
+                    </h2>
+                  </div>
+                </ng-template>
+              </li>
+            </lu>
+            <div [ngbNavOutlet]="nav" class="mt-2"></div>
+          </form>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+</div>

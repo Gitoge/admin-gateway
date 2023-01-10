@@ -1,0 +1,52 @@
+{
+  "admingatewayApp": {
+    "carriereSituationAdministrative": {
+      "home": {
+        "title": "SituationAdministratives",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Situation Administrative",
+        "createOrEditLabel": "Créer ou éditer un Situation Administrative",
+        "notFound": "Aucun Situation Administrative trouvé"
+      },
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Situation Administrative {{ id }} ?"
+      },
+      "detail": {
+        "title": "Situation Administrative"
+      },
+      "id": "ID",
+      "dateRecrutement": "Date Recrutement",
+      "numeroRecrutement": "Numero Recrutement",
+      "datePriseRang": "Date Prise Rang",
+      "numeroOrdreService": "Numero Ordre Service",
+      "dateOrdreService": "Date Ordre Service",
+      "loge": "Loge",
+      "logementFonction": "Logement Fonction",
+      "datedebut": "Datedebut",
+      "datefin": "Datefin",
+      "numeroCompte": "Numero Compte",
+      "status": "Status",
+      "corpsId": "Corps Id",
+      "hierarchieId": "Hierarchie Id",
+      "cadreId": "Cadre Id",
+      "gradeId": "Grade Id",
+      "echelonId": "Echelon Id",
+      "classeId": "Classe Id",
+      "reglementId": "Reglement Id",
+      "userInsertId": "User Insert Id",
+      "userUpdateId": "User Update Id",
+      "dateInsert": "Date Insert",
+      "dateUpdate": "Date Update",
+      "actes": "Actes",
+      "agent": "Agent",
+      "categorieAgent": "Categorie Agent"
+    }
+  },
+  "carriereApp": {
+    "carriereSituationAdministrative": {
+      "created": "Un nouveau Situation Administrative a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Situation Administrative avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Situation Administrative avec l'identifiant {{ param }} a été supprimé"
+    }
+  }
+}

@@ -1,0 +1,154 @@
+<div>
+  <form style="margin: 2px; padding: 0" [formGroup]="editForm">
+    <div class="col-md-12" style="border: 1px solid lightgray; padding: 1%">
+      <fieldset [hidden]="fiche">
+        <legend style="font-size: 17px; color: #24695c; font-weight: 700">Visualiser les statistiques:</legend>
+        <div class="row" style="margin-top: 1%">
+          <div class="col-md-3">
+            <label style="font-family: Arial; font-size: 120%">Exercice</label>
+            <select
+              class="form-control"
+              id="field_exerciceId"
+              data-cy="exerciceId"
+              name="exerciceId"
+              formControlName="exerciceId"
+              (change)="findPeriodeByExercice(editForm.get('exerciceId')!.value?.id)"
+              required
+            >
+              <option [ngValue]="null"></option>
+              <option
+                [ngValue]="exerciceOption.id === editForm.get('exerciceId')!.value?.id ? editForm.get('exerciceId')!.value : exerciceOption"
+                *ngFor="let exerciceOption of exercice"
+              >
+                {{ exerciceOption.libelle }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label style="font-family: Arial; font-size: 120%">Periode</label>
+            <select class="form-control" id="field_periodeId" data-cy="periodeId" name="periodeId" formControlName="periodeId" required>
+              <option [ngValue]="null"></option>
+              <option
+                [ngValue]="periodeOption.id === editForm.get('periodeId')!.value?.id ? editForm.get('periodeId')!.value : periodeOption"
+                *ngFor="let periodeOption of periodePaye"
+              >
+                {{ periodeOption.libelle }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-3" style="margin-top: 25px">
+            <button
+              type="button"
+              class="btn btn-primary"
+              [disabled]="editForm.invalid"
+              (click)="getStatistiqueByPeriode(editForm.get('periodeId')!.value?.id)"
+            >
+              <fa-icon [icon]="'search'"></fa-icon>
+            </button>
+          </div>
+        </div>
+      </fieldset>
+      <jhi-alert-error></jhi-alert-error>
+      <jhi-alert></jhi-alert>
+      <br />
+      <button type="button" (click)="openPDF()" class="btn btn-primary" *ngIf="fiche && fiche.length > 0">Imprimer</button>
+      &nbsp;
+      <button *ngIf="fiche && fiche.length > 0" (click)="refresh()" class="btn btn-primary" type="button">Retour</button>
+      <div class="table-responsive row" id="testPDF" *ngIf="fiche && fiche.length > 0">
+        <div class="row">
+          <div class="col-md-8">
+            <table class="table table-bordered table-condensed table-hover" aria-describedby="page-heading" style="width: 100%">
+              <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+                  <th scope="col" jhiSortBy="Poste">
+                    <span>Postes</span>
+                    <fa-icon icon="sort"></fa-icon>
+                  </th>
+                  <th scope="col" jhiSortBy="dateDebut">
+                    <span>Libellé</span>
+                    <fa-icon icon="sort"></fa-icon>
+                  </th>
+                  <th scope="col" jhiSortBy="dateDebut">
+                    <span>Somme Montant</span>
+                    <fa-icon icon="sort"></fa-icon>
+                  </th>
+                  <th scope="col" jhiSortBy="dateDebut">
+                    <span>Nombre de fois</span>
+                    <fa-icon icon="sort"></fa-icon>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let fiche of fiche" data-cy="entityTable">
+                  <td *ngIf="fiche">
+                    <div class="row" style="margin-top: 1%; font-family: bold">
+                      <div class="col-md-8">
+                        {{ fiche[0] }}
+                      </div>
+                    </div>
+                  </td>
+                  <td *ngIf="fiche">
+                    <div class="row" style="margin-top: 1%; font-family: bold">
+                      <div class="col-md-8">
+                        {{ fiche[1] }}
+                      </div>
+                    </div>
+                  </td>
+                  <td *ngIf="fiche">
+                    <div class="row" style="margin-top: 1%; font-family: bold">
+                      <div class="col-md-8">
+                        {{ fiche[2] }}
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="row" style="margin-top: 1%; font-family: bold">
+                      <div class="col-md-8">
+                        {{ fiche[3] }}
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-md-4">
+            <table class="table table-bordered table-condensed table-hover" aria-describedby="page-heading" style="width: 100%">
+              <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+                  <th scope="col" jhiSortBy="Poste">
+                    <span>Etablissement</span>
+                    <fa-icon icon="sort"></fa-icon>
+                  </th>
+                  <th scope="col" jhiSortBy="dateDebut">
+                    <span>Somme d'argent</span>
+                    <fa-icon icon="sort"></fa-icon>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let nbre of nombrePoste" data-cy="entityTable">
+                  <td>
+                    <div class="row" style="margin-top: 1%; font-family: bold" *ngIf="libelleEtablissement">
+                      <div class="col-md-6">
+                        {{ libelleEtablissement.libelleCourt }}
+                      </div>
+                    </div>
+                  </td>
+                  <td *ngIf="nbre">
+                    <div class="row" style="margin-top: 1%; font-family: bold">
+                      <div class="col-md-6">
+                        {{ nbre[1] }}
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-md-4"></div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

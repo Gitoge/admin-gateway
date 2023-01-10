@@ -1,0 +1,27 @@
+{
+  "admingatewayApp": {
+    "cadre": {
+      "home": {
+        "title": "Cadres",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Cadre",
+        "createOrEditLabel": "Create or edit a Cadre",
+        "notFound": "No Cadres found"
+      },
+      "created": "A new Cadre is created with identifier {{ param }}",
+      "updated": "A Cadre is updated with identifier {{ param }}",
+      "deleted": "A Cadre is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Cadre {{ id }}?"
+      },
+      "detail": {
+        "title": "Cadre"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description",
+      "typeSalaire": "Type Salaire"
+    }
+  }
+}

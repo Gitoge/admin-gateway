@@ -1,0 +1,26 @@
+{
+  "admingatewayApp": {
+    "echelon": {
+      "home": {
+        "title": "Echelons",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Echelon",
+        "createOrEditLabel": "Créer ou éditer un Echelon",
+        "notFound": "Aucun Echelon trouvé"
+      },
+      "created": "Un nouveau Echelon a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Echelon avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Echelon avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Echelon {{ id }} ?"
+      },
+      "detail": {
+        "title": "Echelon"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description"
+    }
+  }
+}

@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="diplomes">
+      <h2 data-cy="diplomesDetailsHeading"><span jhiTranslate="admingatewayApp.diplomes.detail.title">Diplomes</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ diplomes.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.diplomes.code">Code</span></dt>
+        <dd>
+          <span>{{ diplomes.code }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.diplomes.libelle">Libellé</span></dt>
+        <dd>
+          <span>{{ diplomes.libelle }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.diplomes.description">Description</span></dt>
+        <dd>
+          <span>{{ diplomes.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.diplomes.userIdInsert">User Id Insert</span></dt>
+        <dd>
+          <span>{{ diplomes.userIdInsert }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.diplomes.userdateInsert">Userdate Insert</span></dt>
+        <dd>
+          <span>{{ diplomes.userdateInsert | formatMediumDate }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/diplomes', diplomes.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

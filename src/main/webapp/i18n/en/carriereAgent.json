@@ -1,0 +1,53 @@
+{
+  "admingatewayApp": {
+    "carriereAgent": {
+      "home": {
+        "title": "Agents",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Agent",
+        "createOrEditLabel": "Create or edit a Agent",
+        "notFound": "No Agents found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Agent {{ id }}?"
+      },
+      "detail": {
+        "title": "Agent"
+      },
+      "id": "ID",
+      "matricule": "Matricule",
+      "nin": "Nin",
+      "prenom": "Prenom",
+      "nom": "Nom",
+      "dateNaissance": "Date Naissance",
+      "lieuNaissance": "Lieu Naissance",
+      "sexe": "Sexe",
+      "nomMari": "Nom Mari",
+      "telephone": "Telephone",
+      "email": "Email",
+      "adresse": "Adresse",
+      "femmeMariee": "Femme Mariee",
+      "datePriseEnCharge": "Date Prise En Charge",
+      "dateSortie": "Date Sortie",
+      "status": "Status",
+      "titreId": "Titre Id",
+      "userInsertId": "User Insert Id",
+      "userUpdateId": "User Update Id",
+      "dateInsert": "Date Insert",
+      "dateUpdate": "Date Update",
+      "situationFamiliale": "Situation Familiale",
+      "situationAdministrative": "Situation Administrative",
+      "affectation": "Affectation",
+      "positionsAgent": "Positions Agent",
+      "enfant": "Enfant",
+      "nationalite": "Nationalite"
+    }
+  },
+  "carriereApp": {
+    "carriereAgent": {
+      "created": "A new Agent is created with identifier {{ param }}",
+      "updated": "A Agent is updated with identifier {{ param }}",
+      "deleted": "A Agent is deleted with identifier {{ param }}"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "admingatewayApp": {
+    "typeDestinataires": {
+      "home": {
+        "title": "TypeDestinataires",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Type Destinataires",
+        "createOrEditLabel": "Créer ou éditer un Type Destinataires",
+        "notFound": "Aucun Type Destinataires trouvé"
+      },
+      "created": "Un nouveau Type Destinataires a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Type Destinataires avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Type Destinataires avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Type Destinataires {{ id }} ?"
+      },
+      "detail": {
+        "title": "Type Destinataires"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description",
+      "destinataires": "Destinataires"
+    }
+  }
+}

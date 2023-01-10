@@ -1,0 +1,28 @@
+{
+  "admingatewayApp": {
+    "roles": {
+      "home": {
+        "title": "Roles",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Roles",
+        "createOrEditLabel": "Créer ou éditer un Roles",
+        "notFound": "Aucun Roles trouvé"
+      },
+      "created": "Un nouveau Roles a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Roles avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Roles avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Roles {{ id }} ?"
+      },
+      "detail": {
+        "title": "Roles"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description",
+      "pages": "Pages",
+      "profils": "Profils"
+    }
+  }
+}

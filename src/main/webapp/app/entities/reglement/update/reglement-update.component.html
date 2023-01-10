@@ -1,0 +1,101 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-reglement-heading" data-cy="ReglementCreateUpdateHeading" class="custom-title">Ajouter ou modifier un réglement</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3">
+          <label class="form-label custom-label" for="field_code">Code <span style="color: red">*</span> </label>
+          <input
+            type="text"
+            class="form-control custom-control custom-input-size"
+            name="code"
+            id="field_code"
+            data-cy="code"
+            formControlName="code"
+          />
+          <div *ngIf="editForm.get('code')!.invalid && (editForm.get('code')!.dirty || editForm.get('code')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.required"> Ce champs est obligatoire. </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label custom-label" for="field_libelle">Libellé</label>
+          <input
+            type="text"
+            class="form-control custom-control"
+            name="libelle"
+            id="field_libelle"
+            data-cy="libelle"
+            formControlName="libelle"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label custom-label" for="field_complementinfos">Complément d'information</label>
+          <input
+            type="text"
+            class="form-control custom-control"
+            name="complementinfos"
+            id="field_complementinfos"
+            data-cy="complementinfos"
+            formControlName="complementinfos"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label custom-label" for="field_commentaire">Commentaire</label>
+          <input
+            type="text"
+            class="form-control custom-control"
+            name="commentaire"
+            id="field_commentaire"
+            data-cy="commentaire"
+            formControlName="commentaire"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label custom-label" for="field_typereglement">Type de réglement</label>
+          <select
+            class="form-control custom-control"
+            id="field_typereglement"
+            data-cy="typereglement"
+            name="typereglement"
+            formControlName="typereglement"
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                typeReglementOption.id === editForm.get('typereglement')!.value?.id
+                  ? editForm.get('typereglement')!.value
+                  : typeReglementOption
+              "
+              *ngFor="let typeReglementOption of typeReglementsSharedCollection; trackBy: trackTypeReglementById"
+            >
+              {{ typeReglementOption.libelle }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Enregistrer</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

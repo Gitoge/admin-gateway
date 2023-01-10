@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <div *ngIf="reglement">
+      <h2 data-cy="reglementDetailsHeading" class="custom-title"><span>Réglement</span></h2>
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details detail-card">
+        <dt><span>Code</span></dt>
+        <dd>
+          <span>{{ reglement.code }}</span>
+        </dd>
+        <dt><span>Libellé</span></dt>
+        <dd>
+          <span>{{ reglement.libelle }}</span>
+        </dd>
+        <dt><span>Complementinfos</span></dt>
+        <dd>
+          <span>{{ reglement.complementinfos }}</span>
+        </dd>
+        <dt><span>Commentaire</span></dt>
+        <dd>
+          <span>{{ reglement.commentaire }}</span>
+        </dd>
+        <dt><span>Type de réglement</span></dt>
+        <dd>
+          <div *ngIf="reglement.typereglement">
+            <a [routerLink]="['/type-reglement', reglement.typereglement?.id, 'view']">{{ reglement.typereglement?.libelle }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour </span>
+      </button>
+    </div>
+  </div>
+</div>

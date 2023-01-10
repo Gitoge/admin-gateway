@@ -1,0 +1,38 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <div *ngIf="tableTypeValeur">
+      <h2 data-cy="tableTypeValeurDetailsHeading" class="custom-title">
+        <span
+          >Visualisation de la Table des Types de Valeurs: <b>{{ tableTypeValeur.libelle }}</b></span
+        >
+      </h2>
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details detail-card">
+        <dt><span>Code</span></dt>
+        <dd>
+          <span>{{ tableTypeValeur.code }}</span>
+        </dd>
+        <dt><span>Libellé</span></dt>
+        <dd>
+          <span>{{ tableTypeValeur.libelle }}</span>
+        </dd>
+        <dt><span>Description</span></dt>
+        <dd>
+          <span>{{ tableTypeValeur.description }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/table-type-valeur', tableTypeValeur.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Modifier </span>
+      </button>
+    </div>
+  </div>
+</div>

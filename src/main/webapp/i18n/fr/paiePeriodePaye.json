@@ -1,0 +1,42 @@
+{
+  "admingatewayApp": {
+    "paiePeriodePaye": {
+      "home": {
+        "title": "PeriodePayes",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Periode Paye",
+        "createOrEditLabel": "Créer ou éditer un Periode Paye",
+        "notFound": "Aucun Periode Paye trouvé"
+      },
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Periode Paye {{ id }} ?"
+      },
+      "detail": {
+        "title": "Periode Paye"
+      },
+      "id": "ID",
+      "libelle": "Libelle",
+      "dateDebut": "Date Debut",
+      "dateFin": "Date Fin",
+      "dateDebutSaisie": "Date Debut Saisie",
+      "dateFinSaisie": "Date Fin Saisie",
+      "dateDebutCalculSal": "Date Debut Calcul Sal",
+      "dateFinCalculSal": "Date Fin Calcul Sal",
+      "statut": "Statut",
+      "userInsertId": "User Insert Id",
+      "userUpdateId": "User Update Id",
+      "dateInsert": "Date Insert",
+      "dateUpdate": "Date Update",
+      "saisieEmoluments": "Saisie Emoluments",
+      "saisieElementsVariables": "Saisie Elements Variables",
+      "exercice": "Exercice"
+    }
+  },
+  "paieApp": {
+    "paiePeriodePaye": {
+      "created": "Un nouveau Periode Paye a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Periode Paye avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Periode Paye avec l'identifiant {{ param }} a été supprimé"
+    }
+  }
+}

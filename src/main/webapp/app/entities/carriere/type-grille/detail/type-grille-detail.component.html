@@ -1,0 +1,36 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <div *ngIf="typeGrille">
+      <h2 data-cy="typeGrilleDetailsHeading">
+        <span>Visualisation : <b>Type Grille </b></span>
+      </h2>
+      <hr />
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details detail-card">
+        <dt><span jhiTranslate="admingatewayApp.carriereTypeGrille.code">Code</span></dt>
+        <dd>
+          <span>{{ typeGrille.code }}</span>
+        </dd>
+        <dt><span>Libellé</span></dt>
+        <dd>
+          <span>{{ typeGrille.libelle }}</span>
+        </dd>
+        <dt><span>Déscription</span></dt>
+        <dd>
+          <span>{{ typeGrille.description }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/type-grille', typeGrille.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

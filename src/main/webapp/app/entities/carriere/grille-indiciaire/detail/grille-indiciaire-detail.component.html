@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <div *ngIf="grilleIndiciaire">
+      <h2 data-cy="grilleIndiciaireDetailsHeading" class="custom-title">
+        <span>Visualisation :<b> Grille Indiciaire</b></span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details detail-card table-hover">
+        <dt><span>Ancienneté</span></dt>
+        <dd>
+          <span>{{ grilleIndiciaire.anciennete }}</span>
+        </dd>
+        <!-- <dt><span>Corps</span></dt>
+        <dd>
+          <span>{{ grilleIndiciaire.corpsId }}</span>
+        </dd> -->
+        <dt><span>Hierarchie</span></dt>
+        <dd>
+          <span>{{ grilleIndiciaire.libelleHierarchie }}</span>
+        </dd>
+        <dt><span>Grade</span></dt>
+        <dd>
+          <span>{{ grilleIndiciaire.codeGrade }}</span>
+        </dd>
+        <dt><span>Echelon</span></dt>
+        <dd>
+          <span>{{ grilleIndiciaire.libelleEchelon }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereGrilleIndiciaire.indices">Indices</span></dt>
+        <dd>
+          <div *ngIf="grilleIndiciaire.indices">
+            <a [routerLink]="['/indices', grilleIndiciaire.indices?.id, 'view']">{{ grilleIndiciaire.indices?.libelle }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/grille-indiciaire', grilleIndiciaire.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

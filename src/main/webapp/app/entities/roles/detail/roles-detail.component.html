@@ -1,0 +1,43 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <div *ngIf="roles">
+      <h2 data-cy="rolesDetailsHeading" class="custom-title">
+        <span
+          >Visualisation du rôle: <b>{{ roles.libelle }}</b></span
+        >
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details detail-card">
+        <dt><span>Libellé</span></dt>
+        <dd>
+          <span>{{ roles.libelle }}</span>
+        </dd>
+        <dt><span>Description</span></dt>
+        <dd>
+          <span>{{ roles.description }}</span>
+        </dd>
+        <dt><span>Pages / Actions</span></dt>
+        <dd>
+          <span *ngFor="let pagesActions of roles.pagesActions; let last = last">
+            <a [routerLink]="['/profils', pagesActions?.id, 'view']">{{ pagesActions.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/roles', roles.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Modifier</span>
+      </button>
+    </div>
+  </div>
+</div>

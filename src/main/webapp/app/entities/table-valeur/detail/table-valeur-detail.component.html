@@ -1,0 +1,44 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <div *ngIf="tableValeur">
+      <h2 data-cy="tableValeurDetailsHeading" class="custom-title">
+        <span
+          >Visualisation de la Table de Valeurs: <b>{{ tableValeur.libelle }}</b></span
+        >
+      </h2>
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details detail-card">
+        <dt><span jhiTranslate="admingatewayApp.tableValeur.code">Code</span></dt>
+        <dd>
+          <span>{{ tableValeur.code }}</span>
+        </dd>
+        <dt><span>Libellé</span></dt>
+        <dd>
+          <span>{{ tableValeur.libelle }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.tableValeur.description">Description</span></dt>
+        <dd>
+          <span>{{ tableValeur.description }}</span>
+        </dd>
+        <dt><span>Table Type Valeur</span></dt>
+        <dd>
+          <div *ngIf="tableValeur.tabletypevaleur">
+            <a [routerLink]="['/table-type-valeur', tableValeur.tabletypevaleur?.id, 'view']">{{ tableValeur.tabletypevaleur?.libelle }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/table-valeur', tableValeur.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Modifier</span>
+      </button>
+    </div>
+  </div>
+</div>

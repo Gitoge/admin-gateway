@@ -1,0 +1,129 @@
+{
+  "applications": "*",
+  "changelogDate": "20220829114019",
+  "clientRootFolder": "carriere",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "situation_administrative",
+  "fields": [
+    {
+      "fieldName": "dateRecrutement",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "numeroRecrutement",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "datePriseRang",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "numeroOrdreService",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateOrdreService",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "loge",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "logementFonction",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "datedebut",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "datefin",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "numeroCompte",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "corpsId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "hierarchieId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "cadreId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "gradeId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "echelonId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "classeId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "reglementId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "userInsertId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "userUpdateId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "dateInsert",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "dateUpdate",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "carriere",
+  "name": "SituationAdministrative",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "actes",
+      "otherEntityRelationshipName": "situationAdministrative",
+      "ownerSide": true,
+      "relationshipName": "actes",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "agent",
+      "otherEntityRelationshipName": "situationAdministrative",
+      "relationshipName": "agent",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categorieAgent",
+      "otherEntityRelationshipName": "situationAdministrative",
+      "relationshipName": "categorieAgent",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

@@ -1,0 +1,76 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="positionsAgent">
+      <h2 data-cy="positionsAgentDetailsHeading">
+        <span jhiTranslate="admingatewayApp.carrierePositionsAgent.detail.title">Positions Agent</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ positionsAgent.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carrierePositionsAgent.motif">Motif</span></dt>
+        <dd>
+          <span>{{ positionsAgent.motif }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carrierePositionsAgent.datePosition">Date Position</span></dt>
+        <dd>
+          <span>{{ positionsAgent.datePosition | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carrierePositionsAgent.dateAnnulation">Date Annulation</span></dt>
+        <dd>
+          <span>{{ positionsAgent.dateAnnulation | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carrierePositionsAgent.dateFinAbsence">Date Fin Absence</span></dt>
+        <dd>
+          <span>{{ positionsAgent.dateFinAbsence | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carrierePositionsAgent.status">Status</span></dt>
+        <dd>
+          <span>{{ positionsAgent.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carrierePositionsAgent.posistionsId">Posistions Id</span></dt>
+        <dd>
+          <span>{{ positionsAgent.posistionsId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carrierePositionsAgent.userInsertId">User Insert Id</span></dt>
+        <dd>
+          <span>{{ positionsAgent.userInsertId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carrierePositionsAgent.actes">Actes</span></dt>
+        <dd>
+          <div *ngIf="positionsAgent.actes">
+            <a [routerLink]="['/actes', positionsAgent.actes?.id, 'view']">{{ positionsAgent.actes?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carrierePositionsAgent.agent">Agent</span></dt>
+        <dd>
+          <div *ngIf="positionsAgent.agent">
+            <a [routerLink]="['/agent', positionsAgent.agent?.id, 'view']">{{ positionsAgent.agent?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carrierePositionsAgent.categorieAgent">Categorie Agent</span></dt>
+        <dd>
+          <div *ngIf="positionsAgent.categorieAgent">
+            <a [routerLink]="['/categorie-agent', positionsAgent.categorieAgent?.id, 'view']">{{ positionsAgent.categorieAgent?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/positions-agent', positionsAgent.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

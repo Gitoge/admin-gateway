@@ -1,0 +1,94 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+      <div>
+        <div class="form-group" [hidden]="!augmentationIndice.id">
+          <h2 class="custom-title" id="jhi-augmentationIndice-heading">
+            Modification de l'augmentation: <b>{{ augmentationIndice.libelle }}</b>
+          </h2>
+        </div>
+        <div class="form-group" [hidden]="augmentationIndice.id">
+          <h2 class="custom-title" id="jhi-augmentationIndice-heading">Ajout d'une nouvelle Augmentation indice</h2>
+        </div>
+      </div>
+      <br />
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+        <div class="justify-content-center" style="border: 1px solid lightgray; padding: 2%">
+          <fieldset>
+            <legend style="font-size: 17px; color: #24695c; font-weight: 700">{{ titre }}</legend>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Poste <span style="color: red">*</span> </label>
+                <select
+                  class="form-control"
+                  id="field_postes"
+                  data-cy="postes"
+                  name="postes"
+                  [(ngModel)]="augmentationIndice.postes"
+                  required
+                >
+                  <option [ngValue]="null"></option>
+                  <option
+                    [ngValue]="postesOption.id === augmentationIndice.postes?.id ? augmentationIndice.postes : postesOption"
+                    *ngFor="let postesOption of postesSharedCollection"
+                  >
+                    {{ postesOption.codePoste }} -- {{ postesOption.libelle }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label> Valeur <span style="color: red">*</span> </label>
+
+                <select
+                  class="form-control"
+                  id="field_valeur"
+                  data-cy="valeur"
+                  name="valeur"
+                  [(ngModel)]="augmentationIndice.histoAugmentation"
+                  required
+                >
+                  <option [ngValue]="null"></option>
+                  <option
+                    [ngValue]="
+                      postesOption.id === augmentationIndice.histoAugmentation?.id ? augmentationIndice.histoAugmentation : postesOption
+                    "
+                    *ngFor="let postesOption of valeurSharedCollection"
+                  >
+                    {{ postesOption.valeur }}
+                  </option>
+                </select>
+
+                <div [hidden]="!(editForm.controls.valeur?.dirty && editForm.controls.valeur?.invalid)">
+                  <small class="form-text text-danger" [hidden]="!editForm.controls.valeur?.errors?.required">
+                    Ce champ est obligatoire.
+                  </small>
+                  <small class="form-text text-danger" [hidden]="!editForm.controls.valeur?.errors?.number">
+                    Ce champ doit comporter un nombre.
+                  </small>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <br />
+        <br />
+      </div>
+      <div style="display: flex; justify-content: center; align-items: center">
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        &nbsp;
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

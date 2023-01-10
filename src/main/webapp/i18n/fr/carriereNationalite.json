@@ -1,0 +1,34 @@
+{
+  "admingatewayApp": {
+    "carriereNationalite": {
+      "home": {
+        "title": "Nationalites",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer une nouvelle Nationalite",
+        "createOrEditLabel": "Créer ou éditer un Nationalite",
+        "notFound": "Aucune Nationalite trouvée"
+      },
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer cette Nationalite?"
+      },
+      "detail": {
+        "title": "Nationalité"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "userInsertId": "User Insert Id",
+      "userUpdateId": "User Update Id",
+      "dateInsert": "Date Insert",
+      "dateUpdate": "Date Update",
+      "agent": "Agent"
+    }
+  },
+  "carriereApp": {
+    "carriereNationalite": {
+      "created": "Une nouvelle Nationalité a été créé avec l'identifiant {{ param }}",
+      "updated": "La Nationalité avec l'identifiant {{ param }} a été mise à jour",
+      "deleted": "La Nationalité avec l'identifiant {{ param }} a été supprimé"
+    }
+  }
+}

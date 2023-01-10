@@ -1,0 +1,30 @@
+{
+  "admingatewayApp": {
+    "augmentationBareme": {
+      "home": {
+        "title": "AugmentationBaremes",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Augmentation Bareme",
+        "createOrEditLabel": "Créer ou éditer un Augmentation Bareme",
+        "notFound": "Aucun Augmentation Bareme trouvé"
+      },
+      "created": "Un nouveau Augmentation Bareme a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Augmentation Bareme avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Augmentation Bareme avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Augmentation Bareme {{ id }} ?"
+      },
+      "detail": {
+        "title": "Augmentation Bareme"
+      },
+      "id": "ID",
+      "codePoste": "Code Poste",
+      "montant": "Montant",
+      "posteId": "Poste Id",
+      "dateInsertId": "Date Insert Id",
+      "dateUpdateId": "Date Update Id",
+      "userInsertId": "User Insert Id",
+      "userUpdateId": "User Update Id"
+    }
+  }
+}

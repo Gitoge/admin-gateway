@@ -1,0 +1,25 @@
+{
+  "admingatewayApp": {
+    "exclusionTaux": {
+      "home": {
+        "title": "Exclusion Tauxes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Exclusion Taux",
+        "createOrEditLabel": "Create or edit a Exclusion Taux",
+        "notFound": "No Exclusion Tauxes found"
+      },
+      "created": "A new Exclusion Taux is created with identifier {{ param }}",
+      "updated": "A Exclusion Taux is updated with identifier {{ param }}",
+      "deleted": "A Exclusion Taux is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Exclusion Taux {{ id }}?"
+      },
+      "detail": {
+        "title": "Exclusion Taux"
+      },
+      "id": "ID",
+      "etablissementId": "Etablissement Id",
+      "valeur": "Valeur"
+    }
+  }
+}

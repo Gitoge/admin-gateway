@@ -1,0 +1,602 @@
+<form style="margin: 2px; padding: 0" [formGroup]="editForm">
+  <div class="row justify-content-center" style="margin: 0 !important; padding: 0 !important">
+    <div class="col-md-5" style="border: 1px solid lightgray; padding: 1%">
+      <div class="col-md-12" style="border: 1px solid lightgray; padding: 1%">
+        <fieldset>
+          <legend style="font-size: 17px; color: #24695c; font-weight: 700">Recherche par matricule:</legend>
+          <div class="row" style="margin-top: 1%">
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Matricule </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="matriucle"
+                  id="field_matriucle"
+                  data-cy="matriucle"
+                  formControlName="matricule"
+                  placeholder="Saisir le matriucle"
+                  oninput="this.value = this.value.toUpperCase()"
+                />
+              </div>
+              <div class="col-md-6" style="padding-top: 10px">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  style="margin-top: 5.5%"
+                  (click)="getAgentByMatricule(editForm.get('matricule')!.value)"
+                >
+                  <fa-icon [icon]="'search'"></fa-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <br />
+      <div class="col-md-12" style="border: 1px solid lightgray; padding: 1%">
+        <fieldset>
+          <legend style="font-size: 17px; color: #24695c; font-weight: 700">Recherche par Etat Civil :</legend>
+          <div class="row" style="margin-top: 1%">
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Prenom </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="prenom"
+                  id="field_prenom"
+                  data-cy="prenom"
+                  formControlName="prenom"
+                  placeholder="Saisir le prenom"
+                  oninput="this.value = this.value.toUpperCase()"
+                />
+              </div>
+            </div>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Nom </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="nom"
+                  id="field_nom"
+                  data-cy="nom"
+                  formControlName="nom"
+                  placeholder="Saisir le nom"
+                  oninput="this.value = this.value.toUpperCase()"
+                />
+              </div>
+              <div class="col-md-6" style="padding-top: 10px">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  style="margin-top: 5.5%"
+                  (click)="getAgentByMotCle(editForm.get('prenom')!.value, editForm.get('nom')!.value)"
+                >
+                  <fa-icon [icon]="'search'"></fa-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <br />
+
+      <div class="col-md-12" style="border: 1px solid lightgray; padding: 1%">
+        <fieldset>
+          <legend style="font-size: 17px; color: #24695c; font-weight: 700">Resultat de la Recherche :</legend>
+          <div class="row" style="margin-top: 1%">
+            <div class="table-responsive" id="entities">
+              <table class="table table-bordered table-condensed table-hover" aria-describedby="page-heading">
+                <thead>
+                  <tr>
+                    <th scope="col">
+                      <span>Matricule</span>
+                    </th>
+
+                    <th scope="col"><span>Prénom</span></th>
+
+                    <th scope="col">
+                      <span>Nom</span>
+                    </th>
+
+                    <th scope="col">
+                      <span>Date de Naissance</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let agent of agents">
+                    <td>
+                      {{ agent?.matricule }}
+                    </td>
+
+                    <td>
+                      {{ agent?.prenom }}
+                    </td>
+
+                    <td>
+                      {{ agent?.nom }}
+                    </td>
+
+                    <td>
+                      {{ agent?.dateNaissance | date: 'dd/MM/yyyy' }}
+                    </td>
+
+                    <td>
+                      <button
+                        type="submit"
+                        class="btn btn-outline-info"
+                        title="Détails"
+                        data-cy="entityDetailsButton"
+                        title="Details"
+                        (click)="chargerInfos(agent)"
+                      >
+                        <fa-icon icon="eye"></fa-icon>
+                        <span class="d-none d-md-inline"></span>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+
+    <div class="col-md-5" style="border: 1px solid lightgray; padding: 1%; margin-left: 1%">
+      <fieldset>
+        <lu ngbNav #nav="ngbNav" [(activeId)]="active" (navChange)="onNavChange($event)" class="nav-tabs">
+          <li [ngbNavItem]="1">
+            <a ngbNavLink id="infos-agent">Infos agent</a>
+            <ng-template ngbNavContent>
+              <div class="col-md-12" style="border: 1px solid lightgray; padding: 1%">
+                <div class="row" style="margin-top: 1%">
+                  <div class="row" style="margin-top: 1%">
+                    <div class="col-md-6">
+                      <label> Matricule </label>
+                      <input readonly class="form-control" [value]="matricule" />
+                    </div>
+
+                    <div class="col-md-6">
+                      <label> Numéro Pièce </label>
+                      <input readonly class="form-control" [value]="numeroPiece" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <br />
+
+              <div class="col-md-12" style="border: 1px solid lightgray; padding: 1%">
+                <div class="row" style="margin-top: 1%">
+                  <div class="row" style="margin-top: 1%">
+                    <div class="col-md-6">
+                      <label> Prenom </label>
+                      <input readonly class="form-control" [value]="prenom" />
+                    </div>
+
+                    <div class="col-md-6">
+                      <label> Nom </label>
+                      <input readonly class="form-control" [value]="nom" />
+                    </div>
+                  </div>
+
+                  <div class="row" style="margin-top: 1%">
+                    <div class="col-md-6">
+                      <label> Date de Naissance </label>
+                      <input readonly class="form-control" formControlName="dateNaissance" [value]="dateNaissance | date: 'dd/MM/yyyy'" />
+                    </div>
+
+                    <div class="col-md-6">
+                      <label> Lieu de Naissance </label>
+                      <input readonly class="form-control" [value]="lieuNaissance" />
+                    </div>
+                  </div>
+
+                  <div class="row" style="margin-top: 1%">
+                    <div class="col-md-6">
+                      <label> Sexe </label>
+                      <input readonly class="form-control" [value]="sexe" />
+                    </div>
+
+                    <div class="col-md-6">
+                      <label> Nationalité </label>
+                      <input readonly class="form-control" [value]="nationalite?.libelle" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <br />
+              <div class="col-md-12" style="border: 1px solid lightgray; padding: 1%">
+                <div class="row" style="margin-top: 1%">
+                  <div class="row" style="margin-top: 1%">
+                    <div class="col-md-6">
+                      <label> Téléphone </label>
+                      <input readonly class="form-control" [value]="telephone" />
+                    </div>
+
+                    <div class="col-md-6">
+                      <label> Email </label>
+                      <input readonly class="form-control" [value]="email" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row" style="margin-top: 1%">
+                  <div class="row" style="margin-top: 1%">
+                    <div class="col-md-6">
+                      <label> Adresse Complète </label>
+                      <input readonly class="form-control" [value]="adresse" />
+                    </div>
+
+                    <div class="col-md-6">
+                      <label> Opérateur de saisie </label>
+                      <input readonly class="form-control" [value]="initiales" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h2 id="page-heading">
+                  <div>
+                    <button type="button" id="jh-create-entity" class="btn btn-info" (click)="nav.select(2)">
+                      <span>Suivant </span>
+                      <!--  <fa-icon [icon]="'arrow-right'"></fa-icon> -->
+                    </button>
+                  </div>
+                </h2>
+              </div>
+            </ng-template>
+          </li>
+
+          <li [ngbNavItem]="2">
+            <a ngbNavLink id="infos-famille">Sit. Familiale</a>
+            <ng-template ngbNavContent>
+              <br /><br />
+
+              <div class="col-md-12" style="border: 1px solid lightgray; padding: 1%">
+                <div class="row" style="margin-top: 1%">
+                  <div class="row" style="margin-top: 1%">
+                    <div class="col-md-6">
+                      <label> Situation matrimoniale </label>
+                      <input readonly class="form-control" [value]="situationFamiliale?.situationMatrimoniale" />
+                    </div>
+
+                    <div class="col-md-6">
+                      <label> Travail conjoint </label>
+                      <input readonly class="form-control" [value]="travailConjoint" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row" style="margin-top: 1%">
+                  <div class="row" style="margin-top: 1%">
+                    <div class="col-md-6" [hidden]="sexe === 'MASCULIN'">
+                      <label> Nom du mari </label>
+                      <input readonly class="form-control" [value]="nomMari" />
+                    </div>
+
+                    <div class="col-md-6" [hidden]="sexe === 'FEMININ'">
+                      <label> Nombre d'épouses </label>
+                      <input readonly class="form-control" [value]="nombreEpouses" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br />
+
+              <div class="col-md-12" style="border: 1px solid lightgray; padding: 1%">
+                <div class="row" style="margin-top: 1%">
+                  <div class="row" style="margin-top: 1%">
+                    <div class="col-md-6">
+                      <label>Nombre enfants </label>
+                      <input readonly class="form-control" [value]="situationFamiliale?.nombreEnfant" />
+                    </div>
+
+                    <div class="col-md-6">
+                      <label> Nombre enfants majeurs </label>
+                      <input readonly class="form-control" [value]="situationFamiliale?.nombreEnfantMajeur" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row" style="margin-top: 1%">
+                  <div class="row" style="margin-top: 1%">
+                    <div class="col-md-6">
+                      <label> Nombre enfants décédés </label>
+                      <input readonly class="form-control" [value]="situationFamiliale?.nombreEnfantDecede" />
+                    </div>
+
+                    <div class="col-md-6">
+                      <label> Nombre de parts fiscal</label>
+                      <input readonly class="form-control" [value]="situationFamiliale?.nombrePart" />
+                    </div>
+                  </div>
+                </div>
+                <br />
+                <div class="col-md-12" style="border: 1px solid lightgray; padding: 1%">
+                  <fieldset>
+                    <legend style="font-size: 17px; color: #24695c; font-weight: 700">Membres :</legend>
+                    <div class="row" style="margin-top: 1%">
+                      <div class="table-responsive" id="entities">
+                        <table class="table table-bordered table-condensed table-hover" aria-describedby="page-heading">
+                          <thead>
+                            <tr>
+                              <th scope="col">
+                                <span>Rang</span>
+                              </th>
+
+                              <th scope="col"><span>Prénom</span></th>
+
+                              <th scope="col">
+                                <span>Nom</span>
+                              </th>
+
+                              <th scope="col">
+                                <span>Date de Naissance</span>
+                              </th>
+
+                              <th scope="col">
+                                <span>Lien de Parenté</span>
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let enfant of enfants">
+                              <td>
+                                {{ enfant?.rangEnfant }}
+                              </td>
+
+                              <td>
+                                {{ enfant?.prenom }}
+                              </td>
+
+                              <td>
+                                {{ enfant?.nom }}
+                              </td>
+
+                              <td>
+                                {{ enfant?.dateNaissance | date: 'dd/MM/yyyy' }}
+                              </td>
+
+                              <td>
+                                {{ enfant?.lienParente }}
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+
+              <div>
+                <h2 id="page-heading">
+                  <div>
+                    <button type="button" id="jh-create-entity" class="btn btn-info" (click)="nav.select(1)">
+                      <span>Precedent </span>
+                      <!--  <fa-icon [icon]="'arrow-right'"></fa-icon> -->
+                    </button>
+                    <button type="button" id="jh-create-entity" class="btn btn-info" (click)="nav.select(3)">
+                      <span>Suivant </span>
+                      <!--  <fa-icon [icon]="'arrow-right'"></fa-icon> -->
+                    </button>
+                  </div>
+                </h2>
+              </div>
+            </ng-template>
+          </li>
+          <li [ngbNavItem]="3">
+            <a ngbNavLink id="infos-admin">Sit. Administrative</a>
+            <ng-template ngbNavContent>
+              <div class="col-md-12" style="border: 1px solid lightgray; padding: 1%">
+                <div class="row">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label> Nature d'engagement </label>
+                      <input
+                        readonly
+                        class="form-control"
+                        name="natureActe"
+                        id="field_natureActe"
+                        data-cy="natureActe"
+                        [value]="situationAdministrative?.typePec"
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <label>Date de recrutement </label>
+                      <input readonly class="form-control" [value]="situationAdministrative?.dateRecrutement | date: 'dd/MM/yyyy'" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br />
+              <div class="col-md-12" style="border: 1px solid lightgray; padding: 1%">
+                <div class="row">
+                  <div class="row">
+                    <div class="col-md-6" *ngIf="hierarchie">
+                      <label> Hierarchie </label>
+                      <input readonly class="form-control" [value]="hierarchie?.libelle" />
+                    </div>
+                    <div class="col-md-6">
+                      <label> Echelon </label>
+                      <input readonly class="form-control" [value]="echelon?.libelle" />
+                    </div>
+                  </div>
+                  <div class="row" style="margin-top: 1%">
+                    <div class="col-md-6">
+                      <label> Grade </label>
+                      <input readonly class="form-control" [value]="grade?.libelle" />
+                    </div>
+
+                    <div class="col-md-6" *ngIf="indices">
+                      <label> Indice </label>
+                      <input readonly class="form-control" [value]="indices?.libelle" />
+                    </div>
+
+                    <div class="col-md-6" *ngIf="situationAdministrative?.soldeGlobal">
+                      <label> Solde Global </label>
+                      <input readonly class="form-control" [value]="situationAdministrative?.soldeGlobal" />
+                    </div>
+                  </div>
+                  <div class="row" style="margin-top: 1%">
+                    <div class="col-md-6">
+                      <label> Rémunération </label>
+                      <input readonly class="form-control" [value]="remuneration" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br />
+              <div class="col-md-12" style="border: 1px solid lightgray; padding: 1%">
+                <div class="row">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label> Etablissement </label>
+                      <input readonly class="form-control" [value]="etablissement?.libelleCourt" />
+                    </div>
+                    <div class="col-md-6">
+                      <label> Service </label>
+                      <input readonly class="form-control" [value]="service?.libelle" />
+                    </div>
+                  </div>
+                  <div class="row" style="margin-top: 1%">
+                    <div class="col-md-6">
+                      <label> Fonction </label>
+                      <input readonly class="form-control" [value]="emploi?.libelle" />
+                    </div>
+
+                    <div class="col-md-6">
+                      <label> Règlement </label>
+                      <input readonly class="form-control" [value]="situationAdministrative?.modeReglement" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <br />
+
+              <div class="col-md-12" style="border: 1px solid lightgray; padding: 1%">
+                <div class="row">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label> Postion </label>
+                      <input readonly class="form-control" [value]="positions?.libelle" />
+                    </div>
+
+                    <div class="col-md-6">
+                      <label> Date début position </label>
+                      <input readonly class="form-control" [value]="situationAdministrative?.datedebut | date: 'dd/MM/yyyy'" />
+                    </div>
+                  </div>
+
+                  <div class="row" style="margin-top: 1%">
+                    <div class="col-md-6">
+                      <label> Date fin / date annulation </label>
+                      <input readonly class="form-control" [value]="situationAdministrative?.datefin | date: 'dd/MM/yyyy'" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h2 id="page-heading">
+                  <div>
+                    <button type="button" id="jh-create-entity" class="btn btn-info" (click)="nav.select(2)">
+                      <span>Precedent </span>
+                      <!--  <fa-icon [icon]="'arrow-right'"></fa-icon> -->
+                    </button>
+                    <button type="button" id="jh-create-entity" class="btn btn-info" (click)="nav.select(4)">
+                      <span>Suivant </span>
+                      <!--  <fa-icon [icon]="'arrow-right'"></fa-icon> -->
+                    </button>
+                  </div>
+                </h2>
+              </div>
+            </ng-template>
+          </li>
+
+          <li [ngbNavItem]="4">
+            <a ngbNavLink id="emoluments">Emoluments </a>
+            <ng-template ngbNavContent>
+              <div class="col-md-12" style="border: 1px solid lightgray; padding: 1%">
+                <fieldset>
+                  <div class="row" style="margin-top: 1%">
+                    <div class="table-responsive" id="entities">
+                      <table class="table table-bordered table-condensed table-hover" aria-describedby="page-heading">
+                        <thead>
+                          <tr>
+                            <th scope="col">
+                              <span>Code poste</span>
+                            </th>
+
+                            <th scope="col">
+                              <span>Poste </span>
+                            </th>
+
+                            <th scope="col">
+                              <span>Date d'effet</span>
+                            </th>
+
+                            <th scope="col">
+                              <span>Date échéance</span>
+                            </th>
+
+                            <th scope="col">
+                              <span>Montant</span>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let emolument of emoluments">
+                            <td>
+                              {{ emolument?.codePoste }}
+                            </td>
+
+                            <td>
+                              {{ emolument?.reference }}
+                            </td>
+
+                            <td>
+                              {{ emolument?.dateEffet | date: 'dd/MM/yyyy' }}
+                            </td>
+
+                            <td>
+                              {{ emolument?.dateEcheance | date: 'dd/MM/yyyy' }}
+                            </td>
+
+                            <td>
+                              {{ emolument?.montant }}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+
+              <div>
+                <h2 id="page-heading">
+                  <div>
+                    <button type="button" id="jh-create-entity" class="btn btn-info" (click)="nav.select(3)">
+                      <span>Precedent </span>
+                      <!--  <fa-icon [icon]="'arrow-right'"></fa-icon> -->
+                    </button>
+                  </div>
+                </h2>
+              </div>
+            </ng-template>
+          </li>
+        </lu>
+      </fieldset>
+      <div [ngbNavOutlet]="nav" class="mt-2"></div>
+    </div>
+  </div>
+</form>

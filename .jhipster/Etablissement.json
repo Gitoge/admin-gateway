@@ -1,0 +1,72 @@
+{
+  "applications": "*",
+  "changelogDate": "20220722173324",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "etablissement",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "sigle",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "libelle",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "adresse",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "numTelephone",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fax",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "bp",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Etablissement",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "direction",
+      "otherEntityRelationshipName": "etab",
+      "relationshipName": "direction",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "typeEtablissement",
+      "otherEntityRelationshipName": "etab",
+      "relationshipName": "typeEtab",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "localite",
+      "otherEntityRelationshipName": "etab",
+      "relationshipName": "localite",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no",
+  "skipServer": true
+}

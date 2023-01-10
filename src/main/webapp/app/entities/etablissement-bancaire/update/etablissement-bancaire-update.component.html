@@ -1,0 +1,142 @@
+<div class="d-flex justify-content-center">
+  <div class="col-10 custom-card">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-etablissement-bancaire-heading" data-cy="EtablissementBancaireCreateUpdateHeading" class="custom-title">
+        {{ titre }}
+      </h2>
+      <br />
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="justify-content-center" style="border: 1px solid lightgray; padding: 2%">
+          <fieldset>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Code<span style="color: red">*</span> </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="code"
+                  id="field_code"
+                  data-cy="code"
+                  formControlName="code"
+                  oninput="this.value = this.value.toUpperCase()"
+                  maxlength="5"
+                />
+                <div *ngIf="editForm.get('code')!.invalid && (editForm.get('code')!.dirty || editForm.get('code')!.touched)">
+                  <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.required"> Ce champ est obligatoire. </small>
+                  <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.minlength">
+                    Ce champ doit comporter au moins 5 caractères.
+                  </small>
+                  <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.maxlength">
+                    Ce champ doit comporter au plus 5 caractères.
+                  </small>
+                  <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.pattern"> Pas de caracteres spéciaux". </small>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label> Libellé<span style="color: red">*</span> </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="libelle"
+                  id="field_libelle"
+                  data-cy="libelle"
+                  formControlName="libelle"
+                  required
+                  oninput="this.value = this.value.toUpperCase()"
+                />
+              </div>
+            </div>
+
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Sigle<span style="color: red">*</span> </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="sigle"
+                  id="field_sigle"
+                  data-cy="sigle"
+                  formControlName="sigle"
+                  oninput="this.value = this.value.toUpperCase()"
+                  required
+                />
+              </div>
+              <div class="col-md-6">
+                <label> Swift </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="swift"
+                  id="field_swift"
+                  data-cy="swift"
+                  formControlName="swift"
+                  oninput="this.value = this.value.toUpperCase()"
+                />
+              </div>
+            </div>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Email </label>
+                <input type="email" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+                <div *ngIf="editForm.get('email')!.invalid && (editForm.get('email')!.dirty || editForm.get('email')!.touched)">
+                  <small class="form-text text-danger" *ngIf="editForm.get('email')?.errors?.invalid"> Votre email est invalide. </small>
+
+                  <small class="form-text text-danger" *ngIf="editForm.get('email')?.errors?.pattern"> Format Email incorrecte. </small>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label> Téléphone </label>
+                <input
+                  type="number"
+                  class="form-control"
+                  name="telephone"
+                  id="field_telephone"
+                  data-cy="telephone"
+                  formControlName="telephone"
+                />
+              </div>
+            </div>
+
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Fax </label>
+                <input type="number" class="form-control" name="fax" id="field_fax" data-cy="fax" formControlName="fax" />
+              </div>
+              <div class="col-md-6">
+                <label> Adresse<span style="color: red">*</span> </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="adresse"
+                  id="field_adresse"
+                  data-cy="adresse"
+                  formControlName="adresse"
+                  oninput="this.value = this.value.toUpperCase()"
+                  required
+                />
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+      <br />
+      <div style="display: flex; justify-content: center; align-items: center">
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Annuler</span>
+        </button>
+        &nbsp;
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Enregistrer</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,1381 @@
+<div class="row justify-content-center">
+  <div class="col-12">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm" style="margin: 2px; padding: 0">
+      <h2 id="page-heading"></h2>
+      <jhi-alert></jhi-alert>
+      <!-- <jhi-alert-error></jhi-alert-error> -->
+      <ngb-alert #selfClosingAlert *ngIf="successMessage" type="{{ typeMessage }}" (closed)="successMessage = ''">{{
+        successMessage
+      }}</ngb-alert>
+      <hr />
+      <lu ngbNav #nav="ngbNav" [(activeId)]="active" (navChange)="onNavChange($event)" class="nav-tabs">
+        <li [ngbNavItem]="1">
+          <a ngbNavLink id="infos-forf">Informations personnelles</a>
+          <ng-template ngbNavContent>
+            <div>
+              <div class="col-12 card">
+                <div class="row justify-content-center" style="margin: 0 !important; padding: 5 !important">
+                  <div class="col-md-6" style="border: 1px solid lightgray; padding: 2%">
+                    <fieldset>
+                      <!-- <legend style="font-size: 17px; color: #24695c; font-weight: 700">Informations personnelles de l'agent</legend> -->
+                      <div class="row" style="margin-top: 1%">
+                        <div class="col-md-4">
+                          <label> Type Pièce <span style="color: red">*</span> </label>
+                          <select
+                            class="form-control"
+                            name="typePiece"
+                            id="field_typePiece"
+                            data-cy="typePiece"
+                            style="width: 100%; font-size: 12px"
+                            formControlName="typePiece"
+                            required
+                            (change)="getSelectedTypePiece(editForm.get('typePiece')!.value)"
+                          >
+                            <option *ngIf="!editForm.value.typePiece" [ngValue]="null" selected></option>
+                            <option
+                              [ngValue]="
+                                typePieceOption.id === editForm.get('typePiece')!.value?.id
+                                  ? editForm.get('typePiece')!.value
+                                  : typePieceOption
+                              "
+                              *ngFor="let typePieceOption of typePiece"
+                            >
+                              {{ typePieceOption.libelle }}
+                            </option>
+                          </select>
+                        </div>
+
+                        <div class="col-md-4">
+                          <label> Numéro Pièce <span style="color: red">*</span> </label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="numeroPiece"
+                            id="field_numeroPiece"
+                            data-cy="numeroPiece"
+                            placeholder="Saisir le numéro de la pièce"
+                            formControlName="numeroPiece"
+                            (focusout)="numeroPieceUnique($event)"
+                            oninput="this.value = this.value.toUpperCase()"
+                          />
+                          <div
+                            *ngIf="
+                              editForm.get('numeroPiece')!.invalid &&
+                              (editForm.get('numeroPiece')!.dirty || editForm.get('numeroPiece')!.touched)
+                            "
+                          >
+                            <small class="form-text text-danger" *ngIf="editForm.get('numeroPiece')?.errors?.required">
+                              Ce champ est obligatoire.
+                            </small>
+                            <small class="form-text text-danger" *ngIf="editForm.get('numeroPiece')?.errors?.minlength">
+                              Ce champ doit comporter 10 ou 14 caractères.
+                            </small>
+                            <small class="form-text text-danger" *ngIf="editForm.get('numeroPiece')?.errors?.maxlength">
+                              Ce champ doit comporter 10 ou 14 caractères.
+                            </small>
+                            <small class="form-text text-danger" *ngIf="editForm.get('numeroPiece')?.errors?.pattern">
+                              Pas de caracteres spéciaux".
+                            </small>
+                          </div>
+                        </div>
+                        <!--
+                        <div class="col-md-4" *ngIf="isPasseport">
+                          <label> Numéro Pièce <span style="color: red">*</span> </label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            [required]="isPasseport"
+                            name="numeroPasseport"
+                            id="field_numeroPasseport"
+                            data-cy="numeroPasseport"
+                            placeholder="Saisir le numéro du passeport"
+                            formControlName="numeroPasseport"
+                            oninput="this.value = this.value.toUpperCase()"
+                          />
+                          <div
+                            *ngIf="
+                              editForm.get('numeroPasseport')!.invalid &&
+                              (editForm.get('numeroPasseport')!.dirty || editForm.get('numeroPasseport')!.touched)
+                            "
+                          >
+                            <small class="form-text text-danger" *ngIf="editForm.get('numeroPasseport')?.errors?.required">
+                              Ce champ est obligatoire.
+                            </small>
+                            <small class="form-text text-danger" *ngIf="editForm.get('numeroPasseport')?.errors?.minlength">
+                              Ce champ doit comporter 10 caractères.
+                            </small>
+                            <small class="form-text text-danger" *ngIf="editForm.get('numeroPasseport')?.errors?.maxlength">
+                              Ce champ doit comporter 10 caractères.
+                            </small>
+                            <small class="form-text text-danger" *ngIf="editForm.get('numeroPasseport')?.errors?.pattern">
+                              Pas de caracteres spéciaux".
+                            </small>
+                          </div>
+                        </div> -->
+                      </div>
+
+                      <div class="row" style="margin-top: 1%">
+                        <div class="col-md-4">
+                          <label> Prénom <span style="color: red">*</span> </label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            required
+                            name="prenom"
+                            id="field_prenom"
+                            data-cy="prenom"
+                            placeholder="Saisir le prénom"
+                            formControlName="prenom"
+                            oninput="this.value = this.value.toUpperCase()"
+                          />
+                          <div
+                            *ngIf="editForm.get('prenom')!.invalid && (editForm.get('prenom')!.dirty || editForm.get('prenom')!.touched)"
+                          >
+                            <small class="form-text text-danger" *ngIf="editForm.get('prenom')?.errors?.required">
+                              Ce champ est obligatoire.
+                            </small>
+
+                            <small class="form-text text-danger" *ngIf="editForm.get('prenom')?.errors?.pattern">
+                              Pas de caracteres spéciaux".
+                            </small>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <label> Nom <span style="color: red">*</span> </label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            required
+                            name="nom"
+                            id="field_nom"
+                            data-cy="nom"
+                            placeholder="Saisir le nom"
+                            formControlName="nom"
+                            oninput="this.value = this.value.toUpperCase()"
+                          />
+                          <div *ngIf="editForm.get('nom')!.invalid && (editForm.get('nom')!.dirty || editForm.get('nom')!.touched)">
+                            <small class="form-text text-danger" *ngIf="editForm.get('nom')?.errors?.required">
+                              Ce champ est obligatoire.
+                            </small>
+
+                            <small class="form-text text-danger" *ngIf="editForm.get('nom')?.errors?.pattern">
+                              Pas de caracteres spéciaux".
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row" style="margin-top: 1%">
+                        <div class="col-md-4">
+                          <label> Date de naissance <span style="color: red">*</span> </label>
+                          <div class="input-group">
+                            <input
+                              id="field_dateNaissance"
+                              data-cy="dateNaissance"
+                              type="date"
+                              class="form-control"
+                              (focusout)="dateSaisie(editForm.get('dateNaissance')?.value)"
+                              min="1950-01-01"
+                              max="{{ today | date: 'yyyy-MM-dd' }}"
+                              name="dateNaissance"
+                              formControlName="dateNaissance"
+                              placeholder=" AAAA-MM-JJ"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <label> Lieu de naissance <span style="color: red">*</span> </label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            required
+                            name="lieuNaissance"
+                            id="field_lieuNaissance"
+                            data-cy="lieuNaissance"
+                            placeholder="Saisir le lieu de naissance"
+                            formControlName="lieuNaissance"
+                            oninput="this.value = this.value.toUpperCase()"
+                          />
+                          <div
+                            *ngIf="
+                              editForm.get('lieuNaissance')!.invalid &&
+                              (editForm.get('lieuNaissance')!.dirty || editForm.get('lieuNaissance')!.touched)
+                            "
+                          >
+                            <small class="form-text text-danger" *ngIf="editForm.get('lieuNaissance')?.errors?.required">
+                              Ce champ est obligatoire.
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+                    </fieldset>
+                  </div>
+                  <div class="col-md-6" style="border: 1px solid lightgray; padding: 2%">
+                    <fieldset>
+                      <div class="row" style="margin-top: 1%">
+                        <div class="col-md-4">
+                          <label> Sexe <span style="color: red">*</span> </label>
+                          <select
+                            class="form-control"
+                            name="sexe"
+                            id="field_sexe"
+                            data-cy="sexe"
+                            style="width: 100%; font-size: 12px"
+                            formControlName="sexe"
+                            (change)="getSelectedGenre(editForm.get('sexe')!.value)"
+                            (change)="onChoixSexe(editForm.get('sexe')!.value?.libelle)"
+                          >
+                            <option *ngIf="!editForm.value.sexe" [ngValue]="null" selected></option>
+                            <option
+                              [ngValue]="sexeOption.id === editForm.get('sexe')!.value?.id ? editForm.get('sexe')!.value : sexeOption"
+                              *ngFor="let sexeOption of genre"
+                            >
+                              {{ sexeOption.libelle }}
+                            </option>
+                          </select>
+                        </div>
+                        <div class="col-md-4">
+                          <label> Nationalité <span style="color: red">*</span> </label>
+                          <select
+                            class="form-control"
+                            id="field_nationalite"
+                            data-cy="nationalite"
+                            name="nationalite"
+                            formControlName="nationalite"
+                            style="width: 100%; font-size: 12px"
+                          >
+                            <option [ngValue]="null"></option>
+                            <option
+                              [ngValue]="
+                                nationaliteOption.id === editForm.get('nationalite')!.value?.id
+                                  ? editForm.get('nationalite')!.value
+                                  : nationaliteOption
+                              "
+                              *ngFor="let nationaliteOption of nationaliteSharedCollection"
+                            >
+                              {{ nationaliteOption.libelle }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="row" style="margin-top: 1%">
+                        <div class="col-md-4">
+                          <label> Email</label>
+                          <input
+                            type="email"
+                            class="form-control"
+                            name="email"
+                            id="field_email"
+                            data-cy="email"
+                            placeholder="Saisir l'email"
+                            formControlName="email"
+                            oninput="this.value = this.value.toLowerCase()"
+                          />
+                          <small class="form-text text-danger" *ngIf="editForm.get('email')?.errors?.pattern">
+                            Pas de caracteres spéciaux".
+                          </small>
+                        </div>
+                        <div class="col-md-4">
+                          <label> Téléphone<span style="color: red">*</span> </label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            required
+                            name="tel"
+                            id="field_tel"
+                            data-cy="tel"
+                            placeholder="Saisir le numéro de téléphone"
+                            formControlName="telephone"
+                          />
+                          <div
+                            *ngIf="
+                              editForm.get('telephone')!.invalid && (editForm.get('telephone')!.dirty || editForm.get('telephone')!.touched)
+                            "
+                          >
+                            <small class="form-text text-danger" *ngIf="editForm.get('telephone')?.errors?.required">
+                              Ce champ est obligatoire.
+                            </small>
+
+                            <small class="form-text text-danger" *ngIf="editForm.get('telephone')?.errors?.pattern">
+                              Pas de caracteres spéciaux".
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row" style="margin-top: 1%">
+                        <div class="col-md-8">
+                          <label> Adresse complète <span style="color: red">*</span> </label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="adresse"
+                            required
+                            id="field_adresse"
+                            data-cy="adresse"
+                            placeholder="Saisir l'adresse complète"
+                            formControlName="adresse"
+                            oninput="this.value = this.value.toUpperCase()"
+                          />
+                        </div>
+                      </div>
+                    </fieldset>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h2 id="page-heading">
+                <div class="float-right float">
+                  <button type="button" id="jh-create-entity" class="btn btn-info" (click)="allerASituationAdmin(nav)">
+                    <span>Suivant </span>
+                    <!--  <fa-icon [icon]="'arrow-right'"></fa-icon> -->
+                  </button>
+                </div>
+              </h2>
+            </div>
+          </ng-template>
+        </li>
+        &nbsp;
+        <li [ngbNavItem]="2">
+          <a ngbNavLink id="infos-forfait">Situation Administrative</a>
+          <ng-template ngbNavContent>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-block">
+                    <div class="row">
+                      <div class="col-md-4" style="border: 1px solid lightgray; padding: 1%">
+                        <fieldset>
+                          <!-- <legend style="font-size: 17px; color: #24695c; font-weight: 700">Situation administrative</legend> -->
+                          <div class="row" style="margin-top: 1%">
+                            <div class="col-md-12">
+                              <label> Evenement <span style="color: red">*</span> </label>
+                              <select
+                                class="form-control"
+                                name="natureActe"
+                                id="field_natureActe"
+                                data-cy="natureActe"
+                                formControlName="natureActe"
+                                style="width: 100%; font-size: 12px"
+                                (change)="
+                                  getSelectedNatureActe(editForm.get('natureActe')!.value);
+                                  getTypeActesByEvenement(editForm.get('natureActe')!.value)
+                                "
+                              >
+                                <option *ngIf="!editForm.value.natureActe" [ngValue]="null" selected></option>
+                                <option
+                                  [ngValue]="
+                                    natureActeOption.id === editForm.get('natureActe')!.value?.id
+                                      ? editForm.get('natureActe')!.value
+                                      : natureActeOption
+                                  "
+                                  *ngFor="let natureActeOption of evenementSharedCollection"
+                                >
+                                  {{ natureActeOption.libelle }}
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="row" style="margin-top: 1%">
+                            <div class="col-md-12">
+                              <label> Etablissement <span style="color: red">*</span> </label>
+
+                              <div>
+                                <ng-autocomplete
+                                  [data]="etablissementSharedCollection"
+                                  [searchKeyword]="keyword"
+                                  placeholder="Saisir le nom de l'établissement"
+                                  (selected)="
+                                    selectEventEtablissement($event); onchangeEtablisement($event); getServicesByEtablissement($event)
+                                  "
+                                  (inputChanged)="onChangeSearch($event)"
+                                  (inputFocused)="onFocused($event)"
+                                  historyIdentifier="etablissement"
+                                  name="etablissementId"
+                                  id="field_etablissementId"
+                                  [itemTemplate]="itemTemplate"
+                                  [notFoundTemplate]="notFoundTemplate"
+                                  (change)="getSelectedEtablissement(editForm.get('etablissementId')!.value?.id)"
+                                  formControlName="etablissementId"
+                                >
+                                </ng-autocomplete>
+
+                                <ng-template #itemTemplate let-item>
+                                  <a [innerHTML]="item.libelleLong"></a>
+                                </ng-template>
+
+                                <ng-template #notFoundTemplate let-notFound>
+                                  <div>Etablissement non trouvé !</div>
+                                </ng-template>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="row" style="margin-top: 5%">
+                            <div class="col-md-6">
+                              <label> Date recrutement <span style="color: red">*</span> </label>
+                              <input
+                                type="date"
+                                class="form-control"
+                                name="dateRecrutement"
+                                id="field_dateRecrutement"
+                                data-cy="dateRecrutement"
+                                (change)="getSelectedDateRecrutement(editForm.get('dateRecrutement')!.value)"
+                                formControlName="dateRecrutement"
+                                max="{{ today | date: 'yyyy-MM-dd' }}"
+                              />
+                            </div>
+
+                            <!-- <div class="col-md-6">
+                              <label> Numéro acte <span style="color: red">*</span> </label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                required
+                                name="numeroRecrutement"
+                                id="field_numeroRecrutement"
+                                data-cy="numeroRecrutement"
+                                formControlName="numeroRecrutement"
+                              />
+                            </div> -->
+                          </div>
+
+                          <div class="row" style="margin-top: 5%">
+                            <div class="col-md-6">
+                              <label> Rémunération <span style="color: red">*</span> </label>
+                              <select
+                                formControlName="typeRemuneration"
+                                class="form-control"
+                                name="remun"
+                                id="field_remun"
+                                data-cy="remun"
+                                style="width: 100%; font-size: 12px"
+                                (change)="
+                                  onRemunerationChange(editForm.get('typeRemuneration')!.value?.libelle);
+                                  getSelectedRemuneration(editForm.get('typeRemuneration')!.value)
+                                "
+                                required
+                              >
+                                <option
+                                  [ngValue]="
+                                    remunerationOption.id === editForm.get('typeRemuneration')!.value?.id
+                                      ? editForm.get('typeRemuneration')!.value
+                                      : remunerationOption
+                                  "
+                                  *ngFor="let remunerationOption of typeRemuneration"
+                                >
+                                  {{ remunerationOption.libelle }}
+                                </option>
+                              </select>
+                            </div>
+                            <div class="col-md-6">
+                              <label> Statut Agent <span style="color: red">*</span> </label>
+                              <select
+                                class="form-control"
+                                name="categorieAgent"
+                                id="field_categorieAgent"
+                                data-cy="categorieAgent"
+                                style="width: 100%; font-size: 12px"
+                                formControlName="categorieAgent"
+                                [(ngModel)]="categorieAgentSharedCollection[0]"
+                              >
+                                <option
+                                  [ngValue]="
+                                    categorieAgentOption.id === editForm.get('categorieAgent')!.value?.id
+                                      ? editForm.get('categorieAgent')!.value
+                                      : categorieAgentOption
+                                  "
+                                  [selected]="categorieAgentSharedCollection[0]"
+                                  *ngFor="let categorieAgentOption of categorieAgentSharedCollection"
+                                >
+                                  {{ categorieAgentOption.libelle }}
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="row" style="margin-top: 5%">
+                            <div class="col-md-6" *ngIf="isIndiciaire == true">
+                              <label> Grade <span style="color: red">*</span> </label>
+                              <div>
+                                <ng-autocomplete
+                                  [data]="gradeSharedCollection"
+                                  [searchKeyword]="keywordGrade"
+                                  placeholder="Saisir le grade "
+                                  (selected)="selectEventGrade($event)"
+                                  (focusout)="onFocusOutEventGrade($event)"
+                                  (inputChanged)="onChangeSearch($event)"
+                                  (inputFocused)="onFocused($event)"
+                                  historyIdentifier="grade"
+                                  name="gradeId"
+                                  id="field_gradeId"
+                                  [itemTemplate]="itemTemplate"
+                                  [notFoundTemplate]="notFoundTemplate"
+                                  formControlName="gradeId"
+                                >
+                                </ng-autocomplete>
+                                <ng-template #itemTemplate let-itemitemGrade>
+                                  <a [innerHTML]="itemitemGrade.code"></a>
+                                </ng-template>
+                                <ng-template #notFoundTemplate let-notFound>
+                                  <div>Grade non trouvé !</div>
+                                </ng-template>
+                              </div>
+                            </div>
+                            <div class="col-md-6" *ngIf="isConvention == true || isCasParticulier == true || isSoldeGlobal == true">
+                              <label> Grade <span style="color: red">*</span> </label>
+                              <div>
+                                <ng-autocomplete
+                                  [data]="gradeSharedCollection"
+                                  [searchKeyword]="keywordGrade"
+                                  placeholder="Saisir le grade"
+                                  (selected)="selectEventGrade2($event)"
+                                  (focusout)="onFocusOutEventGrade2($event)"
+                                  (inputChanged)="onChangeSearch($event)"
+                                  (inputFocused)="onFocused($event)"
+                                  historyIdentifier="grade"
+                                  name="gradeId"
+                                  id="field_gradeId"
+                                  [itemTemplate]="itemTemplate"
+                                  [notFoundTemplate]="notFoundTemplate"
+                                  formControlName="gradeId"
+                                >
+                                </ng-autocomplete>
+
+                                <ng-template #itemTemplate let-itemGrade>
+                                  <a [innerHTML]="itemGrade.libelle"></a>
+                                </ng-template>
+
+                                <ng-template #notFoundTemplate let-notFound>
+                                  <div>Grade non trouvé !</div>
+                                </ng-template>
+                              </div>
+                            </div>
+
+                            <div
+                              class="col-md-6"
+                              *ngIf="isIndiciaire == false && isConvention == false && isCasParticulier == false && isSoldeGlobal == false"
+                            >
+                              <label> Grade <span style="color: red">*</span> </label>
+                              <div>
+                                <input
+                                  class="form-control"
+                                  name="grade"
+                                  id="field_grade"
+                                  data-cy="grade"
+                                  readonly
+                                  formControlName="grade"
+                                />
+
+                                <ng-template #itemTemplate let-itemGrade>
+                                  <a [innerHTML]="itemGrade.libelle"></a>
+                                </ng-template>
+                              </div>
+                            </div>
+
+                            <div class="col-md-6" *ngIf="isIndiciaire == true">
+                              <label> Indice de grade <span style="color: red">*</span> </label>
+                              <div>
+                                <ng-autocomplete
+                                  [data]="indicesSharedCollection"
+                                  [searchKeyword]="keywordIndice"
+                                  placeholder="Saisir l'indice de grade"
+                                  (selected)="selectEventIndice($event)"
+                                  (focusout)="onFocusOutEventIndice($event)"
+                                  (inputChanged)="onChangeSearch($event)"
+                                  (inputFocused)="onFocused($event)"
+                                  historyIdentifier="indice"
+                                  name="indiceId"
+                                  id="field_indiceId"
+                                  [itemTemplate]="itemTemplate"
+                                  [notFoundTemplate]="notFoundTemplate"
+                                  formControlName="indiceId"
+                                >
+                                </ng-autocomplete>
+
+                                <ng-template #itemTemplate let-itemIndice>
+                                  <a [innerHTML]="itemIndice.libelle"></a>
+                                </ng-template>
+
+                                <ng-template #notFoundTemplate let-notFound>
+                                  <div>Indice non trouvé !</div>
+                                </ng-template>
+                              </div>
+                            </div>
+
+                            <div class="col-md-6" *ngIf="isSoldeGlobal == true">
+                              <label> Hierarchie <span style="color: red">*</span> </label>
+                              <div>
+                                <ng-autocomplete
+                                  [data]="hierarchieSharedCollection"
+                                  [searchKeyword]="keywordHierarchie"
+                                  placeholder="Saisir la hierarchie"
+                                  (selected)="selectEventHierarchie($event)"
+                                  (inputChanged)="onChangeSearch($event)"
+                                  (inputFocused)="onFocused($event)"
+                                  historyIdentifier="hierarchie"
+                                  name="hierarchieId"
+                                  id="field_hierarchieId"
+                                  [itemTemplate]="itemTemplate"
+                                  [notFoundTemplate]="notFoundTemplate"
+                                  formControlName="hierarchieId"
+                                >
+                                </ng-autocomplete>
+
+                                <ng-template #itemTemplate let-itemHierarchie>
+                                  <a [innerHTML]="itemHierarchie.libelle"></a>
+                                </ng-template>
+
+                                <ng-template #notFoundTemplate let-notFound>
+                                  <div>Hierarchie non trouvée !</div>
+                                </ng-template>
+                              </div>
+                            </div>
+
+                            <div
+                              class="col-md-6"
+                              *ngIf="isIndiciaire == false && isConvention == false && isCasParticulier == false && isSoldeGlobal == false"
+                            >
+                              <label> Indice de grade <span style="color: red">*</span> </label>
+                              <div>
+                                <input class="form-control" name="indice" id="field_indice" data-cy="indice" readonly />
+
+                                <ng-template #itemTemplate let-itemIndice>
+                                  <a [innerHTML]="itemIndice.libelle"></a>
+                                </ng-template>
+                              </div>
+                            </div>
+
+                            <div
+                              class="col-md-6"
+                              *ngIf="isIndiciaire == false && isCasParticulier == false && isConventionEntreprise == true"
+                            >
+                              <label> Classe <span style="color: red">*</span> </label>
+                              <div>
+                                <ng-autocomplete
+                                  [data]="classeSharedCollection"
+                                  [searchKeyword]="keywordClasse"
+                                  placeholder="Saisir la Classe"
+                                  (selected)="selectEventClasse($event)"
+                                  (inputChanged)="onChangeSearch($event)"
+                                  (inputFocused)="onFocused($event)"
+                                  historyIdentifier="classe"
+                                  name="classeId"
+                                  id="field_classeId"
+                                  [itemTemplate]="itemTemplate"
+                                  [notFoundTemplate]="notFoundTemplate"
+                                  formControlName="classeId"
+                                >
+                                </ng-autocomplete>
+
+                                <ng-template #itemTemplate let-itemClasse>
+                                  <a [innerHTML]="itemClasse.libelle"></a>
+                                </ng-template>
+
+                                <ng-template #notFoundTemplate let-notFound>
+                                  <div>Classe non trouvée !</div>
+                                </ng-template>
+                              </div>
+                            </div>
+
+                            <div class="col-md-6" *ngIf="isCasParticulier == true">
+                              <label *ngIf="isCasParticulier == true">Solde global <span style="color: red">*</span> </label>
+                              <input
+                                type="number"
+                                class="form-control"
+                                name="soldeGlobalCP"
+                                id="field_soldeGlobalCP"
+                                data-cy="soldeGlobalCP"
+                                formControlName="soldeGlobalCP"
+                              />
+                            </div>
+                          </div>
+                        </fieldset>
+                      </div>
+
+                      <div class="col-md-4" style="border: 1px solid lightgray; padding: 1%">
+                        <fieldset>
+                          <!-- <legend style="font-size: 17px; color: #24695c; font-weight: 700">Situation administrative</legend> -->
+
+                          <div class="row" style="margin-top: 1%">
+                            <div class="col-md-6" *ngIf="isIndiciaire == true">
+                              <label> Hiérarchie <span style="color: red">*</span> </label>
+                              <input
+                                class="form-control"
+                                name="hierarchieId"
+                                id="field_hierarchieId"
+                                readOnly
+                                data-cy="hierarchieId"
+                                formControlName="hierarchieId"
+                                style="width: 100%; font-size: 12px"
+                              />
+                            </div>
+
+                            <div class="col-md-6" *ngIf="isSoldeGlobal == true">
+                              <label> Echelon <span style="color: red">*</span> </label>
+                              <div>
+                                <ng-autocomplete
+                                  [data]="echelonSharedCollection"
+                                  [searchKeyword]="keywordEchelon"
+                                  placeholder="Saisir l'Echelon"
+                                  (selected)="selectEventEchelon($event)"
+                                  (inputChanged)="onChangeSearch($event)"
+                                  (inputFocused)="onFocused($event)"
+                                  historyIdentifier="echelon"
+                                  name="echelonId"
+                                  id="field_echelonId"
+                                  [itemTemplate]="itemTemplate"
+                                  formControlName="echelonId"
+                                >
+                                </ng-autocomplete>
+
+                                <ng-template #itemTemplate let-itemEchelon>
+                                  <a [innerHTML]="itemEchelon.libelle"></a>
+                                </ng-template>
+                              </div>
+                            </div>
+
+                            <div class="col-md-6" *ngIf="isIndiciaire == true">
+                              <label> Echelon <span style="color: red">*</span> </label>
+                              <input
+                                class="form-control"
+                                readOnly
+                                name="echelonId"
+                                id="field_echelonId"
+                                data-cy="echelonId"
+                                style="width: 100%; font-size: 12px"
+                                formControlName="echelonId"
+                              />
+                            </div>
+
+                            <div class="col-md-6" *ngIf="isIndiciaire == false && isCasParticulier == false && isSoldeGlobal == true">
+                              <label>Solde Globale <span style="color: red">*</span> </label>
+                              <input
+                                class="form-control"
+                                name="soldeGlobal"
+                                id="field_soldeGlobal"
+                                data-cy="soldeGlobal"
+                                readonly
+                                formControlName="soldeGlobal"
+                              />
+                            </div>
+                          </div>
+                          <div class="row" style="margin-top: 5%">
+                            <div class="col-md-6" *ngIf="isIndiciaire == false && isCasParticulier == false && isConvention == true">
+                              <label> Catégorie <span style="color: red">*</span> </label>
+                              <div>
+                                <ng-autocomplete
+                                  [data]="categorieSharedCollection"
+                                  [searchKeyword]="keywordCategorie"
+                                  placeholder="Saisir la Catégorie"
+                                  (selected)="selectEventCategorie($event)"
+                                  (inputChanged)="onChangeSearch($event)"
+                                  (inputFocused)="onFocused($event)"
+                                  historyIdentifier="categorie"
+                                  name="categorieId"
+                                  id="field_categorieId"
+                                  [itemTemplate]="itemTemplate"
+                                  [notFoundTemplate]="notFoundTemplate"
+                                  formControlName="categorieId"
+                                >
+                                </ng-autocomplete>
+
+                                <ng-template #itemTemplate let-itemCategorie>
+                                  <a [innerHTML]="itemCategorie.libelle"></a>
+                                </ng-template>
+
+                                <ng-template #notFoundTemplate let-notFound>
+                                  <div>Catgéorz non trouvée !</div>
+                                </ng-template>
+                              </div>
+                            </div>
+
+                            <div class="col-md-6" *ngIf="isIndiciaire == false && isCasParticulier == false && isConvention == true">
+                              <label *ngIf="isIndiciaire == false && isCasParticulier == false">Salaire de base </label>
+                              <input
+                                class="form-control"
+                                name="soldeGlobal"
+                                id="field_soldeGlobal"
+                                data-cy="soldeGlobal"
+                                readonly
+                                formControlName="soldeGlobal"
+                              />
+                            </div>
+                          </div>
+                          <div class="row" style="margin-top: 1%">
+                            <div class="col-md-6">
+                              <label> Date de prise de rang <span style="color: red">*</span> </label>
+                              <input
+                                type="date"
+                                class="form-control"
+                                name="datePriseRang"
+                                id="field_datePriseRang"
+                                data-cy="datePriseRang"
+                                (change)="getSelectedDatePriseDeRang(editForm.get('datePriseRang')!.value)"
+                                min="{{ dateRecrutement | date: 'yyyy-MM-dd' }}"
+                                formControlName="datePriseRang"
+                              />
+                            </div>
+                          </div>
+                          <div class="row" style="margin-top: 5%">
+                            <div class="col-md-12">
+                              <label> Position <span style="color: red">*</span> </label>
+                              <select
+                                class="form-control"
+                                id="field_position"
+                                data-cy="position"
+                                name="position"
+                                style="width: 100%; font-size: 12px"
+                                formControlName="position"
+                              >
+                                <option [ngValue]="null"></option>
+                                <option
+                                  [ngValue]="
+                                    positionOption.id === editForm.get('position')!.value?.id
+                                      ? editForm.get('position')!.value
+                                      : positionOption
+                                  "
+                                  [selected]="positionSharedCollection[0]"
+                                  *ngFor="let positionOption of positionSharedCollection"
+                                >
+                                  {{ positionOption.libelle }}
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="row" style="margin-top: 5%">
+                            <div class="col-md-12">
+                              <label> Date effet/début <span style="color: red">*</span> </label>
+                              <input
+                                type="date"
+                                class="form-control"
+                                name="datedebut"
+                                id="field_datedebut"
+                                data-cy="datedebut"
+                                (change)="getSelectedDatePosition(editForm.get('datedebut')!.value)"
+                                min="{{ datePriseDeRang | date: 'yyyy-MM-dd' }}"
+                                formControlName="datedebut"
+                              />
+                            </div>
+                          </div>
+                          <!--
+                        <div class="col-md-6" style="margin-top: 5%">
+                              <label> Date de fin / Date d'annulation <span style="color: red">*</span> </label>
+                              <input
+                                type="date"
+                                class="form-control"
+                                name="datefin"
+                                id="field_datefin"
+                                min="{{ datePosition | date: 'yyyy-MM-dd' }}"
+                                data-cy="datefin"
+                                formControlName="datefin"
+                              />
+                            </div>
+                            -->
+                        </fieldset>
+                      </div>
+
+                      <div class="col-md-4" style="border: 1px solid lightgray; padding: 1%">
+                        <fieldset>
+                          <!-- <legend style="font-size: 17px; color: #24695c; font-weight: 700">Situation administrative</legend> -->
+
+                          <div class="row" style="margin-top: 1%">
+                            <div class="col-md-6">
+                              <label> Service <span style="color: red">*</span> </label>
+                              <div>
+                                <select
+                                  class="form-control"
+                                  id="field_servicesId"
+                                  data-cy="servicesId"
+                                  name="servicesId"
+                                  style="width: 100%; font-size: 12px"
+                                  formControlName="servicesId"
+                                >
+                                  <option
+                                    [ngValue]="
+                                      servicesOption.id === editForm.get('servicesId')!.value?.id
+                                        ? editForm.get('servicesId')!.value
+                                        : servicesOption
+                                    "
+                                    *ngFor="let servicesOption of services"
+                                  >
+                                    {{ servicesOption.libelle }}
+                                  </option>
+                                </select>
+                                <!-- <ng-autocomplete
+                                  [data]="services"
+                                  [searchKeyword]="keywordService"
+                                  placeholder="Saisir le code du service"
+                                  (selected)="selectEventService($event)"
+                                  (focusout)="onFocusOutEventService($event)"
+                                  (inputChanged)="onChangeSearchService($event)"
+                                  (inputFocused)="onFocusedService($event)"
+                                  name="servicesId"
+                                  id="field_servicesId"
+                                  [itemTemplate]="itemTemplateEmploi"
+                                  [notFoundTemplate]="notFoundTemplateEmplois"
+                                  formControlName="servicesId"
+                                >
+                                </ng-autocomplete>
+
+                                <ng-template #itemTemplateEmploi let-item>
+                                  <a [innerHTML]="item.code"></a>
+                                </ng-template>
+                                <ng-template #notFoundTemplateEmplois let-notFound>
+                                  <div>Service non trouvé !</div>
+                                </ng-template> -->
+                              </div>
+                            </div>
+                            <label>{{ libelleService }}</label>
+                          </div>
+                          <div class="row" style="margin-top: 3%">
+                            <div class="col-md-6">
+                              <label> Emploi/Fonction </label>
+
+                              <div>
+                                <ng-autocomplete
+                                  [data]="emploisSharedCollection"
+                                  [searchKeyword]="keywordEmploi"
+                                  placeholder="Saisir la fonction ou l'emploi"
+                                  (selected)="selectEventEmploi($event)"
+                                  (focusout)="onFocusOutEventEmplois($event)"
+                                  (inputChanged)="onChangeSearchEmplois($event)"
+                                  (inputFocused)="onFocusedEmploi($event)"
+                                  historyIdentifier="emplois"
+                                  name="emploisId"
+                                  id="field_emploisId"
+                                  [itemTemplate]="itemTemplateEmploi"
+                                  [notFoundTemplate]="notFoundTemplateEmplois"
+                                  formControlName="emploisId"
+                                >
+                                </ng-autocomplete>
+
+                                <ng-template #itemTemplateEmploi let-item>
+                                  <a [innerHTML]="item.code"></a>
+                                </ng-template>
+                                <ng-template #notFoundTemplateEmplois let-notFound>
+                                  <div>Emploi non trouvé !</div>
+                                </ng-template>
+                              </div>
+                            </div>
+                            <label>{{ libelleEmploi }}</label>
+                          </div>
+
+                          <div class="row" style="margin-top: 5%">
+                            <div class="col-md-6">
+                              <input
+                                type="checkbox"
+                                name="cotisation_ipres"
+                                id="field_cotisation_ipres"
+                                data-cy="cotisation_ipres"
+                                style="margin: 2%"
+                                (change)="isLogeChecked($event)"
+                              />
+                              <label> Cotisation IPRES cadre </label>
+                            </div>
+                          </div>
+
+                          <div class="row" style="margin-top: 1%">
+                            <div class="col-md-6" *ngIf="isContrat == true">
+                              <input
+                                type="checkbox"
+                                name="cdi"
+                                id="field_cdi"
+                                data-cy="cdi"
+                                formControlName="cdi"
+                                style="margin: 2%"
+                                (change)="isCDIChecked($event)"
+                              />
+                              <label> CDI </label>
+                            </div>
+                          </div>
+                          <div class="row" style="margin-top: 5%">
+                            <div class="col-md-6">
+                              <label> Mode de réglement <span style="color: red">*</span> </label>
+                              <select
+                                class="form-control"
+                                name="modeReglement"
+                                id="field_modeReglement"
+                                data-cy="modeReglement"
+                                style="width: 100%; font-size: 12px"
+                                (change)="onModeReglementChange(editForm.get('modeReglement')!.value)"
+                                formControlName="modeReglement"
+                              >
+                                <option *ngIf="!editForm.value.modeReglement" [ngValue]="null" selected></option>
+                                <option
+                                  [ngValue]="
+                                    modeReglementOption.id === editForm.get('modeReglement')!.value?.id
+                                      ? editForm.get('modeReglement')!.value
+                                      : modeReglementOption
+                                  "
+                                  *ngFor="let modeReglementOption of modeReglement"
+                                >
+                                  {{ modeReglementOption.libelle }}
+                                </option>
+                              </select>
+                            </div>
+                            <div class="col-md-6" *ngIf="isModeBanque == true">
+                              <label> Nom agence <span style="color: red">*</span> </label>
+                              <div>
+                                <ng-autocomplete
+                                  [data]="agenceSharedCollection"
+                                  [searchKeyword]="keywordBanque"
+                                  placeholder="Saisir le nom de l'agence "
+                                  name="agenceId"
+                                  id="fieldagenceId"
+                                  formControlName="agenceId"
+                                  (selected)="selectEventBanque($event)"
+                                  (inputChanged)="onChangeSearchBanque($event)"
+                                  (inputFocused)="onFocusedBanque($event)"
+                                  historyIdentifier="agence"
+                                  [itemTemplate]="itemTemplate"
+                                >
+                                </ng-autocomplete>
+
+                                <ng-template #itemTemplate let-itemb>
+                                  <a [innerHTML]="itemb.libelle"></a>
+                                </ng-template>
+                              </div>
+                              <label>{{ libelleBanque }}</label>
+                            </div>
+                            <div class="col-md-6" *ngIf="isBilleteur == true">
+                              <label> Billeteur <span style="color: red">*</span> </label>
+                              <select
+                                class="form-control"
+                                name="billeteurId"
+                                id="field_billeteurId"
+                                data-cy="billeteurId"
+                                formControlName="billeteurId"
+                                style="width: 100%; font-size: 12px"
+                              >
+                                <option [ngValue]="null"></option>
+                                <option
+                                  [ngValue]="
+                                    billeteurOption.id === editForm.get('billeteurId')!.value?.id
+                                      ? editForm.get('billeteurId')!.value
+                                      : billeteurOption
+                                  "
+                                  *ngFor="let billeteurOption of billeteurSharedCollection"
+                                >
+                                  {{ billeteurOption.prenom }}
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="row" style="margin-top: 5%">
+                            <div class="col-md-6" id="form" *ngIf="isModeBanque">
+                              <label> Code banque + code agence : saisir numéro de compte <span style="color: red">*</span> </label>
+                              <div id="codeBanque" *ngIf="isModeBanque" class="col-md-6">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  name="numeroCompte"
+                                  id="field_numeroCompte"
+                                  (focusout)="verifNumeroCompte(editForm.get('numeroCompte')?.value)"
+                                  maxlength="15"
+                                  formControlName="numeroCompte"
+                                />
+                                <span>{{ codeAgence }}{{ codeBanque }}</span>
+                              </div>
+
+                              <div
+                                *ngIf="
+                                  editForm.get('numeroCompte')!.invalid &&
+                                  (editForm.get('numeroCompte')!.dirty || editForm.get('numeroCompte')!.touched)
+                                "
+                              >
+                                <small class="form-text text-danger" *ngIf="editForm.get('numeroCompte')?.errors?.minlength">
+                                  Veuillez saisir un numéro de 15 positions.
+                                </small>
+                                <small class="form-text text-danger" *ngIf="editForm.get('numeroCompte')?.errors?.maxlength">
+                                  Veuillez saisir un numéro de 15 positions.
+                                </small>
+                              </div>
+                            </div>
+                          </div>
+                        </fieldset>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h2 id="page-heading">
+                <div class="float-right float">
+                  <button type="button" id="jh-create-entity" class="btn btn-info" (click)="nav.select(1)">
+                    <span>Precedent </span>
+                    <!--  <fa-icon [icon]="'arrow-right'"></fa-icon> -->
+                  </button>
+                  <button type="button" id="jh-create-entity" class="btn btn-info" (click)="allerADocuments(nav)">
+                    <span>Suivant </span>
+                    <!--  <fa-icon [icon]="'arrow-right'"></fa-icon> -->
+                  </button>
+                </div>
+              </h2>
+            </div>
+          </ng-template>
+        </li>
+
+        &nbsp;
+        <li [ngbNavItem]="3">
+          <a ngbNavLink id="infos-forfait">Documents à fournir</a>
+          <ng-template ngbNavContent>
+            <!-- <form name="editFormDocument" role="form" novalidate (ngSubmit)="ajouterDocument()" [formGroup]="editFormDocument"> -->
+            <div>
+              <div class="col-12 card">
+                <div class="row justify-content-center" style="margin: 0 !important; padding: 5 !important">
+                  <div class="col-md-5" style="border: 1px solid lightgray; padding: 2%">
+                    <fieldset>
+                      <!-- <legend style="font-size: 17px; color: #24695c; font-weight: 700">Informations personnelles de l'agent</legend> -->
+                      <div class="row" style="margin-top: 1%">
+                        <div class="col-md-4">
+                          <div>
+                            <button type="button" id="ajout-piece" class="btn btn-outline-primary btn-lg mb-2" (click)="ajoutPiece()">
+                              <fa-icon icon="book"></fa-icon>&nbsp;<span>Ajouter une pièce</span>
+                            </button>
+                          </div>
+                        </div>
+
+                        <div class="col-md-4" *ngIf="!isPasseport"></div>
+
+                        <div class="col-md-4" *ngIf="isPasseport"></div>
+                      </div>
+                      <br />
+                      <br />
+                      <div class="table-responsive" id="entities" *ngIf="documentsAdministratif && documentsAdministratif.length > 0">
+                        <table class="table table-bordered table-condensed table-hover" aria-describedby="page-heading">
+                          <thead>
+                            <tr>
+                              <th scope="col"><span>Tye pièce</span></th>
+
+                              <th scope="col">
+                                <span>Nature pièce</span>
+                              </th>
+
+                              <th scope="col">
+                                <span>Numéro</span>
+                              </th>
+                              <th scope="col">
+                                <span>Date</span>
+                              </th>
+                              <th scope="col"></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let document of documentsAdministratif">
+                              <td>{{ document.typeActes?.libelle }}</td>
+                              <td>{{ document.natureActe?.libelle }}</td>
+                              <td>{{ document.numero }}</td>
+                              <td>{{ document.date }}</td>
+                              <td>
+                                <button
+                                  type="button"
+                                  (click)="openFile(document?.fichier, document?.fichierContentType)"
+                                  class="btn btn-outline-dark"
+                                  data-cy="entityDetailsButton"
+                                  title="Ouvrir ce document administratif"
+                                >
+                                  <fa-icon icon="eye"></fa-icon>
+                                  <span class="d-none d-md-inline"></span>
+                                </button>
+                                <button
+                                  class="btn btn-outline-danger btn-sm"
+                                  data-cy="entityDeleteButton"
+                                  title="Retirer ce Membre"
+                                  (click)="retirerDocument(document)"
+                                >
+                                  <fa-icon icon="times"></fa-icon>
+                                  <span class="d-none d-md-inline"></span>
+                                </button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </fieldset>
+                  </div>
+
+                  <div class="col-md-7" style="border: 1px solid lightgray; padding: 2%">
+                    <fieldset *ngIf="ajoutActe">
+                      <div class="row justify-content-center">
+                        <div class="col-12">
+                          <br />
+                          <div class="row mb-4">
+                            <div class="col mb-2 row">
+                              <label class="col-sm-4 col-form-label space" for="field_evenement">Type pièce </label>
+                              <div class="col-sm-7">
+                                <select
+                                  class="form-control"
+                                  id="field_typeActes"
+                                  data-cy="typeActes"
+                                  name="typeActes"
+                                  formControlName="typeActes"
+                                  style="width: 100%"
+                                >
+                                  <option [ngValue]="null"></option>
+                                  <option
+                                    [ngValue]="
+                                      typeActeOption.id === editForm.get('typeActes')!.value?.id
+                                        ? editForm.get('typeActes')!.value
+                                        : typeActeOption
+                                    "
+                                    *ngFor="let typeActeOption of typeActes"
+                                  >
+                                    {{ typeActeOption.libelle }}
+                                  </option>
+                                </select>
+                              </div>
+                            </div>
+
+                            <div class="col mb-2 row">
+                              <label class="col-sm-4 col-form-label space" for="field_natureActes">Nature pièce</label>
+                              <div class="col-sm-7">
+                                <select
+                                  class="form-control"
+                                  name="natureActes"
+                                  id="field_natureActes"
+                                  data-cy="natureActes"
+                                  formControlName="natureActes"
+                                  style="width: 100%"
+                                >
+                                  <option [ngValue]="null"></option>
+                                  <option
+                                    [ngValue]="
+                                      natureActeOption.id === editForm.get('natureActes')!.value?.id
+                                        ? editForm.get('natureActes')!.value
+                                        : natureActeOption
+                                    "
+                                    *ngFor="let natureActeOption of natureActes"
+                                  >
+                                    {{ natureActeOption.libelle }}
+                                  </option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="row mb-4">
+                            <div class="col mb-2 row">
+                              <label class="col-sm-4 col-form-label space" for="field_numero">Numéro </label>
+                              <div class="col-sm-7">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  name="numero"
+                                  id="field_numero"
+                                  data-cy="numero"
+                                  formControlName="numero"
+                                  style="width: 100%"
+                                />
+                              </div>
+                            </div>
+                            <div class="col mb-2 row">
+                              <label for="field_date" class="col-sm-4 col-form-label">Date pièce</label>
+                              <div class="col-sm-7">
+                                <input
+                                  type="date"
+                                  class="form-control"
+                                  name="date"
+                                  id="field_date"
+                                  data-cy="date"
+                                  formControlName="date"
+                                  style="width: 100%"
+                                />
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="row mb-4">
+                            <div class="col mb-2 row">
+                              <label class="col-sm-3 col-form-label" for="field_fichier">fichier</label>
+                              <div class="col-sm-7">
+                                <div>
+                                  <div *ngIf="editForm.get('fichier')!.value" class="form-text text-danger clearfix">
+                                    <a
+                                      class="pull-left"
+                                      (click)="openFile(editForm.get('fichier')!.value, editForm.get('fichierContentType')!.value)"
+                                      >open</a
+                                    ><br />
+                                    <span class="pull-left"
+                                      >{{ editForm.get('fichierContentType')!.value }}, {{ byteSize(editForm.get('fichier')!.value) }}</span
+                                    >
+                                    <button
+                                      type="button"
+                                      (click)="editForm.patchValue({ fichier: null }); editForm.patchValue({ fichierContentType: null })"
+                                      class="btn btn-secondary btn-xs pull-right"
+                                    >
+                                      <fa-icon icon="times"></fa-icon>
+                                    </button>
+                                  </div>
+                                  <input
+                                    type="file"
+                                    id="file_fichier"
+                                    name="file_fichier"
+                                    data-cy="fichier"
+                                    (change)="setFileData($event, 'fichier', false)"
+                                  />
+                                </div>
+                                <input
+                                  type="hidden"
+                                  class="form-control"
+                                  name="fichier"
+                                  id="field_fichier"
+                                  data-cy="fichier"
+                                  formControlName="fichier"
+                                />
+                                <input
+                                  type="hidden"
+                                  class="form-control"
+                                  name="fichierContentType"
+                                  id="field_fichierContentType"
+                                  formControlName="fichierContentType"
+                                />
+                              </div>
+                            </div>
+
+                            <div class="col mb-2 row">
+                              <div class="col-sm-7"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-dark" (click)="fermerFormulaire()">Fermer</button>
+                        <button type="button" class="btn btn-outline-dark" (click)="ajouterDocument()">Ajouter</button>
+                      </div>
+                    </fieldset>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- </form> -->
+
+            <div>
+              <h2 id="page-heading">
+                <div>
+                  <div class="float-right float">
+                    <button type="button" id="jh-create-entity" class="btn btn-info" (click)="nav.select(2)">
+                      <span>Précédent </span>
+                      <!--  <fa-icon [icon]="'arrow-right'"></fa-icon> -->
+                    </button>
+
+                    <button
+                      type="submit"
+                      id="save-entity"
+                      data-cy="entityCreateSaveButton"
+                      [disabled]="editForm.invalid || isSaving"
+                      class="btn btn-primary btn-sm"
+                    >
+                      <fa-icon icon="save"></fa-icon>&nbsp;<span>Enregistrer</span>
+                    </button>
+                  </div>
+                </div>
+              </h2>
+            </div>
+          </ng-template>
+        </li>
+      </lu>
+      <div [ngbNavOutlet]="nav" class="mt-2"></div>
+    </form>
+  </div>
+</div>

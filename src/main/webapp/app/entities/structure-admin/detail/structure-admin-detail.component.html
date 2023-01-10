@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="structureAdmin">
+      <h2 data-cy="structureAdminDetailsHeading" class="custom-title">
+        <span
+          >Visualisation de la Structure: <b>{{ structureAdmin.libelle }}</b></span
+        >
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details detail-card">
+        <!-- <dt><span >ID</span></dt>
+        <dd>
+          <span>{{ structureAdmin.id }}</span>
+        </dd>
+        <dt><span>Code</span></dt>
+        <dd>
+          <span>{{ structureAdmin.code }}</span>
+        </dd> -->
+        <dt><span>Libellé</span></dt>
+        <dd>
+          <span>{{ structureAdmin.libelle }}</span>
+        </dd>
+        <dt><span>Description</span></dt>
+        <dd>
+          <span>{{ structureAdmin.description }}</span>
+        </dd>
+        <dt><span>Direction</span></dt>
+        <dd>
+          <span>{{ structureAdmin.direction }}</span>
+        </dd>
+        <dt><span>Services</span></dt>
+        <dd>
+          <span>{{ structureAdmin.services }}</span>
+        </dd>
+        <dt><span>Adresse</span></dt>
+        <dd>
+          <span>{{ structureAdmin.adresse }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/structure-admin', structureAdmin.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Modifier</span>
+      </button>
+    </div>
+  </div>
+</div>

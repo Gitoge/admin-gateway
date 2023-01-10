@@ -1,0 +1,138 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <form name="editForm" role="form" novalidate (ngSubmit)="saveUpdate()" [formGroup]="editForm">
+      <h2 id="jhi-saisie-elements-variables-heading" data-cy="SaisieElementsVariablesCreateUpdateHeading">
+        Modification des éléments variables
+      </h2>
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+        <div class="justify-content-center" style="border: 1px solid lightgray; padding: 2%">
+          <fieldset>
+            <legend style="font-size: 17px; color: #24695c; font-weight: 700">
+              <div>
+                <div class="form-group">
+                  <h2 class="custom-title" id="jhi-augmentation-heading">Modification des éléments variables</h2>
+                </div>
+              </div>
+            </legend>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Code Poste<span style="color: red">*</span> </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="codePoste"
+                  id="field_codePoste"
+                  data-cy="codePoste"
+                  formControlName="codePoste"
+                />
+                <div *ngIf="editForm.get('codePoste')!.invalid && (editForm.get('codePoste')!.dirty || editForm.get('codePoste')!.touched)">
+                  <small
+                    class="form-text text-danger"
+                    *ngIf="editForm.get('codePoste')?.errors?.required"
+                    jhiTranslate="entity.validation.required"
+                  >
+                    This field is required.
+                  </small>
+                  <small
+                    class="form-text text-danger"
+                    *ngIf="editForm.get('codePoste')?.errors?.minlength"
+                    jhiTranslate="entity.validation.minlength"
+                    [translateValues]="{ min: 3 }"
+                  >
+                    This field is required to be at least 3 characters.
+                  </small>
+                  <small
+                    class="form-text text-danger"
+                    *ngIf="editForm.get('codePoste')?.errors?.maxlength"
+                    jhiTranslate="entity.validation.maxlength"
+                    [translateValues]="{ max: 3 }"
+                  >
+                    This field cannot be longer than 3 characters.
+                  </small>
+                </div>
+              </div>
+              <div class="col-md-6"></div>
+            </div>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Matricule<span style="color: red">*</span> </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="matricule"
+                  id="field_matricule"
+                  data-cy="matricule"
+                  formControlName="matricule"
+                  readonly
+                />
+                <div *ngIf="editForm.get('matricule')!.invalid && (editForm.get('matricule')!.dirty || editForm.get('matricule')!.touched)">
+                  <small
+                    class="form-text text-danger"
+                    *ngIf="editForm.get('matricule')?.errors?.required"
+                    jhiTranslate="entity.validation.required"
+                  >
+                    This field is required.
+                  </small>
+                  <small
+                    class="form-text text-danger"
+                    *ngIf="editForm.get('matricule')?.errors?.minlength"
+                    jhiTranslate="entity.validation.minlength"
+                    [translateValues]="{ min: 7 }"
+                  >
+                    This field is required to be at least 7 characters.
+                  </small>
+                  <small
+                    class="form-text text-danger"
+                    *ngIf="editForm.get('matricule')?.errors?.maxlength"
+                    jhiTranslate="entity.validation.maxlength"
+                    [translateValues]="{ max: 7 }"
+                  >
+                    This field cannot be longer than 7 characters.
+                  </small>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label> Montant<span style="color: red">*</span> </label>
+                <input type="number" class="form-control" name="montant" id="field_montant" data-cy="montant" formControlName="montant" />
+                <div *ngIf="editForm.get('montant')!.invalid && (editForm.get('montant')!.dirty || editForm.get('montant')!.touched)">
+                  <small
+                    class="form-text text-danger"
+                    *ngIf="editForm.get('montant')?.errors?.required"
+                    jhiTranslate="entity.validation.required"
+                  >
+                    This field is required.
+                  </small>
+                  <small
+                    class="form-text text-danger"
+                    [hidden]="!editForm.get('montant')?.errors?.number"
+                    jhiTranslate="entity.validation.number"
+                  >
+                    This field should be a number.
+                  </small>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+      <br />
+      <div style="display: flex; justify-content: center; align-items: center">
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Retour</span>
+        </button>
+        &nbsp;
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<br />

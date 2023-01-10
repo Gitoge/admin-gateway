@@ -1,0 +1,188 @@
+<div class="row justify-content-center">
+  <div class="col-12">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm" style="margin: 2px; padding: 0">
+      <h2 id="page-heading"></h2>
+      <jhi-alert></jhi-alert>
+      <jhi-alert-error></jhi-alert-error>
+
+      <hr />
+      <lu ngbNav #nav="ngbNav" [(activeId)]="active" (navChange)="onNavChange($event)" class="nav-tabs">
+        <li [ngbNavItem]="1">
+          <a ngbNavLink id="infos-forf">Informations personnelles</a>
+          <ng-template ngbNavContent>
+            <div>
+              <div class="col-12 card">
+                <div class="row justify-content-center" style="margin: 0 !important; padding: 5 !important">
+                  <div class="col-md-6" style="border: 1px solid lightgray; padding: 2%">
+                    <fieldset>
+                      <!-- <legend style="font-size: 17px; color: #24695c; font-weight: 700">Informations personnelles de l'agent</legend> -->
+                      <div class="row" style="margin-top: 1%">
+                        <div class="col-md-4">
+                          <label> Type Pièce <span style="color: red">*</span> </label>
+                        </div>
+
+                        <div class="col-md-4">
+                          <label> Numéro Pièce <span style="color: red">*</span> </label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="numeroPiece"
+                            id="field_numeroPiece"
+                            data-cy="numeroPiece"
+                            required
+                            [(ngModel)]="numeroPiece"
+                            oninput="this.value = this.value.toUpperCase()"
+                          />
+                          <div></div>
+                        </div>
+                      </div>
+
+                      <div class="row" style="margin-top: 1%">
+                        <div class="col-md-4">
+                          <label> Prénom <span style="color: red">*</span> </label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            required
+                            name="prenom"
+                            id="field_prenom"
+                            data-cy="prenom"
+                            placeholder="Saisir le prénom"
+                            oninput="this.value = this.value.toUpperCase()"
+                          />
+                        </div>
+                        <div class="col-md-4">
+                          <label> Nom <span style="color: red">*</span> </label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            required
+                            name="nom"
+                            id="field_nom"
+                            data-cy="nom"
+                            placeholder="Saisir le nom"
+                            oninput="this.value = this.value.toUpperCase()"
+                          />
+                        </div>
+                      </div>
+                      <div class="row" style="margin-top: 1%">
+                        <div class="col-md-4">
+                          <label> Date de naissance <span style="color: red">*</span> </label>
+                          <div class="input-group">
+                            <input
+                              id="field_dateNaissance"
+                              data-cy="dateNaissance"
+                              type="date"
+                              class="form-control"
+                              min="1950-01-01"
+                              max="{{ today | date: 'yyyy-MM-dd' }}"
+                              name="dateNaissance"
+                              placeholder=" AAAA-MM-JJ"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <label> Lieu de naissance <span style="color: red">*</span> </label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            required
+                            name="lieuNaissance"
+                            id="field_lieuNaissance"
+                            data-cy="lieuNaissance"
+                            placeholder="Saisir le lieu de naissance"
+                            oninput="this.value = this.value.toUpperCase()"
+                          />
+                        </div>
+                      </div>
+                    </fieldset>
+                  </div>
+                  <div class="col-md-6" style="border: 1px solid lightgray; padding: 2%">
+                    <fieldset>
+                      <div class="row" style="margin-top: 1%">
+                        <div class="col-md-4">
+                          <label> Sexe <span style="color: red">*</span> </label>
+                          <select
+                            class="form-control"
+                            name="sexe"
+                            id="field_sexe"
+                            data-cy="sexe"
+                            style="width: 100%; font-size: 12px"
+                          ></select>
+                        </div>
+                        <div class="col-md-4">
+                          <label> Nationalité <span style="color: red">*</span> </label>
+                          <select
+                            class="form-control"
+                            id="field_nationalite"
+                            data-cy="nationalite"
+                            name="nationalite"
+                            style="width: 100%; font-size: 12px"
+                          >
+                            <option [ngValue]="null"></option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="row" style="margin-top: 1%">
+                        <div class="col-md-4">
+                          <label> Email</label>
+                          <input
+                            type="email"
+                            class="form-control"
+                            name="email"
+                            id="field_email"
+                            data-cy="email"
+                            placeholder="Saisir l'email"
+                            oninput="this.value = this.value.toLowerCase()"
+                          />
+                        </div>
+                        <div class="col-md-4">
+                          <label> Téléphone<span style="color: red">*</span> </label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            required
+                            name="tel"
+                            id="field_tel"
+                            data-cy="tel"
+                            placeholder="Saisir le numéro de téléphone"
+                          />
+                        </div>
+                      </div>
+                      <div class="row" style="margin-top: 1%">
+                        <div class="col-md-8">
+                          <label> Adresse complète <span style="color: red">*</span> </label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="adresse"
+                            required
+                            id="field_adresse"
+                            data-cy="adresse"
+                            placeholder="Saisir l'adresse complète"
+                            oninput="this.value = this.value.toUpperCase()"
+                          />
+                        </div>
+                      </div>
+                    </fieldset>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h2 id="page-heading">
+                <div class="float-right float">
+                  <button type="button" id="jh-create-entity" class="btn btn-info">
+                    <span>Suivant </span>
+                    <!--  <fa-icon [icon]="'arrow-right'"></fa-icon> -->
+                  </button>
+                </div>
+              </h2>
+            </div>
+          </ng-template>
+        </li>
+      </lu>
+      <div [ngbNavOutlet]="nav" class="mt-2"></div>
+    </form>
+  </div>
+</div>

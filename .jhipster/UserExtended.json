@@ -1,0 +1,17 @@
+{
+  "applications": "*",
+  "changelogDate": "20220722173320",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "user_extended",
+  "fields": [],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "UserExtended",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no",
+  "skipServer": true
+}

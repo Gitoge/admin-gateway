@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <div *ngIf="augmentationIndice">
+      <h2 data-cy="augmentationIndiceDetailsHeading" class="custom-title">
+        <span>Augmentation Indice</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details detail-card">
+        <!-- <dt><span jhiTranslate="global.field.id">ID</span></dt> -->
+        <!-- <dd>
+          <span>{{ augmentationIndice.id }}</span>
+        </dd> -->
+        <dt><span>Libelle</span></dt>
+        <dd>
+          <span>{{ augmentationIndice.libelle }}</span>
+        </dd>
+        <dt><span>Valeur</span></dt>
+        <dd>
+          <span>{{ augmentationIndice.valeur }}</span>
+        </dd>
+        <dt><span> Poste</span></dt>
+        <dd>
+          <span>{{ augmentationIndice.postes?.code }}</span>
+        </dd>
+        <dt><span>Total</span></dt>
+        <dd>
+          <span>{{ augmentationIndice.total }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/augmentation-indice', augmentationIndice.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

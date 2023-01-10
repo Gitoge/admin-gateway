@@ -1,0 +1,424 @@
+<form style="margin: 2px; padding: 0" [formGroup]="editForm">
+  <div class="row justify-content-center" style="margin: 0 !important; padding: 0 !important">
+    <!--   <h2 id="jhi-emoluments-heading" data-cy="EmolumentsCreateUpdateHeading" style="text-align: center">
+      {{ titre }}
+    </h2>
+    <hr />
+    <div>
+      <jhi-alert-error></jhi-alert-error>-->
+
+    <div class="col-md-5" style="border: 1px solid lightgray; padding: 1%">
+      <div class="col-md-12" style="border: 1px solid lightgray; padding: 1%">
+        <fieldset>
+          <legend style="font-size: 17px; color: #24695c; font-weight: 700">Recherche par matricule:</legend>
+          <div class="row" style="margin-top: 1%">
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Matricule </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="matriucle"
+                  id="field_matriucle"
+                  data-cy="matriucle"
+                  formControlName="matricule"
+                  placeholder="Saisir le matriucle"
+                />
+              </div>
+
+              <div class="col-md-6" style="margin-top: 2%">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  style="margin-top: 5.5%"
+                  (click)="getAgentByMatricule(editForm.get('matricule')!.value)"
+                >
+                  <fa-icon [icon]="'search'"></fa-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <br />
+      <br />
+      <br />
+
+      <fieldset *ngIf="emolument && emolument.length > 0">
+        <fieldset>
+          <legend style="font-size: 17px; color: #24695c; font-weight: 700">Elements Fixes:</legend>
+          <div class="row" style="margin-top: 1%">
+            <div class="table-responsive" id="entities" *ngIf="emolument && emolument.length > 0">
+              <table class="table table-bordered table-condensed table-hover" aria-describedby="page-heading">
+                <thead>
+                  <tr>
+                    <th scope="col"><span>Matricule</span></th>
+
+                    <th scope="col">
+                      <span>Libellé</span>
+                    </th>
+
+                    <th scope="col">
+                      <span>Taux</span>
+                    </th>
+                    <th scope="col">
+                      <span>Montant</span>
+                    </th>
+                    <th scope="col">
+                      <span>Date Effet</span>
+                    </th>
+                    <th scope="col">
+                      <span>Date Echeance</span>
+                    </th>
+                    <!-- <th scope="col"></th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let emolument of emolument">
+                    <td>{{ emolument.matricule }}</td>
+                    <td>{{ emolument.reference }}</td>
+                    <td>{{ emolument.taux }}</td>
+                    <td>{{ emolument?.montant }}</td>
+                    <td>{{ emolument.dateEffet }}</td>
+                    <td>{{ emolument.dateEcheance }}</td>
+                    <!-- <td>
+                    <button
+                      class="btn btn-outline-danger btn-sm"
+                      data-cy="entityDeleteButton"
+                      title="Retirer ce Membre"
+                      (click)="deleteMembre(enfant)"
+                    >
+                      <fa-icon icon="times"></fa-icon>
+                      <span class="d-none d-md-inline"></span>
+                    </button>
+                  </td> -->
+                  </tr>
+                  <tr>
+                    <td>
+                      <button
+                        type="submit"
+                        class="btn btn-outline-info"
+                        title="Ajouter"
+                        data-cy="entityDetailsButton"
+                        title="Ajouter un membre"
+                        (click)="veuxAjouter()"
+                      >
+                        <fa-icon icon="plus"></fa-icon>
+                        <span class="d-none d-md-inline"></span>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </fieldset>
+      </fieldset>
+    </div>
+    <br />
+    <div class="col-md-6" style="border: 1px solid lightgray; padding: 1%; margin-left: 1%">
+      <div class="row justify-content-center" style="margin: 0 !important; padding: 0 !important" *ngIf="isAjout == true">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+          <div class="row mb-4 space">
+            <div class="col mb-2 row space">
+              <label class="col-sm-4 col-form-label" for="field_agentId">Agent</label>
+              <div class="col-sm-7">
+                <ng-autocomplete
+                  [data]="agents"
+                  [searchKeyword]="keyword"
+                  placeholder="Prenom Agent"
+                  (selected)="selectEvent($event)"
+                  (inputChanged)="onChangeSearch($event)"
+                  (inputFocused)="onFocused($event)"
+                  historyIdentifier="agentId"
+                  [itemTemplate]="itemTemplate"
+                  name="agentId"
+                  id="field_agentId"
+                >
+                </ng-autocomplete>
+                <ng-template #itemTemplate let-item>
+                  <a [innerHTML]="item.prenom"></a>
+                </ng-template>
+              </div>
+            </div>
+            <div class="col mb-2 row space">
+              <label class="col-sm-4 col-form-label" for="field_matricule">Matricule <span style="color: red">*</span></label>
+              <div class="col-sm-7">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="matricule"
+                  id="field_matricule"
+                  data-cy="matricule"
+                  formControlName="matricule"
+                  required
+                />
+                <div *ngIf="editForm.get('matricule')!.invalid && (editForm.get('matricule')!.dirty || editForm.get('matricule')!.touched)">
+                  <small
+                    class="form-text text-danger"
+                    *ngIf="editForm.get('matricule')?.errors?.required"
+                    jhiTranslate="entity.validation.required"
+                  >
+                    This field is required.
+                  </small>
+                  <small
+                    class="form-text text-danger"
+                    *ngIf="editForm.get('matricule')?.errors?.minlength"
+                    jhiTranslate="entity.validation.minlength"
+                    [translateValues]="{ min: 7 }"
+                  >
+                    This field is required to be at least 7 characters.
+                  </small>
+                  <small
+                    class="form-text text-danger"
+                    *ngIf="editForm.get('matricule')?.errors?.maxlength"
+                    jhiTranslate="entity.validation.maxlength"
+                    [translateValues]="{ max: 7 }"
+                  >
+                    This field cannot be longer than 7 characters.
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-4 space">
+            <div class="col mb-2 row space">
+              <label class="col-sm-4 col-form-label" for="field_codePoste">Code Poste <span style="color: red">*</span></label>
+              <div class="col-sm-7">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="codePoste"
+                  id="field_codePoste"
+                  data-cy="codePoste"
+                  formControlName="codePoste"
+                />
+                <div *ngIf="editForm.get('codePoste')!.invalid && (editForm.get('codePoste')!.dirty || editForm.get('codePoste')!.touched)">
+                  <small
+                    class="form-text text-danger"
+                    *ngIf="editForm.get('codePoste')?.errors?.required"
+                    jhiTranslate="entity.validation.required"
+                  >
+                    This field is required.
+                  </small>
+                  <small
+                    class="form-text text-danger"
+                    *ngIf="editForm.get('codePoste')?.errors?.minlength"
+                    jhiTranslate="entity.validation.minlength"
+                    [translateValues]="{ min: 3 }"
+                  >
+                    This field is required to be at least 3 characters.
+                  </small>
+                  <small
+                    class="form-text text-danger"
+                    *ngIf="editForm.get('codePoste')?.errors?.maxlength"
+                    jhiTranslate="entity.validation.maxlength"
+                    [translateValues]="{ max: 3 }"
+                  >
+                    This field cannot be longer than 3 characters.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col mb-2 row">
+              <label class="col-sm-4 col-form-label" for="field_Postes">Poste <span style="color: red">*</span></label>
+              <div class="col-sm-7">
+                <select class="form-control" id="field_postes" data-cy="postes" name="postes" formControlName="postes">
+                  <option [ngValue]="null"></option>
+                  <option
+                    [ngValue]="postesOption.id === editForm.get('postes')!.value?.id ? editForm.get('postes')!.value : postesOption"
+                    *ngFor="let postesOption of postesSharedCollection; trackBy: trackPostesById"
+                  >
+                    {{ postesOption.libelle }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-4 space">
+            <div class="col mb-2 row">
+              <label class="col-sm-4 col-form-label" for="field_taux">Taux <span style="color: red">*</span></label>
+              <div class="col-sm-7">
+                <input type="text" class="form-control" name="taux" id="field_taux" data-cy="taux" formControlName="taux" required />
+                <div *ngIf="editForm.get('taux')!.invalid && (editForm.get('taux')!.dirty || editForm.get('taux')!.touched)">
+                  <small
+                    class="form-text text-danger"
+                    *ngIf="editForm.get('taux')?.errors?.required"
+                    jhiTranslate="entity.validation.required"
+                  >
+                    This field is required.
+                  </small>
+                  <small
+                    class="form-text text-danger"
+                    [hidden]="!editForm.get('taux')?.errors?.number"
+                    jhiTranslate="entity.validation.number"
+                  >
+                    This field should be a number.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col mb-2 row space">
+              <label class="col-sm-4 col-form-label" for="field_montant">Montant <span style="color: red">*</span></label>
+              <div class="col-sm-7">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="montant"
+                  id="field_montant"
+                  data-cy="montant"
+                  formControlName="montant"
+                  required
+                />
+                <div *ngIf="editForm.get('montant')!.invalid && (editForm.get('montant')!.dirty || editForm.get('montant')!.touched)">
+                  <small
+                    class="form-text text-danger"
+                    *ngIf="editForm.get('montant')?.errors?.required"
+                    jhiTranslate="entity.validation.required"
+                  >
+                    This field is required.
+                  </small>
+                  <small
+                    class="form-text text-danger"
+                    [hidden]="!editForm.get('montant')?.errors?.number"
+                    jhiTranslate="entity.validation.number"
+                  >
+                    This field should be a number.
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-4 space">
+            <div class="col mb-2 row">
+              <label class="col-sm-4 col-form-label" for="field_reference">Libellé <span style="color: red">*</span></label>
+              <div class="col-sm-7">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="reference"
+                  id="field_reference"
+                  data-cy="reference"
+                  formControlName="reference"
+                  required
+                />
+                <div *ngIf="editForm.get('reference')!.invalid && (editForm.get('reference')!.dirty || editForm.get('reference')!.touched)">
+                  <small
+                    class="form-text text-danger"
+                    *ngIf="editForm.get('reference')?.errors?.required"
+                    jhiTranslate="entity.validation.required"
+                  >
+                    This field is required.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col mb-2 row space">
+              <label class="col-sm-4 col-form-label" for="field_etablissementId">Etablissement <span style="color: red">*</span></label>
+              <div class="col-sm-7">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="etablissementId"
+                  id="field_etablissementId"
+                  data-cy="etablissementId"
+                  formControlName="etablissementId"
+                  required
+                />
+                <div
+                  *ngIf="
+                    editForm.get('etablissementId')!.invalid &&
+                    (editForm.get('etablissementId')!.dirty || editForm.get('etablissementId')!.touched)
+                  "
+                >
+                  <small
+                    class="form-text text-danger"
+                    *ngIf="editForm.get('etablissementId')?.errors?.required"
+                    jhiTranslate="entity.validation.required"
+                  >
+                    This field is required.
+                  </small>
+                  <small
+                    class="form-text text-danger"
+                    [hidden]="!editForm.get('etablissementId')?.errors?.number"
+                    jhiTranslate="entity.validation.number"
+                  >
+                    This field should be a number.
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-4 space">
+            <div class="col mb-2 row">
+              <label class="col-sm-4 col-form-label" for="field_dateEffet">Date Effet <span style="color: red">*</span></label>
+              <div class="col-sm-7">
+                <input
+                  type="date"
+                  class="form-control"
+                  name="dateEffet"
+                  id="field_dateEffet"
+                  data-cy="dateEffet"
+                  formControlName="dateEffet"
+                  required
+                />
+                <div *ngIf="editForm.get('dateEffet')!.invalid && (editForm.get('dateEffet')!.dirty || editForm.get('dateEffet')!.touched)">
+                  <small
+                    class="form-text text-danger"
+                    *ngIf="editForm.get('dateEffet')?.errors?.required"
+                    jhiTranslate="entity.validation.required"
+                  >
+                    This field is required.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col mb-2 row space">
+              <label class="col-sm-4 col-form-label" for="field_dateEcheance">Date Echeance <span style="color: red">*</span></label>
+              <div class="col-sm-7">
+                <input
+                  type="date"
+                  class="form-control"
+                  name="dateEcheance"
+                  id="field_dateEcheance"
+                  data-cy="dateEcheance"
+                  formControlName="dateEcheance"
+                  required
+                />
+                <div
+                  *ngIf="
+                    editForm.get('dateEcheance')!.invalid && (editForm.get('dateEcheance')!.dirty || editForm.get('dateEcheance')!.touched)
+                  "
+                >
+                  <small
+                    class="form-text text-danger"
+                    *ngIf="editForm.get('dateEcheance')?.errors?.required"
+                    jhiTranslate="entity.validation.required"
+                  >
+                    This field is required.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div>
+              <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+                <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+              </button>
+
+              <button
+                type="submit"
+                id="save-entity"
+                data-cy="entityCreateSaveButton"
+                [disabled]="editForm.invalid || isSaving"
+                class="btn btn-primary"
+              >
+                <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</form>

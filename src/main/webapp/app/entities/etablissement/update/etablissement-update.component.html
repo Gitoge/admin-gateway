@@ -1,0 +1,293 @@
+<div class="d-flex justify-content-center">
+  <div class="col-12 custom-card">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+      <div>
+        <div class="form-group" [hidden]="!etablissement.id">
+          <h2 class="custom-title" id="jhi-etablissement-heading">
+            Modification de l'établissement: <b>{{ etablissement.libelleCourt }}</b>
+          </h2>
+        </div>
+        <div class="form-group" [hidden]="etablissement.id">
+          <h2 class="custom-title" id="jhi-etablissement-heading">Ajout d'un nouvel établissement</h2>
+        </div>
+      </div>
+      <div>
+        <div>
+          <div class="col-12 card">
+            <div class="row justify-content-center" style="margin: 0 !important; padding: 5 !important">
+              <div class="col-md-6 infos-pers" style="border: 1px solid lightgray; padding: 2%">
+                <fieldset>
+                  <legend style="font-size: 17px; color: #24695c; font-weight: 700">Informations Générales</legend>
+                  <div class="row" style="margin-top: 1%">
+                    <div class="col-md-6">
+                      <label> Type Etablissement <span style="color: red">*</span> </label>
+                      <select
+                        class="form-control"
+                        id="field_typeEtab"
+                        data-cy="typeEtab"
+                        name="typeEtab"
+                        [(ngModel)]="etablissement.typeEtab"
+                        required
+                      >
+                        <option [ngValue]="null"></option>
+                        <option
+                          [ngValue]="typeEtabOption.id === etablissement.typeEtab?.id ? etablissement.typeEtab : typeEtabOption"
+                          *ngFor="let typeEtabOption of typeEtablissementsSharedCollection; trackBy: trackTypeEtablissementById"
+                        >
+                          {{ typeEtabOption.libelle }}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                      <label> Code <span style="color: red">*</span> </label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="code"
+                        id="field_code"
+                        data-cy="code"
+                        [(ngModel)]="etablissement.code"
+                        required
+                        oninput="this.value = this.value.toUpperCase()"
+                      />
+                    </div>
+                  </div>
+                  <div class="row" style="margin-top: 3%">
+                    <div class="col-md-6">
+                      <label> Libellé Long <span style="color: red">*</span> </label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="libelleLong"
+                        id="field_libellelong"
+                        data-cy="libelleLong"
+                        [(ngModel)]="etablissement.libelleLong"
+                        required
+                        oninput="this.value = this.value.toUpperCase()"
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <label> Libelé Court <span style="color: red">*</span> </label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="libelleCourt"
+                        id="field_libelleCourt"
+                        data-cy="libelleCourt"
+                        [(ngModel)]="etablissement.libelleCourt"
+                        required
+                        oninput="this.value = this.value.toUpperCase()"
+                      />
+                    </div>
+                  </div>
+                  <div class="row" style="margin-top: 3%">
+                    <div class="col-md-6">
+                      <label>Convention <span style="color: red">*</span> </label>
+                      <select
+                        class="form-control"
+                        id="field_convention"
+                        data-cy="convention"
+                        name="convention"
+                        [(ngModel)]="etablissement.libelleConvention"
+                      >
+                        <option [ngValue]="null"></option>
+                        <option
+                          [ngValue]="
+                            conventionOption.id === etablissement.conventionId ? etablissement.libelleConvention : conventionOption.libelle
+                          "
+                          *ngFor="let conventionOption of conventionsSharedCollection; trackBy: trackConventionById"
+                        >
+                          {{ conventionOption.libelle }}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                      <label> Sigle <span style="color: red">*</span> </label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="sigle"
+                        id="field_sigle"
+                        data-cy="sigle"
+                        [(ngModel)]="etablissement.sigle"
+                        required
+                        oninput="this.value = this.value.toUpperCase()"
+                      />
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+              <div class="col-md-6" style="border: 1px solid lightgray; padding: 2%">
+                <fieldset>
+                  <legend style="font-size: 17px; color: #24695c; font-weight: 700">Informations de Contact</legend>
+                  <div class="row" style="margin-top: 1%">
+                    <div class="col-md-6">
+                      <label> Numéro Téléphone </label>
+                      <input
+                        type="number"
+                        class="form-control"
+                        name="numTelephone"
+                        id="field_numTelephone"
+                        data-cy="numTelephone"
+                        [(ngModel)]="etablissement.numTelephone"
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <label> Fax </label>
+                      <input
+                        type="number"
+                        pattern="[+0-9]{9,}"
+                        class="form-control"
+                        name="fax"
+                        id="field_fax"
+                        data-cy="fax"
+                        [(ngModel)]="etablissement.fax"
+                      />
+                    </div>
+                  </div>
+                  <div class="row" style="margin-top: 3%">
+                    <div class="col-md-6">
+                      <label> Email </label>
+                      <input
+                        type="email"
+                        class="form-control"
+                        name="email"
+                        id="field_email"
+                        data-cy="email"
+                        [(ngModel)]="etablissement.email"
+                        required
+                        pattern="^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
+                      />
+                      <div [hidden]="!(editForm.controls.email?.dirty && editForm.controls.email?.invalid)">
+                        <small class="form-text text-danger" [hidden]="!editForm.controls.email?.errors?.pattern">
+                          Le format du e-mail est incorrect.
+                        </small>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <label> Adresse </label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="adresse"
+                        id="field_adresse"
+                        data-cy="adresse"
+                        [(ngModel)]="etablissement.adresse"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="row" style="margin-top: 3%">
+                    <div class="col-md-4" [hidden]="etablissement.id">
+                      <label> Région </label>
+
+                      <select
+                        class="form-control"
+                        id="field_region"
+                        data-cy="region"
+                        name="region"
+                        [(ngModel)]="v_region"
+                        [required]="
+                          etablissement?.region?.libelle === 'Région' ||
+                          etablissement?.region?.libelle === 'Département' ||
+                          etablissement?.region?.libelle === 'Commune'
+                        "
+                        (change)="getDepartementByRegion(v_region.id)"
+                        name="region"
+                      >
+                        <option [ngValue]="null"></option>
+                        <option
+                          [ngValue]="regionOption.id === v_region?.id ? v_region : regionOption"
+                          *ngFor="let regionOption of regions; trackBy: trackRegionById"
+                        >
+                          {{ regionOption.libelle }}
+                        </option>
+                      </select>
+                    </div>
+
+                    <div class="col-md-4" [hidden]="etablissement.id">
+                      <label> Département </label>
+                      <select
+                        class="form-control"
+                        id="field_departement"
+                        data-cy="region"
+                        name="departement"
+                        [(ngModel)]="v_departement"
+                        [required]="etablissement?.region?.libelle === 'Département' || etablissement?.region?.libelle === 'Commune'"
+                        (change)="getCommunesByDepartement(v_departement.id)"
+                      >
+                        <option [ngValue]="null"></option>
+                        <option
+                          [ngValue]="departementOption.id === v_departement?.id ? v_departement : departementOption"
+                          *ngFor="let departementOption of departements"
+                        >
+                          {{ departementOption.libelle }}
+                        </option>
+                      </select>
+                    </div>
+
+                    <div class="col-md-4" [hidden]="etablissement.id">
+                      <label> Commune </label>
+                      <select
+                        class="form-control"
+                        id="field_localite"
+                        data-cy="localite"
+                        name="localite"
+                        [(ngModel)]="v_commune"
+                        [required]="etablissement?.region?.libelle === 'Commune'"
+                      >
+                        <option [ngValue]="null"></option>
+                        <option
+                          [ngValue]="communeOption.id === v_commune?.id ? v_commune : communeOption"
+                          *ngFor="let communeOption of communes; trackBy: trackCommuneById"
+                        >
+                          {{ communeOption.libelle }}
+                        </option>
+                      </select>
+                    </div>
+
+                    <div class="col-md-4" [hidden]="!etablissement.id">
+                      <label> Localité </label>
+                      <select
+                        class="form-control"
+                        id="field_localite"
+                        data-cy="localite"
+                        name="localite"
+                        [(ngModel)]="etablissement!.localite"
+                      >
+                        <option [ngValue]="null"></option>
+
+                        <option
+                          [ngValue]="localiteOption.id === etablissement.localite?.id ? etablissement.localite : localiteOption"
+                          *ngFor="let localiteOption of communes; trackBy: trackCommuneById"
+                        >
+                          {{ localiteOption.libelle }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div style="display: flex; justify-content: center; align-items: center">
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Annuler</span>
+        </button>
+        &nbsp;
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Enregistrer</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

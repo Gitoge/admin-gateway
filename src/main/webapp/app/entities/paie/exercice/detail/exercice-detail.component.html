@@ -1,0 +1,44 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <div *ngIf="exercice">
+      <h2 data-cy="exerciceDetailsHeading"><span jhiTranslate="admingatewayApp.paieExercice.detail.title">Exercice</span></h2>
+      <hr />
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details detail-card">
+        <dt><span>Libellé</span></dt>
+        <dd>
+          <span>{{ exercice.libelle }}</span>
+        </dd>
+        <dt><span>Date Début</span></dt>
+        <dd>
+          <span>{{ exercice.dateDebut | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieExercice.dateFin">Date Fin</span></dt>
+        <dd>
+          <span>{{ exercice.dateFin | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieExercice.dateOuverture">Date Ouverture</span></dt>
+        <dd>
+          <span>{{ exercice.dateOuverture | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieExercice.dateFermeture">Date Fermeture</span></dt>
+        <dd>
+          <span>{{ exercice.dateFermeture | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieExercice.statut">Statut</span></dt>
+        <dd>
+          <span>{{ exercice.statut }}</span>
+        </dd>
+      </dl>
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+      <button type="button" [routerLink]="['/exercice', exercice.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

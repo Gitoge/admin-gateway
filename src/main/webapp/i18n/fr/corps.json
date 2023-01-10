@@ -1,0 +1,29 @@
+{
+  "admingatewayApp": {
+    "corps": {
+      "home": {
+        "title": "Corps",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Corps",
+        "createOrEditLabel": "Créer ou éditer un Corps",
+        "notFound": "Aucun Corps trouvé"
+      },
+      "created": "Un nouveau Corps a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Corps avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Corps avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Corps {{ id }} ?"
+      },
+      "detail": {
+        "title": "Corps"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description",
+      "codHierarchie": "Cod Hierarchie",
+      "ageRetraite": "Age Retraite",
+      "classification": "Classification"
+    }
+  }
+}

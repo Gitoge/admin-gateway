@@ -1,0 +1,456 @@
+<form style="margin: 2px; padding: 0" [formGroup]="editForm">
+  <div class="row justify-content-center" style="margin: 0 !important; padding: 0 !important">
+    <div class="col-md-5" style="border: 1px solid lightgray; padding: 1%">
+      <div class="col-md-12" style="border: 1px solid lightgray; padding: 1%">
+        <fieldset>
+          <legend style="font-size: 17px; color: #24695c; font-weight: 700">Recherche par matricule:</legend>
+          <div class="row" style="margin-top: 1%">
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Matricule </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="matriucle"
+                  id="field_matriucle"
+                  data-cy="matriucle"
+                  formControlName="matricule"
+                  placeholder="Saisir le matriucle"
+                  oninput="this.value = this.value.toUpperCase()"
+                />
+              </div>
+
+              <div class="col-md-6">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  style="margin-top: 5.5%"
+                  (click)="getAgentByMatricule(editForm.get('matricule')!.value)"
+                >
+                  <fa-icon [icon]="'search'"></fa-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <br />
+
+      <div class="col-md-12" style="border: 1px solid lightgray; padding: 1%">
+        <fieldset>
+          <!-- <legend style="font-size: 17px; color: #24695c; font-weight: 700">Resultat de la Recherche :</legend> -->
+          <div class="row" style="margin-top: 1%">
+            <div class="table-responsive" id="entities">
+              <div *ngIf="agent">
+                {{ agent?.prenom }} {{ agent?.nom }}, né le {{ agent?.dateNaissance }}, matricule {{ agent?.matricule }}
+
+                <br />
+
+                <td>
+                  <button
+                    type="submit"
+                    class="btn btn-outline-info"
+                    title="Ajouter"
+                    data-cy="entityDetailsButton"
+                    title="Ajouter un membre"
+                    (click)="veuxAjouter()"
+                  >
+                    <fa-icon icon="plus"></fa-icon>
+                    <span class="d-none d-md-inline"></span>
+                  </button>
+                </td>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <br />
+      <br />
+
+      <fieldset *ngIf="enfants && enfants.length > 0">
+        <fieldset>
+          <legend style="font-size: 17px; color: #24695c; font-weight: 700">Situation Familiale Agent :</legend>
+          <div class="row" style="margin-top: 1%">
+            <div class="table-responsive" id="entities" *ngIf="enfants && enfants.length > 0">
+              <table class="table table-bordered table-condensed table-hover" aria-describedby="page-heading">
+                <thead>
+                  <tr>
+                    <th scope="col"><span>Prénom</span></th>
+
+                    <th scope="col">
+                      <span>Nom</span>
+                    </th>
+
+                    <th scope="col">
+                      <span>Sexe</span>
+                    </th>
+                    <!-- <th scope="col">
+                      <span>Date Naissance</span>
+                    </th> -->
+                    <th scope="col">
+                      <span>Lieu Naissance</span>
+                    </th>
+                    <th scope="col">
+                      <span>Lien de Parenté</span>
+                    </th>
+                    <!-- <th scope="col"></th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let enfant of enfants">
+                    <td>{{ enfant.prenom }}</td>
+                    <td>{{ enfant.nom }}</td>
+                    <td>{{ enfant.sexe }}</td>
+                    <!-- <td>{{ enfant?.dateNaissance }}</td> -->
+                    <td>{{ enfant.lieuNaissance }}</td>
+                    <td>{{ enfant.lienParente }}</td>
+                    <!-- <td>
+                      <button
+                        class="btn btn-outline-danger btn-sm"
+                        data-cy="entityDeleteButton"
+                        title="Retirer ce Membre"
+                        (click)="deleteMembre(enfant)"
+                      >
+                        <fa-icon icon="times"></fa-icon>
+                        <span class="d-none d-md-inline"></span>
+                      </button>
+                    </td> -->
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </fieldset>
+      </fieldset>
+    </div>
+
+    <div class="col-md-5" style="border: 1px solid lightgray; padding: 1%; margin-left: 1%">
+      <div class="row justify-content-center" style="margin: 0 !important; padding: 0 !important" *ngIf="isAjout == true">
+        <!-- <div class="col-md-10" style="border: 1px solid lightgray; padding: 1%" > -->
+
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+          <div>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Lien de Parenté <span style="color: red">*</span> </label>
+                <select
+                  class="form-control"
+                  name="lienParente"
+                  id="field_lienParente"
+                  data-cy="lienParente"
+                  style="width: 100%; font-size: 12px"
+                  formControlName="lienParente"
+                  (change)="
+                    onLienParenteChange(editForm.get('lienParente')!.value?.libelle);
+                    getTypeActesByEvenement(editForm.get('lienParente')!.value)
+                  "
+                >
+                  <option *ngIf="!editForm.value.lienParente" [ngValue]="null" selected></option>
+                  <option
+                    [ngValue]="
+                      lienParenteOption.id === editForm.get('lienParente')!.value?.id
+                        ? editForm.get('lienParente')!.value
+                        : lienParenteOption
+                    "
+                    *ngFor="let lienParenteOption of lienParente"
+                  >
+                    {{ lienParenteOption.libelle }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Prénom <span style="color: red">*</span> </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  required
+                  name="prenom"
+                  id="field_prenom"
+                  data-cy="prenom"
+                  placeholder="Saisir le prénom"
+                  formControlName="prenom"
+                  oninput="this.value = this.value.toUpperCase()"
+                />
+                <div *ngIf="editForm.get('prenom')!.invalid && (editForm.get('prenom')!.dirty || editForm.get('prenom')!.touched)">
+                  <small class="form-text text-danger" *ngIf="editForm.get('prenom')?.errors?.required"> Ce champ est obligatoire. </small>
+
+                  <small class="form-text text-danger" *ngIf="editForm.get('prenom')?.errors?.pattern">
+                    Pas de caracteres spéciaux".
+                  </small>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label> Nom <span style="color: red">*</span> </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  required
+                  name="nom"
+                  id="field_nom"
+                  data-cy="nom"
+                  placeholder="Saisir le nom"
+                  formControlName="nom"
+                  oninput="this.value = this.value.toUpperCase()"
+                />
+                <div *ngIf="editForm.get('nom')!.invalid && (editForm.get('nom')!.dirty || editForm.get('nom')!.touched)">
+                  <small class="form-text text-danger" *ngIf="editForm.get('nom')?.errors?.required"> Ce champ est obligatoire. </small>
+
+                  <small class="form-text text-danger" *ngIf="editForm.get('nom')?.errors?.pattern"> Pas de caracteres spéciaux". </small>
+                </div>
+              </div>
+            </div>
+
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Date de naissance <span style="color: red">*</span> </label>
+                <div class="input-group">
+                  <input
+                    id="field_dateNaissance"
+                    data-cy="dateNaissance"
+                    type="date"
+                    class="form-control"
+                    min="1950-01-01"
+                    max="{{ today | date: 'yyyy-MM-dd' }}"
+                    name="dateNaissance"
+                    formControlName="dateNaissance"
+                    placeholder=" AAAA-MM-JJ"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label> Lieu de naissance <span style="color: red">*</span> </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  required
+                  name="lieuNaissance"
+                  id="field_lieuNaissance"
+                  data-cy="lieuNaissance"
+                  placeholder="Saisir le lieu de naissance"
+                  formControlName="lieuNaissance"
+                  oninput="this.value = this.value.toUpperCase()"
+                />
+                <div
+                  *ngIf="
+                    editForm.get('lieuNaissance')!.invalid &&
+                    (editForm.get('lieuNaissance')!.dirty || editForm.get('lieuNaissance')!.touched)
+                  "
+                >
+                  <small class="form-text text-danger" *ngIf="editForm.get('lieuNaissance')?.errors?.required">
+                    Ce champ est obligatoire.
+                  </small>
+
+                  <small class="form-text text-danger" *ngIf="editForm.get('lieuNaissance')?.errors?.pattern">
+                    Pas de caracteres spéciaux".
+                  </small>
+                </div>
+              </div>
+            </div>
+
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Sexe <span style="color: red">*</span> </label>
+                <select
+                  class="form-control"
+                  name="sexe"
+                  id="field_sexe"
+                  data-cy="sexe"
+                  style="width: 100%; font-size: 12px"
+                  formControlName="sexe"
+                  (change)="getSelectedGenre(editForm.get('sexe')!.value)"
+                >
+                  <option *ngIf="!editForm.value.sexe" [ngValue]="null" selected></option>
+                  <option
+                    [ngValue]="sexeOption.id === editForm.get('sexe')!.value?.id ? editForm.get('sexe')!.value : sexeOption"
+                    *ngFor="let sexeOption of genre"
+                  >
+                    {{ sexeOption.libelle }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="col-md-6" *ngIf="isEnfant == false">
+                <label> CNI <span style="color: red">*</span> </label>
+                <input
+                  class="form-control"
+                  name="nin"
+                  id="field_nin"
+                  data-cy="nin"
+                  style="width: 100%; font-size: 12px"
+                  formControlName="nin"
+                />
+              </div>
+            </div>
+            <br />
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Type actes <span style="color: red">*</span> </label>
+                <select
+                  class="form-control"
+                  id="field_typeActes"
+                  data-cy="typeActes"
+                  name="typeActes"
+                  formControlName="typeActes"
+                  style="width: 100%"
+                >
+                  <option [ngValue]="null"></option>
+                  <option
+                    [ngValue]="
+                      typeActeOption.id === editForm.get('typeActes')!.value?.id ? editForm.get('typeActes')!.value : typeActeOption
+                    "
+                    *ngFor="let typeActeOption of evenement?.typeActes"
+                  >
+                    {{ typeActeOption.libelle }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="col-md-6" *ngIf="isEnfant == false" style="margin-top: 3%">
+                <input
+                  type="checkbox"
+                  name="salarie"
+                  id="field_salarie"
+                  data-cy="salarie"
+                  formControlName="salarie"
+                  style="margin: 2%"
+                  (change)="isConjointSalarieChecked($event)"
+                />
+                <label> Conjoint(e) Salarié(e) </label>
+              </div>
+            </div>
+
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Date acte Naissance <span style="color: red">*</span> </label>
+                <div class="input-group">
+                  <input
+                    id="field_dateActe"
+                    data-cy="dateActe"
+                    type="date"
+                    class="form-control"
+                    min="1950-01-01"
+                    max="{{ today | date: 'yyyy-MM-dd' }}"
+                    name="dateActe"
+                    formControlName="dateActe"
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label> Numéro Acte <span style="color: red">*</span> </label>
+                <div class="input-group">
+                  <input id="field_numeroActe" data-cy="numeroActe" type="text" class="form-control" formControlName="numeroActe" />
+                </div>
+              </div>
+            </div>
+
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Fichier <span style="color: red">*</span> </label>
+                <div>
+                  <div *ngIf="editForm.get('fichier')!.value" class="form-text text-danger clearfix">
+                    <a class="pull-left" (click)="openFile(editForm.get('fichier')!.value, editForm.get('fichierContentType')!.value)"
+                      >open</a
+                    ><br />
+                    <span class="pull-left"
+                      >{{ editForm.get('fichierContentType')!.value }}, {{ byteSize(editForm.get('fichier')!.value) }}</span
+                    >
+                    <button
+                      type="button"
+                      (click)="editForm.patchValue({ fichier: null }); editForm.patchValue({ fichierContentType: null })"
+                      class="btn btn-secondary btn-xs pull-right"
+                    >
+                      <fa-icon icon="times"></fa-icon>
+                    </button>
+                  </div>
+                  <input
+                    type="file"
+                    id="file_fichier"
+                    name="file_fichier"
+                    data-cy="fichier"
+                    (change)="setFileData($event, 'fichier', false)"
+                  />
+                </div>
+                <input type="hidden" class="form-control" name="fichier" id="field_fichier" data-cy="fichier" formControlName="fichier" />
+                <input
+                  type="hidden"
+                  class="form-control"
+                  name="fichierContentType"
+                  id="field_fichierContentType"
+                  formControlName="fichierContentType"
+                />
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-dark" (click)="ajouterDocument()">Ajouter</button>
+            </div>
+          </div>
+          <fieldset *ngIf="documentsAdministratif && documentsAdministratif.length > 0">
+            <fieldset>
+              <legend style="font-size: 17px; color: #24695c; font-weight: 700">Documents :</legend>
+              <div class="row" style="margin-top: 1%">
+                <div class="table-responsive" id="entities" *ngIf="documentsAdministratif && documentsAdministratif.length > 0">
+                  <table class="table table-bordered table-condensed table-hover" aria-describedby="page-heading">
+                    <thead>
+                      <tr>
+                        <th scope="col"><span>Tye Acte</span></th>
+
+                        <th scope="col">
+                          <span>Numéro</span>
+                        </th>
+                        <th scope="col">
+                          <span>Date</span>
+                        </th>
+
+                        <th scope="col">
+                          <span>Documents</span>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tr *ngFor="let document of documentsAdministratif">
+                      <td>{{ document.typeActes?.libelle }}</td>
+                      <td>{{ document.numero }}</td>
+                      <td>{{ document.date }}</td>
+                      <td>{{ document.fichierContentType }}</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </fieldset>
+          </fieldset>
+
+          <br />
+          <br />
+          <div class="modal-footer">
+            <button
+              type="button"
+              id="cancel-save"
+              data-cy="entityCreateCancelButton"
+              class="btn btn-outline-dark"
+              (click)="fermerFormulaire()"
+            >
+              Fermer
+            </button>
+            <button
+              type="submit"
+              id="save-entity"
+              data-cy="entityCreateSaveButton"
+              [disabled]="editForm.invalid || isSaving"
+              class="btn btn-primary"
+            >
+              <fa-icon icon="save"></fa-icon>&nbsp;<span>Enregistrer</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <br />
+</form>

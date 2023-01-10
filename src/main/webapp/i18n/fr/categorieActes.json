@@ -1,0 +1,29 @@
+{
+  "admingatewayApp": {
+    "categorieActes": {
+      "home": {
+        "title": "CategorieActes",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Categorie Actes",
+        "createOrEditLabel": "Créer ou éditer un Categorie Actes",
+        "notFound": "Aucun Categorie Actes trouvé"
+      },
+      "created": "Un nouveau Categorie Actes a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Categorie Actes avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Categorie Actes avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Categorie Actes {{ id }} ?"
+      },
+      "detail": {
+        "title": "Categorie Actes"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description",
+      "userIdInsert": "User Id Insert",
+      "userdateInsert": "Userdate Insert",
+      "typeactes": "Typeactes"
+    }
+  }
+}

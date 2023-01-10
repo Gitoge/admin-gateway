@@ -1,0 +1,25 @@
+{
+  "admingatewayApp": {
+    "posteGrade": {
+      "home": {
+        "title": "PosteGrades",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Poste Grade",
+        "createOrEditLabel": "Créer ou éditer un Poste Grade",
+        "notFound": "Aucun Poste Grade trouvé"
+      },
+      "created": "Un nouveau Poste Grade a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Poste Grade avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Poste Grade avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Poste Grade {{ id }} ?"
+      },
+      "detail": {
+        "title": "Poste Grade"
+      },
+      "id": "ID",
+      "codeGrade": "Code Grade",
+      "codePoste": "Code Poste"
+    }
+  }
+}

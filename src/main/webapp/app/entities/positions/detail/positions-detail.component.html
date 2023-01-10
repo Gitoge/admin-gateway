@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <div *ngIf="positions">
+      <h2 data-cy="positionsDetailsHeading" class="custom-title">
+        <span
+          >Visualisation de la Position: <b>{{ positions.libelle }}</b></span
+        >
+      </h2>
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details detail-card">
+        <dt><span>Position</span></dt>
+        <dd>
+          <span>{{ positions.code }}</span>
+        </dd>
+        <dt><span>Libellé</span></dt>
+        <dd>
+          <span>{{ positions.libelle }}</span>
+        </dd>
+        <dt><span>Type agent</span></dt>
+        <dd>
+          <span>{{ positions.typeAgent }}</span>
+        </dd>
+        <dt><span>Impact solde</span></dt>
+        <dd>
+          <span>{{ positions.impactSolde }}</span>
+        </dd>
+        <dt><span>Statut position</span></dt>
+        <dd>
+          <span>{{ positions.statutPosition }}</span>
+        </dd>
+        <dt><span>Type de position</span></dt>
+        <dd>
+          <div *ngIf="positions.typeposition">
+            <a [routerLink]="['/type-positions', positions.typeposition?.id, 'view']">{{ positions.typeposition?.libelle }}</a>
+          </div>
+        </dd>
+        <dt><span>Description</span></dt>
+        <dd>
+          <span>{{ positions.description }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+      </button>
+    </div>
+  </div>
+</div>

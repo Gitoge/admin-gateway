@@ -1,0 +1,424 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-situation-administrative-heading"
+        data-cy="SituationAdministrativeCreateUpdateHeading"
+        jhiTranslate="admingatewayApp.carriereSituationAdministrative.home.createOrEditLabel"
+      >
+        Create or edit a Situation Administrative
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="admingatewayApp.carriereSituationAdministrative.dateRecrutement"
+            for="field_dateRecrutement"
+            >Date Recrutement</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dateRecrutement"
+              data-cy="dateRecrutement"
+              type="text"
+              class="form-control"
+              name="dateRecrutement"
+              ngbDatepicker
+              #dateRecrutementDp="ngbDatepicker"
+              formControlName="dateRecrutement"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateRecrutementDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+          <div
+            *ngIf="
+              editForm.get('dateRecrutement')!.invalid &&
+              (editForm.get('dateRecrutement')!.dirty || editForm.get('dateRecrutement')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dateRecrutement')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="admingatewayApp.carriereSituationAdministrative.numeroRecrutement"
+            for="field_numeroRecrutement"
+            >Numero Recrutement</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="numeroRecrutement"
+            id="field_numeroRecrutement"
+            data-cy="numeroRecrutement"
+            formControlName="numeroRecrutement"
+          />
+          <div
+            *ngIf="
+              editForm.get('numeroRecrutement')!.invalid &&
+              (editForm.get('numeroRecrutement')!.dirty || editForm.get('numeroRecrutement')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('numeroRecrutement')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carriereSituationAdministrative.datePriseRang" for="field_datePriseRang"
+            >Date Prise Rang</label
+          >
+          <div class="input-group">
+            <input
+              id="field_datePriseRang"
+              data-cy="datePriseRang"
+              type="text"
+              class="form-control"
+              name="datePriseRang"
+              ngbDatepicker
+              #datePriseRangDp="ngbDatepicker"
+              formControlName="datePriseRang"
+            />
+            <button type="button" class="btn btn-secondary" (click)="datePriseRangDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="admingatewayApp.carriereSituationAdministrative.numeroOrdreService"
+            for="field_numeroOrdreService"
+            >Numero Ordre Service</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="numeroOrdreService"
+            id="field_numeroOrdreService"
+            data-cy="numeroOrdreService"
+            formControlName="numeroOrdreService"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="admingatewayApp.carriereSituationAdministrative.dateOrdreService"
+            for="field_dateOrdreService"
+            >Date Ordre Service</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dateOrdreService"
+              data-cy="dateOrdreService"
+              type="text"
+              class="form-control"
+              name="dateOrdreService"
+              ngbDatepicker
+              #dateOrdreServiceDp="ngbDatepicker"
+              formControlName="dateOrdreService"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateOrdreServiceDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carriereSituationAdministrative.loge" for="field_loge">Loge</label>
+          <input type="checkbox" class="form-check" name="loge" id="field_loge" data-cy="loge" formControlName="loge" />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="admingatewayApp.carriereSituationAdministrative.logementFonction"
+            for="field_logementFonction"
+            >Logement Fonction</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="logementFonction"
+            id="field_logementFonction"
+            data-cy="logementFonction"
+            formControlName="logementFonction"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carriereSituationAdministrative.datedebut" for="field_datedebut"
+            >Datedebut</label
+          >
+          <div class="input-group">
+            <input
+              id="field_datedebut"
+              data-cy="datedebut"
+              type="text"
+              class="form-control"
+              name="datedebut"
+              ngbDatepicker
+              #datedebutDp="ngbDatepicker"
+              formControlName="datedebut"
+            />
+            <button type="button" class="btn btn-secondary" (click)="datedebutDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carriereSituationAdministrative.datefin" for="field_datefin"
+            >Datefin</label
+          >
+          <div class="input-group">
+            <input
+              id="field_datefin"
+              data-cy="datefin"
+              type="text"
+              class="form-control"
+              name="datefin"
+              ngbDatepicker
+              #datefinDp="ngbDatepicker"
+              formControlName="datefin"
+            />
+            <button type="button" class="btn btn-secondary" (click)="datefinDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carriereSituationAdministrative.numeroCompte" for="field_numeroCompte"
+            >Numero Compte</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="numeroCompte"
+            id="field_numeroCompte"
+            data-cy="numeroCompte"
+            formControlName="numeroCompte"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carriereSituationAdministrative.status" for="field_status">Status</label>
+          <input type="text" class="form-control" name="status" id="field_status" data-cy="status" formControlName="status" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carriereSituationAdministrative.corpsId" for="field_corpsId"
+            >Corps Id</label
+          >
+          <input type="number" class="form-control" name="corpsId" id="field_corpsId" data-cy="corpsId" formControlName="corpsId" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carriereSituationAdministrative.hierarchieId" for="field_hierarchieId"
+            >Hierarchie Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="hierarchieId"
+            id="field_hierarchieId"
+            data-cy="hierarchieId"
+            formControlName="hierarchieId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carriereSituationAdministrative.cadreId" for="field_cadreId"
+            >Cadre Id</label
+          >
+          <input type="number" class="form-control" name="cadreId" id="field_cadreId" data-cy="cadreId" formControlName="cadreId" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carriereSituationAdministrative.gradeId" for="field_gradeId"
+            >Grade Id</label
+          >
+          <input type="number" class="form-control" name="gradeId" id="field_gradeId" data-cy="gradeId" formControlName="gradeId" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carriereSituationAdministrative.echelonId" for="field_echelonId"
+            >Echelon Id</label
+          >
+          <input type="number" class="form-control" name="echelonId" id="field_echelonId" data-cy="echelonId" formControlName="echelonId" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carriereSituationAdministrative.classeId" for="field_classeId"
+            >Classe Id</label
+          >
+          <input type="number" class="form-control" name="classeId" id="field_classeId" data-cy="classeId" formControlName="classeId" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carriereSituationAdministrative.reglementId" for="field_reglementId"
+            >Reglement Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="reglementId"
+            id="field_reglementId"
+            data-cy="reglementId"
+            formControlName="reglementId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carriereSituationAdministrative.userInsertId" for="field_userInsertId"
+            >User Insert Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="userInsertId"
+            id="field_userInsertId"
+            data-cy="userInsertId"
+            formControlName="userInsertId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carriereSituationAdministrative.userUpdateId" for="field_userUpdateId"
+            >User Update Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="userUpdateId"
+            id="field_userUpdateId"
+            data-cy="userUpdateId"
+            formControlName="userUpdateId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carriereSituationAdministrative.dateInsert" for="field_dateInsert"
+            >Date Insert</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dateInsert"
+              data-cy="dateInsert"
+              type="datetime-local"
+              class="form-control"
+              name="dateInsert"
+              formControlName="dateInsert"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carriereSituationAdministrative.dateUpdate" for="field_dateUpdate"
+            >Date Update</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dateUpdate"
+              data-cy="dateUpdate"
+              type="datetime-local"
+              class="form-control"
+              name="dateUpdate"
+              formControlName="dateUpdate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carriereSituationAdministrative.actes" for="field_actes">Actes</label>
+          <select class="form-control" id="field_actes" data-cy="actes" name="actes" formControlName="actes">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="actesOption.id === editForm.get('actes')!.value?.id ? editForm.get('actes')!.value : actesOption"
+              *ngFor="let actesOption of actesCollection; trackBy: trackActesById"
+            >
+              {{ actesOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carriereSituationAdministrative.agent" for="field_agent">Agent</label>
+          <select class="form-control" id="field_agent" data-cy="agent" name="agent" formControlName="agent">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="agentOption.id === editForm.get('agent')!.value?.id ? editForm.get('agent')!.value : agentOption"
+              *ngFor="let agentOption of agentsSharedCollection; trackBy: trackAgentById"
+            >
+              {{ agentOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carriereSituationAdministrative.categorieAgent" for="field_categorieAgent"
+            >Categorie Agent</label
+          >
+          <select
+            class="form-control"
+            id="field_categorieAgent"
+            data-cy="categorieAgent"
+            name="categorieAgent"
+            formControlName="categorieAgent"
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                categorieAgentOption.id === editForm.get('categorieAgent')!.value?.id
+                  ? editForm.get('categorieAgent')!.value
+                  : categorieAgentOption
+              "
+              *ngFor="let categorieAgentOption of categorieAgentsSharedCollection; trackBy: trackCategorieAgentById"
+            >
+              {{ categorieAgentOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

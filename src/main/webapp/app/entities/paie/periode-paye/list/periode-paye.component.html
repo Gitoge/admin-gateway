@@ -1,0 +1,152 @@
+<div>
+  <form [formGroup]="editForm" style="margin: 2px; padding: 0">
+    <div class="col-md-12 container" style="border: 1px solid lightgray; padding: 1%">
+      <h2 id="page-heading" data-cy="PeriodePayeHeading"></h2>
+      <fieldset>
+        <legend style="font-size: 17px; color: #24695c; font-weight: 700">Recherche Période Paie par Exercice:</legend>
+        <div class="row" style="margin-top: 1%">
+          <div class="col-md-3">
+            <label style="font-family: Arial; font-size: 100%">Exercice</label>
+            <select class="form-control" data-cy="exerciceId" formControlName="exerciceId" id="field_exerciceId" name="exerciceId" required>
+              <option [ngValue]="null"></option>
+              <option
+                *ngFor="let exerciceOption of exercice"
+                [ngValue]="exerciceOption.id === editForm.get('exerciceId')!.value?.id ? editForm.get('exerciceId')!.value : exerciceOption"
+              >
+                {{ exerciceOption.libelle }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-3" style="margin-top: 20px">
+            <button (click)="loadPage()" [disabled]="editForm.invalid" class="btn btn-primary" title="Rechercher" type="button">
+              <fa-icon [icon]="'search'"></fa-icon></button
+            >&nbsp;
+            <button type="button" class="btn btn-danger" title="Effacer" (click)="effacer()">
+              <fa-icon icon="times"></fa-icon>
+            </button>
+          </div>
+        </div>
+      </fieldset>
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <div class="alert alert-warning" id="no-result" *ngIf="periodePayes?.length === 0">
+        <span jhiTranslate="admingatewayApp.paiePeriodePaye.home.notFound">No periodePayes found</span>
+      </div>
+      <div class="table-responsive" id="entities" *ngIf="periodePayes && periodePayes.length > 0">
+        <table class="table table-bordered table-condensed table-hover" aria-describedby="page-heading">
+          <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+              <th scope="col" jhiSortBy="libelle"><span>Période</span> <fa-icon icon="sort"></fa-icon></th>
+              <th scope="col" jhiSortBy="dateDebut"><span>Date Début</span> <fa-icon icon="sort"></fa-icon></th>
+              <th scope="col" jhiSortBy="dateFin">
+                <span jhiTranslate="admingatewayApp.paiePeriodePaye.dateFin">Date Fin</span> <fa-icon icon="sort"></fa-icon>
+              </th>
+              <th scope="col" jhiSortBy="dateDebutSaisie"><span>Date Début Saisie</span> <fa-icon icon="sort"></fa-icon></th>
+              <th scope="col" jhiSortBy="dateFinSaisie">
+                <span jhiTranslate="admingatewayApp.paiePeriodePaye.dateFinSaisie">Date Fin Saisie</span> <fa-icon icon="sort"></fa-icon>
+              </th>
+              <th scope="col" jhiSortBy="dateDebutCalculSal">
+                <span jhiTranslate="admingatewayApp.paiePeriodePaye.dateDebutCalculSal">Date Debut Calcul Sal</span>
+                <fa-icon icon="sort"></fa-icon>
+              </th>
+              <th scope="col" jhiSortBy="dateFinCalculSal">
+                <span jhiTranslate="admingatewayApp.paiePeriodePaye.dateFinCalculSal">Date Fin Calcul Sal</span>
+                <fa-icon icon="sort"></fa-icon>
+              </th>
+              <th scope="col" jhiSortBy="exercice.id">
+                <span jhiTranslate="admingatewayApp.paiePeriodePaye.exercice">Exercice</span> <fa-icon icon="sort"></fa-icon>
+              </th>
+              <th scope="col" jhiSortBy="statut">
+                <span jhiTranslate="admingatewayApp.paiePeriodePaye.statut">Statut</span> <fa-icon icon="sort"></fa-icon>
+              </th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let periodePaye of periodePayes; trackBy: trackId" data-cy="entityTable">
+              <td>{{ periodePaye.libelle }}</td>
+              <td>{{ periodePaye.dateDebut | date: 'dd/MM/yyyy' }}</td>
+              <td>{{ periodePaye.dateFin | date: 'dd/MM/yyyy' }}</td>
+              <td>{{ periodePaye.dateDebutSaisie | date: 'dd/MM/yyyy' }}</td>
+              <td>{{ periodePaye.dateFinSaisie | date: 'dd/MM/yyyy' }}</td>
+              <td>{{ periodePaye.dateDebutCalculSal | date: 'dd/MM/yyyy' }}</td>
+              <td>{{ periodePaye.dateFinCalculSal | date: 'dd/MM/yyyy' }}</td>
+              <td>
+                <div *ngIf="periodePaye.exercice">
+                  <a [routerLink]="['/exercice', periodePaye.exercice?.id, 'view']">{{ periodePaye.exercice?.libelle }}</a>
+                </div>
+              </td>
+              <td>
+                <div *ngIf="periodePaye.statut?.toUpperCase() === 'OUVERT'">
+                  <span class="btn btn-success ouvert" style="width: 90px">OUVERT</span>
+                </div>
+                <div *ngIf="periodePaye.statut?.toUpperCase() === 'VERROUILLE'">
+                  <span class="btn btn-warning ouvert" style="width: 90px">VERROUILLE</span>
+                </div>
+                <div *ngIf="periodePaye.statut?.toUpperCase() === 'FERMER'">
+                  <span class="btn btn-danger ouvert" style="width: 90px">FERMER</span>
+                </div>
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <button
+                    type="submit"
+                    [routerLink]="['/periode-paye', periodePaye.id, 'view']"
+                    class="btn btn-outline-info"
+                    title="Détails"
+                    data-cy="entityDetailsButton"
+                    title="Details"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline"></span>
+                  </button>
+                  <button
+                    type="submit"
+                    [routerLink]="['/periode-paye', periodePaye.id, 'edit']"
+                    class="btn btn-outline-primary"
+                    title="Modifier"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline"></span>
+                  </button>
+                  <button
+                    type="submit"
+                    (click)="delete(periodePaye)"
+                    class="btn btn-outline-danger btn-sm"
+                    data-cy="entityDeleteButton"
+                    title="Supprimer"
+                  >
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline"></span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!--  <div *ngIf="periodePayes && periodePayes.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>-->
+    </div>
+  </form>
+</div>
+<br /><br />

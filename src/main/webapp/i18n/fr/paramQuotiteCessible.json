@@ -1,0 +1,31 @@
+{
+  "admingatewayApp": {
+    "paramQuotiteCessible": {
+      "home": {
+        "title": "ParamQuotiteCessibles",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Param Quotite Cessible",
+        "createOrEditLabel": "Créer ou éditer un Param Quotite Cessible",
+        "notFound": "Aucun Param Quotite Cessible trouvé"
+      },
+      "created": "Un nouveau Param Quotite Cessible a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Param Quotite Cessible avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Param Quotite Cessible avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Param Quotite Cessible {{ id }} ?"
+      },
+      "detail": {
+        "title": "Param Quotite Cessible"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "salaireDebut": "Salaire Debut",
+      "salaireFin": "Salaire Fin",
+      "tauxTranche": "Taux Tranche",
+      "dateImpact": "Date Impact",
+      "userIdInsert": "User Id Insert",
+      "userdateInsert": "Userdate Insert"
+    }
+  }
+}

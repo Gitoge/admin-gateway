@@ -1,0 +1,31 @@
+{
+  "admingatewayApp": {
+    "personne": {
+      "home": {
+        "title": "Utilisateurs",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Utilisateur",
+        "createOrEditLabel": "Créer ou éditer un Utilisateur",
+        "notFound": "Aucun Personne trouvé"
+      },
+      "created": "Un nouveau Utilisateur a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Utilisateur avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Utilisateur avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer l'Utilisateur {{ id }} ?"
+      },
+      "detail": {
+        "title": "Utilisateur"
+      },
+      "id": "ID",
+      "prenom": "Prenom",
+      "nom": "Nom",
+      "dateNaissance": "Date Naissance",
+      "lieuNaissance": "Lieu Naissance",
+      "telephone": "Telephone",
+      "cni": "Cni",
+      "email": "Email",
+      "sexe": "Sexe"
+    }
+  }
+}

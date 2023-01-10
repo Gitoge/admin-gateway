@@ -1,0 +1,39 @@
+{
+  "applications": "*",
+  "changelogDate": "20220722173340",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "indices",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "mntSFTenf01",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "mntSFTenf02",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "soldeIndiciaire",
+      "fieldType": "Integer"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Indices",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no",
+  "skipServer": true
+}

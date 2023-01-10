@@ -1,0 +1,165 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-actes-heading" data-cy="ActesCreateUpdateHeading" class="custom-title">
+        {{ titre }}
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-4">
+          <div class="col mb-2 row">
+            <label class="col-sm-4 col-form-label custom-label" for="field_numeroActe">Numéro Acte<span style="color: red">*</span></label>
+            <div class="col-sm-7">
+              <input
+                type="number"
+                class="form-control"
+                name="numeroActe"
+                id="field_numeroActe"
+                data-cy="numeroActe"
+                formControlName="numeroActe"
+              />
+            </div>
+            <div *ngIf="editForm.get('numeroActe')!.invalid && (editForm.get('numeroActe')!.dirty || editForm.get('numeroActe')!.touched)">
+              <small
+                class="form-text text-danger"
+                *ngIf="editForm.get('numeroActe')?.errors?.required"
+                jhiTranslate="entity.validation.required"
+              >
+                This field is required.
+              </small>
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('numeroActe')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+              >
+                This field should be a number.
+              </small>
+            </div>
+          </div>
+
+          <div class="col mb-2 row">
+            <label class="col-sm-4 col-form-label custom-label" for="field_natureActes"
+              >Nature Acte <span style="color: red">*</span>
+            </label>
+            <div class="col-sm-7">
+              <select
+                class="form-control"
+                id="field_natureActes"
+                data-cy="natureActes"
+                name="natureActes"
+                formControlName="natureActes"
+                required
+              >
+                <option [ngValue]="null"></option>
+                <option
+                  [ngValue]="
+                    natureActesOption.id === editForm.get('natureActes')!.value?.id ? editForm.get('natureActes')!.value : natureActesOption
+                  "
+                  *ngFor="let natureActesOption of natureActesSharedCollection; trackBy: trackNatureActesById"
+                >
+                  {{ natureActesOption.libelle }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-4">
+          <div class="col mb-2 row">
+            <label class="col-sm-4 col-form-label custom-label" for="field_typeActes">Type Acte <span style="color: red">*</span> </label>
+            <div class="col-sm-7">
+              <select class="form-control" id="field_typeActes" data-cy="typeActes" name="typeActes" formControlName="typeActes" required>
+                <option [ngValue]="null"></option>
+                <option
+                  [ngValue]="
+                    typeActesOption.id === editForm.get('typeActes')!.value?.id ? editForm.get('typeActes')!.value : typeActesOption
+                  "
+                  *ngFor="let typeActesOption of typeActesSharedCollection; trackBy: trackTypeActesById"
+                >
+                  {{ typeActesOption.libelle }}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col mb-2 row">
+            <label class="col-sm-4 col-form-label custom-label" for="field_dateEffet">Date Effet </label>
+            <div class="col-sm-7">
+              <div class="input-group">
+                <input
+                  id="field_dateEffet"
+                  data-cy="dateEffet"
+                  type="text"
+                  class="form-control"
+                  name="dateEffet"
+                  ngbDatepicker
+                  #dateEffetDp="ngbDatepicker"
+                  formControlName="dateEffet"
+                />
+                <button type="button" class="btn btn-secondary" (click)="dateEffetDp.toggle()">
+                  <fa-icon icon="calendar-alt"></fa-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-4">
+          <div class="col mb-2 row">
+            <label class="col-sm-4 col-form-label custom-label" for="field_origineId">Origine Id</label>
+            <div class="col-sm-7">
+              <input
+                type="number"
+                class="form-control"
+                name="origineId"
+                id="field_origineId"
+                data-cy="origineId"
+                formControlName="origineId"
+              />
+            </div>
+          </div>
+
+          <div class="col mb-2 row">
+            <label class="col-sm-4 col-form-label custom-label" for="field_natureActes"> </label>
+            <div class="col-sm-7"></div>
+          </div>
+        </div>
+
+        <!-- <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.carriereActes.dateActe" for="field_dateActe">Date Acte</label>
+          <div class="input-group">
+            <input
+              id="field_dateActe"
+              data-cy="dateActe"
+              type="text"
+              class="form-control"
+              name="dateActe"
+              ngbDatepicker
+              #dateActeDp="ngbDatepicker"
+              formControlName="dateActe"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateActeDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div> -->
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,147 @@
+<div class="d-flex justify-content-center">
+  <div class="col-10 custom-card">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+      <h2
+        data-cy="GrilleIndiciaireCreateUpdateHeading"
+        style="text-align: center; font-weight: 600; text-transform: uppercase; font-size: 12px"
+      >
+        {{ titre }}
+      </h2>
+      <br />
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+        <div class="justify-content-center" style="border: 1px solid lightgray; padding: 2%">
+          <fieldset>
+            <!-- <legend style="font-size: 17px; color: #24695c; font-weight: 700">Paramètrage Grille Solde Global</legend> -->
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Hiérarchie<span style="color: red">*</span> </label>
+                <select
+                  class="form-control"
+                  id="field_hierarchie"
+                  data-cy="hierarchie"
+                  name="hierarchie"
+                  [(ngModel)]="grilleSoldeGlobal.libelleHierarchie"
+                  required
+                >
+                  <option [ngValue]="null"></option>
+                  <option
+                    [ngValue]="
+                      hierarchieOption.id === grilleSoldeGlobal.hierarchieId
+                        ? grilleSoldeGlobal.libelleHierarchie
+                        : hierarchieOption.libelle
+                    "
+                    *ngFor="let hierarchieOption of hierarchieSharedCollection"
+                  >
+                    {{ hierarchieOption.libelle }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label> Grade<span style="color: red">*</span> </label>
+                <select
+                  class="form-control"
+                  id="field_grade"
+                  data-cy="grade"
+                  name="grade"
+                  [(ngModel)]="grilleSoldeGlobal.codeGrade"
+                  required
+                >
+                  <option [ngValue]="null"></option>
+                  <option
+                    [ngValue]="gradeOption.id === grilleSoldeGlobal.gradeId ? grilleSoldeGlobal.codeGrade : gradeOption.libelle"
+                    *ngFor="let gradeOption of gradeSharedCollection"
+                  >
+                    {{ gradeOption.libelle }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label>Classe </label>
+                <select
+                  class="form-control"
+                  id="field_classe"
+                  data-cy="classe"
+                  name="classe"
+                  [(ngModel)]="grilleSoldeGlobal.libelleClasse"
+                  required
+                >
+                  <option [ngValue]="null"></option>
+                  <option
+                    [ngValue]="classeOption.id === grilleSoldeGlobal.classeId ? grilleSoldeGlobal.libelleClasse : classeOption.libelle"
+                    *ngFor="let classeOption of classeSharedCollection"
+                  >
+                    {{ classeOption.libelle }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label>Echelon</label>
+                <select
+                  class="form-control"
+                  id="field_echelon"
+                  data-cy="echelon"
+                  name="echelon"
+                  [(ngModel)]="grilleSoldeGlobal.libelleEchelon"
+                >
+                  <option [ngValue]="null"></option>
+                  <option
+                    [ngValue]="echelonOption.id === grilleSoldeGlobal.echelonId ? grilleSoldeGlobal.libelleEchelon : echelonOption.libelle"
+                    *ngFor="let echelonOption of echelonSharedCollection"
+                  >
+                    {{ echelonOption.libelle }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label>Solde Global<span style="color: red">*</span></label>
+                <input
+                  type="number"
+                  class="form-control"
+                  name="soldeGlobal"
+                  id="field_soldeGlobal"
+                  data-cy="nom"
+                  [(ngModel)]="grilleSoldeGlobal.soldeGlobal"
+                  required
+                />
+              </div>
+              <div class="col-md-6">
+                <label>Ancienneté<span style="color: red">*</span></label>
+
+                <input
+                  type="number"
+                  class="form-control"
+                  name="anciennete"
+                  id="field_anciennete"
+                  data-cy="anciennete"
+                  [(ngModel)]="grilleSoldeGlobal.anciennete"
+                  required
+                />
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+      <hr />
+      <div style="display: flex; justify-content: center; align-items: center">
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        &nbsp;
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

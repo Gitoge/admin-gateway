@@ -1,0 +1,30 @@
+{
+  "admingatewayApp": {
+    "positions": {
+      "home": {
+        "title": "Positions",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Positions",
+        "createOrEditLabel": "Créer ou éditer un Positions",
+        "notFound": "Aucun Positions trouvé"
+      },
+      "created": "Un nouveau Positions a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Positions avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Positions avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Positions {{ id }} ?"
+      },
+      "detail": {
+        "title": "Positions"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description",
+      "typeAgent": "Type Agent",
+      "impactSolde": "Impact Solde",
+      "statutPosition": "Statut Position",
+      "typeposition": "Typeposition"
+    }
+  }
+}

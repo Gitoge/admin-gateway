@@ -1,0 +1,33 @@
+{
+  "admingatewayApp": {
+    "carriereParamMatricules": {
+      "home": {
+        "title": "ParamMatricules",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Param Matricules",
+        "createOrEditLabel": "Créer ou éditer un Param Matricules",
+        "notFound": "Aucun Param Matricules trouvé"
+      },
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Param Matricules {{ id }} ?"
+      },
+      "detail": {
+        "title": "Param Matricules"
+      },
+      "id": "ID",
+      "numeroMatricule": "Numero Matricule",
+      "datePriseEnCompte": "Date Prise En Compte",
+      "userInsertId": "User Insert Id",
+      "userUpdateId": "User Update Id",
+      "dateInsert": "Date Insert",
+      "dateUpdate": "Date Update"
+    }
+  },
+  "carriereApp": {
+    "carriereParamMatricules": {
+      "created": "Un nouveau Param Matricules a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Param Matricules avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Param Matricules avec l'identifiant {{ param }} a été supprimé"
+    }
+  }
+}

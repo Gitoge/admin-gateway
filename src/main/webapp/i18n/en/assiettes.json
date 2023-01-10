@@ -1,0 +1,29 @@
+{
+  "admingatewayApp": {
+    "assiettes": {
+      "home": {
+        "title": "Assiettes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Assiettes",
+        "createOrEditLabel": "Create or edit a Assiettes",
+        "notFound": "No Assiettes found"
+      },
+      "created": "A new Assiettes is created with identifier {{ param }}",
+      "updated": "A Assiettes is updated with identifier {{ param }}",
+      "deleted": "A Assiettes is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Assiettes {{ id }}?"
+      },
+      "detail": {
+        "title": "Assiettes"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description",
+      "userIdInsert": "User Id Insert",
+      "userdateInsert": "Userdate Insert",
+      "postes": "Postes"
+    }
+  }
+}

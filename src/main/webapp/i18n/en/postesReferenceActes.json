@@ -1,0 +1,24 @@
+{
+  "admingatewayApp": {
+    "postesReferenceActes": {
+      "home": {
+        "title": "Postes Reference Actes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Postes Reference Actes",
+        "createOrEditLabel": "Create or edit a Postes Reference Actes",
+        "notFound": "No Postes Reference Actes found"
+      },
+      "created": "A new Postes Reference Actes is created with identifier {{ param }}",
+      "updated": "A Postes Reference Actes is updated with identifier {{ param }}",
+      "deleted": "A Postes Reference Actes is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Postes Reference Actes {{ id }}?"
+      },
+      "detail": {
+        "title": "Postes Reference Actes"
+      },
+      "id": "ID",
+      "postes": "Postes"
+    }
+  }
+}

@@ -1,0 +1,124 @@
+<div>
+  <h2 id="page-heading" data-cy="ExerciceHeading">
+    <span jhiTranslate="admingatewayApp.paieExercice.home.title">Exercices</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="admingatewayApp.paieExercice.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-exercice"
+        [routerLink]="['/exercice/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Nouveau Exercice </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="exercices?.length === 0">
+    <span jhiTranslate="admingatewayApp.paieExercice.home.notFound">No exercices found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="exercices && exercices.length > 0">
+    <table class="table table-bordered table-condensed table-hover" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="libelle"><span>Libellé</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="dateDebut"><span>Date Début</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="dateFin">
+            <span jhiTranslate="admingatewayApp.paieExercice.dateFin">Date Fin</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateOuverture">
+            <span jhiTranslate="admingatewayApp.paieExercice.dateOuverture">Date Ouverture</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateFermeture">
+            <span jhiTranslate="admingatewayApp.paieExercice.dateFermeture">Date Fermeture</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="statut">
+            <span jhiTranslate="admingatewayApp.paieExercice.statut">Statut</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let exercice of exercices; trackBy: trackId" data-cy="entityTable">
+          <td>{{ exercice.libelle }}</td>
+          <td>{{ exercice.dateDebut?.locale('FR')?.format('DD/MM/YYYY') }}</td>
+          <td>{{ exercice.dateFin?.locale('FR')?.format('DD/MM/YYYY') }}</td>
+          <td>{{ exercice.dateOuverture?.locale('FR')?.format('DD/MM/YYYY') }}</td>
+          <td>{{ exercice.dateFermeture?.locale('FR')?.format('DD/MM/YYYY') }}</td>
+          <td>{{ exercice.statut }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/exercice', exercice.id, 'view']"
+                class="btn btn-outline-info"
+                title="Détails"
+                data-cy="entityDetailsButton"
+                title="Details"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/exercice', exercice.id, 'edit']"
+                class="btn btn-outline-primary"
+                title="Modifier"
+                data-cy="entityEditButton"
+                title="Modifier"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+
+              <button
+                type="submit"
+                (click)="delete(exercice)"
+                class="btn btn-outline-danger"
+                title="Supprimer"
+                data-cy="entityDeleteButton"
+                class="btn btn-outline-danger btn-sm"
+                data-cy="entityDeleteButton"
+                title="Supprimer"
+              >
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!--<div *ngIf="exercices && exercices.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>-->
+</div>
+<br /><br />

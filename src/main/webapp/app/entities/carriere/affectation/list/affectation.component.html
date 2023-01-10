@@ -1,0 +1,150 @@
+<div>
+  <h2 id="page-heading" data-cy="AffectationHeading">
+    <span jhiTranslate="admingatewayApp.carriereAffectation.home.title">Affectations</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="admingatewayApp.carriereAffectation.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-affectation"
+        [routerLink]="['/affectation/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="admingatewayApp.carriereAffectation.home.createLabel"> Create a new Affectation </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="affectations?.length === 0">
+    <span jhiTranslate="admingatewayApp.carriereAffectation.home.notFound">No affectations found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="affectations && affectations.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="motif">
+            <span jhiTranslate="admingatewayApp.carriereAffectation.motif">Motif</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateAffectation">
+            <span jhiTranslate="admingatewayApp.carriereAffectation.dateAffectation">Date Affectation</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateEffet">
+            <span jhiTranslate="admingatewayApp.carriereAffectation.dateEffet">Date Effet</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="datefin">
+            <span jhiTranslate="admingatewayApp.carriereAffectation.datefin">Datefin</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <span jhiTranslate="admingatewayApp.carriereAffectation.status">Status</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="servicesId">
+            <span jhiTranslate="admingatewayApp.carriereAffectation.servicesId">Services Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="emploisId">
+            <span jhiTranslate="admingatewayApp.carriereAffectation.emploisId">Emplois Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="userInsertId">
+            <span jhiTranslate="admingatewayApp.carriereAffectation.userInsertId">User Insert Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="actes.id">
+            <span jhiTranslate="admingatewayApp.carriereAffectation.actes">Actes</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="agent.id">
+            <span jhiTranslate="admingatewayApp.carriereAffectation.agent">Agent</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let affectation of affectations; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/affectation', affectation.id, 'view']">{{ affectation.id }}</a>
+          </td>
+          <td>{{ affectation.motif }}</td>
+          <td>{{ affectation.dateAffectation | formatMediumDate }}</td>
+          <td>{{ affectation.dateEffet | formatMediumDate }}</td>
+          <td>{{ affectation.datefin | formatMediumDate }}</td>
+          <td>{{ affectation.status }}</td>
+          <td>{{ affectation.servicesId }}</td>
+          <td>{{ affectation.emploisId }}</td>
+          <td>{{ affectation.userInsertId }}</td>
+          <td>
+            <div *ngIf="affectation.actes">
+              <a [routerLink]="['/actes', affectation.actes?.id, 'view']">{{ affectation.actes?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="affectation.agent">
+              <a [routerLink]="['/agent', affectation.agent?.id, 'view']">{{ affectation.agent?.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/affectation', affectation.id, 'view']"
+                class="btn btn-outline-info btn-sm"
+                data-cy="entityDetailsButton"
+                title="Details"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/affectation', affectation.id, 'edit']"
+                class="btn btn-outline-primary btn-sm"
+                data-cy="entityEditButton"
+                title="Modifier"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+
+              <button
+                type="submit"
+                (click)="delete(affectation)"
+                class="btn btn-outline-danger btn-sm"
+                data-cy="entityDeleteButton"
+                title="Supprimer"
+              >
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="affectations && affectations.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

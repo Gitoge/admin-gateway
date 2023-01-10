@@ -1,0 +1,125 @@
+<div>
+  <h2 id="page-heading" data-cy="ParamBaremeMinimumFiscalHeading">
+    <span jhiTranslate="admingatewayApp.paramBaremeMinimumFiscal.home.title">Param Bareme Minimum Fiscals</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="admingatewayApp.paramBaremeMinimumFiscal.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-param-bareme-minimum-fiscal"
+        [routerLink]="['/param-bareme-minimum-fiscal/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="admingatewayApp.paramBaremeMinimumFiscal.home.createLabel"> Create a new Param Bareme Minimum Fiscal </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="paramBaremeMinimumFiscals?.length === 0">
+    <span jhiTranslate="admingatewayApp.paramBaremeMinimumFiscal.home.notFound">No paramBaremeMinimumFiscals found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="paramBaremeMinimumFiscals && paramBaremeMinimumFiscals.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="code">
+            <span jhiTranslate="admingatewayApp.paramBaremeMinimumFiscal.code">Code</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="libelle">
+            <span jhiTranslate="admingatewayApp.paramBaremeMinimumFiscal.libelle">Libellé</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="montantPlafond">
+            <span jhiTranslate="admingatewayApp.paramBaremeMinimumFiscal.montantPlafond">Montant Plafond</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="montantAPrelever">
+            <span jhiTranslate="admingatewayApp.paramBaremeMinimumFiscal.montantAPrelever">Montant A Prelever</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateImpact">
+            <span jhiTranslate="admingatewayApp.paramBaremeMinimumFiscal.dateImpact">Date Impact</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="userIdInsert">
+            <span jhiTranslate="admingatewayApp.paramBaremeMinimumFiscal.userIdInsert">User Id Insert</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="userdateInsert">
+            <span jhiTranslate="admingatewayApp.paramBaremeMinimumFiscal.userdateInsert">Userdate Insert</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let paramBaremeMinimumFiscal of paramBaremeMinimumFiscals; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/param-bareme-minimum-fiscal', paramBaremeMinimumFiscal.id, 'view']">{{ paramBaremeMinimumFiscal.id }}</a>
+          </td>
+          <td>{{ paramBaremeMinimumFiscal.code }}</td>
+          <td>{{ paramBaremeMinimumFiscal.libelle }}</td>
+          <td>{{ paramBaremeMinimumFiscal.montantPlafond }}</td>
+          <td>{{ paramBaremeMinimumFiscal.montantAPrelever }}</td>
+          <td>{{ paramBaremeMinimumFiscal.dateImpact | formatMediumDate }}</td>
+          <td>{{ paramBaremeMinimumFiscal.userIdInsert }}</td>
+          <td>{{ paramBaremeMinimumFiscal.userdateInsert | formatMediumDate }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/param-bareme-minimum-fiscal', paramBaremeMinimumFiscal.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/param-bareme-minimum-fiscal', paramBaremeMinimumFiscal.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(paramBaremeMinimumFiscal)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="paramBaremeMinimumFiscals && paramBaremeMinimumFiscals.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

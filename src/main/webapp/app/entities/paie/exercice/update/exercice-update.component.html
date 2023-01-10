@@ -1,0 +1,200 @@
+<div class="d-flex justify-content-center">
+  <div class="card col-8">
+    <div class="row justify-content-center" style="margin: 0 !important; padding: 5 !important">
+      <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+        <h2 id="jhi-exercice-heading" data-cy="ExerciceCreateUpdateHeading" style="text-align: center">
+          {{ titre }}
+        </h2>
+        <br />
+        <div>
+          <jhi-alert-error></jhi-alert-error>
+
+          <div class="justify-content-center" style="border: 1px solid lightgray; padding: 2%">
+            <fieldset>
+              <legend style="font-size: 17px; color: #24695c; font-weight: 700">Informations de l'exercice</legend>
+              <div class="row" style="margin-top: 1%">
+                <div class="col-md-6">
+                  <label> Date Début <span style="color: red">*</span> </label>
+                  <input
+                    id="field_dateDebut"
+                    data-cy="dateDebut"
+                    type="date"
+                    class="form-control"
+                    name="dateDebut"
+                    ngbDatepicker
+                    #dateDebutDp="ngbDatepicker"
+                    min="{{ aujourdhui | date: 'yyyy-MM-dd' }}"
+                    formControlName="dateDebut"
+                  />
+                  <div
+                    *ngIf="editForm.get('dateDebut')!.invalid && (editForm.get('dateDebut')!.dirty || editForm.get('dateDebut')!.touched)"
+                  >
+                    <small
+                      class="form-text text-danger"
+                      *ngIf="editForm.get('dateDebut')?.errors?.required"
+                      jhiTranslate="entity.validation.required"
+                    >
+                      This field is required.
+                    </small>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <label> Date Fin <span style="color: red">*</span> </label>
+                  <input
+                    id="field_dateFin"
+                    data-cy="dateFin"
+                    type="date"
+                    class="form-control"
+                    name="dateFin"
+                    ngbDatepicker
+                    #dateFinDp="ngbDatepicker"
+                    formControlName="dateFin"
+                  />
+                  <div *ngIf="editForm.get('dateFin')!.invalid && (editForm.get('dateFin')!.dirty || editForm.get('dateFin')!.touched)">
+                    <small
+                      class="form-text text-danger"
+                      *ngIf="editForm.get('dateFin')?.errors?.required"
+                      jhiTranslate="entity.validation.required"
+                    >
+                      This field is required.
+                    </small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row" style="margin-top: 1%">
+                <div class="col-md-6">
+                  <label> Date Ouverture <span style="color: red">*</span> </label>
+                  <input
+                    id="field_dateOuverture"
+                    data-cy="dateOuverture"
+                    type="date"
+                    class="form-control"
+                    name="dateOuverture"
+                    min="{{ aujourdhui | date: 'yyyy-MM-dd' }}"
+                    ngbDatepicker
+                    #dateDebutDp="ngbDatepicker"
+                    formControlName="dateOuverture"
+                  />
+                  <div
+                    *ngIf="
+                      editForm.get('dateOuverture')!.invalid &&
+                      (editForm.get('dateOuverture')!.dirty || editForm.get('dateOuverture')!.touched)
+                    "
+                  >
+                    <small
+                      class="form-text text-danger"
+                      *ngIf="editForm.get('dateOuverture')?.errors?.required"
+                      jhiTranslate="entity.validation.required"
+                    >
+                      This field is required.
+                    </small>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label> Date Fermeture <span style="color: red">*</span> </label>
+                  <input
+                    id="field_dateFermeture"
+                    data-cy="dateFermeture"
+                    type="date"
+                    class="form-control"
+                    name="dateFin"
+                    ngbDatepicker
+                    formControlName="dateFermeture"
+                  />
+                  <div
+                    *ngIf="
+                      editForm.get('dateFermeture')!.invalid &&
+                      (editForm.get('dateFermeture')!.dirty || editForm.get('dateFermeture')!.touched)
+                    "
+                  >
+                    <small
+                      class="form-text text-danger"
+                      *ngIf="editForm.get('dateFermeture')?.errors?.required"
+                      jhiTranslate="entity.validation.required"
+                    >
+                      This field is required.
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="row" style="margin-top: 1%">
+                <div class="col-md-6">
+                  <label> Libellé <span style="color: red">*</span> </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="libelle"
+                    id="field_libelle"
+                    data-cy="libelle"
+                    formControlName="libelle"
+                    required
+                  />
+                  <div *ngIf="editForm.get('libelle')!.invalid && (editForm.get('libelle')!.dirty || editForm.get('libelle')!.touched)">
+                    <small
+                      class="form-text text-danger"
+                      *ngIf="editForm.get('libelle')?.errors?.required"
+                      jhiTranslate="entity.validation.required"
+                    >
+                      This field is required.
+                    </small>
+                    <small
+                      class="form-text text-danger"
+                      *ngIf="editForm.get('libelle')?.errors?.minlength"
+                      jhiTranslate="entity.validation.minlength"
+                      [translateValues]="{ min: 4 }"
+                    >
+                      This field is required to be at least 4 characters.
+                    </small>
+                    <small
+                      class="form-text text-danger"
+                      *ngIf="editForm.get('libelle')?.errors?.maxlength"
+                      jhiTranslate="entity.validation.maxlength"
+                      [translateValues]="{ max: 4 }"
+                    >
+                      This field cannot be longer than 4 characters.
+                    </small>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label> Statut <span style="color: red">*</span> </label>
+                  <select class="form-control" name="statut" id="field_statut" data-cy="statut" formControlName="statut" required>
+                    <option value="">--Veuillez choisir une --</option>
+                    <option value="OUVERT">OUVERT</option>
+                    <option value="FERMER">FERMER</option>
+                  </select>
+                  <div *ngIf="editForm.get('statut')!.invalid && (editForm.get('statut')!.dirty || editForm.get('statut')!.touched)">
+                    <small
+                      class="form-text text-danger"
+                      *ngIf="editForm.get('statut')?.errors?.required"
+                      jhiTranslate="entity.validation.required"
+                    >
+                      This field is required.
+                    </small>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+        <hr />
+        <div style="display: flex; justify-content: center; align-items: center">
+          <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+            <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+          </button>
+          &nbsp;
+          <button
+            type="submit"
+            id="save-entity"
+            data-cy="entityCreateSaveButton"
+            [disabled]="editForm.invalid || isSaving"
+            class="btn btn-primary"
+          >
+            <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

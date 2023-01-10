@@ -1,0 +1,230 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-periode-paye-heading" data-cy="PeriodePayeCreateUpdateHeading" style="text-align: center">
+        {{ titre }}
+      </h2>
+      <br />
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+        <div class="justify-content-center" style="border: 1px solid lightgray; padding: 2%">
+          <fieldset>
+            <legend style="font-size: 17px; color: #24695c; font-weight: 700">Informations de la periode</legend>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Libellé<span style="color: red">*</span> </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="libelle"
+                  id="field_libelle"
+                  data-cy="libelle"
+                  formControlName="libelle"
+                  readonly
+                />
+                <div *ngIf="editForm.get('libelle')!.invalid && (editForm.get('libelle')!.dirty || editForm.get('libelle')!.touched)">
+                  <small
+                    class="form-text text-danger"
+                    *ngIf="editForm.get('libelle')?.errors?.required"
+                    jhiTranslate="entity.validation.required"
+                  >
+                    This field is required.
+                  </small>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label> </label>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Date Début<span style="color: red">*</span> </label>
+                <input
+                  id="field_dateDebut"
+                  data-cy="dateDebut"
+                  type="date"
+                  class="form-control"
+                  name="dateDebut"
+                  ngbDatepicker
+                  formControlName="dateDebut"
+                  [readOnly]="periodePaye?.dateDebutSaisie > today || periodePaye?.dateFinSaisie < today"
+                />
+                <div *ngIf="editForm.get('dateDebut')!.invalid && (editForm.get('dateDebut')!.dirty || editForm.get('dateDebut')!.touched)">
+                  <small
+                    class="form-text text-danger"
+                    *ngIf="editForm.get('dateDebut')?.errors?.required"
+                    jhiTranslate="entity.validation.required"
+                  >
+                    This field is required.
+                  </small>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label> Date Fin <span style="color: red">*</span> </label>
+                <input
+                  id="field_dateFin"
+                  data-cy="dateFin"
+                  type="date"
+                  class="form-control"
+                  name="dateFin"
+                  ngbDatepicker
+                  formControlName="dateFin"
+                  [readOnly]="periodePaye?.dateDebutSaisie > today || periodePaye?.dateFinSaisie < today"
+                />
+                <div *ngIf="editForm.get('dateFin')!.invalid && (editForm.get('dateFin')!.dirty || editForm.get('dateFin')!.touched)">
+                  <small
+                    class="form-text text-danger"
+                    *ngIf="editForm.get('dateFin')?.errors?.required"
+                    jhiTranslate="entity.validation.required"
+                  >
+                    This field is required.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Date Début Saisie<span style="color: red">*</span> </label>
+                <input
+                  id="field_dateDebutSaisie"
+                  data-cy="dateDebutSaisie"
+                  type="date"
+                  class="form-control"
+                  name="dateDebutSaisie"
+                  [min]="today"
+                  ngbDatepicker
+                  formControlName="dateDebutSaisie"
+                  [readOnly]="diff(today, periodePaye?.dateDebut) > 30 || diff(today, periodePaye?.dateDebut) < 0"
+                />
+                <div
+                  *ngIf="
+                    editForm.get('dateDebutSaisie')!.invalid &&
+                    (editForm.get('dateDebutSaisie')!.dirty || editForm.get('dateDebutSaisie')!.touched)
+                  "
+                >
+                  <small
+                    class="form-text text-danger"
+                    *ngIf="editForm.get('dateDebutSaisie')?.errors?.required"
+                    jhiTranslate="entity.validation.required"
+                  >
+                    This field is required.
+                  </small>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label> Date Fin Saisie <span style="color: red">*</span> </label>
+                <input
+                  id="field_dateFinSaisie"
+                  data-cy="dateFinSaisie"
+                  type="date"
+                  class="form-control"
+                  name="dateFinSaisie"
+                  ngbDatepicker
+                  formControlName="dateFinSaisie"
+                  [readOnly]="diff(today, periodePaye?.dateDebut) > 30 || diff(today, periodePaye?.dateDebut) < 0"
+                />
+                <div
+                  *ngIf="
+                    editForm.get('dateFinSaisie')!.invalid &&
+                    (editForm.get('dateFinSaisie')!.dirty || editForm.get('dateFinSaisie')!.touched)
+                  "
+                >
+                  <small
+                    class="form-text text-danger"
+                    *ngIf="editForm.get('dateFinSaisie')?.errors?.required"
+                    jhiTranslate="entity.validation.required"
+                  >
+                    This field is required.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Date Début Calcul </label>
+                <input
+                  id="field_dateDebutCalculSal"
+                  data-cy="dateDebutCalculSal"
+                  type="date"
+                  class="form-control"
+                  name="dateDebutCalculSal"
+                  ngbDatepicker
+                  formControlName="dateDebutCalculSal"
+                  [readOnly]="periodePaye?.dateDebutSaisie > today || periodePaye?.dateFinSaisie < today"
+                />
+              </div>
+              <div class="col-md-6">
+                <label> Date Fin Calcul </label>
+                <input
+                  id="field_dateFinCalculSal"
+                  data-cy="dateFinCalculSal"
+                  type="date"
+                  class="form-control"
+                  name="dateFinCalculSal"
+                  ngbDatepicker
+                  formControlName="dateFinCalculSal"
+                  [readOnly]="periodePaye?.dateDebutSaisie > today || periodePaye?.dateFinSaisie < today"
+                />
+              </div>
+            </div>
+            <div class="row" style="margin-top: 1%" [hidden]="periodePaye?.dateDebutSaisie > today || periodePaye?.dateFinSaisie < today">
+              <div class="col-md-6">
+                <label> Statut<span style="color: red">*</span> </label>
+                <select
+                  name="statut"
+                  id="field_statut"
+                  data-cy="statut"
+                  class="form-control"
+                  formControlName="statut"
+                  [disabled]="periodePaye?.dateDebutSaisie > today || periodePaye?.dateFinSaisie < today"
+                >
+                  <option value="">--Veuillez choisir une --</option>
+                  <option value="OUVERT">OUVERT</option>
+                  <option value="VERROUILLE">VERROUILLE</option>
+                  <option value="FERMER">FERMER</option>
+                </select>
+                <div *ngIf="editForm.get('statut')!.invalid && (editForm.get('statut')!.dirty || editForm.get('statut')!.touched)">
+                  <small
+                    class="form-text text-danger"
+                    *ngIf="editForm.get('statut')?.errors?.required"
+                    jhiTranslate="entity.validation.required"
+                  >
+                    This field is required.
+                  </small>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label> Exercice <span style="color: red">*</span> </label>
+                <select class="form-control" id="field_exercice" data-cy="exercice" name="exercice" formControlName="exercice">
+                  <option [ngValue]="null"></option>
+                  <option
+                    [ngValue]="exerciceOption.id === editForm.get('exercice')!.value?.id ? editForm.get('exercice')!.value : exerciceOption"
+                    *ngFor="let exerciceOption of exercicesSharedCollection; trackBy: trackExerciceById"
+                  >
+                    {{ exerciceOption.libelle }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+      <br />
+      <div style="display: flex; justify-content: center; align-items: center">
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span></button
+        >&nbsp;
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

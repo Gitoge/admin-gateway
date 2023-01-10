@@ -1,0 +1,37 @@
+{
+  "admingatewayApp": {
+    "carrierePositionsAgent": {
+      "home": {
+        "title": "Positions Agents",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Positions Agent",
+        "createOrEditLabel": "Create or edit a Positions Agent",
+        "notFound": "No Positions Agents found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Positions Agent {{ id }}?"
+      },
+      "detail": {
+        "title": "Positions Agent"
+      },
+      "id": "ID",
+      "motif": "Motif",
+      "datePosition": "Date Position",
+      "dateAnnulation": "Date Annulation",
+      "dateFinAbsence": "Date Fin Absence",
+      "status": "Status",
+      "posistionsId": "Posistions Id",
+      "userInsertId": "User Insert Id",
+      "actes": "Actes",
+      "agent": "Agent",
+      "categorieAgent": "Categorie Agent"
+    }
+  },
+  "carriereApp": {
+    "carrierePositionsAgent": {
+      "created": "A new Positions Agent is created with identifier {{ param }}",
+      "updated": "A Positions Agent is updated with identifier {{ param }}",
+      "deleted": "A Positions Agent is deleted with identifier {{ param }}"
+    }
+  }
+}

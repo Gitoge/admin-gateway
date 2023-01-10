@@ -1,0 +1,144 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-pages-heading" data-cy="PagesCreateUpdateHeading" class="custom-title">{{ this.titre }}</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row mb-4">
+          <div class="col mb-2 row">
+            <label class="col-sm-4 col-form-label custom-label" for="field_modules">Modules <span style="color: red">*</span> </label>
+            <div class="col-sm-7">
+              <select class="form-control" id="field_modules" data-cy="modules" name="modules" formControlName="modules" required>
+                <option [ngValue]="null"></option>
+                <option
+                  [ngValue]="modulesOption.id === editForm.get('modules')!.value?.id ? editForm.get('modules')!.value : modulesOption"
+                  *ngFor="let modulesOption of modules; trackBy: trackModulesById"
+                >
+                  {{ modulesOption.libelle }}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col mb-2 row">
+            <label class="col-sm-4 col-form-label custom-label custom-label" for="field_code">Code<span style="color: red">*</span></label>
+            <div class="col-sm-7">
+              <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" required />
+            </div>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col mb-2 row">
+            <label class="col-sm-4 col-form-label custom-label" for="field_libelle">Libellé<span style="color: red">*</span></label>
+            <div class="col-sm-7">
+              <input
+                type="text"
+                class="form-control"
+                name="libelle"
+                id="field_libelle"
+                data-cy="libelle"
+                formControlName="libelle"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="col mb-2 row">
+            <label class="col-sm-4 col-form-label custom-label" for="field_libelle">Description</label>
+            <div class="col-sm-7">
+              <input
+                type="text-area"
+                class="form-control"
+                name="description"
+                id="field_description"
+                data-cy="description"
+                formControlName="description"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-4">
+          <div class="col mb-2 row">
+            <label class="form-label custom-label" for="field_ordre">Ordre</label>
+            <div class="col-sm-7">
+              <input type="number" class="form-control" name="ordre" id="field_ordre" data-cy="ordre" formControlName="ordre" />
+            </div>
+          </div>
+
+          <div class="col mb-2 row">
+            <label class="form-label custom-label" for="field_active">Active</label>
+            <div class="col-sm-7">
+              <input
+                type="checkbox"
+                name="active"
+                id="field_active"
+                data-cy="active"
+                style="margin: 2%"
+                (change)="isChecked($event)"
+                checked
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-4">
+          <div class="col mb-2 row">
+            <label class="col-sm-4 col-form-label custom-label"> Router Link <span style="color: red">*</span> </label>
+            <div class="col-sm-7">
+              <select
+                formControlName="routerLink"
+                class="form-control"
+                name="routerLink"
+                id="field_routerLink"
+                data-cy="routerLink"
+                style="width: 100%; font-size: 12px"
+                required
+              >
+                <option *ngIf="!editForm.value.routerLink" [ngValue]="null" selected></option>
+                <option
+                  [ngValue]="
+                    routerLinkOption.id === editForm.get('routerLink')!.value?.id ? editForm.get('routerLink')!.value : routerLinkOption
+                  "
+                  *ngFor="let routerLinkOption of routerLinks"
+                >
+                  {{ routerLinkOption.libelle }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col mb-2 row"></div>
+        </div>
+
+        <div class="row mb-3">
+          <label for="field_actions">Actions</label>
+          <select class="form-control" id="field_actions" data-cy="actions" multiple name="actions" formControlName="actions">
+            <option
+              [ngValue]="getSelectedActions(actionsOption, editForm.get('actions')!.value)"
+              *ngFor="let actionsOption of actionsSharedCollection; trackBy: trackActionsById"
+            >
+              {{ actionsOption.libelle }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Enregistrer</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

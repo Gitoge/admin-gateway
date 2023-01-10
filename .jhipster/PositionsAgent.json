@@ -1,0 +1,67 @@
+{
+  "applications": "*",
+  "changelogDate": "20220829114022",
+  "clientRootFolder": "carriere",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "positions_agent",
+  "fields": [
+    {
+      "fieldName": "motif",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "datePosition",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dateAnnulation",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dateFinAbsence",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "posistionsId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "userInsertId",
+      "fieldType": "Integer"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "carriere",
+  "name": "PositionsAgent",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "actes",
+      "otherEntityRelationshipName": "positionsAgent",
+      "ownerSide": true,
+      "relationshipName": "actes",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "agent",
+      "otherEntityRelationshipName": "positionsAgent",
+      "relationshipName": "agent",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "categorieAgent",
+      "otherEntityRelationshipName": "positionsAgent",
+      "relationshipName": "categorieAgent",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

@@ -1,0 +1,27 @@
+{
+  "admingatewayApp": {
+    "augmentationIndice": {
+      "home": {
+        "title": "AugmentationIndices",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Augmentation Indice",
+        "createOrEditLabel": "Créer ou éditer un Augmentation Indice",
+        "notFound": "Aucun Augmentation Indice trouvé"
+      },
+      "created": "Un nouveau Augmentation Indice a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Augmentation Indice avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Augmentation Indice avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Augmentation Indice {{ id }} ?"
+      },
+      "detail": {
+        "title": "Augmentation Indice"
+      },
+      "id": "ID",
+      "libelle": "Libelle",
+      "valeur": "Valeur",
+      "idPoste": "Id Poste",
+      "total": "Total"
+    }
+  }
+}

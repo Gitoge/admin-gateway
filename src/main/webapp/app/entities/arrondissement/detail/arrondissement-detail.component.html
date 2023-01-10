@@ -1,0 +1,38 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="arrondissement">
+      <h2 data-cy="arrondissementDetailsHeading"><span>Arrondissement</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details detail-card table-hover">
+        <dt><span>Code</span></dt>
+        <dd>
+          <span>{{ arrondissement.code }}</span>
+        </dd>
+        <dt><span>Libelle</span></dt>
+        <dd>
+          <span>{{ arrondissement.libelle }}</span>
+        </dd>
+        <dt><span>Departement</span></dt>
+        <dd>
+          <div *ngIf="arrondissement.departement">
+            <a [routerLink]="['/departement', arrondissement.departement?.id, 'view']">{{ arrondissement.departement?.libelle }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/arrondissement', arrondissement.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Modifier</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+{
+  "admingatewayApp": {
+    "carriereTypeGrille": {
+      "home": {
+        "title": "Type Grilles",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Type Grille",
+        "createOrEditLabel": "Create or edit a Type Grille",
+        "notFound": "No Type Grilles found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Type Grille {{ id }}?"
+      },
+      "detail": {
+        "title": "Type Grille"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description",
+      "situationAdministrative": "Situation Administrative"
+    }
+  },
+  "carriereApp": {
+    "carriereTypeGrille": {
+      "created": "A new Type Grille is created with identifier {{ param }}",
+      "updated": "A Type Grille is updated with identifier {{ param }}",
+      "deleted": "A Type Grille is deleted with identifier {{ param }}"
+    }
+  }
+}

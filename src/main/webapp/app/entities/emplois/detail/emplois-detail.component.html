@@ -1,0 +1,27 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <div *ngIf="emplois; &quot;custom-card&quot;">
+      <h2 data-cy="emploisDetailsHeading" class="custom-title"><span>Visualisation de l'Emploi</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details detail-card">
+        <dt><span>Libellé</span></dt>
+        <dd>
+          <span>{{ emplois.libelle }}</span>
+        </dd>
+        <dt><span>Prime Lie Emploi</span></dt>
+        <dd>
+          <span>{{ emplois.primeLieEmploi }}</span>
+        </dd>
+      </dl>
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+      </button>
+    </div>
+  </div>
+</div>

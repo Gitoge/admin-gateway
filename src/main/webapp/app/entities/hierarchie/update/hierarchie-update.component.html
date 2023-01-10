@@ -1,0 +1,187 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-hierarchie-heading" data-cy="HierarchieCreateUpdateHeading" class="custom-title">{{ this.titre }}</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="justify-content-center" style="border: 1px solid lightgray; padding: 2%">
+          <fieldset>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Code<span style="color: red">*</span> </label>
+                <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" maxlength="2" />
+                <div *ngIf="editForm.get('code')!.invalid && (editForm.get('code')!.dirty || editForm.get('code')!.touched)">
+                  <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.required"> Ce champ est obligatoire. </small>
+                  <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.minlength">
+                    Ce champ doit comporter au moins 2 caractères.
+                  </small>
+                  <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.maxlength">
+                    Ce champ doit comporter au plus 10 caractères.
+                  </small>
+                  <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.pattern"> Pas de caracteres spéciaux". </small>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label> Libellé<span style="color: red">*</span> </label>
+                <input type="text" class="form-control" name="libelle" id="field_libelle" data-cy="libelle" formControlName="libelle" />
+                <div *ngIf="editForm.get('libelle')!.invalid && (editForm.get('libelle')!.dirty || editForm.get('libelle')!.touched)">
+                  <small class="form-text text-danger" *ngIf="editForm.get('libelle')?.errors?.required"> Ce champ est obligatoire. </small>
+                </div>
+              </div>
+            </div>
+
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label>Borne Inférieure </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="borneInferieure"
+                  id="field_borneInferieure"
+                  data-cy="borneInferieure"
+                  formControlName="borneInferieure"
+                  maxlength="4"
+                />
+                <div
+                  *ngIf="
+                    editForm.get('borneInferieure')!.invalid &&
+                    (editForm.get('borneInferieure')!.dirty || editForm.get('borneInferieure')!.touched)
+                  "
+                >
+                  <small class="form-text text-danger" *ngIf="editForm.get('borneInferieure')?.errors?.required">
+                    Ce champs est obligatoire.
+                  </small>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label>Borne Supérieure </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="borneSuperieure"
+                  id="field_borneSuperieure"
+                  data-cy="borneSuperieure"
+                  formControlName="borneSuperieure"
+                  maxlength="4"
+                />
+                <div
+                  *ngIf="
+                    editForm.get('borneSuperieure')!.invalid &&
+                    (editForm.get('borneSuperieure')!.dirty || editForm.get('borneSuperieure')!.touched)
+                  "
+                >
+                  <small class="form-text text-danger" *ngIf="editForm.get('borneSuperieure')?.errors?.required">
+                    Ce champs est obligatoire.
+                  </small>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <!-- 
+        <div class="row mb-4">
+          <div class="col mb-2 row">
+            <label class="col-sm-4 col-form-label" for="field_borneInferieure">Borne Inférieure <span style="color: red">*</span></label>
+            <div class="col-sm-7">
+              <input
+                type="text"
+                class="form-control"
+                name="borneInferieure"
+                id="field_borneInferieure"
+                data-cy="borneInferieure"
+                formControlName="borneInferieure"
+                maxlength="4"
+                min="0"
+              />
+            </div>
+            <div
+              *ngIf="
+                editForm.get('borneInferieure')!.invalid &&
+                (editForm.get('borneInferieure')!.dirty || editForm.get('borneInferieure')!.touched)
+              "
+            >
+              <small class="form-text text-danger" *ngIf="editForm.get('borneInferieure')?.errors?.required">
+                Ce champ est obligatoire.
+              </small>
+              <small class="form-text text-danger" *ngIf="editForm.get('borneInferieure')?.errors?.minlength">
+                Ce champ doit comporter 4 caractères.
+              </small>
+              <small class="form-text text-danger" *ngIf="editForm.get('borneInferieure')?.errors?.maxlength">
+                Ce champ doit comporter au plus 10 caractères.
+              </small>
+              <small class="form-text text-danger" *ngIf="editForm.get('borneInferieure')?.errors?.pattern">
+                Pas de caracteres spéciaux".
+              </small>
+            </div>
+          </div>
+
+          <div class="col mb-2 row">
+            <label class="col-sm-4 col-form-label" for="field_borneSuperieure">Borne Supérieure <span style="color: red">*</span></label>
+            <div class="col-sm-7">
+              <input
+                type="text"
+                class="form-control"
+                name="borneSuperieure"
+                id="field_borneSuperieure"
+                data-cy="borneSuperieure"
+                formControlName="borneSuperieure"
+                maxlength="4"
+                min="0"
+              />
+            </div>
+            <div
+              *ngIf="
+                editForm.get('borneSuperieure')!.invalid &&
+                (editForm.get('borneSuperieure')!.dirty || editForm.get('borneSuperieure')!.touched)
+              "
+            >
+              <small class="form-text text-danger" *ngIf="editForm.get('borneSuperieure')?.errors?.required">
+                Ce champ est obligatoire.
+              </small>
+              <small class="form-text text-danger" *ngIf="editForm.get('borneSuperieure')?.errors?.minlength">
+                Ce champ doit comporter au moins 4 caractères.
+              </small>
+              <small class="form-text text-danger" *ngIf="editForm.get('borneSuperieure')?.errors?.maxlength">
+                Ce champ doit comporter au plus 10 caractères.
+              </small>
+              <small class="form-text text-danger" *ngIf="editForm.get('borneSuperieure')?.errors?.pattern">
+                Pas de caracteres spéciaux".
+              </small>
+            </div>
+          </div>
+        </div> -->
+
+        <!-- <div class="col mb-2 row">
+          <label for="field_postes" class="col-sm-4 col-form-label custom-label">Postes</label>
+          <select class="form-control custom-control" id="field_postes" data-cy="postes" multiple name="postes" formControlName="postes">
+            <option
+              [ngValue]="getSelectedPostes(postesOption, editForm.get('postes')!.value)"
+              *ngFor="let postesOption of postesSharedCollection; trackBy: trackPostesById"
+            >
+              {{ postesOption.id }}
+            </option>
+          </select>
+        </div> -->
+      </div>
+      <br />
+      <div style="display: flex; justify-content: center; align-items: center">
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Annuler</span>
+        </button>
+        &nbsp;
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Enregistrer </span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

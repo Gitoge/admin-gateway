@@ -1,0 +1,25 @@
+{
+  "admingatewayApp": {
+    "postesNonCumulabe": {
+      "home": {
+        "title": "PostesNonCumulabes",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Postes Non Cumulabe",
+        "createOrEditLabel": "Créer ou éditer un Postes Non Cumulabe",
+        "notFound": "Aucun Postes Non Cumulabe trouvé"
+      },
+      "created": "Un nouveau Postes Non Cumulabe a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Postes Non Cumulabe avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Postes Non Cumulabe avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Postes Non Cumulabe {{ id }} ?"
+      },
+      "detail": {
+        "title": "Postes Non Cumulabe"
+      },
+      "id": "ID",
+      "codePoste1": "Code Poste 1",
+      "codePoste2": "Code Poste 2"
+    }
+  }
+}

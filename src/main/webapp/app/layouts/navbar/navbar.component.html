@@ -1,0 +1,135 @@
+<nav data-cy="navbar" class="navbar navbar-dark navbar-expand-md bg-dark" style="padding: 6px; background-color: #11478f !important">
+  <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
+    <div class="row">
+      <div class="col-md-3" *ngIf="account">
+        <span class="navbar-title" *ngIf="account == null"><b style="color: white">C . E . P</b></span>
+      </div>
+      <div class="col-md-3" style="align-self: center; font-size: 11px; color: white" *ngIf="account && personne !== null">
+        <div class="menu">
+          &nbsp;&nbsp;&nbsp;
+          <b>{{ personne?.prenom! }}</b>
+          <b>{{ personne?.nom! }}</b>
+        </div>
+        <br />
+        <b>{{ personne?.profils?.libelle! }}</b>
+      </div>
+      <span class="navbar-title" *ngIf="account == null"><b style="color: white">C . E . P</b></span>
+    </div>
+  </a>
+  <a
+    class="navbar-toggler d-lg-none"
+    href="javascript:void(0);"
+    data-toggle="collapse"
+    data-target="#navbarResponsive"
+    aria-controls="navbarResponsive"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+    (click)="toggleNavbar()"
+  >
+    <fa-icon icon="bars"></fa-icon>
+  </a>
+  <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="account !== null">
+    <ul class="navbar-nav ms-auto">
+      <li *ngIf="account != null" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
+          <span>
+            <fa-icon icon="home"></fa-icon>
+            <span jhiTranslate="global.menu.home">Home</span>
+          </span>
+        </a>
+      </li>
+      <!-- MENU FROM MODULES -->
+      <span *ngFor="let module of modules">
+        <span *ngIf="account != null && module.active == true && (module.type | lowercase) === 'dropdown'">
+          <li
+            ngbDropdown
+            class="nav-item dropdown pointer"
+            display="dynamic"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu" data-cy="entity">
+              <span>
+                <fa-icon [icon]="module?.icon?.code"></fa-icon>
+                <span>{{ module?.libelle }}</span>
+              </span>
+            </a>
+            <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
+              <li *ngFor="let page of pages">
+                <a
+                  *ngIf="module.id == page?.modules?.id && page?.active == true"
+                  class="dropdown-item"
+                  routerLink="{{ page?.routerLink?.code }}"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <span>{{ page?.libelle }}</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </span>
+        <span *ngIf="account != null && module.active == true && (module.type | lowercase) !== 'dropdown'">
+          <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <a class="nav-link" routerLink="{{ module.routerLink }}" (click)="collapseNavbar()">
+              <span>
+                <span>{{ module.libelle }}</span>
+              </span>
+            </a>
+          </li>
+        </span>
+      </span>
+      <li
+        *ngIf="account != null"
+        ngbDropdown
+        class="nav-item dropdown pointer"
+        display="dynamic"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu" data-cy="accountMenu">
+          <span *ngIf="!account?.imageUrl">
+            <fa-icon icon="user"></fa-icon>
+            <span jhiTranslate="global.menu.account.main">Account</span>
+          </span>
+          <span *ngIf="account?.imageUrl">
+            <img [src]="account!.imageUrl" class="profile-image rounded-circle" alt="Avatar" />
+          </span>
+        </a>
+        <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="account-menu">
+          <li *ngSwitchCase="true">
+            <a
+              class="dropdown-item"
+              routerLink="account/password"
+              routerLinkActive="active"
+              (click)="collapseNavbar()"
+              data-cy="passwordItem"
+            >
+              <fa-icon icon="lock" [fixedWidth]="true"></fa-icon>
+              <span jhiTranslate="global.menu.account.password">Password</span>
+            </a>
+          </li>
+          <li *ngSwitchCase="true">
+            <a class="dropdown-item" (click)="logout()" id="logout" data-cy="logout">
+              <fa-icon icon="sign-out-alt" [fixedWidth]="true"></fa-icon>
+              <span jhiTranslate="global.menu.account.logout">Sign out</span>
+            </a>
+          </li>
+          <li *ngSwitchCase="false">
+            <a class="dropdown-item" (click)="login()" id="login" data-cy="login">
+              <fa-icon icon="sign-in-alt" [fixedWidth]="true"></fa-icon>
+              <span jhiTranslate="global.menu.account.login">Sign in</span>
+            </a>
+          </li>
+          <li *ngSwitchCase="false">
+            <a class="dropdown-item" routerLink="account/register" routerLinkActive="active" (click)="collapseNavbar()" data-cy="register">
+              <fa-icon icon="user-plus" [fixedWidth]="true"></fa-icon>
+              <span jhiTranslate="global.menu.account.register">Register</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>

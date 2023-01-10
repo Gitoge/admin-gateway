@@ -1,0 +1,136 @@
+<div>
+  <h2 id="page-heading" data-cy="SaisieEmolumentsHeading">
+    <span>Saisie Emoluments</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="admingatewayApp.paieSaisieEmoluments.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-saisie-emoluments"
+        [routerLink]="['/saisie-emoluments/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Saisie Emoluments </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="saisieEmoluments?.length === 0">
+    <span jhiTranslate="admingatewayApp.paieSaisieEmoluments.home.notFound">No saisieEmoluments found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="saisieEmoluments && saisieEmoluments.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="codePoste">
+            <span jhiTranslate="admingatewayApp.paieSaisieEmoluments.codePoste">Code Poste</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="matricule">
+            <span jhiTranslate="admingatewayApp.paieSaisieEmoluments.matricule">Matricule</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="reference"><span>Référence</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="montant">
+            <span jhiTranslate="admingatewayApp.paieSaisieEmoluments.montant">Montant</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="taux">
+            <span jhiTranslate="admingatewayApp.paieSaisieEmoluments.taux">Taux</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateEffet">
+            <span jhiTranslate="admingatewayApp.paieSaisieEmoluments.dateEffet">Date Effet</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateEcheance">
+            <span jhiTranslate="admingatewayApp.paieSaisieEmoluments.dateEcheance">Date Echeance</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="periodePaye.id"><span>Période Paye</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="postes.id">
+            <span jhiTranslate="admingatewayApp.paieSaisieEmoluments.postes">Postes</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let saisieEmoluments of saisieEmoluments; trackBy: trackId" data-cy="entityTable">
+          <td>{{ saisieEmoluments.codePoste }}</td>
+          <td>{{ saisieEmoluments.matricule }}</td>
+          <td>{{ saisieEmoluments.reference }}</td>
+          <td>{{ saisieEmoluments.montant }}</td>
+          <td>{{ saisieEmoluments.taux }}</td>
+          <td>{{ saisieEmoluments.dateEffet | date: 'dd/MM/yyyy' }}</td>
+          <td>{{ saisieEmoluments.dateEcheance | date: 'dd/MM/yyyy' }}</td>
+          <td>
+            <div *ngIf="saisieEmoluments.periodePaye">
+              <a [routerLink]="['/periode-paye', saisieEmoluments.periodePaye?.id, 'view']">{{ saisieEmoluments.periodePaye?.id }}</a>
+            </div>
+          </td>
+          <td>
+            {{ saisieEmoluments.posteId }}
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/saisie-emoluments', saisieEmoluments.id, 'view']"
+                class="btn btn-outline-info btn-sm"
+                data-cy="entityDetailsButton"
+                title="Details"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/saisie-emoluments', saisieEmoluments.id, 'edit']"
+                class="btn btn-outline-primary btn-sm"
+                data-cy="entityEditButton"
+                title="Modifier"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+
+              <button
+                type="submit"
+                (click)="delete(saisieEmoluments)"
+                class="btn btn-outline-danger btn-sm"
+                data-cy="entityDeleteButton"
+                title="Supprimer"
+              >
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="saisieEmoluments && saisieEmoluments.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

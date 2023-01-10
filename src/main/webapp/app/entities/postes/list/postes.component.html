@@ -1,0 +1,138 @@
+<div>
+  <h2 id="page-heading" data-cy="PostesHeading">
+    <span jhiTranslate="admingatewayApp.postes.home.title">Postes</span>
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="admingatewayApp.postes.home.refreshListLabel">Refresh List</span>
+      </button>
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-postes"
+        [routerLink]="['/postes/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Nouveau</span>
+      </button>
+    </div>
+  </h2>
+  <jhi-alert-error></jhi-alert-error>
+  <jhi-alert></jhi-alert>
+  <div class="alert alert-warning" id="no-result" *ngIf="postes?.length === 0">
+    <span jhiTranslate="admingatewayApp.postes.home.notFound">No postes found</span>
+  </div>
+  <div class="row" style="margin-left: 1px">
+    <div class="col-md-8 form__group field" id="adv-search">
+      <input
+        type="text"
+        class="form__field"
+        name="motCle"
+        id="field_motCle"
+        [(ngModel)]="motCles"
+        oninput="this.value = this.value.toUpperCase()"
+      />
+      <label for="name" class="form__label">Rechercher par Libellé ...</label>
+    </div>
+    <div class="col-md-4" style="margin-top: 25px">
+      <button type="button" class="btn btn-primary" title="Rechercher" (click)="recherche()">
+        <fa-icon [icon]="'search'"></fa-icon>
+      </button>
+      &nbsp;
+      <button type="button" class="btn btn-danger" title="Effacer" (click)="effacer()">
+        <fa-icon icon="times"></fa-icon>
+      </button>
+    </div>
+  </div>
+  <div class="table-responsive" id="entities" *ngIf="postes && postes.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="code">
+            <span jhiTranslate="admingatewayApp.postes.code">Code</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="libelle">
+            <span jhiTranslate="admingatewayApp.postes.libelle">Libelle</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="description">
+            <span>Déscription</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="montant">
+            <span>Montant</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th>
+            <span>Cumule Retenue</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let postes of postes; trackBy: trackId" data-cy="entityTable">
+          <td>{{ postes.code }}</td>
+          <td>{{ postes.libelle }}</td>
+          <td>{{ postes.description }}</td>
+          <td>{{ postes.montant }}</td>
+          <td>{{ postes.cumuleRetenue }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/postes', postes.id, 'view']"
+                class="btn btn-info btn-sm"
+                title="Details"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/postes', postes.id, 'edit']"
+                class="btn btn-outline-primary btn-sm"
+                data-cy="entityEditButton"
+                title="Modifier"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+              <button
+                type="submit"
+                (click)="delete(postes)"
+                class="btn btn-outline-danger btn-sm"
+                data-cy="entityDeleteButton"
+                title="Supprimer"
+              >
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="postes && postes.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

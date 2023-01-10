@@ -1,0 +1,27 @@
+{
+  "changelogDate": "20221027102701",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "codeGrade",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "7",
+      "fieldValidateRulesMinlength": "6"
+    },
+    {
+      "fieldName": "codePoste",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "3",
+      "fieldValidateRulesMinlength": "3"
+    }
+  ],
+  "jpaMetamodelFiltering": false,
+  "name": "PosteGrade",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceClass"
+}

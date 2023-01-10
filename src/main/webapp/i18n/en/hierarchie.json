@@ -1,0 +1,30 @@
+{
+  "admingatewayApp": {
+    "hierarchie": {
+      "home": {
+        "title": "Hierarchies",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Hierarchie",
+        "createOrEditLabel": "Create or edit a Hierarchie",
+        "notFound": "No Hierarchies found"
+      },
+      "created": "A new Hierarchie is created with identifier {{ param }}",
+      "updated": "A Hierarchie is updated with identifier {{ param }}",
+      "deleted": "A Hierarchie is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Hierarchie {{ id }}?"
+      },
+      "detail": {
+        "title": "Hierarchie"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "borneInferieure": "Borne Inferieure",
+      "borneSuperieure": "Borne Superieure",
+      "codEchelonIndiciare": "Cod Echelon Indiciare",
+      "hcadre": "Hcadre",
+      "postes": "Postes"
+    }
+  }
+}

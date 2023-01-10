@@ -1,0 +1,41 @@
+{
+  "admingatewayApp": {
+    "paieEmoluments": {
+      "home": {
+        "title": "Emoluments",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Emoluments",
+        "createOrEditLabel": "Créer ou éditer un Emoluments",
+        "notFound": "Aucun Emoluments trouvé"
+      },
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Emoluments {{ id }} ?"
+      },
+      "detail": {
+        "title": "Emoluments"
+      },
+      "id": "ID",
+      "codePoste": "Code Poste",
+      "matricule": "Matricule",
+      "reference": "Reference",
+      "montant": "Montant",
+      "taux": "Taux",
+      "dateEffet": "Date Effet",
+      "dateEcheance": "Date Echeance",
+      "agentId": "Agent Id",
+      "etablissementId": "Etablissement Id",
+      "userInsertId": "User Insert Id",
+      "userUpdateId": "User Update Id",
+      "dateInsert": "Date Insert",
+      "dateUpdate": "Date Update",
+      "postes": "Postes"
+    }
+  },
+  "paieApp": {
+    "paieEmoluments": {
+      "created": "Un nouveau Emoluments a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Emoluments avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Emoluments avec l'identifiant {{ param }} a été supprimé"
+    }
+  }
+}

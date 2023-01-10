@@ -1,0 +1,41 @@
+{
+  "admingatewayApp": {
+    "paieEmoluments": {
+      "home": {
+        "title": "Emoluments",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Emoluments",
+        "createOrEditLabel": "Create or edit a Emoluments",
+        "notFound": "No Emoluments found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Emoluments {{ id }}?"
+      },
+      "detail": {
+        "title": "Emoluments"
+      },
+      "id": "ID",
+      "codePoste": "Code Poste",
+      "matricule": "Matricule",
+      "reference": "Reference",
+      "montant": "Montant",
+      "taux": "Taux",
+      "dateEffet": "Date Effet",
+      "dateEcheance": "Date Echeance",
+      "agentId": "Agent Id",
+      "etablissementId": "Etablissement Id",
+      "userInsertId": "User Insert Id",
+      "userUpdateId": "User Update Id",
+      "dateInsert": "Date Insert",
+      "dateUpdate": "Date Update",
+      "postes": "Postes"
+    }
+  },
+  "paieApp": {
+    "paieEmoluments": {
+      "created": "A new Emoluments is created with identifier {{ param }}",
+      "updated": "A Emoluments is updated with identifier {{ param }}",
+      "deleted": "A Emoluments is deleted with identifier {{ param }}"
+    }
+  }
+}

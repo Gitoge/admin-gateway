@@ -1,0 +1,33 @@
+{
+  "admingatewayApp": {
+    "modules": {
+      "home": {
+        "title": "Modules",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Modules",
+        "createOrEditLabel": "Créer ou éditer un Modules",
+        "notFound": "Aucun Modules trouvé"
+      },
+      "created": "Un nouveau Modules a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Modules avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Modules avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Modules {{ id }} ?"
+      },
+      "detail": {
+        "title": "Modules"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description",
+      "icon": "Icon",
+      "ordre": "Ordre",
+      "routerLink": "Router Link",
+      "type": "Type",
+      "active": "Active",
+      "profils": "Profils",
+      "applications": "Applications"
+    }
+  }
+}

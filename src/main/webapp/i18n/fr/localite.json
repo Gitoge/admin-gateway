@@ -1,0 +1,36 @@
+{
+  "admingatewayApp": {
+    "localite": {
+      "home": {
+        "title": "Localites",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Localite",
+        "createOrEditLabel": "Créer ou éditer un Localite",
+        "notFound": "Aucun Localite trouvé"
+      },
+      "created": "Un nouveau Localite a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Localite avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Localite avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Localite {{ id }} ?"
+      },
+      "detail": {
+        "title": "Localite"
+      },
+      "id": "ID",
+      "code": "Code",
+      "estParDefaut": "Est Par Defaut",
+      "libelle": "Libelle",
+      "niveau": "Niveau",
+      "ordre": "Ordre",
+      "version": "Version",
+      "paysId": "Pays Id",
+      "insertUserId": "Insert User Id",
+      "insertDate": "Insert Date",
+      "localite": "Localite",
+      "etab": "Etab",
+      "rattachementId": "Rattachement Id",
+      "typeLocalite": "Type Localite"
+    }
+  }
+}

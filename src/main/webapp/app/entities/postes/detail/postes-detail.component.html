@@ -1,0 +1,148 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="postes">
+      <h2 data-cy="postesDetailsHeading"><span jhiTranslate="admingatewayApp.paiePostes.detail.title">Postes</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ postes.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paiePostes.code">Code</span></dt>
+        <dd>
+          <span>{{ postes.code }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paiePostes.libelle">Libelle</span></dt>
+        <dd>
+          <span>{{ postes.libelle }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paiePostes.description">Description</span></dt>
+        <dd>
+          <span>{{ postes.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paiePostes.sens">Sens</span></dt>
+        <dd>
+          <span>{{ postes.sens }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paiePostes.dateEffet">Date Effet</span></dt>
+        <dd>
+          <span>{{ postes.dateEffet | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paiePostes.dateEcheance">Date Echeance</span></dt>
+        <dd>
+          <span>{{ postes.dateEcheance | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paiePostes.formule">Formule</span></dt>
+        <dd>
+          <span>{{ postes.formule | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paiePostes.dansAssiette">Dans Assiette</span></dt>
+        <dd>
+          <span>{{ postes.dansAssiette }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paiePostes.montant">Montant</span></dt>
+        <dd>
+          <span>{{ postes.montant }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paiePostes.capital">Capital</span></dt>
+        <dd>
+          <span>{{ postes.capital }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paiePostes.cumuleRetenue">Cumule Retenue</span></dt>
+        <dd>
+          <span>{{ postes.cumuleRetenue }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paiePostes.typePosteId">Type Poste Id</span></dt>
+        <dd>
+          <span>{{ postes.typePosteId }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="admingatewayApp.paiePostes.typePosteLibelle"
+            [ngbTooltip]="'admingatewayApp.paiePostes.help.typePosteLibelle' | translate"
+            >Type Poste Libelle</span
+          >
+        </dt>
+        <dd>
+          <span>{{ postes.typePosteLibelle }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="admingatewayApp.paiePostes.frequenceId"
+            [ngbTooltip]="'admingatewayApp.paiePostes.help.frequenceId' | translate"
+            >Frequence Id</span
+          >
+        </dt>
+        <dd>
+          <span>{{ postes.frequenceId }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="admingatewayApp.paiePostes.frequenceLibelle"
+            [ngbTooltip]="'admingatewayApp.paiePostes.help.frequenceLibelle' | translate"
+            >Frequence Libelle</span
+          >
+        </dt>
+        <dd>
+          <span>{{ postes.frequenceLibelle }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="admingatewayApp.paiePostes.categoriePosteId"
+            [ngbTooltip]="'admingatewayApp.paiePostes.help.categoriePosteId' | translate"
+            >Categorie Poste Id</span
+          >
+        </dt>
+        <dd>
+          <span>{{ postes.categoriePosteId }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="admingatewayApp.paiePostes.categoriePosteLibelle"
+            [ngbTooltip]="'admingatewayApp.paiePostes.help.categoriePosteLibelle' | translate"
+            >Categorie Poste Libelle</span
+          >
+        </dt>
+        <dd>
+          <span>{{ postes.categoriePosteLibelle }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="admingatewayApp.paiePostes.userInsertId"
+            [ngbTooltip]="'admingatewayApp.paiePostes.help.userInsertId' | translate"
+            >User Insert Id</span
+          >
+        </dt>
+        <dd>
+          <span>{{ postes.userInsertId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paiePostes.userUpdateId">User Update Id</span></dt>
+        <dd>
+          <span>{{ postes.userUpdateId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paiePostes.dateInsert">Date Insert</span></dt>
+        <dd>
+          <span>{{ postes.dateInsert | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paiePostes.dateUpdate">Date Update</span></dt>
+        <dd>
+          <span>{{ postes.dateUpdate | formatMediumDatetime }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/postes', postes.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

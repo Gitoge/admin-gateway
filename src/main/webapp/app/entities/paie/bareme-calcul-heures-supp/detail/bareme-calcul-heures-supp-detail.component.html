@@ -1,0 +1,78 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="baremeCalculHeuresSupp">
+      <h2 data-cy="baremeCalculHeuresSuppDetailsHeading">
+        <span jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.detail.title">Bareme Calcul Heures Supp</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ baremeCalculHeuresSupp.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.indiceDebut">Indice Debut</span></dt>
+        <dd>
+          <span>{{ baremeCalculHeuresSupp.indiceDebut }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.indiceFin">Indice Fin</span></dt>
+        <dd>
+          <span>{{ baremeCalculHeuresSupp.indiceFin }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.soldeGlobalDebut">Solde Global Debut</span></dt>
+        <dd>
+          <span>{{ baremeCalculHeuresSupp.soldeGlobalDebut }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.soldeGlobalFin">Solde Global Fin</span></dt>
+        <dd>
+          <span>{{ baremeCalculHeuresSupp.soldeGlobalFin }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.heuresOrdinaires">Heures Ordinaires</span></dt>
+        <dd>
+          <span>{{ baremeCalculHeuresSupp.heuresOrdinaires }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.dimanchesJoursFeries">Dimanches Jours Feries</span></dt>
+        <dd>
+          <span>{{ baremeCalculHeuresSupp.dimanchesJoursFeries }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.heuresNuit">Heures Nuit</span></dt>
+        <dd>
+          <span>{{ baremeCalculHeuresSupp.heuresNuit }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.observation">Observation</span></dt>
+        <dd>
+          <span>{{ baremeCalculHeuresSupp.observation }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.userInsertId">User Insert Id</span></dt>
+        <dd>
+          <span>{{ baremeCalculHeuresSupp.userInsertId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.userUpdateId">User Update Id</span></dt>
+        <dd>
+          <span>{{ baremeCalculHeuresSupp.userUpdateId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.dateInsert">Date Insert</span></dt>
+        <dd>
+          <span>{{ baremeCalculHeuresSupp.dateInsert | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieBaremeCalculHeuresSupp.dateUpdate">Date Update</span></dt>
+        <dd>
+          <span>{{ baremeCalculHeuresSupp.dateUpdate | formatMediumDatetime }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/bareme-calcul-heures-supp', baremeCalculHeuresSupp.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

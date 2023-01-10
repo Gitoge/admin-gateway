@@ -1,0 +1,38 @@
+{
+  "admingatewayApp": {
+    "paieExercice": {
+      "home": {
+        "title": "Exercices",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Exercice",
+        "createOrEditLabel": "Créer ou éditer un Exercice",
+        "notFound": "Aucun Exercice trouvé"
+      },
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Exercice {{ id }} ?"
+      },
+      "detail": {
+        "title": "Exercice"
+      },
+      "id": "ID",
+      "libelle": "Libelle",
+      "dateDebut": "Date Debut",
+      "dateFin": "Date Fin",
+      "dateOuverture": "Date Ouverture",
+      "dateFermeture": "Date Fermeture",
+      "statut": "Statut",
+      "userInsertId": "User Insert Id",
+      "userUpdateId": "User Update Id",
+      "dateInsert": "Date Insert",
+      "dateUpdate": "Date Update",
+      "periodePaye": "Periode Paye"
+    }
+  },
+  "paieApp": {
+    "paieExercice": {
+      "created": "Un nouveau Exercice a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Exercice avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Exercice avec l'identifiant {{ param }} a été supprimé"
+    }
+  }
+}

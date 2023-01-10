@@ -1,0 +1,359 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-elements-variables-heading"
+        data-cy="ElementsVariablesCreateUpdateHeading"
+        jhiTranslate="admingatewayApp.paieElementsVariables.home.createOrEditLabel"
+      >
+        Create or edit a Elements Variables
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.paieElementsVariables.codePoste" for="field_codePoste">Code Poste</label>
+          <input type="text" class="form-control" name="codePoste" id="field_codePoste" data-cy="codePoste" formControlName="codePoste" />
+          <div *ngIf="editForm.get('codePoste')!.invalid && (editForm.get('codePoste')!.dirty || editForm.get('codePoste')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('codePoste')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('codePoste')?.errors?.minlength"
+              jhiTranslate="entity.validation.minlength"
+              [translateValues]="{ min: 3 }"
+            >
+              This field is required to be at least 3 characters.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('codePoste')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 3 }"
+            >
+              This field cannot be longer than 3 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.paieElementsVariables.matricule" for="field_matricule">Matricule</label>
+          <input type="text" class="form-control" name="matricule" id="field_matricule" data-cy="matricule" formControlName="matricule" />
+          <div *ngIf="editForm.get('matricule')!.invalid && (editForm.get('matricule')!.dirty || editForm.get('matricule')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('matricule')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('matricule')?.errors?.minlength"
+              jhiTranslate="entity.validation.minlength"
+              [translateValues]="{ min: 7 }"
+            >
+              This field is required to be at least 7 characters.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('matricule')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 7 }"
+            >
+              This field cannot be longer than 7 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.paieElementsVariables.reference" for="field_reference">Reference</label>
+          <input type="text" class="form-control" name="reference" id="field_reference" data-cy="reference" formControlName="reference" />
+          <div *ngIf="editForm.get('reference')!.invalid && (editForm.get('reference')!.dirty || editForm.get('reference')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('reference')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.paieElementsVariables.montant" for="field_montant">Montant</label>
+          <input type="number" class="form-control" name="montant" id="field_montant" data-cy="montant" formControlName="montant" />
+          <div *ngIf="editForm.get('montant')!.invalid && (editForm.get('montant')!.dirty || editForm.get('montant')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('montant')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('montant')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.paieElementsVariables.taux" for="field_taux">Taux</label>
+          <input type="number" class="form-control" name="taux" id="field_taux" data-cy="taux" formControlName="taux" />
+          <div *ngIf="editForm.get('taux')!.invalid && (editForm.get('taux')!.dirty || editForm.get('taux')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('taux')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('taux')?.errors?.number" jhiTranslate="entity.validation.number">
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.paieElementsVariables.dateDebut" for="field_dateDebut">Date Debut</label>
+          <div class="input-group">
+            <input
+              id="field_dateDebut"
+              data-cy="dateDebut"
+              type="text"
+              class="form-control"
+              name="dateDebut"
+              ngbDatepicker
+              #dateDebutDp="ngbDatepicker"
+              formControlName="dateDebut"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateDebutDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+          <div *ngIf="editForm.get('dateDebut')!.invalid && (editForm.get('dateDebut')!.dirty || editForm.get('dateDebut')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dateDebut')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.paieElementsVariables.dateEcheance" for="field_dateEcheance"
+            >Date Echeance</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dateEcheance"
+              data-cy="dateEcheance"
+              type="text"
+              class="form-control"
+              name="dateEcheance"
+              ngbDatepicker
+              #dateEcheanceDp="ngbDatepicker"
+              formControlName="dateEcheance"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateEcheanceDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+          <div
+            *ngIf="editForm.get('dateEcheance')!.invalid && (editForm.get('dateEcheance')!.dirty || editForm.get('dateEcheance')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dateEcheance')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.paieElementsVariables.periode" for="field_periode">Periode</label>
+          <input type="text" class="form-control" name="periode" id="field_periode" data-cy="periode" formControlName="periode" />
+          <div *ngIf="editForm.get('periode')!.invalid && (editForm.get('periode')!.dirty || editForm.get('periode')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('periode')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.paieElementsVariables.statut" for="field_statut">Statut</label>
+          <input type="checkbox" class="form-check" name="statut" id="field_statut" data-cy="statut" formControlName="statut" />
+          <div *ngIf="editForm.get('statut')!.invalid && (editForm.get('statut')!.dirty || editForm.get('statut')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('statut')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.paieElementsVariables.agentId" for="field_agentId">Agent Id</label>
+          <input type="number" class="form-control" name="agentId" id="field_agentId" data-cy="agentId" formControlName="agentId" />
+          <div *ngIf="editForm.get('agentId')!.invalid && (editForm.get('agentId')!.dirty || editForm.get('agentId')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('agentId')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('agentId')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.paieElementsVariables.etablissementId" for="field_etablissementId"
+            >Etablissement Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="etablissementId"
+            id="field_etablissementId"
+            data-cy="etablissementId"
+            formControlName="etablissementId"
+          />
+          <div
+            *ngIf="
+              editForm.get('etablissementId')!.invalid &&
+              (editForm.get('etablissementId')!.dirty || editForm.get('etablissementId')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('etablissementId')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('etablissementId')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.paieElementsVariables.userInsertId" for="field_userInsertId"
+            >User Insert Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="userInsertId"
+            id="field_userInsertId"
+            data-cy="userInsertId"
+            formControlName="userInsertId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.paieElementsVariables.userUpdateId" for="field_userUpdateId"
+            >User Update Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="userUpdateId"
+            id="field_userUpdateId"
+            data-cy="userUpdateId"
+            formControlName="userUpdateId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.paieElementsVariables.dateInsert" for="field_dateInsert"
+            >Date Insert</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dateInsert"
+              data-cy="dateInsert"
+              type="datetime-local"
+              class="form-control"
+              name="dateInsert"
+              formControlName="dateInsert"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.paieElementsVariables.dateUpdate" for="field_dateUpdate"
+            >Date Update</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dateUpdate"
+              data-cy="dateUpdate"
+              type="datetime-local"
+              class="form-control"
+              name="dateUpdate"
+              formControlName="dateUpdate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.paieElementsVariables.postes" for="field_postes">Postes</label>
+          <select class="form-control" id="field_postes" data-cy="postes" name="postes" formControlName="postes">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="postesOption.id === editForm.get('postes')!.value?.id ? editForm.get('postes')!.value : postesOption"
+              *ngFor="let postesOption of postesSharedCollection; trackBy: trackPostesById"
+            >
+              {{ postesOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

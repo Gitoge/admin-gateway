@@ -1,0 +1,66 @@
+{
+  "applications": "*",
+  "changelogDate": "20220718174959",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "personne",
+  "fields": [
+    {
+      "fieldName": "cni",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateNaissance",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fonction",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lieuNaissance",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "matricule",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "prenom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sexe",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "telephone",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Personne",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "userExtended",
+      "otherEntityRelationshipName": "personne",
+      "ownerSide": true,
+      "relationshipName": "userKnowPersonne",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "no",
+  "skipServer": true
+}

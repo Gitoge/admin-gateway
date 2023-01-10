@@ -1,0 +1,148 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-service-heading" class="custom-title" data-cy="ServiceCreateUpdateHeading">
+        {{ this.titre }}
+      </h2>
+
+      <div>
+        <!-- <jhi-alert-error></jhi-alert-error> -->
+        <div class="justify-content-center" style="border: 1px solid lightgray; padding: 2%">
+          <fieldset>
+            <div>
+              <div class="row" style="margin-top: 1%">
+                <div class="col-md-6">
+                  <label class="col-sm-4 col-form-label" for="field_direction">Direction <span style="color: red">*</span></label>
+                  <div>
+                    <select class="form-control" id="field_direction" data-cy="direction" name="direction" formControlName="direction">
+                      <option [ngValue]="null"></option>
+                      <option
+                        [ngValue]="
+                          directionOption.id === editForm.get('direction')!.value?.id ? editForm.get('direction')!.value : directionOption
+                        "
+                        *ngFor="let directionOption of directionsSharedCollection; trackBy: trackDirectionById"
+                      >
+                        {{ directionOption.libelle }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label custom-label" for="field_code">Code<span style="color: red">*</span></label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" />
+                  </div>
+                  <div *ngIf="editForm.get('code')!.invalid && (editForm.get('code')!.dirty || editForm.get('code')!.touched)">
+                    <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.required"> Ce champ est obligatoire. </small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row" style="margin-top: 1%">
+                <div class="col-md-6">
+                  <label class="form-label" for="field_libelle">Libellé<span style="color: red">*</span></label>
+                  <div>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="libelle"
+                      id="field_libelle"
+                      data-cy="libelle"
+                      formControlName="libelle"
+                      oninput="this.value = this.value.toUpperCase()"
+                    />
+                  </div>
+                  <div *ngIf="editForm.get('libelle')!.invalid && (editForm.get('libelle')!.dirty || editForm.get('libelle')!.touched)">
+                    <small class="form-text text-danger" *ngIf="editForm.get('libelle')?.errors?.required">
+                      Ce champ est obligatoire.
+                    </small>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label" for="field_email">Email</label>
+                  <div class="col-sm-8">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="email"
+                      id="field_email"
+                      data-cy="email"
+                      formControlName="email"
+                      required
+                      pattern="^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
+                    />
+                    <div [hidden]="!(editForm.controls.email?.dirty && editForm.controls.email?.invalid)">
+                      <small class="form-text text-danger" [hidden]="!editForm.controls.email?.errors?.pattern">
+                        Le format du e-mail est incorrect.
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row" style="margin-top: 1%">
+                <div class="col-md-6">
+                  <label class="form-label" for="field_numTelephone">Téléphone</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    name="numTelephone"
+                    id="field_numTelephone"
+                    data-cy="numTelephone"
+                    formControlName="numTelephone"
+                  />
+                  <div
+                    *ngIf="
+                      editForm.get('numTelephone')!.invalid &&
+                      (editForm.get('numTelephone')!.dirty || editForm.get('numTelephone')!.touched)
+                    "
+                  >
+                    <small class="form-text text-danger" *ngIf="editForm.get('numTelephone')?.errors?.required">
+                      Ce champ est obligatoire.
+                    </small>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label custom-label" for="field_fax">Fax</label>
+                  <div class="col-sm-8">
+                    <input type="number" class="form-control" name="fax" id="field_fax" data-cy="fax" formControlName="fax" />
+                  </div>
+                  <div *ngIf="editForm.get('fax')!.invalid && (editForm.get('fax')!.dirty || editForm.get('fax')!.touched)">
+                    <small class="form-text text-danger" *ngIf="editForm.get('fax')?.errors?.required"> Ce champ est obligatoire. </small>
+                  </div>
+                </div>
+              </div>
+              <div class="row" style="margin-top: 1%">
+                <div class="col-md-6">
+                  <label class="form-label custom-label" for="field_bp">Adresse</label>
+                  <div>
+                    <input type="text" class="form-control" name="adresse" id="field_adresse" data-cy="adresse" formControlName="adresse" />
+                  </div>
+                </div>
+                <div class="col-md-6"></div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+      <br />
+      <div style="display: flex; justify-content: center; align-items: center">
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        &nbsp;
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Enregistrer</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

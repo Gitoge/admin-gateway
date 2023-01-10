@@ -1,0 +1,29 @@
+{
+  "admingatewayApp": {
+    "typePosition": {
+      "home": {
+        "title": "TypePositions",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Type Position",
+        "createOrEditLabel": "Créer ou éditer un Type Position",
+        "notFound": "Aucun Type Position trouvé"
+      },
+      "created": "Un nouveau Type Position a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Type Position avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Type Position avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Type Position {{ id }} ?"
+      },
+      "detail": {
+        "title": "Type Position"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description",
+      "userIdInsert": "User Id Insert",
+      "userdateInsert": "Userdate Insert",
+      "positions": "Positions"
+    }
+  }
+}

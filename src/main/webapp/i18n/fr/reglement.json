@@ -1,0 +1,28 @@
+{
+  "admingatewayApp": {
+    "reglement": {
+      "home": {
+        "title": "Reglements",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Reglement",
+        "createOrEditLabel": "Créer ou éditer un Reglement",
+        "notFound": "Aucun Reglement trouvé"
+      },
+      "created": "Un nouveau Reglement a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Reglement avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Reglement avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Reglement {{ id }} ?"
+      },
+      "detail": {
+        "title": "Reglement"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "complementinfos": "Complementinfos",
+      "commentaire": "Commentaire",
+      "typereglement": "Typereglement"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "admingatewayApp": {
+    "tableValeur": {
+      "home": {
+        "title": "Table Valeurs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Table Valeur",
+        "createOrEditLabel": "Create or edit a Table Valeur",
+        "notFound": "No Table Valeurs found"
+      },
+      "created": "A new Table Valeur is created with identifier {{ param }}",
+      "updated": "A Table Valeur is updated with identifier {{ param }}",
+      "deleted": "A Table Valeur is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Table Valeur {{ id }}?"
+      },
+      "detail": {
+        "title": "Table Valeur"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description",
+      "tabletypevaleur": "Tabletypevaleur"
+    }
+  }
+}

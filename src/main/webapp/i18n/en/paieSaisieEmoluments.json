@@ -1,0 +1,43 @@
+{
+  "admingatewayApp": {
+    "paieSaisieEmoluments": {
+      "home": {
+        "title": "Saisie Emoluments",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Saisie Emoluments",
+        "createOrEditLabel": "Create or edit a Saisie Emoluments",
+        "notFound": "No Saisie Emoluments found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Saisie Emoluments {{ id }}?"
+      },
+      "detail": {
+        "title": "Saisie Emoluments"
+      },
+      "id": "ID",
+      "codePoste": "Code Poste",
+      "matricule": "Matricule",
+      "reference": "Reference",
+      "montant": "Montant",
+      "taux": "Taux",
+      "dateEffet": "Date Effet",
+      "dateEcheance": "Date Echeance",
+      "statut": "Statut",
+      "agentId": "Agent Id",
+      "etablissementId": "Etablissement Id",
+      "userInsertId": "User Insert Id",
+      "userUpdateId": "User Update Id",
+      "dateInsert": "Date Insert",
+      "dateUpdate": "Date Update",
+      "periodePaye": "Periode Paye",
+      "postes": "Postes"
+    }
+  },
+  "paieApp": {
+    "paieSaisieEmoluments": {
+      "created": "A new Saisie Emoluments is created with identifier {{ param }}",
+      "updated": "A Saisie Emoluments is updated with identifier {{ param }}",
+      "deleted": "A Saisie Emoluments is deleted with identifier {{ param }}"
+    }
+  }
+}

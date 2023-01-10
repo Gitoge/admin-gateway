@@ -1,0 +1,30 @@
+{
+  "admingatewayApp": {
+    "carriereIndices": {
+      "home": {
+        "title": "Indices",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Indices",
+        "createOrEditLabel": "Créer ou éditer un Indices",
+        "notFound": "Aucun Indices trouvé"
+      },
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Indices {{ id }} ?"
+      },
+      "detail": {
+        "title": "Indices"
+      },
+      "id": "ID",
+      "code": "Code",
+      "soldeIndiciaire": "Solde Indiciaire",
+      "grilleIndiciaire": "Grille Indiciaire"
+    }
+  },
+  "carriereApp": {
+    "carriereIndices": {
+      "created": "Un nouveau Indices a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Indices avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Indices avec l'identifiant {{ param }} a été supprimé"
+    }
+  }
+}

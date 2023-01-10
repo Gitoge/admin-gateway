@@ -1,0 +1,29 @@
+{
+  "admingatewayApp": {
+    "typeActes": {
+      "home": {
+        "title": "TypeActes",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Type Actes",
+        "createOrEditLabel": "Créer ou éditer un Type Actes",
+        "notFound": "Aucun Type Actes trouvé"
+      },
+      "created": "Un nouveau Type d'actes a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Type d'acte avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Type d'acte avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Type d'actes {{ id }} ?"
+      },
+      "detail": {
+        "title": "Type Actes"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description",
+      "userIdInsert": "User Id Insert",
+      "userdateInsert": "Userdate Insert",
+      "categorieactes": "Categorieactes"
+    }
+  }
+}

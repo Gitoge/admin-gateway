@@ -1,0 +1,36 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="avancement">
+      <h2 data-cy="avancementDetailsHeading"><span jhiTranslate="admingatewayApp.avancement.detail.title">Avancement</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>Grade Id</span></dt>
+        <dd>
+          <span>{{ avancement.gradeId }}</span>
+        </dd>
+        <dt><span>Echelon Id</span></dt>
+        <dd>
+          <span>{{ avancement.echelonId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.avancement.hierarchieId">Hierarchie Id</span></dt>
+        <dd>
+          <span>{{ avancement.hierarchieId }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/avancement', avancement.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

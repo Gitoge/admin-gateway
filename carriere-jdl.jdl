@@ -1,0 +1,235 @@
+entity ParamMatricules{
+numeroMatricule Integer required unique,
+datePriseEnCompte LocalDate required,
+userInsertId Integer,
+userUpdateId Integer,
+dateInsert Instant,
+dateUpdate Instant
+}
+
+entity Agent {
+matricule String required unique,
+nin String required unique,
+prenom String required,
+nom String required,
+dateNaissance LocalDate required,
+lieuNaissance String required,
+sexe String required,
+nomMari String,
+telephone String,
+email String,
+adresse String,
+femmeMariee Boolean,
+datePriseEnCharge Instant, //Correspond à la date de PEC
+dateSortie Instant,
+status String,
+titreId Long, //Mr, Mme
+userInsertId Integer,
+userUpdateId Integer,
+dateInsert Instant,
+dateUpdate Instant
+}
+
+entity Nationalite{
+code String, 
+libelle String required unique,
+userInsertId Integer,
+userUpdateId Integer,
+dateInsert Instant,
+dateUpdate Instant
+}
+
+entity Enfant {
+matriculeParent String required,
+nom String required,
+prenom String required,
+sexe String required,
+dateNaissance LocalDate required,
+lieuNaissance String required,
+numeroActeNaissance String,
+dateActeNaissance LocalDate,
+rangEnfant Integer,
+codeAge Integer,
+enfantEnVie Boolean,
+enfantImposable Boolean,
+userInsertId Integer,
+}
+
+//--------------
+entity SituationFamiliale {
+situationMatrimoniale String required, 
+nombreEpouse Integer,  
+codeTravailConjoint Integer,
+nombreEnfant Integer, 
+nombrePart Integer, 
+nombreEnfantImposable Integer, 
+nombreEnfantMajeur Integer, 
+nombreMinimumFiscal Double, 
+nombreEnfantDecede Integer, 
+dateModification Instant,
+status String,
+userInsertId Integer,
+}
+
+//--------------
+entity SituationAdministrative {
+dateRecrutement LocalDate required, 
+numeroRecrutement String required, 
+datePriseRang LocalDate, 
+numeroOrdreService String, 
+dateOrdreService LocalDate, 
+loge Boolean, //Cotisation IPRES cadre (Oui/Non)
+logementFonction Boolean, //Logement de fonction (Oui/Non)
+datedebut LocalDate, 
+datefin LocalDate, 
+numeroCompte String, //Numéro compte bancaire ou numéro du billeteur
+status String,
+corpsId Long,
+hierarchieId Long,
+cadreId Long,
+gradeId Long,
+echelonId Long,
+classeId Long,
+//typeReglementId Long, //Banque, Billetage
+reglementId Long, //La banque ou le billeteur concerné
+userInsertId Integer,
+userUpdateId Integer,
+dateInsert Instant,
+dateUpdate Instant
+}
+
+entity CategorieAgent{
+code String required unique, 
+libelle String required unique, //fonctionnaire, non fonctionnaire, cas particulier
+description String,
+userInsertId Integer,
+userUpdateId Integer,
+dateInsert Instant,
+dateUpdate Instant
+}
+
+//--------------
+entity Affectation {
+motif String, 
+dateAffectation LocalDate, 
+dateEffet LocalDate, 
+datefin LocalDate, 
+status String,
+servicesId Long,
+emploisId Long,
+userInsertId Integer
+}
+
+//--------------
+
+entity PositionsAgent {
+motif String,
+datePosition LocalDate, 
+dateAnnulation LocalDate, 
+dateFinAbsence LocalDate,
+status String,
+posistionsId Long,
+userInsertId Integer
+}
+
+entity NatureActes 
+{
+code String required unique,
+libelle String required unique,
+userInsertId Integer,
+userdateInsert Instant
+}
+
+entity CategorieActes {
+code String required unique,
+libelle String required unique,
+userInsertId Integer,
+userdateInsert Instant
+}
+
+entity TypeActes {
+code String required unique, 
+libelle String required unique,
+userInsertId Integer,
+userdateInsert Instant
+}
+
+entity Actes {
+numeroActe Integer required unique,
+dateActe LocalDate,
+dateEffet LocalDate,
+origineId Long,
+userInsertId Integer
+}
+
+//--------------
+entity Convention {
+code String required unique, 
+libelle String required unique,
+description String,
+userInsertId Integer,
+userUpdateId Integer,
+dateInsert Instant,
+dateUpdate Instant
+}
+
+//---- Table d'association entre Convention et Etablissement ------
+entity ConventionEtablissements {
+etablissementId Long,
+conventionId Long
+}
+
+//----- relationship AGENT -------
+relationship OneToMany {
+  Agent to SituationFamiliale,
+  Agent to SituationAdministrative,
+  Agent to Affectation,
+  Agent to PositionsAgent,
+  Agent to Enfant
+  }
+
+relationship OneToMany {
+  Nationalite to Agent
+}
+
+relationship OneToOne {
+  PositionsAgent to Actes,
+}
+
+//----------------
+relationship OneToOne {
+  SituationAdministrative to Actes
+}
+
+relationship OneToMany {
+  CategorieAgent to SituationAdministrative,
+  CategorieAgent to PositionsAgent
+}
+
+//--------------
+relationship OneToMany {
+   CategorieActes  to TypeActes
+}
+
+relationship OneToMany {
+	NatureActes to Actes
+	TypeActes to Actes
+}
+
+relationship OneToOne {
+  SituationFamiliale to Actes,
+}
+
+relationship OneToOne {
+  Affectation to Actes
+}
+
+ paginate * with pagination
+ //service * with serviceClass
+ //dto * with mapstruct
+ microservice * with carriere
+ //---skipServer * pour la partie frontend
+ 
+
+ 
+

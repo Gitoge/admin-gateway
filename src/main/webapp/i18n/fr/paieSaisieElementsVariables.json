@@ -1,0 +1,44 @@
+{
+  "admingatewayApp": {
+    "paieSaisieElementsVariables": {
+      "home": {
+        "title": "SaisieElementsVariables",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Saisie Elements Variables",
+        "createOrEditLabel": "Créer ou éditer un Saisie Elements Variables",
+        "notFound": "Aucun Saisie Elements Variables trouvé"
+      },
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Saisie Elements Variables {{ id }} ?"
+      },
+      "detail": {
+        "title": "Saisie Elements Variables"
+      },
+      "id": "ID",
+      "codePoste": "Code Poste",
+      "matricule": "Matricule",
+      "reference": "Reference",
+      "montant": "Montant",
+      "taux": "Taux",
+      "dateDebut": "Date Debut",
+      "dateEcheance": "Date Echeance",
+      "periode": "Periode",
+      "statut": "Statut",
+      "agentId": "Agent Id",
+      "etablissementId": "Etablissement Id",
+      "userInsertId": "User Insert Id",
+      "userUpdateId": "User Update Id",
+      "dateInsert": "Date Insert",
+      "dateUpdate": "Date Update",
+      "periodePaye": "Periode Paye",
+      "postes": "Postes"
+    }
+  },
+  "paieApp": {
+    "paieSaisieElementsVariables": {
+      "created": "Un nouveau Saisie Elements Variables a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Saisie Elements Variables avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Saisie Elements Variables avec l'identifiant {{ param }} a été supprimé"
+    }
+  }
+}

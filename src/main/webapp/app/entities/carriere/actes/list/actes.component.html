@@ -1,0 +1,118 @@
+<div>
+  <h2 id="page-heading" data-cy="ActesHeading">
+    <span jhiTranslate="admingatewayApp.carriereActes.home.title">Actes</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="admingatewayApp.carriereActes.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-actes"
+        [routerLink]="['/actes/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="admingatewayApp.carriereActes.home.createLabel"> Create a new Actes </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="actes?.length === 0">
+    <span jhiTranslate="admingatewayApp.carriereActes.home.notFound">No actes found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="actes && actes.length > 0">
+    <table class="table table-bordered table-condensed table-hover" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="numeroActe">
+            <span jhiTranslate="admingatewayApp.carriereActes.numeroActe">Numero Acte</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateActe">
+            <span jhiTranslate="admingatewayApp.carriereActes.dateActe">Date Acte</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateEffet">
+            <span jhiTranslate="admingatewayApp.carriereActes.dateEffet">Date Effet</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="origineId">
+            <span jhiTranslate="admingatewayApp.carriereActes.origineId">Origine Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="natureActes.id">
+            <span jhiTranslate="admingatewayApp.carriereActes.natureActes">Nature Actes</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="typeActes.id">
+            <span jhiTranslate="admingatewayApp.carriereActes.typeActes">Type Actes</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let actes of actes; trackBy: trackId" data-cy="entityTable">
+          <td>{{ actes.numeroActe }}</td>
+          <td>{{ actes.dateActe | formatMediumDate }}</td>
+          <td>{{ actes.dateEffet | formatMediumDate }}</td>
+          <td>{{ actes.origineId }}</td>
+          <td>
+            <div *ngIf="actes.natureActes">
+              <a [routerLink]="['/nature-actes', actes.natureActes?.id, 'view']">{{ actes.natureActes?.libelle }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="actes.typeActes">
+              <a [routerLink]="['/type-actes', actes.typeActes?.id, 'view']">{{ actes.typeActes?.libelle }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/actes', actes.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/actes', actes.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button
+                type="submit"
+                (click)="delete(actes)"
+                class="btn btn-outline-danger btn-sm"
+                data-cy="entityDeleteButton"
+                title="Supprimer"
+              >
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline"></span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="actes && actes.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

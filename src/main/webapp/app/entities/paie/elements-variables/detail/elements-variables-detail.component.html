@@ -1,0 +1,96 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="elementsVariables">
+      <h2 data-cy="elementsVariablesDetailsHeading">
+        <span jhiTranslate="admingatewayApp.paieElementsVariables.detail.title">Elements Variables</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ elementsVariables.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieElementsVariables.codePoste">Code Poste</span></dt>
+        <dd>
+          <span>{{ elementsVariables.codePoste }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieElementsVariables.matricule">Matricule</span></dt>
+        <dd>
+          <span>{{ elementsVariables.matricule }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieElementsVariables.reference">Reference</span></dt>
+        <dd>
+          <span>{{ elementsVariables.reference }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieElementsVariables.montant">Montant</span></dt>
+        <dd>
+          <span>{{ elementsVariables.montant }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieElementsVariables.taux">Taux</span></dt>
+        <dd>
+          <span>{{ elementsVariables.taux }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieElementsVariables.dateDebut">Date Debut</span></dt>
+        <dd>
+          <span>{{ elementsVariables.dateDebut | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieElementsVariables.dateEcheance">Date Echeance</span></dt>
+        <dd>
+          <span>{{ elementsVariables.dateEcheance | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieElementsVariables.periode">Periode</span></dt>
+        <dd>
+          <span>{{ elementsVariables.periode }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieElementsVariables.statut">Statut</span></dt>
+        <dd>
+          <span>{{ elementsVariables.statut }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieElementsVariables.agentId">Agent Id</span></dt>
+        <dd>
+          <span>{{ elementsVariables.agentId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieElementsVariables.etablissementId">Etablissement Id</span></dt>
+        <dd>
+          <span>{{ elementsVariables.etablissementId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieElementsVariables.userInsertId">User Insert Id</span></dt>
+        <dd>
+          <span>{{ elementsVariables.userInsertId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieElementsVariables.userUpdateId">User Update Id</span></dt>
+        <dd>
+          <span>{{ elementsVariables.userUpdateId }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieElementsVariables.dateInsert">Date Insert</span></dt>
+        <dd>
+          <span>{{ elementsVariables.dateInsert | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieElementsVariables.dateUpdate">Date Update</span></dt>
+        <dd>
+          <span>{{ elementsVariables.dateUpdate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paieElementsVariables.postes">Postes</span></dt>
+        <dd>
+          <div *ngIf="elementsVariables.postes">
+            <a [routerLink]="['/postes', elementsVariables.postes?.id, 'view']">{{ elementsVariables.postes?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/elements-variables', elementsVariables.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

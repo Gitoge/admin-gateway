@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <div *ngIf="paramQuotiteCessible">
+      <h2 data-cy="paramQuotiteCessibleDetailsHeading" class="custom-title">
+        <span>Param Quotite Cessible</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details detail-card">
+        <!-- <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ paramQuotiteCessible.id }}</span>
+        </dd> -->
+        <dt><span>Code</span></dt>
+        <dd>
+          <span>{{ paramQuotiteCessible.code }}</span>
+        </dd>
+        <dt><span>Libellé</span></dt>
+        <dd>
+          <span>{{ paramQuotiteCessible.libelle }}</span>
+        </dd>
+        <dt><span>Salaire Debut</span></dt>
+        <dd>
+          <span>{{ paramQuotiteCessible.salaireDebut }}</span>
+        </dd>
+        <dt><span>Salaire Fin</span></dt>
+        <dd>
+          <span>{{ paramQuotiteCessible.salaireFin }}</span>
+        </dd>
+        <dt><span>Taux Tranche</span></dt>
+        <dd>
+          <span>{{ paramQuotiteCessible.tauxTranche }}</span>
+        </dd>
+        <dt><span>Date Impact</span></dt>
+        <dd>
+          <span>{{ paramQuotiteCessible.dateImpact | formatMediumDate }}</span>
+        </dd>
+        <!-- <dt><span >User Id Insert</span></dt>
+        <dd>
+          <span>{{ paramQuotiteCessible.userIdInsert }}</span>
+        </dd>
+        <dt><span >Userdate Insert</span></dt>
+        <dd>
+          <span>{{ paramQuotiteCessible.userdateInsert | formatMediumDate }}</span>
+        </dd> -->
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/param-quotite-cessible', paramQuotiteCessible.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

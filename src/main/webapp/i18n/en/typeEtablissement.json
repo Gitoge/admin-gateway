@@ -1,0 +1,27 @@
+{
+  "admingatewayApp": {
+    "typeEtablissement": {
+      "home": {
+        "title": "Type Etablissements",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Type Etablissement",
+        "createOrEditLabel": "Create or edit a Type Etablissement",
+        "notFound": "No Type Etablissements found"
+      },
+      "created": "A new Type Etablissement is created with identifier {{ param }}",
+      "updated": "A Type Etablissement is updated with identifier {{ param }}",
+      "deleted": "A Type Etablissement is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Type Etablissement {{ id }}?"
+      },
+      "detail": {
+        "title": "Type Etablissement"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description",
+      "etab": "Etab"
+    }
+  }
+}

@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="paramBaremeMinimumFiscal">
+      <h2 data-cy="paramBaremeMinimumFiscalDetailsHeading">
+        <span jhiTranslate="admingatewayApp.paramBaremeMinimumFiscal.detail.title">Param Bareme Minimum Fiscal</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ paramBaremeMinimumFiscal.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paramBaremeMinimumFiscal.code">Code</span></dt>
+        <dd>
+          <span>{{ paramBaremeMinimumFiscal.code }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paramBaremeMinimumFiscal.libelle">Libellé</span></dt>
+        <dd>
+          <span>{{ paramBaremeMinimumFiscal.libelle }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paramBaremeMinimumFiscal.montantPlafond">Montant Plafond</span></dt>
+        <dd>
+          <span>{{ paramBaremeMinimumFiscal.montantPlafond }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paramBaremeMinimumFiscal.montantAPrelever">Montant A Prelever</span></dt>
+        <dd>
+          <span>{{ paramBaremeMinimumFiscal.montantAPrelever }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paramBaremeMinimumFiscal.dateImpact">Date Impact</span></dt>
+        <dd>
+          <span>{{ paramBaremeMinimumFiscal.dateImpact | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paramBaremeMinimumFiscal.userIdInsert">User Id Insert</span></dt>
+        <dd>
+          <span>{{ paramBaremeMinimumFiscal.userIdInsert }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.paramBaremeMinimumFiscal.userdateInsert">Userdate Insert</span></dt>
+        <dd>
+          <span>{{ paramBaremeMinimumFiscal.userdateInsert | formatMediumDate }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/param-bareme-minimum-fiscal', paramBaremeMinimumFiscal.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

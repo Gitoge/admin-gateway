@@ -1,0 +1,79 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <div *ngIf="enfant">
+      <h2 data-cy="enfantDetailsHeading">
+        <span> Visualisation de : l'enfant {{ enfant.prenom }} {{ enfant.nom }}</span>
+      </h2>
+
+      <hr />
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details detail-card table-bordered">
+        <dt><span jhiTranslate="admingatewayApp.carriereEnfant.matriculeParent">Matricule Parent</span></dt>
+        <dd>
+          <span>{{ enfant.matriculeParent }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereEnfant.nom">Nom</span></dt>
+        <dd>
+          <span>{{ enfant.nom }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereEnfant.prenom">Prenom</span></dt>
+        <dd>
+          <span>{{ enfant.prenom }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereEnfant.sexe">Sexe</span></dt>
+        <dd>
+          <span>{{ enfant.sexe }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereEnfant.dateNaissance">Date Naissance</span></dt>
+        <dd>
+          <span>{{ enfant.dateNaissance | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereEnfant.lieuNaissance">Lieu Naissance</span></dt>
+        <dd>
+          <span>{{ enfant.lieuNaissance }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereEnfant.numeroActeNaissance">Numero Acte Naissance</span></dt>
+        <dd>
+          <span>{{ enfant.numeroActeNaissance }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereEnfant.dateActeNaissance">Date Acte Naissance</span></dt>
+        <dd>
+          <span>{{ enfant.dateActeNaissance | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereEnfant.rangEnfant">Rang Enfant</span></dt>
+        <dd>
+          <span>{{ enfant.rangEnfant }}</span>
+        </dd>
+        <!-- <dt><span jhiTranslate="admingatewayApp.carriereEnfant.codeAge">Code Age</span></dt>
+        <dd>
+          <span>{{ enfant.codeAge }}</span>
+        </dd> -->
+        <dt><span jhiTranslate="admingatewayApp.carriereEnfant.enfantEnVie">Enfant En Vie</span></dt>
+        <dd>
+          <span *ngIf="enfant?.enfantEnVie === true">Oui</span>
+          <span *ngIf="enfant?.enfantEnVie === false">Non</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereEnfant.enfantImposable">Enfant Imposable</span></dt>
+        <dd>
+          <span *ngIf="enfant?.enfantImposable === true">Oui</span>
+          <span *ngIf="enfant?.enfantImposable === false">Non</span>
+        </dd>
+        <dt><span jhiTranslate="admingatewayApp.carriereEnfant.agent">Agent</span></dt>
+        <dd>
+          <div *ngIf="enfant.agent">
+            <a [routerLink]="['/agent', enfant.agent?.id, 'view']">{{ enfant.agent?.prenom }}</a>
+          </div>
+        </dd>
+      </dl>
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+      <button type="button" [routerLink]="['/enfant', enfant.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

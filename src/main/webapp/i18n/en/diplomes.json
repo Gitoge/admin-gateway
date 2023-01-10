@@ -1,0 +1,28 @@
+{
+  "admingatewayApp": {
+    "diplomes": {
+      "home": {
+        "title": "Diplomes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Diplomes",
+        "createOrEditLabel": "Create or edit a Diplomes",
+        "notFound": "No Diplomes found"
+      },
+      "created": "A new Diplomes is created with identifier {{ param }}",
+      "updated": "A Diplomes is updated with identifier {{ param }}",
+      "deleted": "A Diplomes is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Diplomes {{ id }}?"
+      },
+      "detail": {
+        "title": "Diplomes"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description",
+      "userIdInsert": "User Id Insert",
+      "userdateInsert": "Userdate Insert"
+    }
+  }
+}

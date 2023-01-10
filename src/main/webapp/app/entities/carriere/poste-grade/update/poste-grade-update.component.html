@@ -1,0 +1,59 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-poste-grade-heading"
+        data-cy="PosteGradeCreateUpdateHeading"
+        jhiTranslate="admingatewayApp.posteGrade.home.createOrEditLabel"
+      >
+        Create or edit a Poste Grade
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.posteGrade.codeGrade" for="field_grade">Code Grade</label>
+          <select class="form-control" id="field_grade" data-cy="grade" name="grade" formControlName="grade" required>
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="gradeOption.id === editForm.get('grade')!.value?.id ? editForm.get('grade')!.value : gradeOption"
+              *ngFor="let gradeOption of grade; trackBy: trackGradeById"
+            >
+              {{ gradeOption.code }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="admingatewayApp.posteGrade.codePoste" for="field_postes">Code Poste</label>
+          <select class="form-control" id="field_postes" data-cy="postes" name="postes" formControlName="postes" required>
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="postesOption.id === editForm.get('postes')!.value?.id ? editForm.get('postes')!.value : postesOption"
+              *ngFor="let postesOption of postes"
+            >
+              {{ postesOption.code }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

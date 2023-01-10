@@ -1,0 +1,81 @@
+{
+  "applications": "*",
+  "changelogDate": "20220722173323",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "localite",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "estParDefaut",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "libelle",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "niveau",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ordre",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "version",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "paysId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "insertUserId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "insertDate",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Localite",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "localite",
+      "otherEntityRelationshipName": "rattachementId",
+      "ownerSide": true,
+      "relationshipName": "localite",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "etablissement",
+      "otherEntityRelationshipName": "localite",
+      "relationshipName": "etab",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "localite",
+      "otherEntityRelationshipName": "localite",
+      "ownerSide": false,
+      "relationshipName": "rattachementId",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "typeLocalite",
+      "otherEntityRelationshipName": "localite",
+      "relationshipName": "typeLocalite",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no",
+  "skipServer": true
+}

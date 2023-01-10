@@ -1,0 +1,47 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <div *ngIf="evenement">
+      <h2 data-cy="evenementDetailsHeading" class="custom-title">
+        <span
+          >Détails de l'évenement : <strong> {{ evenement.libelle }}</strong></span
+        >
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details detail-card">
+        <dt><span>Code</span></dt>
+        <dd>
+          <span>{{ evenement.code }}</span>
+        </dd>
+        <dt><span>Libelle</span></dt>
+        <dd>
+          <span>{{ evenement.libelle }}</span>
+        </dd>
+        <dt><span>Description</span></dt>
+        <dd>
+          <span>{{ evenement.description }}</span>
+        </dd>
+        <dt><span>Type Actes</span></dt>
+        <dd>
+          <span *ngFor="let typeActes of evenement.typeActes; let last = last">
+            <a [routerLink]="['/type-actes', typeActes?.id, 'view']">{{ typeActes.libelle }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/evenement', evenement.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

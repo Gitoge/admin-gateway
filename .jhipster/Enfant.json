@@ -1,0 +1,84 @@
+{
+  "applications": "*",
+  "changelogDate": "20220829114017",
+  "clientRootFolder": "carriere",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "enfant",
+  "fields": [
+    {
+      "fieldName": "matriculeParent",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "prenom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "sexe",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateNaissance",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "lieuNaissance",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "numeroActeNaissance",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateActeNaissance",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "rangEnfant",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "codeAge",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "enfantEnVie",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "enfantImposable",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "userInsertId",
+      "fieldType": "Integer"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "carriere",
+  "name": "Enfant",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "agent",
+      "otherEntityRelationshipName": "enfant",
+      "relationshipName": "agent",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

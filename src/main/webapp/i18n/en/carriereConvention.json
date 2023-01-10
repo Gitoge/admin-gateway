@@ -1,0 +1,34 @@
+{
+  "admingatewayApp": {
+    "carriereConvention": {
+      "home": {
+        "title": "Conventions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Convention",
+        "createOrEditLabel": "Create or edit a Convention",
+        "notFound": "No Conventions found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Convention {{ id }}?"
+      },
+      "detail": {
+        "title": "Convention"
+      },
+      "id": "ID",
+      "code": "Code",
+      "libelle": "Libelle",
+      "description": "Description",
+      "userInsertId": "User Insert Id",
+      "userUpdateId": "User Update Id",
+      "dateInsert": "Date Insert",
+      "dateUpdate": "Date Update"
+    }
+  },
+  "carriereApp": {
+    "carriereConvention": {
+      "created": "A new Convention is created with identifier {{ param }}",
+      "updated": "A Convention is updated with identifier {{ param }}",
+      "deleted": "A Convention is deleted with identifier {{ param }}"
+    }
+  }
+}

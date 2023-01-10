@@ -1,0 +1,611 @@
+<div class="row justify-content-center">
+  <div class="col-12 custom-card">
+    <div class="alert alert-danger" *ngIf="doNotMatch">Les deux mots de passe ne correspondent pas !</div>
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <div class="row">
+        <h2
+          id="jhi-utilisateur-heading"
+          data-cy="UtilisateurCreateUpdateHeading"
+          style="text-align: center; text-transform: uppercase; font-size: 14px; color: #24695c; font-weight: 600"
+        >
+          <fa-icon icon="user" style="font-size: 26px"></fa-icon>
+          {{ titre }}
+        </h2>
+      </div>
+      <br />
+      <div>
+        <div class="col-12 card">
+          <div class="row justify-content-center" style="margin: 0 !important; padding: 5 !important">
+            <div class="col-md-6 infos-pers" style="border: 1px solid lightgray; padding: 2%">
+              <fieldset>
+                <legend style="font-size: 17px; color: #24695c; font-weight: 700">Informations personnelles</legend>
+                <div class="row" style="margin-top: 1%">
+                  <div class="col-md-6">
+                    <label> Type Pièce <span style="color: red">*</span> </label>
+                    <select
+                      class="form-control"
+                      name="typePiece"
+                      formControlName="typePiece"
+                      id="field_typePiece"
+                      data-cy="typePiece"
+                      required
+                    >
+                      <option [ngValue]="null"></option>
+                      <option value="CNI">CNI</option>
+                      <option value="PASSEPORT">PASSEPORT</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-6" *ngIf="!isPasseport">
+                    <label> Numéro Pièce <span style="color: red">*</span> </label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      [required]="!isPasseport"
+                      name="numeroPiece"
+                      id="field_numeroPiece"
+                      data-cy="numeroPiece"
+                      placeholder="Saisir le numéro de la pièce"
+                      formControlName="numeroPiece"
+                      oninput="this.value = this.value.toUpperCase()"
+                    />
+                    <div
+                      *ngIf="
+                        editForm.get('numeroPiece')!.invalid && (editForm.get('numeroPiece')!.dirty || editForm.get('numeroPiece')!.touched)
+                      "
+                    >
+                      <small class="form-text text-danger" *ngIf="editForm.get('numeroPiece')?.errors?.required">
+                        Ce champ est obligatoire.
+                      </small>
+                      <small class="form-text text-danger" *ngIf="editForm.get('numeroPiece')?.errors?.minlength">
+                        Ce champ doit comporter 13 ou 14 caractères.
+                      </small>
+                      <small class="form-text text-danger" *ngIf="editForm.get('numeroPiece')?.errors?.maxlength">
+                        Ce champ doit comporter 13 ou 14 caractères.
+                      </small>
+                      <small class="form-text text-danger" *ngIf="editForm.get('numeroPiece')?.errors?.pattern">
+                        Pas de caracteres spéciaux".
+                      </small>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6" *ngIf="isPasseport">
+                    <label> Numéro Pièce <span style="color: red">*</span> </label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      [required]="isPasseport"
+                      name="numeroPasseport"
+                      id="field_numeroPasseport"
+                      data-cy="numeroPasseport"
+                      placeholder="Saisir le numéro du passeport"
+                      formControlName="numeroPasseport"
+                      oninput="this.value = this.value.toUpperCase()"
+                    />
+                    <div
+                      *ngIf="
+                        editForm.get('numeroPasseport')!.invalid &&
+                        (editForm.get('numeroPasseport')!.dirty || editForm.get('numeroPasseport')!.touched)
+                      "
+                    >
+                      <small class="form-text text-danger" *ngIf="editForm.get('numeroPasseport')?.errors?.required">
+                        Ce champ est obligatoire.
+                      </small>
+                      <small class="form-text text-danger" *ngIf="editForm.get('numeroPasseport')?.errors?.minlength">
+                        Ce champ doit comporter 10 caractères.
+                      </small>
+                      <small class="form-text text-danger" *ngIf="editForm.get('numeroPasseport')?.errors?.maxlength">
+                        Ce champ doit comporter 10 caractères.
+                      </small>
+                      <small class="form-text text-danger" *ngIf="editForm.get('numeroPasseport')?.errors?.pattern">
+                        Pas de caracteres spéciaux".
+                      </small>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row" style="margin-top: 1%">
+                  <div class="col-md-6">
+                    <label> Prénom <span style="color: red">*</span> </label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      required
+                      name="prenom"
+                      id="field_prenom"
+                      data-cy="prenom"
+                      placeholder="Saisir le prénom"
+                      formControlName="prenom"
+                      oninput="this.value = this.value.toUpperCase()"
+                    />
+                    <div *ngIf="editForm.get('prenom')!.invalid && (editForm.get('prenom')!.dirty || editForm.get('prenom')!.touched)">
+                      <small class="form-text text-danger" *ngIf="editForm.get('prenom')?.errors?.required">
+                        Ce champ est obligatoire.
+                      </small>
+
+                      <small class="form-text text-danger" *ngIf="editForm.get('prenom')?.errors?.pattern">
+                        Pas de caracteres spéciaux".
+                      </small>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label> Nom <span style="color: red">*</span> </label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      required
+                      name="nom"
+                      id="field_nom"
+                      data-cy="nom"
+                      placeholder="Saisir le nom"
+                      formControlName="nom"
+                      oninput="this.value = this.value.toUpperCase()"
+                    />
+                    <div *ngIf="editForm.get('nom')!.invalid && (editForm.get('nom')!.dirty || editForm.get('nom')!.touched)">
+                      <small class="form-text text-danger" *ngIf="editForm.get('nom')?.errors?.required"> Ce champ est obligatoire. </small>
+
+                      <small class="form-text text-danger" *ngIf="editForm.get('nom')?.errors?.pattern">
+                        Pas de caracteres spéciaux".
+                      </small>
+                    </div>
+                  </div>
+                </div>
+                <div class="row" style="margin-top: 1%">
+                  <div class="col-md-6">
+                    <label> Date de naissance <span style="color: red">*</span> </label>
+                    <div class="input-group">
+                      <input
+                        id="field_dateNaissance"
+                        data-cy="dateNaissance"
+                        type="date"
+                        class="form-control"
+                        ngbDatepicker
+                        #dateNaissanceDp="ngbDatepicker"
+                        min="1950-01-01"
+                        max="{{ today | date: 'yyyy-MM-dd' }}"
+                        name="dateNaissance"
+                        formControlName="dateNaissance"
+                        placeholder=" AAAA-MM-JJ"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label> Lieu de naissance <span style="color: red">*</span> </label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      required
+                      name="lieuNaissance"
+                      id="field_lieuNaissance"
+                      data-cy="lieuNaissance"
+                      placeholder="Saisir le lieu de naissance"
+                      formControlName="lieuNaissance"
+                      oninput="this.value = this.value.toUpperCase()"
+                    />
+                    <div
+                      *ngIf="
+                        editForm.get('lieuNaissance')!.invalid &&
+                        (editForm.get('lieuNaissance')!.dirty || editForm.get('lieuNaissance')!.touched)
+                      "
+                    >
+                      <small class="form-text text-danger" *ngIf="editForm.get('lieuNaissance')?.errors?.required">
+                        Ce champ est obligatoire.
+                      </small>
+
+                      <small class="form-text text-danger" *ngIf="editForm.get('lieuNaissance')?.errors?.pattern">
+                        Pas de caracteres spéciaux".
+                      </small>
+                    </div>
+                  </div>
+                </div>
+                <div class="row" style="margin-top: 1%">
+                  <div class="col-md-12">
+                    <label> Sexe <span style="color: red">*</span> </label>
+                    <select class="form-control" name="sexe" formControlName="sexe" id="field_sexe" data-cy="sexe" required>
+                      <option [ngValue]="null"></option>
+                      <option value="MASCULIN">MASCULIN</option>
+                      <option value="FEMININ">FEMININ</option>
+                    </select>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+            <div class="col-md-6" style="border: 1px solid lightgray; padding: 2%">
+              <fieldset>
+                <div class="row" style="margin-top: 1%">
+                  <legend style="font-size: 17px; color: #24695c; font-weight: 700">Autres Informations</legend>
+
+                  <div class="col-md-12" [hidden]="personne?.id != undefined">
+                    <label> Profil<span style="color: red">*</span> </label>
+                    <select class="form-control" id="field_profils" data-cy="profils" name="profils" formControlName="profils" required>
+                      <option [ngValue]="null"></option>
+                      <option
+                        [ngValue]="profilOption.id === editForm.get('profils')!.value?.id ? editForm.get('profils')!.value : profilOption"
+                        *ngFor="let profilOption of profils; trackBy: trackProfilById"
+                      >
+                        {{ profilOption.libelle }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row" style="margin-top: 1%">
+                  <div class="col-md-6">
+                    <label> Login</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="login"
+                      id="field_login"
+                      data-cy="login"
+                      formControlName="login"
+                      required
+                      placeholder="login"
+                    />
+                    <div *ngIf="editForm.get('login')!.invalid && (editForm.get('login')!.dirty || editForm.get('login')!.touched)">
+                      <small class="form-text text-danger" *ngIf="editForm.get('login')?.errors?.required">
+                        Votre Login est obligatoire !
+                      </small>
+
+                      <small class="form-text text-danger" *ngIf="editForm.get('login')?.errors?.minlength">
+                        Votre Login doit comporter au moins trois caractères !
+                      </small>
+
+                      <small class="form-text text-danger" *ngIf="editForm.get('login')?.errors?.maxlength">
+                        Votre Login ne peut pas dépasser 20 caractères !
+                      </small>
+
+                      <small class="form-text text-danger" *ngIf="editForm.get('login')?.errors?.pattern">
+                        Votre Login ne doit pas contenir d'espace ou des caractères spéciaux !
+                      </small>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label> Email</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      name="email"
+                      id="field_email"
+                      data-cy="email"
+                      placeholder="Saisir l'email"
+                      formControlName="email"
+                      oninput="this.value = this.value.toLowerCase()"
+                    />
+                    <small class="form-text text-danger" *ngIf="editForm.get('email')?.errors?.pattern">
+                      Pas de caracteres spéciaux".
+                    </small>
+                  </div>
+                </div>
+                <div class="row" style="margin-top: 1%">
+                  <div class="col-md-6">
+                    <label> Téléphone<span style="color: red">*</span> </label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      required
+                      name="tel"
+                      id="field_tel"
+                      data-cy="tel"
+                      placeholder="Saisir le numéro de téléphone"
+                      formControlName="telephone"
+                    />
+                    <div
+                      *ngIf="editForm.get('telephone')!.invalid && (editForm.get('telephone')!.dirty || editForm.get('telephone')!.touched)"
+                    >
+                      <small class="form-text text-danger" *ngIf="editForm.get('telephone')?.errors?.required">
+                        Ce champ est obligatoire.
+                      </small>
+
+                      <small class="form-text text-danger" *ngIf="editForm.get('telephone')?.errors?.pattern">
+                        Pas de caracteres spéciaux".
+                      </small>
+                    </div>
+                  </div>
+                </div>
+                <div class="row" style="margin-top: 1%">
+                  <div class="col-md-12">
+                    <label> Etablissement</label>
+                    <ng-autocomplete
+                      [data]="etablissements"
+                      [searchKeyword]="keyword"
+                      placeholder="Recherchez le nom de l'etablissement"
+                      (selected)="selectEvent($event)"
+                      (inputChanged)="onChangeSearch($event)"
+                      (inputFocused)="onFocused($event)"
+                      historyIdentifier="etablissement"
+                      [itemTemplate]="itemTemplate"
+                      [notFoundTemplate]="notFoundTemplate"
+                      name="etablissement"
+                      id="field_etablissement"
+                    >
+                    </ng-autocomplete>
+
+                    <ng-template #itemTemplate let-item>
+                      <a [innerHTML]="item.libelleLong"></a>
+                    </ng-template>
+                    <ng-template #notFoundTemplate let-notFound>
+                      <div style="color: red">Etablissement non trouvé !</div>
+                    </ng-template>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--      <div>
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div>
+                <strong style="font-size: 16px; color: #24695c; font-weight: 700">Informations Personnelles</strong>
+              </div>
+              <br />
+              <div class="row mb-4 space">
+                <div class="col mb-2 row">
+                  <label class="col-sm-4 col-form-label" for="field_prenom">Prénom <span style="color: red">*</span></label>
+                  <div class="col-sm-7">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="prenom"
+                      id="field_prenom"
+                      data-cy="prenom"
+                      formControlName="prenom"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="col mb-2 row space">
+                  <label class="col-sm-4 col-form-label" for="field_nom">Nom <span style="color: red">*</span></label>
+                  <div class="col-sm-7">
+                    <input type="text" class="form-control" name="nom" id="field_nom" data-cy="nom" formControlName="nom" required />
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mb-4 space">
+                <div class="col mb-2 row">
+                  <label class="col-sm-4 col-form-label" for="field_sexe">Sexe</label>
+                  <div class="col-sm-7">
+                    <select class="form-control" name="sexe" formControlName="sexe" id="field_sexe" data-cy="sexe" required>
+                      <option [ngValue]="null"></option>
+                      <option value="MASCULIN">MASCULIN</option>
+                      <option value="FEMININ">FEMININ</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col mb-2 row space">
+                  <div class="col-sm-7"></div>
+                </div>
+              </div>
+
+              <div class="row mb-4 space">
+                <div class="col mb-2 row">
+                  <label class="col-sm-4 col-form-label" for="field_dateNaissance">Date de Naissance</label>
+                  <div class="col-sm-7">
+                    <div class="input-group">
+                      <input
+                        id="field_dateNaissance"
+                        data-cy="dateNaissance"
+                        type="date"
+                        class="form-control"
+                        name="dateNaissance"
+                        ngbDatepicker
+                        #dateNaissanceDp="ngbDatepicker"
+                        formControlName="dateNaissance"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col mb-2 row space">
+                  <label class="col-sm-4 col-form-label" for="field_lieuNaissance">Lieu de Naissance</label>
+                  <div class="col-sm-7">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="lieuNaissance"
+                      id="field_lieuNaissance"
+                      data-cy="lieuNaissance"
+                      formControlName="lieuNaissance"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mb-4 space">
+                <div class="col mb-2 row">
+                  <label class="col-sm-4 col-form-label" for="field_typePiece">Type Pièce <span style="color: red">*</span></label>
+                  <div class="col-sm-7">
+                    <select
+                      class="form-control"
+                      name="typePiece"
+                      formControlName="typePiece"
+                      id="field_typePiece"
+                      data-cy="typePiece"
+                      required
+                    >
+                      <option [ngValue]="null"></option>
+                      <option value="CNI">CNI</option>
+                      <option value="PASSEPORT">PASSEPORT</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col mb-2 row">
+                  <label class="col-sm-4 col-form-label" for="field_nom">Numéro Pièce <span style="color: red">*</span></label>
+                  <div class="col-sm-7">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="numeroPiece"
+                      id="field_numeroPiece"
+                      data-cy="numeroPiece"
+                      formControlName="numeroPiece"
+                      required
+                    />
+                    <div
+                      *ngIf="
+                        editForm.get('numeroPiece')!.invalid && (editForm.get('numeroPiece')!.dirty || editForm.get('numeroPiece')!.touched)
+                      "
+                    >
+                      <small class="form-text text-danger" *ngIf="editForm.get('numeroPiece')?.errors?.required">
+                        Numéro Pièce obligatoire.
+                      </small>
+                      <small class="form-text text-danger" *ngIf="editForm.get('numeroPiece')?.errors?.minlength">
+                        Numéro Pièce doit comporter au moins 13 caractères.
+                      </small>
+                      <small class="form-text text-danger" *ngIf="editForm.get('numeroPiece')?.errors?.maxlength">
+                        Numéro Pièce doit comporter au moins 14 caractères.
+                      </small>
+                      <small class="form-text text-danger" *ngIf="editForm.get('numeroPiece')?.errors?.pattern">
+                        Pas de caracteres spéciaux".
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-4 space">
+                <div class="col mb-2 row">
+                  <label class="col-sm-4" for="field_telephone">Téléphone </label>
+                  <div class="col-sm-7">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="telephone"
+                      id="field_telephone"
+                      data-cy="telephone"
+                      formControlName="telephone"
+                    />
+                  </div>
+                </div>
+                <div class="col mb-2 row space">
+                  <label class="col-sm-4 col-form-label" for="email">Email</label>
+                  <div class="col-sm-7">
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="email"
+                      name="email"
+                      title="Entrer une addresse une email valide !"
+                      formControlName="email"
+                      data-cy="email"
+                    />
+                    <div *ngIf="editForm.get('email')!.invalid && (editForm.get('email')!.dirty || editForm.get('email')!.touched)">
+                      <small class="form-text text-danger" *ngIf="editForm.get('email')?.errors?.required">
+                        Votre email est obligatoire.
+                      </small>
+
+                      <small class="form-text text-danger" *ngIf="editForm.get('email')?.errors?.invalid">
+                        Votre email est invalide.
+                      </small>
+
+                      <small class="form-text text-danger" *ngIf="editForm.get('email')?.errors?.minlength">
+                        Votre email doit comporter plus de 5 caractères.
+                      </small>
+
+                      <small class="form-text text-danger" *ngIf="editForm.get('email')?.errors?.maxlength">
+                        Votre email ne peut pas comporter plus de 50 caractères.
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header"><strong style="font-size: 16px; color: #24695c; font-weight: 700">Autres informations </strong></div>
+            <br />
+            <div class="row mb-4 space">
+              <div class="col mb-2 row space">
+                <label class="col-sm-4 col-form-label" for="field_profils">Profil<span style="color: red">*</span></label>
+                <div class="col-sm-7">
+                  <select class="form-control" id="field_profils" data-cy="profils" name="profils" formControlName="profils" required>
+                    <option [ngValue]="null"></option>
+                    <option
+                      [ngValue]="profilOption.id === editForm.get('profils')!.value?.id ? editForm.get('profils')!.value : profilOption"
+                      *ngFor="let profilOption of profils; trackBy: trackProfilById"
+                    >
+                      {{ profilOption.libelle }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col mb-2 row space">
+                <label class="col-sm-4 col-form-label space" for="field_nom">Login</label>
+                <div class="col-sm-7">
+                  <input type="text" class="form-control" name="login" id="field_login" data-cy="login" formControlName="login" required />
+
+                  <div *ngIf="editForm.get('login')!.invalid && (editForm.get('login')!.dirty || editForm.get('login')!.touched)">
+                    <small class="form-text text-danger" *ngIf="editForm.get('login')?.errors?.required">
+                      Votre Login est obligatoire !
+                    </small>
+
+                    <small class="form-text text-danger" *ngIf="editForm.get('login')?.errors?.minlength">
+                      Votre Login doit comporter au moins trois caractères !
+                    </small>
+
+                    <small class="form-text text-danger" *ngIf="editForm.get('login')?.errors?.maxlength">
+                      Votre Login ne peut pas dépasser 20 caractères !
+                    </small>
+
+                    <small class="form-text text-danger" *ngIf="editForm.get('login')?.errors?.pattern">
+                      Votre Login ne doit pas contenir d'espace ou des caractères spéciaux !
+                    </small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-4 space">
+              <div class="col mb-2 row space">
+                <label class="col-sm-4 col-form-label " [hidden]="personne?.id != undefined" for="field_etablissement">Etablissement </label>
+                <div class="col-sm-7" [hidden]="personne?.id != undefined">
+                  <ng-autocomplete
+                    [data]="etablissements"
+                    [searchKeyword]="keyword"
+                    placeholder="Nom etablissement"
+                    (selected)="selectEvent($event)"
+                    (inputChanged)="onChangeSearch($event)"
+                    (inputFocused)="onFocused($event)"
+                    historyIdentifier="etablissement"
+                    [itemTemplate]="itemTemplate"
+                    [notFoundTemplate]="notFoundTemplate"
+                    name="etablissement"
+                    id="field_etablissement"
+                  >
+                  </ng-autocomplete>
+
+                  <ng-template #itemTemplate let-item>
+                    <a [innerHTML]="item.libelleLong"></a>
+                  </ng-template>
+                  <ng-template #notFoundTemplate let-notFound>
+                    <div>Etablissement non trouvé !</div>
+                  </ng-template>
+                </div>
+              </div>
+
+              <div class="col"></div>
+            </div>
+          </div>
+        </div>
+      </div>-->
+      <br />
+      <div class="float-right" style="float: right">
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Annuler</span>
+        </button>
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Enregistrer</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

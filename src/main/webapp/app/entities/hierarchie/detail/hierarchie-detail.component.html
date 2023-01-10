@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <div *ngIf="hierarchie">
+      <h2 data-cy="hierarchieDetailsHeading" class="custom-title"><span>Hiérarchie</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details detail-card">
+        <dt><span>Code</span></dt>
+        <dd>
+          <span>{{ hierarchie.code }}</span>
+        </dd>
+        <dt><span>Libellé</span></dt>
+        <dd>
+          <span>{{ hierarchie.libelle }}</span>
+        </dd>
+        <dt><span>Borne Inferieure</span></dt>
+        <dd>
+          <span>{{ hierarchie.borneInferieure }}</span>
+        </dd>
+        <dt><span>Borne Superieure</span></dt>
+        <dd>
+          <span>{{ hierarchie.borneSuperieure }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/hierarchie', hierarchie.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Modifier</span>
+      </button>
+    </div>
+  </div>
+</div>

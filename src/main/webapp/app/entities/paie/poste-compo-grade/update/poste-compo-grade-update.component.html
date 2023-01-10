@@ -1,0 +1,75 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-poste-compo-grade-heading" data-cy="PosteCompoGradeCreateUpdateHeading"></h2>
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+        <div class="justify-content-center" style="border: 1px solid lightgray; padding: 2%">
+          <fieldset>
+            <legend style="font-size: 17px; color: #24695c; font-weight: 700">Paramètrage Postes Composant Grade</legend>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Poste Composant <span style="color: red">*</span> </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="posteComposant"
+                  id="field_posteComposant"
+                  data-cy="posteComposant"
+                  formControlName="posteComposant"
+                  required
+                />
+              </div>
+
+              <div class="col-md-6">
+                <label> Poste Composé <span style="color: red">*</span> </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="posteCompose"
+                  id="field_posteCompose"
+                  data-cy="posteCompose"
+                  formControlName="posteCompose"
+                  required
+                />
+              </div>
+            </div>
+            <div class="row" style="margin-top: 1%">
+              <div class="col-md-6">
+                <label> Opérateur<span style="color: red">*</span> </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="operateur"
+                  id="field_operateur"
+                  data-cy="operateur"
+                  formControlName="operateur"
+                  required
+                />
+              </div>
+              <div class="col-md-6">
+                <label> Valeur <span style="color: red">*</span> </label>
+                <input type="number" class="form-control" name="valeur" id="field_valeur" data-cy="valeur" formControlName="valeur" />
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+      <br />
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

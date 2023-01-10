@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8 custom-card">
+    <div *ngIf="grilleSoldeGlobal">
+      <h2 data-cy="grilleSoldeGlobalDetailsHeading">
+        <span> Visualisation : <b> Grille Solde Global </b></span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details detail-card">
+        <dt><span>Solde Global</span></dt>
+        <dd>
+          <span>{{ grilleSoldeGlobal.soldeGlobal }}</span>
+        </dd>
+        <dt><span>Anciennete</span></dt>
+        <dd>
+          <span>{{ grilleSoldeGlobal.anciennete }} ans</span>
+        </dd>
+        <!-- <dt><span>Corps</span></dt>
+        <dd>
+          <span>{{ grilleSoldeGlobal.corpsId }}</span>
+        </dd> -->
+        <!-- <dt><span>Cadre</span></dt>
+        <dd>
+          <span>{{ grilleSoldeGlobal.cadreId }}</span>
+        </dd> -->
+        <dt><span>Grade</span></dt>
+        <dd>
+          <span>{{ grilleSoldeGlobal.codeGrade }}</span>
+        </dd>
+        <dt><span>Echelon</span></dt>
+        <dd>
+          <span>{{ grilleSoldeGlobal.libelleEchelon }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/grille-solde-global', grilleSoldeGlobal.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Modifier</span>
+      </button>
+    </div>
+  </div>
+</div>
