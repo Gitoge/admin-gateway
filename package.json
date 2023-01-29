@@ -5,7 +5,7 @@
   "description": "Description for admingateway",
   "license": "UNLICENSED",
   "scripts": {
-    "start": "node --max-old-space-size=8192,
+    "start": "node --max-old-space-size=8192",
     "app:start": "./mvnw",
     "backend:build-cache": "./mvnw dependency:go-offline",
     "backend:debug": "./mvnw -Dspring-boot.run.jvmArguments=\"-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000\"",
